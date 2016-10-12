@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CBFBEEBBA70B08AB0AAB582 /* Pods_StylistEye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B11FB7410EB3E97B7902E759 /* Pods_StylistEye.framework */; };
+		311D1F041DAE461D00A7F545 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 311D1F031DAE461D00A7F545 /* Media.xcassets */; };
+		311D1F091DAE464E00A7F545 /* Login.strings in Resources */ = {isa = PBXBuildFile; fileRef = 311D1F0B1DAE464E00A7F545 /* Login.strings */; };
+		311D1F121DAE4AE900A7F545 /* Initializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F111DAE4AE900A7F545 /* Initializable.swift */; };
+		311D1F141DAE4B3000A7F545 /* AbstractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F131DAE4B3000A7F545 /* AbstractViewController.swift */; };
+		311D1F171DAE4B4B00A7F545 /* UIView+SE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F161DAE4B4B00A7F545 /* UIView+SE.swift */; };
+		311D1F1A1DAE4C7F00A7F545 /* APIUrlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */; };
+		311D1F1D1DAE4C9500A7F545 /* NetworkExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */; };
+		311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F1E1DAE4E4500A7F545 /* LoginViewController.swift */; };
 		31F5FB9C1DAE2BE300418D36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5FB9B1DAE2BE300418D36 /* AppDelegate.swift */; };
 		31F5FBB41DAE2BE300418D36 /* StylistEyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5FBB31DAE2BE300418D36 /* StylistEyeTests.swift */; };
 		31F5FBBF1DAE2BE300418D36 /* StylistEyeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5FBBE1DAE2BE300418D36 /* StylistEyeUITests.swift */; };
@@ -30,6 +39,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		311D1F031DAE461D00A7F545 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		311D1F0A1DAE464E00A7F545 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Login.strings; sourceTree = "<group>"; };
+		311D1F111DAE4AE900A7F545 /* Initializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Initializable.swift; path = "../Public protocols/Initializable.swift"; sourceTree = "<group>"; };
+		311D1F131DAE4B3000A7F545 /* AbstractViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractViewController.swift; sourceTree = "<group>"; };
+		311D1F161DAE4B4B00A7F545 /* UIView+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SE.swift"; sourceTree = "<group>"; };
+		311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUrlManager.swift; sourceTree = "<group>"; };
+		311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExecutable.swift; sourceTree = "<group>"; };
+		311D1F1E1DAE4E4500A7F545 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		31F5FB981DAE2BE300418D36 /* StylistEye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StylistEye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31F5FB9B1DAE2BE300418D36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31F5FBAA1DAE2BE300418D36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -39,6 +56,9 @@
 		31F5FBBA1DAE2BE300418D36 /* StylistEyeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StylistEyeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		31F5FBBE1DAE2BE300418D36 /* StylistEyeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylistEyeUITests.swift; sourceTree = "<group>"; };
 		31F5FBC01DAE2BE300418D36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B11FB7410EB3E97B7902E759 /* Pods_StylistEye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StylistEye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3CA3A0A26CA10F0E2AD5B3D /* Pods-StylistEye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylistEye.release.xcconfig"; path = "Pods/Target Support Files/Pods-StylistEye/Pods-StylistEye.release.xcconfig"; sourceTree = "<group>"; };
+		C8E134B3C3EF262318421358 /* Pods-StylistEye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylistEye.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StylistEye/Pods-StylistEye.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CBFBEEBBA70B08AB0AAB582 /* Pods_StylistEye.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +87,180 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11743C1EAA014DE4CB5C8EC1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C8E134B3C3EF262318421358 /* Pods-StylistEye.debug.xcconfig */,
+				B3CA3A0A26CA10F0E2AD5B3D /* Pods-StylistEye.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		2FCE7EF81D47C8B374200615 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B11FB7410EB3E97B7902E759 /* Pods_StylistEye.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		311D1EF71DAE454400A7F545 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				311D1F151DAE4B3D00A7F545 /* UI */,
+				311D1F101DAE4AD500A7F545 /* Public protocols */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		311D1EF81DAE454600A7F545 /* Essentials */ = {
+			isa = PBXGroup;
+			children = (
+				311D1EFD1DAE455000A7F545 /* Controllers */,
+				311D1EFC1DAE454F00A7F545 /* Model */,
+				311D1EFB1DAE454E00A7F545 /* View */,
+			);
+			path = Essentials;
+			sourceTree = "<group>";
+		};
+		311D1EFB1DAE454E00A7F545 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		311D1EFC1DAE454F00A7F545 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		311D1EFD1DAE455000A7F545 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				311D1F0F1DAE467B00A7F545 /* Abstract */,
+				311D1F0C1DAE465400A7F545 /* Login */,
+				311D1F0D1DAE465F00A7F545 /* Main */,
+				311D1F0E1DAE466800A7F545 /* Shared */,
+				31F5FB9B1DAE2BE300418D36 /* AppDelegate.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		311D1EFF1DAE455700A7F545 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				311D1F051DAE461F00A7F545 /* Localization */,
+				311D1F021DAE461000A7F545 /* Assets */,
+				311D1F011DAE45D900A7F545 /* Property lists */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		311D1F001DAE455800A7F545 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		311D1F011DAE45D900A7F545 /* Property lists */ = {
+			isa = PBXGroup;
+			children = (
+				31F5FBAA1DAE2BE300418D36 /* Info.plist */,
+			);
+			path = "Property lists";
+			sourceTree = "<group>";
+		};
+		311D1F021DAE461000A7F545 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				311D1F031DAE461D00A7F545 /* Media.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		311D1F051DAE461F00A7F545 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				311D1F061DAE462C00A7F545 /* Strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		311D1F061DAE462C00A7F545 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				311D1F0B1DAE464E00A7F545 /* Login.strings */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		311D1F0C1DAE465400A7F545 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				311D1F1E1DAE4E4500A7F545 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		311D1F0D1DAE465F00A7F545 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		311D1F0E1DAE466800A7F545 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		311D1F0F1DAE467B00A7F545 /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				311D1F131DAE4B3000A7F545 /* AbstractViewController.swift */,
+			);
+			path = Abstract;
+			sourceTree = "<group>";
+		};
+		311D1F101DAE4AD500A7F545 /* Public protocols */ = {
+			isa = PBXGroup;
+			children = (
+				311D1F111DAE4AE900A7F545 /* Initializable.swift */,
+			);
+			path = "Public protocols";
+			sourceTree = "<group>";
+		};
+		311D1F151DAE4B3D00A7F545 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				311D1F161DAE4B4B00A7F545 /* UIView+SE.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		311D1F181DAE4C4B00A7F545 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				311D1F1B1DAE4C8100A7F545 /* Commands */,
+				311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */,
+				311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		311D1F1B1DAE4C8100A7F545 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
 		31F5FB8F1DAE2BE300418D36 = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +268,8 @@
 				31F5FBB21DAE2BE300418D36 /* StylistEyeTests */,
 				31F5FBBD1DAE2BE300418D36 /* StylistEyeUITests */,
 				31F5FB991DAE2BE300418D36 /* Products */,
+				11743C1EAA014DE4CB5C8EC1 /* Pods */,
+				2FCE7EF81D47C8B374200615 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,8 +286,11 @@
 		31F5FB9A1DAE2BE300418D36 /* StylistEye */ = {
 			isa = PBXGroup;
 			children = (
-				31F5FB9B1DAE2BE300418D36 /* AppDelegate.swift */,
-				31F5FBAA1DAE2BE300418D36 /* Info.plist */,
+				311D1EF81DAE454600A7F545 /* Essentials */,
+				311D1F001DAE455800A7F545 /* Configuration */,
+				311D1EFF1DAE455700A7F545 /* Resources */,
+				311D1EF71DAE454400A7F545 /* Helpers */,
+				311D1F181DAE4C4B00A7F545 /* Services */,
 			);
 			path = StylistEye;
 			sourceTree = "<group>";
@@ -120,9 +320,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 31F5FBC31DAE2BE300418D36 /* Build configuration list for PBXNativeTarget "StylistEye" */;
 			buildPhases = (
+				6BA0FAEA8630372E32C61CB3 /* [CP] Check Pods Manifest.lock */,
 				31F5FB941DAE2BE300418D36 /* Sources */,
 				31F5FB951DAE2BE300418D36 /* Frameworks */,
 				31F5FB961DAE2BE300418D36 /* Resources */,
+				969573373C4207D46F6653E9 /* [CP] Embed Pods Frameworks */,
+				9CC5D274FFA9F9CE73E0B09E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -223,6 +426,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				311D1F091DAE464E00A7F545 /* Login.strings in Resources */,
+				311D1F041DAE461D00A7F545 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,12 +447,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6BA0FAEA8630372E32C61CB3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		969573373C4207D46F6653E9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StylistEye/Pods-StylistEye-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CC5D274FFA9F9CE73E0B09E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StylistEye/Pods-StylistEye-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		31F5FB941DAE2BE300418D36 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */,
 				31F5FB9C1DAE2BE300418D36 /* AppDelegate.swift in Sources */,
+				311D1F141DAE4B3000A7F545 /* AbstractViewController.swift in Sources */,
+				311D1F171DAE4B4B00A7F545 /* UIView+SE.swift in Sources */,
+				311D1F121DAE4AE900A7F545 /* Initializable.swift in Sources */,
+				311D1F1D1DAE4C9500A7F545 /* NetworkExecutable.swift in Sources */,
+				311D1F1A1DAE4C7F00A7F545 /* APIUrlManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +541,17 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		311D1F0B1DAE464E00A7F545 /* Login.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				311D1F0A1DAE464E00A7F545 /* Base */,
+			);
+			name = Login.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		31F5FBC11DAE2BE300418D36 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -301,6 +571,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -350,6 +621,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -376,10 +648,13 @@
 		};
 		31F5FBC41DAE2BE300418D36 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8E134B3C3EF262318421358 /* Pods-StylistEye.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = G7TAUN84TA;
-				INFOPLIST_FILE = StylistEye/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/StylistEye/Resources/Property lists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ms.StylistEye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -389,10 +664,13 @@
 		};
 		31F5FBC51DAE2BE300418D36 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3CA3A0A26CA10F0E2AD5B3D /* Pods-StylistEye.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = G7TAUN84TA;
-				INFOPLIST_FILE = StylistEye/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/StylistEye/Resources/Property lists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ms.StylistEye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -477,6 +755,7 @@
 				31F5FBC51DAE2BE300418D36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		31F5FBC61DAE2BE300418D36 /* Build configuration list for PBXNativeTarget "StylistEyeTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +764,7 @@
 				31F5FBC81DAE2BE300418D36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		31F5FBC91DAE2BE300418D36 /* Build configuration list for PBXNativeTarget "StylistEyeUITests" */ = {
 			isa = XCConfigurationList;
@@ -493,6 +773,7 @@
 				31F5FBCB1DAE2BE300418D36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
