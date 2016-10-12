@@ -12,17 +12,17 @@ import UIKit
  Abstract view controller setup initializable protocol to life-cycle methods.
  */
 class AbstractViewController: UIViewController, InitializableProtocol {
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         /// Load data from API every time.
         loadData()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         /// Just added elements to view and apply constraints.
         addElementsAndApplyConstraints()
     }
