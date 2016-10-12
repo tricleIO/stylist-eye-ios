@@ -29,9 +29,17 @@ class AbstractViewController: UIViewController, InitializableProtocol {
 
     // MARK: - <Initializable>
     func addElements() {}
-    func customInit() {}
+    func customInit() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss)))
+    }
+
     func initializeElements() {}
     func setupConstraints() {}
     func loadData() {}
     func setupView() {}
+
+    // MARK: - Action
+    func keyboardDismiss() {
+        view.endEditing(true)
+    }
 }

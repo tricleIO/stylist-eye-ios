@@ -15,9 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+
         initializeRootViewController()
-        
+
         return true
     }
 
@@ -48,11 +48,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+
     // MARK: - Initialize
     private func initializeRootViewController() {
+        // TODO: @MS
+        var rootViewConrtoller: UIViewController
+        if Keychains[.accessTokenKey] != nil {
+            rootViewConrtoller = MainMenuViewController()
+        }
+        else {
+            rootViewConrtoller = LoginViewController()
+        }
+        let navigationController = UINavigationController(rootViewController: LoginViewController())
+        navigationController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = LoginViewController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 }
