@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0CBFBEEBBA70B08AB0AAB582 /* Pods_StylistEye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B11FB7410EB3E97B7902E759 /* Pods_StylistEye.framework */; };
+		3102869C1DAFA049007EE87B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3102869A1DAFA049007EE87B /* Fabric.framework */; };
+		3102869D1DAFA049007EE87B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3102869B1DAFA049007EE87B /* Crashlytics.framework */; };
 		310919721DAE81170083A2C8 /* LoginCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310919711DAE81170083A2C8 /* LoginCommand.swift */; };
 		310919751DAE823E0083A2C8 /* EmptyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310919741DAE823E0083A2C8 /* EmptyDTO.swift */; };
 		310919781DAE83240083A2C8 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310919771DAE83240083A2C8 /* Configuration.swift */; };
@@ -35,6 +37,7 @@
 		311D1F1A1DAE4C7F00A7F545 /* APIUrlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */; };
 		311D1F1D1DAE4C9500A7F545 /* NetworkExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */; };
 		311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F1E1DAE4E4500A7F545 /* LoginViewController.swift */; };
+		31897D951DAF6B8D00BFFED0 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31897D941DAF6B8D00BFFED0 /* Launch Screen.storyboard */; };
 		31E05E1E1DAEEADC007AE913 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E05E1D1DAEEADC007AE913 /* Serializable.swift */; };
 		31E05E211DAF50BB007AE913 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E05E201DAF50BB007AE913 /* ImageView.swift */; };
 		31E05E231DAF5227007AE913 /* UINavigationBar+SE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E05E221DAF5227007AE913 /* UINavigationBar+SE.swift */; };
@@ -65,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3102869A1DAFA049007EE87B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		3102869B1DAFA049007EE87B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		310919711DAE81170083A2C8 /* LoginCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCommand.swift; sourceTree = "<group>"; };
 		310919741DAE823E0083A2C8 /* EmptyDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDTO.swift; sourceTree = "<group>"; };
 		310919771DAE83240083A2C8 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -92,6 +97,7 @@
 		311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUrlManager.swift; sourceTree = "<group>"; };
 		311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExecutable.swift; sourceTree = "<group>"; };
 		311D1F1E1DAE4E4500A7F545 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		31897D941DAF6B8D00BFFED0 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		31E05E1D1DAEEADC007AE913 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		31E05E201DAF50BB007AE913 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		31E05E221DAF5227007AE913 /* UINavigationBar+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+SE.swift"; sourceTree = "<group>"; };
@@ -121,6 +127,8 @@
 			files = (
 				31E05E291DAF55A6007AE913 /* KVNProgress.framework in Frameworks */,
 				0CBFBEEBBA70B08AB0AAB582 /* Pods_StylistEye.framework in Frameworks */,
+				3102869D1DAFA049007EE87B /* Crashlytics.framework in Frameworks */,
+				3102869C1DAFA049007EE87B /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +161,8 @@
 		2FCE7EF81D47C8B374200615 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3102869A1DAFA049007EE87B /* Fabric.framework */,
+				3102869B1DAFA049007EE87B /* Crashlytics.framework */,
 				31E05E281DAF55A6007AE913 /* KVNProgress.framework */,
 				B11FB7410EB3E97B7902E759 /* Pods_StylistEye.framework */,
 			);
@@ -245,6 +255,7 @@
 		311D1EFF1DAE455700A7F545 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				31897D931DAF6B7400BFFED0 /* Splash */,
 				31E05E251DAF53DF007AE913 /* Entilements */,
 				311D1F051DAE461F00A7F545 /* Localization */,
 				311D1F021DAE461000A7F545 /* Assets */,
@@ -366,6 +377,14 @@
 			path = Commands;
 			sourceTree = "<group>";
 		};
+		31897D931DAF6B7400BFFED0 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				31897D941DAF6B8D00BFFED0 /* Launch Screen.storyboard */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
 		31E05E251DAF53DF007AE913 /* Entilements */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,6 +458,7 @@
 				31F5FB961DAE2BE300418D36 /* Resources */,
 				969573373C4207D46F6653E9 /* [CP] Embed Pods Frameworks */,
 				9CC5D274FFA9F9CE73E0B09E /* [CP] Copy Pods Resources */,
+				310286991DAF9FFC007EE87B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -498,7 +518,7 @@
 					31F5FB971DAE2BE300418D36 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = G7TAUN84TA;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -544,6 +564,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31897D951DAF6B8D00BFFED0 /* Launch Screen.storyboard in Resources */,
 				311D1F091DAE464E00A7F545 /* Login.strings in Resources */,
 				311D1F041DAE461D00A7F545 /* Media.xcassets in Resources */,
 			);
@@ -566,6 +587,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		310286991DAF9FFC007EE87B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 73233866dacc590edbd0c2dbabfa2276d7d2c287 d64f459bbf77d03307fe8e09db9050dcd14552cfc58dd685152eb05416c825fa";
+		};
 		6BA0FAEA8630372E32C61CB3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -804,14 +838,15 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/KVNProgress",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/StylistEye/Resources/Property lists/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ms.StylistEye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "5b7f39e0-7e95-4644-a495-5b1ad3e424d0";
+				PROVISIONING_PROFILE_SPECIFIER = "Stylist dev";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -831,12 +866,15 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/KVNProgress",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/StylistEye/Resources/Property lists/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ms.StylistEye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d85c113f-5072-4c03-a3e6-529404f1a990";
+				PROVISIONING_PROFILE_SPECIFIER = "Stylist dev";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};

@@ -145,7 +145,9 @@ class LoginViewController: AbstractViewController {
                 case let .success(object: data, _):
                     KVNProgress.showSuccess {
                         AccountSessionManager.manager.accountSession = AccountSession(response: data)
-                        self.navigationController?.pushViewController(MainMenuViewController(), animated: true)
+                        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                            appDelegate.window?.rootViewController = MainMenuViewController()
+                        }
                     }
                 case let .failure(message: error, _):
                     KVNProgress.showError()

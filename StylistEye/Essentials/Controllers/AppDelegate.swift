@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
+        Fabric.with([Crashlytics.self])
         initializeRootViewController()
 
         return true
@@ -59,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             rootViewConrtoller = LoginViewController()
         }
-        let navigationController = UINavigationController(rootViewController: LoginViewController())
+        let navigationController = UINavigationController(rootViewController: rootViewConrtoller)
         navigationController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
