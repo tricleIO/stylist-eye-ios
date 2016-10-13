@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        Fabric.with([Crashlytics.self])
         initializeRootViewController()
-        
+
         return true
     }
 
@@ -48,11 +50,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+
     // MARK: - Initialize
     private func initializeRootViewController() {
+        // TODO: @MS
+        var rootViewConrtoller: UIViewController
+        if Keychains[.accessTokenKey] != nil {
+            rootViewConrtoller = MainTabBarController()
+        }
+        else {
+            rootViewConrtoller = LoginViewController()
+        }
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = LoginViewController()
+        window?.rootViewController = rootViewConrtoller
         window?.makeKeyAndVisible()
     }
 }

@@ -6,3 +6,7 @@
   Copyright © 2016 Michal Severín. All rights reserved.
 */
 
+"SE-Login-Forgotpassword" = "Forgot your password?";
+"SE-Login-Login" = "LOGIN";
+"SE-Login-Password" = "Password";
+"SE-Login-Email" = "Email";

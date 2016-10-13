@@ -11,7 +11,7 @@ import UIKit
 /**
  Abstract view controller setup initializable protocol to life-cycle methods.
  */
-class AbstractViewController: UIViewController, InitializableProtocol {
+class AbstractViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,10 +28,12 @@ class AbstractViewController: UIViewController, InitializableProtocol {
     }
 
     // MARK: - <Initializable>
-    func addElements() {}
-    func customInit() {}
-    func initializeElements() {}
-    func setupConstraints() {}
-    func loadData() {}
-    func setupView() {}
+    internal override func customInit() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss)))
+    }
+
+    // MARK: - Action
+    func keyboardDismiss() {
+        view.endEditing(true)
+    }
 }

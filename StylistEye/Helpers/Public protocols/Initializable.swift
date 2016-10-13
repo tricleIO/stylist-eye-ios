@@ -15,32 +15,32 @@
  - setupView
  */
 protocol InitializableProtocol {
-    
+
     /**
      Add all elements as subview to the main view
      */
     func addElements()
-    
+
     /**
      Initialize font, color, properties etc.
      */
     func initializeElements()
-    
+
     /**
      Setup constraint for each element
      */
     func setupConstraints()
-    
+
     /**
      Setup anything you want
      */
     func customInit()
-    
+
     /**
      Set backgroundColor, gesture, etc in the view
      */
     func setupView()
-    
+
     /**
      Load data from API
      */
@@ -48,7 +48,7 @@ protocol InitializableProtocol {
 }
 
 extension InitializableProtocol {
-    
+
     /**
      Initializable function contains all ordered initialzable methods from protocol.
      */
@@ -61,11 +61,11 @@ extension InitializableProtocol {
         addElements()
         setupView()
     }
-    
+
     func initialize() {
         initializeElements()
     }
-    
+
     func loadData() {
         loadData()
     }

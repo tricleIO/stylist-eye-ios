@@ -8,6 +8,7 @@ def shared_pods
     pod 'AlamofireObjectMapper'
     pod 'Alamofire'
     pod 'Kingfisher'
+    pod 'KVNProgress'
     pod 'ObjectMapper'
     pod 'SnapKit'
 end
