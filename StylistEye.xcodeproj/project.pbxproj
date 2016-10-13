@@ -44,6 +44,23 @@
 		311D1F1A1DAE4C7F00A7F545 /* APIUrlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */; };
 		311D1F1D1DAE4C9500A7F545 /* NetworkExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */; };
 		311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F1E1DAE4E4500A7F545 /* LoginViewController.swift */; };
+		31818E4D1DAFEB87004883D2 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31818E4C1DAFEB87004883D2 /* SettingsItem.swift */; };
+		31818E4F1DAFEBF7004883D2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31818E4E1DAFEBF7004883D2 /* SettingsViewController.swift */; };
+		31818E511DAFF003004883D2 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31818E501DAFF003004883D2 /* TableView.swift */; };
+		31818E531DAFF0D5004883D2 /* UITableView+SE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31818E521DAFF0D5004883D2 /* UITableView+SE.swift */; };
+		31818E551DAFF10E004883D2 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31818E541DAFF10E004883D2 /* Reusable.swift */; };
+		31818E571DAFF265004883D2 /* UITabeViewCell+SE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31818E561DAFF265004883D2 /* UITabeViewCell+SE.swift */; };
+		31818E5A1DB00295004883D2 /* LogoutCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31818E591DB00295004883D2 /* LogoutCommand.swift */; };
+		31818E691DB00926004883D2 /* SanFranciscoText-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31818E5D1DB00805004883D2 /* SanFranciscoText-Bold.otf */; };
+		31818E6A1DB00926004883D2 /* SanFranciscoText-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31818E5E1DB00805004883D2 /* SanFranciscoText-BoldItalic.otf */; };
+		31818E6B1DB00926004883D2 /* SanFranciscoText-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31818E5F1DB00805004883D2 /* SanFranciscoText-Heavy.otf */; };
+		31818E6C1DB00926004883D2 /* SanFranciscoText-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31818E601DB00805004883D2 /* SanFranciscoText-HeavyItalic.otf */; };
+		31818E6D1DB00926004883D2 /* SanFranciscoText-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31818E611DB00805004883D2 /* SanFranciscoText-Light.otf */; };
+		31818E6E1DB00926004883D2 /* SanFranciscoText-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31818E621DB00805004883D2 /* SanFranciscoText-LightItalic.otf */; };
+		31818E6F1DB00926004883D2 /* SanFranciscoText-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31818E631DB00805004883D2 /* SanFranciscoText-Medium.otf */; };
+		31818E701DB00926004883D2 /* SanFranciscoText-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31818E641DB00805004883D2 /* SanFranciscoText-MediumItalic.otf */; };
+		31818E711DB00926004883D2 /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 31818E5C1DB007FB004883D2 /* Avenir.ttc */; };
+		31818E731DB00BAC004883D2 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31818E721DB00BAC004883D2 /* Label.swift */; };
 		31897D951DAF6B8D00BFFED0 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31897D941DAF6B8D00BFFED0 /* Launch Screen.storyboard */; };
 		31E05E1E1DAEEADC007AE913 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E05E1D1DAEEADC007AE913 /* Serializable.swift */; };
 		31E05E211DAF50BB007AE913 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E05E201DAF50BB007AE913 /* ImageView.swift */; };
@@ -111,6 +128,27 @@
 		311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUrlManager.swift; sourceTree = "<group>"; };
 		311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExecutable.swift; sourceTree = "<group>"; };
 		311D1F1E1DAE4E4500A7F545 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		31818E4C1DAFEB87004883D2 /* SettingsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
+		31818E4E1DAFEBF7004883D2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		31818E501DAFF003004883D2 /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		31818E521DAFF0D5004883D2 /* UITableView+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+SE.swift"; sourceTree = "<group>"; };
+		31818E541DAFF10E004883D2 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		31818E561DAFF265004883D2 /* UITabeViewCell+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITabeViewCell+SE.swift"; sourceTree = "<group>"; };
+		31818E591DB00295004883D2 /* LogoutCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutCommand.swift; sourceTree = "<group>"; };
+		31818E5C1DB007FB004883D2 /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
+		31818E5D1DB00805004883D2 /* SanFranciscoText-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Bold.otf"; sourceTree = "<group>"; };
+		31818E5E1DB00805004883D2 /* SanFranciscoText-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-BoldItalic.otf"; sourceTree = "<group>"; };
+		31818E5F1DB00805004883D2 /* SanFranciscoText-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Heavy.otf"; sourceTree = "<group>"; };
+		31818E601DB00805004883D2 /* SanFranciscoText-HeavyItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-HeavyItalic.otf"; sourceTree = "<group>"; };
+		31818E611DB00805004883D2 /* SanFranciscoText-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Light.otf"; sourceTree = "<group>"; };
+		31818E621DB00805004883D2 /* SanFranciscoText-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-LightItalic.otf"; sourceTree = "<group>"; };
+		31818E631DB00805004883D2 /* SanFranciscoText-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Medium.otf"; sourceTree = "<group>"; };
+		31818E641DB00805004883D2 /* SanFranciscoText-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-MediumItalic.otf"; sourceTree = "<group>"; };
+		31818E651DB00805004883D2 /* SanFranciscoText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Regular.otf"; sourceTree = "<group>"; };
+		31818E661DB00805004883D2 /* SanFranciscoText-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-RegularItalic.otf"; sourceTree = "<group>"; };
+		31818E671DB00805004883D2 /* SanFranciscoText-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-Semibold.otf"; sourceTree = "<group>"; };
+		31818E681DB00805004883D2 /* SanFranciscoText-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoText-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		31818E721DB00BAC004883D2 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		31897D941DAF6B8D00BFFED0 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		31E05E1D1DAEEADC007AE913 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		31E05E201DAF50BB007AE913 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
@@ -200,6 +238,8 @@
 				310919801DAE8DA30083A2C8 /* TextField.swift */,
 				31E30E9C1DAECD5E007F4A5A /* Button.swift */,
 				31E05E201DAF50BB007AE913 /* ImageView.swift */,
+				31818E501DAFF003004883D2 /* TableView.swift */,
+				31818E721DB00BAC004883D2 /* Label.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -210,6 +250,7 @@
 				310919891DAE99280083A2C8 /* AccessToken.swift */,
 				3109198B1DAE9B2C0083A2C8 /* AccountSession.swift */,
 				3109198D1DAE9BB80083A2C8 /* UserInfo.swift */,
+				31818E4C1DAFEB87004883D2 /* SettingsItem.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -257,6 +298,7 @@
 		311D1EFD1DAE455000A7F545 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				31818E581DAFFE46004883D2 /* Settings */,
 				311D1F0F1DAE467B00A7F545 /* Abstract */,
 				311D1F0C1DAE465400A7F545 /* Login */,
 				311D1F0D1DAE465F00A7F545 /* Main */,
@@ -269,6 +311,7 @@
 		311D1EFF1DAE455700A7F545 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				31818E5B1DB007E4004883D2 /* Fonts */,
 				31897D931DAF6B7400BFFED0 /* Splash */,
 				31E05E251DAF53DF007AE913 /* Entilements */,
 				311D1F051DAE461F00A7F545 /* Localization */,
@@ -336,6 +379,7 @@
 				310286A51DAFA54A007EE87B /* OutfitViewController.swift */,
 				310286A71DAFA569007EE87B /* QuestionnaireViewController.swift */,
 				310286A91DAFA574007EE87B /* WardrobeViewController.swift */,
+				31818E4E1DAFEBF7004883D2 /* SettingsViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -363,6 +407,7 @@
 				311D1F111DAE4AE900A7F545 /* Initializable.swift */,
 				310919971DAEA0790083A2C8 /* KeyRepresentable.swift */,
 				31E05E1D1DAEEADC007AE913 /* Serializable.swift */,
+				31818E541DAFF10E004883D2 /* Reusable.swift */,
 			);
 			path = "Public protocols";
 			sourceTree = "<group>";
@@ -375,6 +420,8 @@
 				31E05E221DAF5227007AE913 /* UINavigationBar+SE.swift */,
 				311D1F161DAE4B4B00A7F545 /* UIView+SE.swift */,
 				310286A21DAFA4C7007EE87B /* UIViewController+SE.swift */,
+				31818E521DAFF0D5004883D2 /* UITableView+SE.swift */,
+				31818E561DAFF265004883D2 /* UITabeViewCell+SE.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -394,8 +441,36 @@
 			isa = PBXGroup;
 			children = (
 				310919711DAE81170083A2C8 /* LoginCommand.swift */,
+				31818E591DB00295004883D2 /* LogoutCommand.swift */,
 			);
 			path = Commands;
+			sourceTree = "<group>";
+		};
+		31818E581DAFFE46004883D2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		31818E5B1DB007E4004883D2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				31818E5D1DB00805004883D2 /* SanFranciscoText-Bold.otf */,
+				31818E5E1DB00805004883D2 /* SanFranciscoText-BoldItalic.otf */,
+				31818E5F1DB00805004883D2 /* SanFranciscoText-Heavy.otf */,
+				31818E601DB00805004883D2 /* SanFranciscoText-HeavyItalic.otf */,
+				31818E611DB00805004883D2 /* SanFranciscoText-Light.otf */,
+				31818E621DB00805004883D2 /* SanFranciscoText-LightItalic.otf */,
+				31818E631DB00805004883D2 /* SanFranciscoText-Medium.otf */,
+				31818E641DB00805004883D2 /* SanFranciscoText-MediumItalic.otf */,
+				31818E651DB00805004883D2 /* SanFranciscoText-Regular.otf */,
+				31818E661DB00805004883D2 /* SanFranciscoText-RegularItalic.otf */,
+				31818E671DB00805004883D2 /* SanFranciscoText-Semibold.otf */,
+				31818E681DB00805004883D2 /* SanFranciscoText-SemiboldItalic.otf */,
+				31818E5C1DB007FB004883D2 /* Avenir.ttc */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		31897D931DAF6B7400BFFED0 /* Splash */ = {
@@ -585,6 +660,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31818E691DB00926004883D2 /* SanFranciscoText-Bold.otf in Resources */,
+				31818E6A1DB00926004883D2 /* SanFranciscoText-BoldItalic.otf in Resources */,
+				31818E6B1DB00926004883D2 /* SanFranciscoText-Heavy.otf in Resources */,
+				31818E6C1DB00926004883D2 /* SanFranciscoText-HeavyItalic.otf in Resources */,
+				31818E6D1DB00926004883D2 /* SanFranciscoText-Light.otf in Resources */,
+				31818E6E1DB00926004883D2 /* SanFranciscoText-LightItalic.otf in Resources */,
+				31818E6F1DB00926004883D2 /* SanFranciscoText-Medium.otf in Resources */,
+				31818E701DB00926004883D2 /* SanFranciscoText-MediumItalic.otf in Resources */,
+				31818E711DB00926004883D2 /* Avenir.ttc in Resources */,
 				31897D951DAF6B8D00BFFED0 /* Launch Screen.storyboard in Resources */,
 				310286AD1DAFA716007EE87B /* Main.strings in Resources */,
 				311D1F091DAE464E00A7F545 /* Login.strings in Resources */,
@@ -676,7 +760,9 @@
 			files = (
 				31E05E211DAF50BB007AE913 /* ImageView.swift in Sources */,
 				310919831DAE8FF80083A2C8 /* UIColor+SE.swift in Sources */,
+				31818E4D1DAFEB87004883D2 /* SettingsItem.swift in Sources */,
 				3102869F1DAFA41A007EE87B /* MainTabBarController.swift in Sources */,
+				31818E571DAFF265004883D2 /* UITabeViewCell+SE.swift in Sources */,
 				310919901DAE9D830083A2C8 /* AccountSessionManager.swift in Sources */,
 				311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */,
 				310919941DAE9FF60083A2C8 /* Typealiases.swift in Sources */,
@@ -688,19 +774,25 @@
 				310286A31DAFA4C7007EE87B /* UIViewController+SE.swift in Sources */,
 				3109197A1DAE850E0083A2C8 /* UserDTO.swift in Sources */,
 				310919961DAEA0260083A2C8 /* UserDefaultKeys.swift in Sources */,
+				31818E5A1DB00295004883D2 /* LogoutCommand.swift in Sources */,
 				310919851DAE91970083A2C8 /* Keychain.swift in Sources */,
 				310919871DAE94AE0083A2C8 /* KeychainKeys.swift in Sources */,
 				310286A81DAFA569007EE87B /* QuestionnaireViewController.swift in Sources */,
 				31E05E1E1DAEEADC007AE913 /* Serializable.swift in Sources */,
+				31818E551DAFF10E004883D2 /* Reusable.swift in Sources */,
+				31818E531DAFF0D5004883D2 /* UITableView+SE.swift in Sources */,
 				3109198E1DAE9BB80083A2C8 /* UserInfo.swift in Sources */,
 				3109197C1DAE860B0083A2C8 /* String+SE.swift in Sources */,
 				311D1F171DAE4B4B00A7F545 /* UIView+SE.swift in Sources */,
 				310286A61DAFA54A007EE87B /* OutfitViewController.swift in Sources */,
+				31818E4F1DAFEBF7004883D2 /* SettingsViewController.swift in Sources */,
 				310286A11DAFA49B007EE87B /* AbstractTabBarViewController.swift in Sources */,
 				311D1F121DAE4AE900A7F545 /* Initializable.swift in Sources */,
 				3109198C1DAE9B2C0083A2C8 /* AccountSession.swift in Sources */,
 				31E30E9D1DAECD5E007F4A5A /* Button.swift in Sources */,
 				3109198A1DAE99280083A2C8 /* AccessToken.swift in Sources */,
+				31818E511DAFF003004883D2 /* TableView.swift in Sources */,
+				31818E731DB00BAC004883D2 /* Label.swift in Sources */,
 				310919721DAE81170083A2C8 /* LoginCommand.swift in Sources */,
 				310919781DAE83240083A2C8 /* Configuration.swift in Sources */,
 				3109197E1DAE87570083A2C8 /* ObjectResponse.swift in Sources */,

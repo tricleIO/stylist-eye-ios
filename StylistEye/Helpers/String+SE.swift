@@ -68,6 +68,12 @@ extension String {
         case questionnaire
         case outfit
         case wardrobe
+        case language
+        case privacy
+        case note
+        case about
+        case logout
+        case menu
 
         var localizedString: String {
             var stringToReturn: String = String.empty
@@ -78,6 +84,18 @@ extension String {
                 stringToReturn = "outfit"
             case .wardrobe:
                 stringToReturn = "wardrobe"
+            case .language:
+                stringToReturn = "language"
+            case .privacy:
+                stringToReturn = "privacy"
+            case .note:
+                stringToReturn = "note"
+            case .about:
+                stringToReturn = "about"
+            case .logout:
+                stringToReturn = "logout"
+            case .menu:
+                stringToReturn = "menu"
             }
             return stringToReturn
         }
@@ -85,7 +103,6 @@ extension String {
 
     subscript(main: Main) -> String {
         return "SE-Main-\(main.localizedString.capitalizedFirst)".localizedFromTable(locTable: .main)
-
     }
 
     /**

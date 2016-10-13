@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self])
+
         initializeRootViewController()
 
         return true
@@ -61,8 +62,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             rootViewConrtoller = LoginViewController()
         }
+        let navController = UINavigationController(rootViewController: rootViewConrtoller)
+        navController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootViewConrtoller
+        window?.rootViewController = navController
         window?.makeKeyAndVisible()
     }
 }

@@ -13,12 +13,14 @@ class Button: UIButton {
     required override init(frame: CGRect) {
         super.init(frame: frame)
 
+        titleLabel?.font = SystemFont[.title]
         initialize()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
+        titleLabel?.font = SystemFont[.title]
         initialize()
     }
 }

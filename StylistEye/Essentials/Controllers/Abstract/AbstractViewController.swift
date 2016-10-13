@@ -28,6 +28,13 @@ class AbstractViewController: UIViewController {
     }
 
     // MARK: - <Initializable>
+    internal override func setupView() {
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName: Palette[custom: .appColor],
+            NSFontAttributeName: SystemFont[.title]
+        ]
+    }
+    
     internal override func customInit() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss)))
     }

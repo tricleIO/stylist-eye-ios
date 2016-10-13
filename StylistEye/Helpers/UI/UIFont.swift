@@ -23,11 +23,16 @@ extension UIFont {
     }
 
     subscript(font: Fonts) -> UIFont {
+        var fontForUse: UIFont?
         switch font {
         case .title:
-            return UIFont.systemFont(ofSize: 15)
+            fontForUse = UIFont(name: "Avenir", size: 20)
         case .description:
-            return UIFont.systemFont(ofSize: 11)
+            fontForUse = UIFont(name: "Avenir", size: 16)
         }
+        guard let fontToReturn = fontForUse else {
+            return UIFont.systemFont(ofSize: 10)
+        }
+        return fontToReturn
     }
 }

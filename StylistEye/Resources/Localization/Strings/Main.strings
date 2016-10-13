@@ -7,5 +7,12 @@
 */
 
 "SE-Main-Questionnaire" = "Dotazník";
-"SE-Main-Outfit" = "Outfit";
+"SE-Main-Outfit" = "Outfity";
 "SE-Main-Wardrobe" = "Šatník";
+
+"SE-Main-Language" = "Jazyk";
+"SE-Main-Privacy" = "Privacy & Safety";
+"SE-Main-Note" = "Obchodní podmínky";
+"SE-Main-About" = "O nás";
+"SE-Main-Logout" = "Logout";
+"SE-Main-Menu" = "Menu";

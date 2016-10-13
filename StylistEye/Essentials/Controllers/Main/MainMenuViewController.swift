@@ -16,7 +16,7 @@ class MainMenuViewController: AbstractViewController {
     var userInfo: UserInfo?
 
     // MARK: > private
-    private let welcome = UILabel()
+    fileprivate let welcome = Label()
 
     // MARK: - <Initializable>
     internal override func setupView() {
