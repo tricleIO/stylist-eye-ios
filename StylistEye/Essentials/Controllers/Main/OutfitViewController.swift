@@ -63,7 +63,6 @@ class OutfitViewController: AbstractViewController {
     fileprivate func openSettingsView() {
         let navigationController = UINavigationController(rootViewController: SettingsViewController())
         navigationController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
-        navigationController.navigationBar.clipsToBounds = true
         present(navigationController, animated: true, completion: nil)
     }
 }

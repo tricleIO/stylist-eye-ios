@@ -25,9 +25,9 @@ extension NetworkExecutable {
 
             switch response.result {
             case let .success(value):
-                completion(.success(object: value.objects, statusCode: response.response?.statusCode))
-            case let .failure(error):
-                completion(.failure(message: error, statusCode: response.response?.statusCode))
+                completion(.success(object: value.objects, statusCode: response.result.value?.statusCode))
+            case .failure:
+                completion(.failure(message: response.result.value?.errorMessage ?? String.empty, statusCode: response.response?.statusCode))
             }
         }
     }

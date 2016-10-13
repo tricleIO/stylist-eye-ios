@@ -30,7 +30,7 @@ extension UINavigationBar {
      */
     func makeInvisibleBar() {
         setBackgroundImage(UIImage(), for: .default)
-        shadowImage = UIImage()
+//        shadowImage = UIImage()
         isTranslucent = true
         backgroundColor = Palette[basic: .clear]
     }

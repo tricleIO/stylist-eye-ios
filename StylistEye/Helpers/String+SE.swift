@@ -74,7 +74,16 @@ extension String {
         case about
         case logout
         case menu
-
+        case pants
+        case dress
+        case jacket
+        case shoe
+        case shirt
+        case cap
+        case work
+        case bussiness
+        case earings
+        
         var localizedString: String {
             var stringToReturn: String = String.empty
             switch self {
@@ -96,6 +105,24 @@ extension String {
                 stringToReturn = "logout"
             case .menu:
                 stringToReturn = "menu"
+            case .pants:
+                stringToReturn = "pants"
+            case .dress:
+                stringToReturn = "dress"
+            case .jacket:
+                stringToReturn = "jacket"
+            case .shoe:
+                stringToReturn = "shoe"
+            case .shirt:
+                stringToReturn = "shirt"
+            case .cap:
+                stringToReturn = "cap"
+            case .work:
+                stringToReturn = "work"
+            case .bussiness:
+                stringToReturn = "bussiness"
+            case .earings:
+                stringToReturn = "earings"
             }
             return stringToReturn
         }

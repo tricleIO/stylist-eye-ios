@@ -68,7 +68,6 @@
 		31E05E271DAF5512007AE913 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E05E261DAF5512007AE913 /* UIFont.swift */; };
 		31E05E291DAF55A6007AE913 /* KVNProgress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E05E281DAF55A6007AE913 /* KVNProgress.framework */; };
 		31E30E9D1DAECD5E007F4A5A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E30E9C1DAECD5E007F4A5A /* Button.swift */; };
-		31E30E9F1DAED4A3007F4A5A /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E30E9E1DAED4A3007F4A5A /* MainMenuViewController.swift */; };
 		31F5FB9C1DAE2BE300418D36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5FB9B1DAE2BE300418D36 /* AppDelegate.swift */; };
 		31F5FBB41DAE2BE300418D36 /* StylistEyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5FBB31DAE2BE300418D36 /* StylistEyeTests.swift */; };
 		31F5FBBF1DAE2BE300418D36 /* StylistEyeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5FBBE1DAE2BE300418D36 /* StylistEyeUITests.swift */; };
@@ -157,7 +156,6 @@
 		31E05E261DAF5512007AE913 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		31E05E281DAF55A6007AE913 /* KVNProgress.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KVNProgress.framework; path = "Pods/../build/Debug-iphoneos/KVNProgress/KVNProgress.framework"; sourceTree = "<group>"; };
 		31E30E9C1DAECD5E007F4A5A /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
-		31E30E9E1DAED4A3007F4A5A /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		31F5FB981DAE2BE300418D36 /* StylistEye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StylistEye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31F5FB9B1DAE2BE300418D36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31F5FBAA1DAE2BE300418D36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -375,7 +373,6 @@
 		311D1F0D1DAE465F00A7F545 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				31E30E9E1DAED4A3007F4A5A /* MainMenuViewController.swift */,
 				310286A51DAFA54A007EE87B /* OutfitViewController.swift */,
 				310286A71DAFA569007EE87B /* QuestionnaireViewController.swift */,
 				310286A91DAFA574007EE87B /* WardrobeViewController.swift */,
@@ -766,7 +763,6 @@
 				310919901DAE9D830083A2C8 /* AccountSessionManager.swift in Sources */,
 				311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */,
 				310919941DAE9FF60083A2C8 /* Typealiases.swift in Sources */,
-				31E30E9F1DAED4A3007F4A5A /* MainMenuViewController.swift in Sources */,
 				31F5FB9C1DAE2BE300418D36 /* AppDelegate.swift in Sources */,
 				311D1F141DAE4B3000A7F545 /* AbstractViewController.swift in Sources */,
 				310919811DAE8DA30083A2C8 /* TextField.swift in Sources */,

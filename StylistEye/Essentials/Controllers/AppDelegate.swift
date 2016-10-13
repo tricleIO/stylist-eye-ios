@@ -62,10 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             rootViewConrtoller = LoginViewController()
         }
-        let navController = UINavigationController(rootViewController: rootViewConrtoller)
-        navController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navController
+        window?.rootViewController = rootViewConrtoller
         window?.makeKeyAndVisible()
     }
 }

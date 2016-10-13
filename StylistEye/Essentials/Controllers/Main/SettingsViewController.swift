@@ -28,7 +28,7 @@ class SettingsViewController: AbstractViewController {
         SettingsItem(image: #imageLiteral(resourceName: "logout_image"), name: StringContainer[.logout], controller: nil),
     ]
     
-    var tableView = TableView(frame: CGRect.zero, style: .grouped)
+    fileprivate var tableView = TableView(frame: CGRect.zero, style: .grouped)
 
     // MARK: - <Initializable>
     internal override func addElements() {

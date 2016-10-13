@@ -14,7 +14,17 @@ class WardrobeViewController: AbstractViewController {
     // MARK: > public
     
     
-    // MARK: > private
+    // MARK: > private    
+    internal static let settingsItem: [SettingsItem] = [
+        SettingsItem(image: #imageLiteral(resourceName: "pants_image"), name: StringContainer[.pants], controller: ""),
+        SettingsItem(image: #imageLiteral(resourceName: "dress_image"), name: StringContainer[.dress], controller: ""),
+        SettingsItem(image: #imageLiteral(resourceName: "jacket_image"), name: StringContainer[.jacket], controller: ""),
+        SettingsItem(image: #imageLiteral(resourceName: "shoe_image"), name: StringContainer[.shoe], controller: ""),
+        SettingsItem(image: #imageLiteral(resourceName: "shirt_image"), name: StringContainer[.shirt], controller: ""),
+    ]
+    
+    fileprivate var tableView = TableView(frame: CGRect.zero, style: .grouped)
+
     fileprivate let backgroundImageView = ImageView()
     
     // MARK: - <Initializable>
@@ -22,7 +32,16 @@ class WardrobeViewController: AbstractViewController {
         super.initializeElements()
         
         backgroundImageView.image = #imageLiteral(resourceName: "whiteBg_image")
+
+        tableView.register(UITableViewCell.self)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = Palette[basic: .clear]
+        tableView.isScrollEnabled = false
+        tableView.separatorColor =  Palette[custom: .purple]
+        tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
         
+        // TODO: @MS
         print(Keychains[.accessTokenKey])
     }
     
@@ -32,6 +51,7 @@ class WardrobeViewController: AbstractViewController {
         view.addSubviews(views:
             [
                 backgroundImageView,
+                tableView,
             ]
         )
     }
@@ -42,6 +62,13 @@ class WardrobeViewController: AbstractViewController {
         backgroundImageView.snp.makeConstraints { make in
             make.edges.equalTo(view)
         }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(view)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.bottom.equalTo(view)
+        }
     }
     
     internal override func setupView() {
@@ -49,5 +76,45 @@ class WardrobeViewController: AbstractViewController {
         
         title = StringContainer[.wardrobe]
         view.backgroundColor = Palette[basic: .white]
+    }
+}
+
+// MARK: - <UITableViewDataSource>
+extension WardrobeViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = tableView.dequeueReusableCell(.value1)
+        let settingItem = WardrobeViewController.settingsItem[indexPath.row]
+        
+        cell.backgroundColor = Palette[basic: .clear]
+        cell.textLabel?.textColor = Palette[custom: .purple]
+        cell.textLabel?.font = SystemFont[.description]
+        cell.accessoryView = ImageView(image: #imageLiteral(resourceName: "disclButton_icon"))
+        cell.tintColor = Palette[custom: .purple]
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.selectionStyle = .gray
+        
+        if indexPath.row < WardrobeViewController.settingsItem.count {
+            cell.imageView?.image = settingItem.image
+            cell.textLabel?.text = settingItem.name
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return WardrobeViewController.settingsItem.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+}
+
+// MARK: - <UITableViewDelegate>
+extension WardrobeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

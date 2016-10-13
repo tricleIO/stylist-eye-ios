@@ -143,20 +143,28 @@ class LoginViewController: AbstractViewController {
             KVNProgress.show()
             LoginCommand(email: email, password: password).executeCommand { data in
                 switch data {
-                case let .success(object: data, _):
-                    KVNProgress.showSuccess {
-                        AccountSessionManager.manager.accountSession = AccountSession(response: data)
-                         if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
-//                            UIView.transition(
-//                                with: window,
-//                                duration: GUIConfiguration.DefaultAnimationDuration,
-//                                options: .allowAnimatedContent,
-//                                animations: {
-                                    window.rootViewController = MainTabBarController()
-//                                }, completion: nil
-//                            )
+                case let .success(object: data, statusCode: statusCode):
+                // TODO: @MS
+                if let statusCode = statusCode {
+                    if statusCode == 1 {
+                        KVNProgress.showSuccess {
+                            AccountSessionManager.manager.accountSession = AccountSession(response: data)
+                            if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
+                                //                            UIView.transition(
+                                //                                with: window,
+                                //                                duration: GUIConfiguration.DefaultAnimationDuration,
+                                //                                options: .allowAnimatedContent,
+                                //                                animations: {
+                                window.rootViewController = MainTabBarController()
+                                //                                }, completion: nil
+                                //                            )
+                            }
                         }
                     }
+                    else {
+                        KVNProgress.showError()
+                    }
+                }
                 case .failure:
                     KVNProgress.showError()
                 }
