@@ -24,6 +24,14 @@ public var StringContainer = String.empty
 
 extension String {
 
+    internal enum LocalizedTable: String {
+        case login
+        case main
+    }
+
+    /**
+     Login string file.
+     */
     internal enum Login: StringContainerProtocol {
 
         case email
@@ -47,12 +55,36 @@ extension String {
         }
     }
 
-    internal enum LocalizedTable: String {
-        case login
-    }
-
     subscript(login: Login) -> String {
         return "SE-Login-\(login.localizedString.capitalizedFirst)".localizedFromTable(locTable: .login)
+
+    }
+
+    /**
+     Main string file.
+     */
+    internal enum Main: StringContainerProtocol {
+
+        case questionnaire
+        case outfit
+        case wardrobe
+
+        var localizedString: String {
+            var stringToReturn: String = String.empty
+            switch self {
+            case .questionnaire:
+                stringToReturn = "questionnaire"
+            case .outfit:
+                stringToReturn = "outfit"
+            case .wardrobe:
+                stringToReturn = "wardrobe"
+            }
+            return stringToReturn
+        }
+    }
+
+    subscript(main: Main) -> String {
+        return "SE-Main-\(main.localizedString.capitalizedFirst)".localizedFromTable(locTable: .main)
 
     }
 

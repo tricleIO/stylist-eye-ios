@@ -10,6 +10,13 @@
 		0CBFBEEBBA70B08AB0AAB582 /* Pods_StylistEye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B11FB7410EB3E97B7902E759 /* Pods_StylistEye.framework */; };
 		3102869C1DAFA049007EE87B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3102869A1DAFA049007EE87B /* Fabric.framework */; };
 		3102869D1DAFA049007EE87B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3102869B1DAFA049007EE87B /* Crashlytics.framework */; };
+		3102869F1DAFA41A007EE87B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3102869E1DAFA41A007EE87B /* MainTabBarController.swift */; };
+		310286A11DAFA49B007EE87B /* AbstractTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310286A01DAFA49B007EE87B /* AbstractTabBarViewController.swift */; };
+		310286A31DAFA4C7007EE87B /* UIViewController+SE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310286A21DAFA4C7007EE87B /* UIViewController+SE.swift */; };
+		310286A61DAFA54A007EE87B /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310286A51DAFA54A007EE87B /* OutfitViewController.swift */; };
+		310286A81DAFA569007EE87B /* QuestionnaireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310286A71DAFA569007EE87B /* QuestionnaireViewController.swift */; };
+		310286AA1DAFA574007EE87B /* WardrobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310286A91DAFA574007EE87B /* WardrobeViewController.swift */; };
+		310286AD1DAFA716007EE87B /* Main.strings in Resources */ = {isa = PBXBuildFile; fileRef = 310286AC1DAFA716007EE87B /* Main.strings */; };
 		310919721DAE81170083A2C8 /* LoginCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310919711DAE81170083A2C8 /* LoginCommand.swift */; };
 		310919751DAE823E0083A2C8 /* EmptyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310919741DAE823E0083A2C8 /* EmptyDTO.swift */; };
 		310919781DAE83240083A2C8 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310919771DAE83240083A2C8 /* Configuration.swift */; };
@@ -70,6 +77,13 @@
 /* Begin PBXFileReference section */
 		3102869A1DAFA049007EE87B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3102869B1DAFA049007EE87B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		3102869E1DAFA41A007EE87B /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = ../Main/MainTabBarController.swift; sourceTree = "<group>"; };
+		310286A01DAFA49B007EE87B /* AbstractTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTabBarViewController.swift; sourceTree = "<group>"; };
+		310286A21DAFA4C7007EE87B /* UIViewController+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SE.swift"; sourceTree = "<group>"; };
+		310286A51DAFA54A007EE87B /* OutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
+		310286A71DAFA569007EE87B /* QuestionnaireViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionnaireViewController.swift; sourceTree = "<group>"; };
+		310286A91DAFA574007EE87B /* WardrobeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeViewController.swift; sourceTree = "<group>"; };
+		310286AC1DAFA716007EE87B /* Main.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Main.strings; sourceTree = "<group>"; };
 		310919711DAE81170083A2C8 /* LoginCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCommand.swift; sourceTree = "<group>"; };
 		310919741DAE823E0083A2C8 /* EmptyDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDTO.swift; sourceTree = "<group>"; };
 		310919771DAE83240083A2C8 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -302,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				311D1F0B1DAE464E00A7F545 /* Login.strings */,
+				310286AC1DAFA716007EE87B /* Main.strings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -318,6 +333,9 @@
 			isa = PBXGroup;
 			children = (
 				31E30E9E1DAED4A3007F4A5A /* MainMenuViewController.swift */,
+				310286A51DAFA54A007EE87B /* OutfitViewController.swift */,
+				310286A71DAFA569007EE87B /* QuestionnaireViewController.swift */,
+				310286A91DAFA574007EE87B /* WardrobeViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -325,6 +343,7 @@
 		311D1F0E1DAE466800A7F545 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				3102869E1DAFA41A007EE87B /* MainTabBarController.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -333,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				311D1F131DAE4B3000A7F545 /* AbstractViewController.swift */,
+				310286A01DAFA49B007EE87B /* AbstractTabBarViewController.swift */,
 			);
 			path = Abstract;
 			sourceTree = "<group>";
@@ -354,6 +374,7 @@
 				31E05E261DAF5512007AE913 /* UIFont.swift */,
 				31E05E221DAF5227007AE913 /* UINavigationBar+SE.swift */,
 				311D1F161DAE4B4B00A7F545 /* UIView+SE.swift */,
+				310286A21DAFA4C7007EE87B /* UIViewController+SE.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -565,6 +586,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31897D951DAF6B8D00BFFED0 /* Launch Screen.storyboard in Resources */,
+				310286AD1DAFA716007EE87B /* Main.strings in Resources */,
 				311D1F091DAE464E00A7F545 /* Login.strings in Resources */,
 				311D1F041DAE461D00A7F545 /* Media.xcassets in Resources */,
 			);
@@ -654,6 +676,7 @@
 			files = (
 				31E05E211DAF50BB007AE913 /* ImageView.swift in Sources */,
 				310919831DAE8FF80083A2C8 /* UIColor+SE.swift in Sources */,
+				3102869F1DAFA41A007EE87B /* MainTabBarController.swift in Sources */,
 				310919901DAE9D830083A2C8 /* AccountSessionManager.swift in Sources */,
 				311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */,
 				310919941DAE9FF60083A2C8 /* Typealiases.swift in Sources */,
@@ -661,14 +684,19 @@
 				31F5FB9C1DAE2BE300418D36 /* AppDelegate.swift in Sources */,
 				311D1F141DAE4B3000A7F545 /* AbstractViewController.swift in Sources */,
 				310919811DAE8DA30083A2C8 /* TextField.swift in Sources */,
+				310286AA1DAFA574007EE87B /* WardrobeViewController.swift in Sources */,
+				310286A31DAFA4C7007EE87B /* UIViewController+SE.swift in Sources */,
 				3109197A1DAE850E0083A2C8 /* UserDTO.swift in Sources */,
 				310919961DAEA0260083A2C8 /* UserDefaultKeys.swift in Sources */,
 				310919851DAE91970083A2C8 /* Keychain.swift in Sources */,
 				310919871DAE94AE0083A2C8 /* KeychainKeys.swift in Sources */,
+				310286A81DAFA569007EE87B /* QuestionnaireViewController.swift in Sources */,
 				31E05E1E1DAEEADC007AE913 /* Serializable.swift in Sources */,
 				3109198E1DAE9BB80083A2C8 /* UserInfo.swift in Sources */,
 				3109197C1DAE860B0083A2C8 /* String+SE.swift in Sources */,
 				311D1F171DAE4B4B00A7F545 /* UIView+SE.swift in Sources */,
+				310286A61DAFA54A007EE87B /* OutfitViewController.swift in Sources */,
+				310286A11DAFA49B007EE87B /* AbstractTabBarViewController.swift in Sources */,
 				311D1F121DAE4AE900A7F545 /* Initializable.swift in Sources */,
 				3109198C1DAE9B2C0083A2C8 /* AccountSession.swift in Sources */,
 				31E30E9D1DAECD5E007F4A5A /* Button.swift in Sources */,

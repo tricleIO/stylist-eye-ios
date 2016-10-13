@@ -56,15 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: @MS
         var rootViewConrtoller: UIViewController
         if Keychains[.accessTokenKey] != nil {
-            rootViewConrtoller = MainMenuViewController()
+            rootViewConrtoller = MainTabBarController()
         }
         else {
             rootViewConrtoller = LoginViewController()
         }
-        let navigationController = UINavigationController(rootViewController: rootViewConrtoller)
-        navigationController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navigationController
+        window?.rootViewController = rootViewConrtoller
         window?.makeKeyAndVisible()
     }
 }

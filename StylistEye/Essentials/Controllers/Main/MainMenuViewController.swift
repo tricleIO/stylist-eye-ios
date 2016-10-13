@@ -14,17 +14,17 @@ class MainMenuViewController: AbstractViewController {
     // MARK: - Properties
     // MARK: > public
     var userInfo: UserInfo?
-    
+
     // MARK: > private
     private let welcome = UILabel()
 
     // MARK: - <Initializable>
     internal override func setupView() {
         super.setupView()
-        
+
         view.backgroundColor = Palette[basic: .white]
     }
-    
+
     internal override func initializeElements() {
         super.initializeElements()
     }
@@ -33,11 +33,11 @@ class MainMenuViewController: AbstractViewController {
         super.customInit()
 
         userInfo = UserInfo.load()
-        
+
         welcome.text = userInfo?.firstname
-        
+
         view.addSubview(welcome)
-        
+
         welcome.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.center.equalTo(view)
