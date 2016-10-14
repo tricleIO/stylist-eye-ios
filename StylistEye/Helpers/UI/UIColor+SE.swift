@@ -29,6 +29,8 @@ extension UIColor {
         case black
         /// Clear color
         case clear
+        /// Gray color
+        case gray
         /// White color.
         case white
     }
@@ -39,6 +41,8 @@ extension UIColor {
             return UIColor.black
         case .clear:
             return UIColor.clear
+        case .gray:
+            return UIColor.gray
         case .white:
             return UIColor.white
         }

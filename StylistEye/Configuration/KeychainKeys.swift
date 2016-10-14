@@ -22,9 +22,15 @@ extension KeychainKeysProtocol where Self:RawRepresentable, Self.RawValue == Str
 /**
  Keychain keys coantins all keychain keys.
     - accessTokenKey
+    - user email
+    - user password
  */
 public enum KeychainKeys: String, KeychainKeysProtocol {
-    
+
     /// Access token key.
-    case accessTokenKey = "SlevomatAccessTokenKey56y3yiye7865"
+    case accessTokenKey = "StylistEyeAkcesToken009"
+    /// User email.
+    case userEmail = "StylistUZerEmal066"
+    /// User password.
+    case userPassword = "StylistPasvort123456"
 }

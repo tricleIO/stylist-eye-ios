@@ -87,14 +87,8 @@ class LanguagesViewController: AbstractViewController {
 
     // MARK: - User Action
     func backButtonTapped() {
-        popViewController()
-    }
-
-    // MARK: - Actions
-    fileprivate func popViewController() {
         navigationController?.popViewController(animated: true)
     }
-
 }
 
 // MARK: - <UITableViewDataSource>

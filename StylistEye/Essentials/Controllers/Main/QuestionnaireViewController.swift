@@ -13,14 +13,14 @@ class QuestionnaireViewController: AbstractViewController {
     // MARK: - Properties
     // MARK: > private
     internal static let cellItem: [CellItem] = [
-        CellItem(image: #imageLiteral(resourceName: "cat_image"), name: StringContainer[.cap], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "work_dress_image"), name: StringContainer[.work], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "long_dress_image"), name: StringContainer[.bussiness], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "shoe_image"), name: StringContainer[.shoe], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "earings_image"), name: StringContainer[.earings], controller: nil),
+        CellItem(image: #imageLiteral(resourceName: "cat_image"), name: StringContainer[.cap], controller: QuestionnaireDetailViewController()),
+        CellItem(image: #imageLiteral(resourceName: "work_dress_image"), name: StringContainer[.work], controller: QuestionnaireDetailViewController()),
+        CellItem(image: #imageLiteral(resourceName: "long_dress_image"), name: StringContainer[.bussiness], controller: QuestionnaireDetailViewController()),
+        CellItem(image: #imageLiteral(resourceName: "shoe_image"), name: StringContainer[.shoe], controller: QuestionnaireDetailViewController()),
+        CellItem(image: #imageLiteral(resourceName: "earings_image"), name: StringContainer[.earings], controller: QuestionnaireDetailViewController()),
     ]
 
-    fileprivate var tableView = TableView(frame: CGRect.zero, style: .grouped)
+    fileprivate var tableView = TableView(style: .grouped)
 
     fileprivate let backgroundImageView = ImageView()
 
@@ -66,6 +66,8 @@ class QuestionnaireViewController: AbstractViewController {
         }
     }
 
+    override func customInit() {}
+
     internal override func setupView() {
         super.setupView()
 
@@ -79,7 +81,7 @@ extension QuestionnaireViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TableViewCellWithImage = tableView.dequeueReusableCell()
-        let settingItem = QuestionnaireViewController.cellItem[indexPath.row]
+        let settingItem = QuestionnaireViewController.cellItem[safe: indexPath.row]
 
         cell.backgroundColor = Palette[basic: .clear]
         cell.textLabel?.textColor = Palette[custom: .purple]
@@ -90,8 +92,8 @@ extension QuestionnaireViewController: UITableViewDataSource {
         cell.selectionStyle = .gray
 
         if indexPath.row < QuestionnaireViewController.cellItem.count {
-            cell.leftCellImage = settingItem.image
-            cell.labelText = settingItem.name
+            cell.leftCellImage = settingItem?.image
+            cell.labelText = settingItem?.name
         }
 
         return cell
@@ -116,5 +118,9 @@ extension QuestionnaireViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if let controller = QuestionnaireViewController.cellItem[indexPath.row].controller {
+            controller.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }
