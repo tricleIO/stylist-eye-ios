@@ -58,7 +58,7 @@ extension UIColor {
     subscript(custom custom: CustomPaletteColors) -> UIColor {
         switch custom {
         case .appColor:
-            return UIColor(rgba: 0xb5978d)
+            return UIColor(rgba: 0x94776d)
         case .purple:
             return UIColor(rgba: 0x41223e)
         }

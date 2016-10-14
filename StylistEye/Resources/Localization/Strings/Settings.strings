@@ -1,0 +1,13 @@
+/* 
+  Settings.strings
+  StylistEye
+
+  Created by Michal Severín on 14.10.16.
+  Copyright © 2016 Michal Severín. All rights reserved.
+*/
+
+"SE-Settings-English" = "English";
+"SE-Settings-Fransais" = "Fransais";
+"SE-Settings-Deutch" = "Deutch";
+"SE-Settings-Cestina" = "Čeština";
+"SE-Settings-Italy" = "Italy";

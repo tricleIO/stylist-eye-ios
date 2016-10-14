@@ -12,9 +12,20 @@ final class AccountSessionManager {
 
     static let manager = AccountSessionManager()
 
-    var accountSession: AccountSession?
+    var accountSession: AccountSession? {
+        didSet {
+            if accountSession == nil {
+                // TODO: @MS
+                Keychains[.accessTokenKey] = nil
+            }
+        }
+    }
 
     fileprivate init() {
         accountSession = AccountSession()
+    }
+
+    func closeSession() {
+        accountSession = nil
     }
 }

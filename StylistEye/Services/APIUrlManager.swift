@@ -20,6 +20,7 @@ protocol APIUrlManagerProtocol {
 /**
  Define API url manager.
     - login
+    - logout
  */
 enum APIUrlManager: APIUrlManagerProtocol {
 
@@ -34,6 +35,13 @@ enum APIUrlManager: APIUrlManagerProtocol {
         password: String
     )
 
+    /**
+     Logout
+     - Parameters:
+        - token: User token.
+     */
+    case logout
+
     /// Url path.
     var url: String {
         var urlString: String = String.empty
@@ -43,14 +51,18 @@ enum APIUrlManager: APIUrlManagerProtocol {
             password
             ):
             urlString = "/api/MobileAccount/login?userName=\(email)&password=\(password)"
+        case .logout:
+            urlString = "/api/MobileAccount/logout"
         }
-        return "\(APIConfiguration.baseUrl)\(urlString)"
+        return "\(APIConfiguration.BaseUrl)\(urlString)"
     }
 
     /// Url parameters.
     var params: [String : String] {
         switch self {
         case .login:
+            fallthrough
+        case .logout:
             return [:]
         }
     }
@@ -59,6 +71,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
     var method: HTTPMethod {
         switch self {
         case .login:
+            fallthrough
+        case .logout:
             return .get
         }
     }

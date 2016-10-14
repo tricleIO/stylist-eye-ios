@@ -13,16 +13,15 @@ import KVNProgress
 class LoginViewController: AbstractViewController {
 
     // MARK: - Properties
-    // MARK: > public
     // MARK: > private
-    private let emailTextField = TextField()
-    private let passwordTextField = TextField()
+    fileprivate let emailTextField = TextField()
+    fileprivate let passwordTextField = TextField()
 
-    private let backgorundImageView = ImageView()
-    private let logoImageView = ImageView()
+    fileprivate let backgorundImageView = ImageView()
+    fileprivate let logoImageView = ImageView()
 
-    private let loginButton = Button(type: .system)
-    private let forgotPasswordButton = Button(type: .system)
+    fileprivate let loginButton = Button(type: .system)
+    fileprivate let forgotPasswordButton = Button(type: .system)
 
     // MARK: - <Initialize>
     internal override func initializeElements() {
@@ -36,7 +35,8 @@ class LoginViewController: AbstractViewController {
             attributes:[NSForegroundColorAttributeName: Palette[custom: .appColor]]
         )
         emailTextField.textColor = Palette[custom: .appColor]
-        let emailImageView = ImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 12))
+        emailTextField.tintColor = Palette[custom: .appColor]
+        let emailImageView = ImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 12))
         emailImageView.image = #imageLiteral(resourceName: "human_image")
         emailImageView.contentMode = .scaleAspectFit
         emailTextField.leftView = emailImageView
@@ -49,7 +49,7 @@ class LoginViewController: AbstractViewController {
         logoImageView.contentMode = .scaleAspectFit
 
         // TODO: @MS
-        let passwordImageView = ImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 12))
+        let passwordImageView = ImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 12))
         passwordImageView.image = #imageLiteral(resourceName: "lock_image")
         passwordImageView.contentMode = .scaleAspectFit
         passwordTextField.textColor = Palette[custom: .appColor]
@@ -61,6 +61,7 @@ class LoginViewController: AbstractViewController {
         )
         passwordTextField.tintColor = Palette[custom: .appColor]
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.addTarget(self, action: #selector(loginButtonTapped), for: .editingDidEndOnExit)
 
         loginButton.backgroundColor = Palette[custom: .appColor]
         loginButton.setTitle(StringContainer[.login], for: .normal)
@@ -93,14 +94,14 @@ class LoginViewController: AbstractViewController {
         emailTextField.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.centerY.equalTo(view)
-            make.width.equalTo(view.frame.size.width - 40)
+            make.width.equalTo(view.frame.size.width - 60)
             make.height.equalTo(30)
         }
 
         forgotPasswordButton.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.top.equalTo(loginButton.snp.bottom).offset(10)
-            make.width.equalTo(view.frame.size.width - 40)
+            make.width.equalTo(view.frame.size.width - 60)
             make.height.equalTo(25)
         }
 
@@ -113,15 +114,15 @@ class LoginViewController: AbstractViewController {
         passwordTextField.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.top.equalTo(emailTextField.snp.bottom).offset(10)
-            make.width.equalTo(view.frame.size.width - 40)
+            make.width.equalTo(view.frame.size.width - 60)
             make.height.equalTo(30)
         }
 
         loginButton.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.top.equalTo(passwordTextField.snp.bottom).offset(10)
-            make.width.equalTo(view.frame.size.width - 40)
-            make.height.equalTo(40)
+            make.width.equalTo(view.frame.size.width - 60)
+            make.height.equalTo(45)
         }
     }
 
@@ -131,27 +132,65 @@ class LoginViewController: AbstractViewController {
         view.backgroundColor = Palette[basic: .white]
     }
 
+    internal override func customInit() {
+        super.customInit()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+
     // MARK: - Actions
     func loginButtonTapped() {
         login()
     }
 
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height / 2
+            }
+        }
+
+    }
+
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height / 2
+            }
+        }
+    }
+
     // MARK: - Action methods
     private func login() {
-        KVNProgress.show()
         if let email = emailTextField.text, let password = passwordTextField.text {
+            KVNProgress.show()
             LoginCommand(email: email, password: password).executeCommand { data in
                 switch data {
-                case let .success(object: data, _):
-                    KVNProgress.showSuccess {
-                        AccountSessionManager.manager.accountSession = AccountSession(response: data)
-                        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                            appDelegate.window?.rootViewController = MainMenuViewController()
+                case let .success(object: data, statusCode: statusCode):
+                // TODO: @MS
+                if let statusCode = statusCode {
+                    if statusCode == 1 {
+                        KVNProgress.showSuccess {
+                            AccountSessionManager.manager.accountSession = AccountSession(response: data)
+                            if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
+                                //                            UIView.transition(
+                                //                                with: window,
+                                //                                duration: GUIConfiguration.DefaultAnimationDuration,
+                                //                                options: .allowAnimatedContent,
+                                //                                animations: {
+                                window.rootViewController = MainTabBarController()
+                                //                                }, completion: nil
+                                //                            )
+                            }
                         }
                     }
-                case let .failure(message: error, _):
+                    else {
+                        KVNProgress.showError()
+                    }
+                }
+                case .failure:
                     KVNProgress.showError()
-                    print(error.localizedDescription)
                 }
             }
         }

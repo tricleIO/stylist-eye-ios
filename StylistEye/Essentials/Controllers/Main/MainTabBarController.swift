@@ -49,22 +49,22 @@ class MainTabBarController: AbstractTabBarController {
         var image: UIImage? {
             switch self {
             case .questionnaire:
-                fallthrough
+                return #imageLiteral(resourceName: "questions_icon")
             case .outfit:
-                fallthrough
+                return #imageLiteral(resourceName: "outfits_icon")
             case .wardrobe:
-                return UIImage()
+                return #imageLiteral(resourceName: "cloakroom_icon")
             }
         }
 
         var selectedImage: UIImage? {
             switch self {
             case .questionnaire:
-                fallthrough
+                return #imageLiteral(resourceName: "questions_icon")
             case .outfit:
-                fallthrough
+                return #imageLiteral(resourceName: "outfits_icon")
             case .wardrobe:
-                return UIImage()
+                return #imageLiteral(resourceName: "cloakroom_icon")
             }
         }
 
@@ -86,6 +86,14 @@ class MainTabBarController: AbstractTabBarController {
 
         tabBar.barTintColor = Palette[custom: .purple]
         tabBar.tintColor = Palette[custom: .appColor]
+        tabBarItem.setTitleTextAttributes([
+            NSFontAttributeName: SystemFont[.description]
+            ]
+            , for: .normal)
+        tabBarItem.setTitleTextAttributes([
+            NSFontAttributeName: SystemFont[.description]
+            ]
+            , for: .selected)
     }
 
     internal override func customInit() {
