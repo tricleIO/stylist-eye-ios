@@ -11,6 +11,7 @@ import AlamofireObjectMapper
 import ObjectMapper
 
 protocol NetworkExecutable {
+
     associatedtype Data: Mappable
     var urlManager: APIUrlManager {get}
     func executeCommand(completion: @escaping Completion)

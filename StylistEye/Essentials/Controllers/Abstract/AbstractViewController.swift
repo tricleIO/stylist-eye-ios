@@ -13,6 +13,11 @@ import UIKit
  */
 class AbstractViewController: UIViewController {
 
+    // MARK: - Status bar style
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -34,7 +39,7 @@ class AbstractViewController: UIViewController {
             NSFontAttributeName: SystemFont[.title]
         ]
     }
-    
+
     internal override func customInit() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss)))
     }

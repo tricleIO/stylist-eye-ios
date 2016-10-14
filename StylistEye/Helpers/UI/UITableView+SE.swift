@@ -9,7 +9,7 @@
 import UIKit
 
 extension UITableView {
-    
+
     /**
      Returns a reusable table-view cell object for the specified reuse identifier and adds it to the table.
      - Parameter style: A constant indicating a cell style. Just for creating new cells. See UITableViewCellStyle for descriptions of these constants.
@@ -21,7 +21,7 @@ extension UITableView {
         }
         return cell
     }
-    
+
     /**
      Returns a reusable table-view cell object for the specified reuse identifier and adds it to the table.
      - Parameter indexPath: The index path specifying the location of the cell. The data source receives this information when it is asked for the cell and should just pass it along. This method uses the index path to perform additional configuration based on the cell’s position in the table view.
@@ -34,7 +34,7 @@ extension UITableView {
         }
         return cell
     }
-    
+
     /**
      Registers a class for use in creating new table cells.
      - Parameter cellClass: The class of a cell that you want to use in the table.

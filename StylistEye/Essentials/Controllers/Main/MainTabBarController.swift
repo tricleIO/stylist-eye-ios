@@ -83,7 +83,7 @@ class MainTabBarController: AbstractTabBarController {
     // MARK: - <Initialize>
     override func setupView() {
         super.setupView()
-        
+
         tabBar.barTintColor = Palette[custom: .purple]
         tabBar.tintColor = Palette[custom: .appColor]
         tabBarItem.setTitleTextAttributes([

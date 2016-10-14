@@ -11,8 +11,8 @@ import UIKit
 class TextField: UITextField {
 
     override func draw(_ rect: CGRect) {
-        let startingPoint   = CGPoint(x: rect.minX + 10, y: rect.maxY)
-        let endingPoint     = CGPoint(x: rect.maxX - 10, y: rect.maxY)
+        let startingPoint = CGPoint(x: rect.minX + 10, y: rect.maxY)
+        let endingPoint  = CGPoint(x: rect.maxX - 10, y: rect.maxY)
         let path = UIBezierPath()
         path.move(to: startingPoint)
         path.addLine(to: endingPoint)
@@ -23,7 +23,7 @@ class TextField: UITextField {
         strokeColor.setFill()
         path.stroke()
     }
-    
+
     required override init(frame: CGRect) {
         super.init(frame: frame)
 

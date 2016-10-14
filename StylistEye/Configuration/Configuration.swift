@@ -14,6 +14,7 @@ struct APIConfiguration {
 }
 
 struct GUIConfiguration {
-    
+
+    static let CellHeight = 65.0
     static let DefaultAnimationDuration: Double = 0.3
 }

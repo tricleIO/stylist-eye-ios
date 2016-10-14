@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 private protocol StringContainerProtocol {
     var localizedString: String { get }
@@ -27,6 +28,7 @@ extension String {
     internal enum LocalizedTable: String {
         case login
         case main
+        case settings
     }
 
     /**
@@ -69,6 +71,7 @@ extension String {
         case outfit
         case wardrobe
         case language
+        case languages
         case privacy
         case note
         case about
@@ -83,7 +86,7 @@ extension String {
         case work
         case bussiness
         case earings
-        
+
         var localizedString: String {
             var stringToReturn: String = String.empty
             switch self {
@@ -95,6 +98,8 @@ extension String {
                 stringToReturn = "wardrobe"
             case .language:
                 stringToReturn = "language"
+            case .languages:
+                stringToReturn = "languages"
             case .privacy:
                 stringToReturn = "privacy"
             case .note:
@@ -133,6 +138,39 @@ extension String {
     }
 
     /**
+     Settings string file.
+     */
+    internal enum Settings: StringContainerProtocol {
+
+        case english
+        case deutch
+        case cestina
+        case italy
+        case fransais
+
+        var localizedString: String {
+            var stringToReturn: String = String.empty
+            switch self {
+            case .english:
+                stringToReturn = "english"
+            case .deutch:
+                stringToReturn = "deutch"
+            case .cestina:
+                stringToReturn = "cestina"
+            case .italy:
+                stringToReturn = "italy"
+            case .fransais:
+                stringToReturn = "fransais"
+            }
+            return stringToReturn
+        }
+    }
+
+    subscript(settings: Settings) -> String {
+        return "SE-Settings-\(settings.localizedString.capitalizedFirst)".localizedFromTable(locTable: .settings)
+    }
+
+    /**
      Localize a string from selected table.
      */
     func localizedFromTable(locTable: LocalizedTable) -> String {
@@ -143,5 +181,9 @@ extension String {
         let first = String(characters.prefix(1)).capitalized
         let other = String(characters.dropFirst()).lowercased()
         return first + other
+    }
+
+    var controllerFromString: UIViewController {
+        return UIViewController()
     }
 }

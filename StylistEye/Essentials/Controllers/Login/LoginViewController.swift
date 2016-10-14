@@ -13,7 +13,6 @@ import KVNProgress
 class LoginViewController: AbstractViewController {
 
     // MARK: - Properties
-    // MARK: > public
     // MARK: > private
     fileprivate let emailTextField = TextField()
     fileprivate let passwordTextField = TextField()
@@ -62,6 +61,7 @@ class LoginViewController: AbstractViewController {
         )
         passwordTextField.tintColor = Palette[custom: .appColor]
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.addTarget(self, action: #selector(loginButtonTapped), for: .editingDidEndOnExit)
 
         loginButton.backgroundColor = Palette[custom: .appColor]
         loginButton.setTitle(StringContainer[.login], for: .normal)
@@ -132,9 +132,33 @@ class LoginViewController: AbstractViewController {
         view.backgroundColor = Palette[basic: .white]
     }
 
+    internal override func customInit() {
+        super.customInit()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+
     // MARK: - Actions
     func loginButtonTapped() {
         login()
+    }
+
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height / 2
+            }
+        }
+
+    }
+
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height / 2
+            }
+        }
     }
 
     // MARK: - Action methods

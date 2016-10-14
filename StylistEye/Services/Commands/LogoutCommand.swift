@@ -12,13 +12,13 @@ import Foundation
  Logout command.
  */
 struct LogoutCommand: NetworkExecutable {
-    
+
     /// User profile DTO
     typealias Data = EmptyDTO
-    
+
     /// Url manager.
     var urlManager: APIUrlManager
-    
+
     init() {
         urlManager = .logout
     }

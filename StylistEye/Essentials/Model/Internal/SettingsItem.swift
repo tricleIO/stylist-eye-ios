@@ -1,5 +1,5 @@
 //
-//  SettingsItem.swift
+//  CellItem.swift
 //  StylistEye
 //
 //  Created by Michal Severín on 13.10.16.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-struct SettingsItem {
-    
-    var image: UIImage
+struct CellItem {
+
+    var image: UIImage?
     var name: String
-    var controller: String?
+    var controller: UIViewController?
 }

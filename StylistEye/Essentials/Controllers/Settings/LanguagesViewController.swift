@@ -1,30 +1,35 @@
 //
-//  SettingsViewController.swift
+//  LanguagesViewController.swift
 //  StylistEye
 //
-//  Created by Michal Severín on 13.10.16.
+//  Created by Michal Severín on 14.10.16.
 //  Copyright © 2016 Michal Severín. All rights reserved.
 //
 
-import KVNProgress
 import UIKit
 
-class SettingsViewController: AbstractViewController {
+class LanguagesViewController: AbstractViewController {
 
     // MARK: - Properties
-    // MARK: > public
-
     // MARK: > private
-    fileprivate lazy var crossButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cross_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(crossButtonTapped))
+    fileprivate lazy var backButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "backArrow_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backButtonTapped))
 
     fileprivate let coverImageView = ImageView()
 
     internal static let cellItem: [CellItem] = [
-        CellItem(image: #imageLiteral(resourceName: "language_image"), name: StringContainer[.language], controller: LanguagesViewController()),
-        CellItem(image: #imageLiteral(resourceName: "privacy_image"), name: StringContainer[.privacy], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "note_image"), name: StringContainer[.note], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "about_image"), name: StringContainer[.about], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "logout_image"), name: StringContainer[.logout], controller: nil),
+        CellItem(image: nil, name: StringContainer[.english], controller: nil),
+        CellItem(image: nil, name: StringContainer[.fransais], controller: nil),
+        CellItem(image: nil, name: StringContainer[.deutch], controller: nil),
+        CellItem(image: nil, name: StringContainer[.cestina], controller: nil),
+        CellItem(image: nil, name: StringContainer[.italy], controller: nil),
+    ]
+
+    internal var selected: [Bool] = [
+        false,
+        false,
+        false,
+        false,
+        false,
     ]
 
     fileprivate var tableView = TableView(frame: CGRect.zero, style: .grouped)
@@ -47,19 +52,19 @@ class SettingsViewController: AbstractViewController {
         coverImageView.image = #imageLiteral(resourceName: "purpleBg_image")
 
         tableView.register(UITableViewCell.self)
-        tableView.delegate = self
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.backgroundColor = Palette[basic: .clear]
         tableView.isScrollEnabled = false
         tableView.separatorColor =  Palette[custom: .appColor]
 
-        navigationItem.leftBarButtonItem = crossButton
+        navigationItem.leftBarButtonItem = backButton
     }
 
     internal override func setupView() {
         super.setupView()
 
-        title = StringContainer[.menu]
+        title = StringContainer[.languages]
     }
 
     internal override func setupConstraints() {
@@ -80,34 +85,34 @@ class SettingsViewController: AbstractViewController {
     override func customInit() {
     }
 
-    // MARK: - User Actions
-    func crossButtonTapped() {
-        dismissThisView()
+    // MARK: - User Action
+    func backButtonTapped() {
+        popViewController()
     }
 
     // MARK: - Actions
-    fileprivate func dismissThisView() {
-        dismiss(animated: true, completion: nil)
+    fileprivate func popViewController() {
+        navigationController?.popViewController(animated: true)
     }
+
 }
 
 // MARK: - <UITableViewDataSource>
-extension SettingsViewController: UITableViewDataSource {
+extension LanguagesViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(.value1)
-        let settingItem = SettingsViewController.cellItem[indexPath.row]
+        let settingItem = LanguagesViewController.cellItem[indexPath.row]
 
         cell.backgroundColor = Palette[basic: .clear]
         cell.textLabel?.textColor = Palette[custom: .appColor]
         cell.textLabel?.font = SystemFont[.description]
-        cell.accessoryView = ImageView(image: #imageLiteral(resourceName: "disclButton_icon"))
         cell.accessoryView?.tintColor = Palette[custom: .appColor]
         cell.tintColor = Palette[custom: .appColor]
         cell.separatorInset = UIEdgeInsets.zero
         cell.selectionStyle = .gray
 
-        if indexPath.row < SettingsViewController.cellItem.count {
+        if indexPath.row < LanguagesViewController.cellItem.count {
             cell.imageView?.image = settingItem.image
             cell.textLabel?.text = settingItem.name
         }
@@ -116,7 +121,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SettingsViewController.cellItem.count
+        return LanguagesViewController.cellItem.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -130,33 +135,17 @@ extension SettingsViewController: UITableViewDataSource {
 }
 
 // MARK: - <UITableViewDelegate>
-extension SettingsViewController: UITableViewDelegate {
-
+extension LanguagesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            selected[indexPath.row] = !selected[indexPath.row]
+            if selected[indexPath.row] {
+                cell.accessoryType = .checkmark
+            }
+            else {
+                cell.accessoryType = .none
+            }
+        }
         tableView.deselectRow(at: indexPath, animated: true)
-
-        if let controller = SettingsViewController.cellItem[indexPath.row].controller {
-            navigationController?.pushViewController(controller, animated: true)
-        }
-        else {
-            if indexPath.row != 4 {
-                return
-            }
-            KVNProgress.show()
-            LogoutCommand().executeCommand { data in
-                switch data {
-                case .success:
-                    KVNProgress.showSuccess {
-                        AccountSessionManager.manager.closeSession()
-                        if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
-                            window.rootViewController = LoginViewController()
-                        }
-                    }
-                case .failure:
-                    break
-                }
-            }
-
-        }
     }
 }

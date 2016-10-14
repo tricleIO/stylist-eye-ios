@@ -10,5 +10,4 @@ import UIKit
 
 // MARK: UITableViewCell
 extension UITableViewCell: Reusable {
-    
 }

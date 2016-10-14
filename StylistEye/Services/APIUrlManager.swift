@@ -34,7 +34,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
         email: String,
         password: String
     )
-    
+
     /**
      Logout
      - Parameters:
