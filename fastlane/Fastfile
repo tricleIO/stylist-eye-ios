@@ -1,0 +1,59 @@
+fastlane_version "1.105.3"
+
+default_platform :ios
+
+platform :ios do
+
+
+  lane :beta do
+	fabric(scheme: "StylistEye",type:"internal")
+  end
+
+  private_lane :fabric do |options|
+    scheme = options[:scheme]
+    ENV["RELEASE_TYPE"] = options[:type]
+    release = options[:type]
+	build = Actions.lane_context[Actions::SharedValues::BUILD_NUMBER]
+    
+    cert
+
+    sigh(
+      skip_install: true,
+      adhoc: true
+    )
+
+    gym(
+  	workspace: "StylistEye.xcworkspace",
+  	configuration: "Release",
+  	scheme: scheme,
+	use_legacy_build_api: true,
+  	silent: true,
+  	clean: true,
+ 	output_name: "StylistEye.ipa",
+  	output_directory:"./products/#{build}/",       # specify the name of the .ipa file to generate (including file extension)
+    )
+    crashlytics(
+      api_token: '73233866dacc590edbd0c2dbabfa2276d7d2c287',
+      build_secret: 'd64f459bbf77d03307fe8e09db9050dcd14552cfc58dd685152eb05416c825fa',
+      emails: ['xmichal.severin@gmail.com'],
+      notes: 'Distributed with fastlane’,
+      notifications: true
+    )
+    slack(
+     slack_url: "https://hooks.slack.com/services/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”,
+     channel: "general",
+     message: "Successfully uploaded a beta release - see it at https://fabric.io/_/beta”,
+    )
+  end 
+
+  after_all do
+    scan(
+      workspace: "StylistEye.xcworkspace”,
+      scheme: "StylistEye”,
+      clean: true,
+      device: "iPhone SE”,
+      slack_url: "https://hooks.slack.com/services/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”,
+      slack_channel: "general”,
+    )
+  end 
+end

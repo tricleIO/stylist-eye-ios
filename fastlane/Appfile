@@ -1,4 +1,4 @@
-app_identifier "" # The bundle identifier of your app
+app_identifier "ms.StylistEye" # The bundle identifier of your app
 apple_id "michal.severin@seznam.cz" # Your Apple email address
 
 team_id "G7TAUN84TA"  # Developer Portal Team ID
