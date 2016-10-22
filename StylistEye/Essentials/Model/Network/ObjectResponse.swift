@@ -15,6 +15,7 @@ import ObjectMapper
 public final class ObjectResponse<Object: Mappable>: Mappable {
 
     var objects: Object?
+    var objectsArray: [Object]?
     var errorMessage: String?
     var statusCode: Int?
 
@@ -23,7 +24,8 @@ public final class ObjectResponse<Object: Mappable>: Mappable {
 
     public func mapping(map: Map) {
         objects <- map["Data"]
-        errorMessage <- map["errorMessage"]
+        objectsArray <- map["Data"]
+        errorMessage <- map["Message"]
         statusCode <- map["Result"]
     }
 }

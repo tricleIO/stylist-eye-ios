@@ -18,18 +18,14 @@ class AbstractViewController: UIViewController {
         return .lightContent
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        /// Load data from API every time.
-        loadData()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         /// Just added elements to view and apply constraints.
         addElementsAndApplyConstraints()
+
+        /// Load data from API.
+        loadData()
     }
 
     // MARK: - <Initializable>

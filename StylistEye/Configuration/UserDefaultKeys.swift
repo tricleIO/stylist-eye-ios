@@ -15,7 +15,7 @@ extension UserDefaults {
      - user profile info
      */
     enum UserDefaultsKeys: String, KeyRepresentable {
-        
+
         /// User name info.
         case userProfileInfo
     }

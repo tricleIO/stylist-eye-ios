@@ -167,28 +167,21 @@ class LoginViewController: AbstractViewController {
             KVNProgress.show()
             LoginCommand(email: email, password: password).executeCommand { data in
                 switch data {
-                case let .success(object: data, statusCode: statusCode):
+                case let .success(object: data, _, apiResponse: apiResponse):
                 // TODO: @MS
-                if let statusCode = statusCode {
-                    if statusCode == 1 {
+                    switch apiResponse {
+                    case .ok:
                         KVNProgress.showSuccess {
+                            Keychains[.userEmail] = email
+                            Keychains[.userPassword] = password
                             AccountSessionManager.manager.accountSession = AccountSession(response: data)
                             if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
-                                //                            UIView.transition(
-                                //                                with: window,
-                                //                                duration: GUIConfiguration.DefaultAnimationDuration,
-                                //                                options: .allowAnimatedContent,
-                                //                                animations: {
                                 window.rootViewController = MainTabBarController()
-                                //                                }, completion: nil
-                                //                            )
                             }
                         }
-                    }
-                    else {
+                    case .fail:
                         KVNProgress.showError()
                     }
-                }
                 case .failure:
                     KVNProgress.showError()
                 }

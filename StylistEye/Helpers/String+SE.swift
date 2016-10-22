@@ -21,6 +21,16 @@ extension String {
     }
 }
 
+extension String {
+
+    var urlValue: URL? {
+        guard let url = URL(string: self) else {
+            return nil
+        }
+        return url
+    }
+}
+
 public var StringContainer = String.empty
 
 extension String {
@@ -86,6 +96,7 @@ extension String {
         case work
         case bussiness
         case earings
+        case messages
 
         var localizedString: String {
             var stringToReturn: String = String.empty
@@ -128,6 +139,8 @@ extension String {
                 stringToReturn = "bussiness"
             case .earings:
                 stringToReturn = "earings"
+            case .messages:
+                stringToReturn = "messages"
             }
             return stringToReturn
         }

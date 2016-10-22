@@ -20,6 +20,7 @@ extension UIFont {
     internal enum Fonts {
         case title
         case description
+        case litleDescription
     }
 
     subscript(font: Fonts) -> UIFont {
@@ -29,6 +30,8 @@ extension UIFont {
             fontForUse = UIFont(name: "Avenir", size: 20)
         case .description:
             fontForUse = UIFont(name: "Avenir", size: 16)
+        case .litleDescription:
+            fontForUse = UIFont(name: "Avenir", size: 12)
         }
         guard let fontToReturn = fontForUse else {
             return UIFont.systemFont(ofSize: 10)

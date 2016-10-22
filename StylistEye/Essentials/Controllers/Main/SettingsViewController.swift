@@ -12,8 +12,6 @@ import UIKit
 class SettingsViewController: AbstractViewController {
 
     // MARK: - Properties
-    // MARK: > public
-
     // MARK: > private
     fileprivate lazy var crossButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cross_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(crossButtonTapped))
 
@@ -21,13 +19,13 @@ class SettingsViewController: AbstractViewController {
 
     internal static let cellItem: [CellItem] = [
         CellItem(image: #imageLiteral(resourceName: "language_image"), name: StringContainer[.language], controller: LanguagesViewController()),
-        CellItem(image: #imageLiteral(resourceName: "privacy_image"), name: StringContainer[.privacy], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "note_image"), name: StringContainer[.note], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "about_image"), name: StringContainer[.about], controller: nil),
+        CellItem(image: #imageLiteral(resourceName: "privacy_image"), name: StringContainer[.privacy], controller: PrivacyViewController()),
+        CellItem(image: #imageLiteral(resourceName: "note_image"), name: StringContainer[.note], controller: NoteViewController()),
+        CellItem(image: #imageLiteral(resourceName: "about_image"), name: StringContainer[.about], controller: AboutViewController()),
         CellItem(image: #imageLiteral(resourceName: "logout_image"), name: StringContainer[.logout], controller: nil),
     ]
 
-    fileprivate var tableView = TableView(frame: CGRect.zero, style: .grouped)
+    fileprivate var tableView = TableView(style: .grouped)
 
     // MARK: - <Initializable>
     internal override func addElements() {
@@ -82,11 +80,6 @@ class SettingsViewController: AbstractViewController {
 
     // MARK: - User Actions
     func crossButtonTapped() {
-        dismissThisView()
-    }
-
-    // MARK: - Actions
-    fileprivate func dismissThisView() {
         dismiss(animated: true, completion: nil)
     }
 }
@@ -96,7 +89,7 @@ extension SettingsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(.value1)
-        let settingItem = SettingsViewController.cellItem[indexPath.row]
+        let settingItem = SettingsViewController.cellItem[safe: indexPath.row]
 
         cell.backgroundColor = Palette[basic: .clear]
         cell.textLabel?.textColor = Palette[custom: .appColor]
@@ -108,8 +101,8 @@ extension SettingsViewController: UITableViewDataSource {
         cell.selectionStyle = .gray
 
         if indexPath.row < SettingsViewController.cellItem.count {
-            cell.imageView?.image = settingItem.image
-            cell.textLabel?.text = settingItem.name
+            cell.imageView?.image = settingItem?.image
+            cell.textLabel?.text = settingItem?.name
         }
 
         return cell
@@ -139,24 +132,26 @@ extension SettingsViewController: UITableViewDelegate {
             navigationController?.pushViewController(controller, animated: true)
         }
         else {
-            if indexPath.row != 4 {
-                return
-            }
             KVNProgress.show()
             LogoutCommand().executeCommand { data in
                 switch data {
-                case .success:
-                    KVNProgress.showSuccess {
-                        AccountSessionManager.manager.closeSession()
-                        if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
-                            window.rootViewController = LoginViewController()
+                case let .success(_, _, apiResponse: apiResponse):
+                    // TODO: @MS
+                    switch apiResponse {
+                    case .ok:
+                        KVNProgress.showSuccess {
+                            AccountSessionManager.manager.closeSession()
+                            if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
+                                window.rootViewController = LoginViewController()
+                            }
                         }
+                    case .fail:
+                        KVNProgress.showError()
                     }
                 case .failure:
-                    break
+                    KVNProgress.showError()
                 }
             }
-
         }
     }
 }

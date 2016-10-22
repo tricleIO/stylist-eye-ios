@@ -27,6 +27,8 @@ struct AccessToken {
             }
             else {
                 Keychains[.accessTokenKey] = nil
+                Keychains[.userEmail] = nil
+                Keychains[.userPassword] = nil
             }
         }
     }

@@ -13,16 +13,16 @@ class WardrobeViewController: AbstractViewController {
     // MARK: - Properties
     // MARK: > public
 
-    // MARK: > private    
+    // MARK: > private
     internal static let cellItem: [CellItem] = [
-        CellItem(image: #imageLiteral(resourceName: "pants_image"), name: StringContainer[.pants], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "dress_image"), name: StringContainer[.dress], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "jacket_image"), name: StringContainer[.jacket], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "shoe_image"), name: StringContainer[.shoe], controller: nil),
-        CellItem(image: #imageLiteral(resourceName: "shirt_image"), name: StringContainer[.shirt], controller: nil),
+        CellItem(image: #imageLiteral(resourceName: "pants_image"), name: StringContainer[.pants], controller: WardrobeFeedViewController()),
+        CellItem(image: #imageLiteral(resourceName: "dress_image"), name: StringContainer[.dress], controller: WardrobeFeedViewController()),
+        CellItem(image: #imageLiteral(resourceName: "jacket_image"), name: StringContainer[.jacket], controller: WardrobeFeedViewController()),
+        CellItem(image: #imageLiteral(resourceName: "shoe_image"), name: StringContainer[.shoe], controller: WardrobeFeedViewController()),
+        CellItem(image: #imageLiteral(resourceName: "shirt_image"), name: StringContainer[.shirt], controller: WardrobeFeedViewController()),
     ]
 
-    fileprivate var tableView = TableView(frame: CGRect.zero, style: .grouped)
+    fileprivate var tableView = TableView(style: .grouped)
 
     fileprivate let backgroundImageView = ImageView()
 
@@ -70,6 +70,8 @@ class WardrobeViewController: AbstractViewController {
         }
     }
 
+    override func customInit() {}
+
     internal override func setupView() {
         super.setupView()
 
@@ -83,7 +85,7 @@ extension WardrobeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TableViewCellWithImage = tableView.dequeueReusableCell()
-        let settingItem = WardrobeViewController.cellItem[indexPath.row]
+        let settingItem = WardrobeViewController.cellItem[safe: indexPath.row]
 
         cell.backgroundColor = Palette[basic: .clear]
         cell.textLabel?.textColor = Palette[custom: .purple]
@@ -94,8 +96,8 @@ extension WardrobeViewController: UITableViewDataSource {
         cell.selectionStyle = .gray
 
         if indexPath.row < WardrobeViewController.cellItem.count {
-            cell.leftCellImage = settingItem.image
-            cell.labelText = settingItem.name
+            cell.leftCellImage = settingItem?.image
+            cell.labelText = settingItem?.name
         }
 
         return cell
@@ -120,5 +122,9 @@ extension WardrobeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if let controller = WardrobeViewController.cellItem[indexPath.row].controller {
+            controller.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }

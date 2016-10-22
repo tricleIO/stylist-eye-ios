@@ -10,7 +10,7 @@ import UIKit
 
 class TableView: UITableView {
 
-    override init(frame: CGRect, style: UITableViewStyle) {
+    override init(frame: CGRect = CGRect.zero, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
 
         initialize()

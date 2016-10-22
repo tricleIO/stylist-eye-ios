@@ -12,7 +12,7 @@ import Alamofire
  Api url manager protocol.
  */
 protocol APIUrlManagerProtocol {
-    var url: String {get}
+    var url: String? {get}
     var params: [String: String] {get}
     var method: HTTPMethod {get}
 }
@@ -21,6 +21,7 @@ protocol APIUrlManagerProtocol {
  Define API url manager.
     - login
     - logout
+    - messages
  */
 enum APIUrlManager: APIUrlManagerProtocol {
 
@@ -42,19 +43,94 @@ enum APIUrlManager: APIUrlManagerProtocol {
      */
     case logout
 
+    /**
+    Messages
+     */
+    case messages
+
+    /**
+     Outfits
+     */
+    case outfits
+
+    /**
+     Oufit detail.
+     - Parameters:
+        - outfitId
+        - photoType
+     */
+    case outfitDetail (
+        outfitId: Int,
+        photoType: Int
+    )
+
     /// Url path.
-    var url: String {
+    var url: String? {
+        var baseUrl: URL? {
+            return URL(string: APIConfiguration.BaseUrl)
+        }
+
         var urlString: String = String.empty
+        switch self {
+        case .login:
+            urlString = "/api/MobileAccount/login"
+        case .logout:
+            urlString = "/api/MobileAccount/logout"
+        case .messages:
+            urlString = "/api/MobileMessages/unreaded"
+        case .outfits:
+            urlString = "/api/MobileOutfit/outfits"
+        case .outfitDetail:
+            urlString = "/api/MobileOutfit/outfitphotos"
+        }
+
+        guard let url = URL(string: urlString, relativeTo: baseUrl) else {
+            return nil
+        }
+
+        if let queryParams = addressParams, var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) {
+            urlComponents.queryItems = []
+            for (queryName, queryValue) in queryParams {
+                let stringValue = String(queryValue)
+                urlComponents.queryItems?.append(URLQueryItem(name: queryName, value: stringValue))
+            }
+            return urlComponents.url?.absoluteString
+        }
+
+        return url.absoluteString
+    }
+
+    /// GET parameters.
+    var addressParams: [String: String]? {
         switch self {
         case let .login(
             email,
             password
             ):
-            urlString = "/api/MobileAccount/login?userName=\(email)&password=\(password)"
+            return [
+                "userName": "\(email)",
+                "password": "\(password)",
+            ]
         case .logout:
-            urlString = "/api/MobileAccount/logout"
+            fallthrough
+        case .messages:
+            fallthrough
+        case .outfits:
+            return [
+                "token": Keychains[.accessTokenKey].forcedValue,
+                "clientId": "29"
+            ]
+        case let .outfitDetail(
+            outfitId,
+            photoType
+            ):
+            return [
+                "token": Keychains[.accessTokenKey].forcedValue,
+                "clientId": "29",
+                "outfitId": "\(outfitId)",
+                "photoType": "\(photoType)"
+            ]
         }
-        return "\(APIConfiguration.BaseUrl)\(urlString)"
     }
 
     /// Url parameters.
@@ -63,6 +139,12 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .login:
             fallthrough
         case .logout:
+            fallthrough
+        case .messages:
+            fallthrough
+        case .outfits:
+            fallthrough
+        case .outfitDetail:
             return [:]
         }
     }
@@ -73,6 +155,12 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .login:
             fallthrough
         case .logout:
+            fallthrough
+        case .messages:
+            fallthrough
+        case .outfits:
+            fallthrough
+        case .outfitDetail:
             return .get
         }
     }

@@ -13,6 +13,6 @@ import ObjectMapper
  */
 public enum NetworkResponse<Data: Mappable> {
 
-    case success(object: Data?, statusCode: Int?)
-    case failure(message: String, statusCode: Int?)
+    case success(object: Data?, objectsArray: [Data]?, apiResponse: ApiResponse)
+    case failure(message: String, apiResponse: ApiResponse)
 }
