@@ -17,6 +17,7 @@ final class AccountSessionManager {
             if accountSession == nil {
                 // TODO: @MS
                 Keychains[.accessTokenKey] = nil
+                Keychains[.clientId] = nil
             }
         }
     }

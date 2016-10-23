@@ -37,7 +37,6 @@ extension NetworkExecutable {
             return
         }
         Alamofire.request(url, method: urlManager.method, parameters: urlManager.params, encoding: URLEncoding.default, headers: nil).responseObject { (response: DataResponse<ObjectResponse<Data>>) in
-
             switch response.result {
             case let .success(value):
                 switch response.result.value?.errorMessage {
@@ -59,13 +58,6 @@ extension NetworkExecutable {
                                 return
                             }
                             Alamofire.request(lastCommandUrl, method: self.urlManager.method, parameters: self.urlManager.params, encoding: URLEncoding.default, headers: nil).responseObject { (lastResponse: DataResponse<ObjectResponse<Data>>) in
-
-                                print("rofl")
-                                print(lastResponse.result)
-                                print(lastResponse.result.value)
-                                print(lastResponse.result.value?.objects)
-                                print(lastResponse.result.value?.objectsArray)
-
                                 switch lastResponse.result {
                                 case let .success(lastValue):
                                     completion(.success(object: lastValue.objects, objectsArray: lastValue.objectsArray, apiResponse: ApiResponse(code: lastResponse.result.value?.statusCode ?? 0)))

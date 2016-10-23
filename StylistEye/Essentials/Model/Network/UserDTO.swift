@@ -17,6 +17,7 @@ struct UserDTO: Mappable {
     var surname: String?
     var email: String?
     var token: String?
+    var clientId: Int?
 
     init?(map: Map) {
     }
@@ -26,5 +27,6 @@ struct UserDTO: Mappable {
         email <- map["Email"]
         surname <- map["Surname"]
         token <- map["Token"]
+        clientId <- map["ClientId"]
     }
 }

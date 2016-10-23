@@ -45,6 +45,7 @@ struct AccountSession {
         guard let token = response?.token else {
             return nil
         }
+        Keychains[.clientId] = "\(response?.clientId ?? 0)"
         accessToken = AccessToken(token: token)
         userInfo = UserInfo(userInfo: response)
         userInfo?.save()

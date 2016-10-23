@@ -10,7 +10,6 @@ import UIKit
 
 class MessagesTableViewCell: AbstractTableViewCell {
 
-
     // MARK: - Properties
     // MARK: < public
     var messageText: String? {

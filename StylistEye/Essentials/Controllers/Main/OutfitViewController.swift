@@ -17,6 +17,9 @@ class OutfitViewController: AbstractViewController {
     fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburger_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
     fileprivate lazy var rightBarbutton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "message_icon"), style: .plain, target: self, action: #selector(messagesButtonTapped))
 
+    fileprivate let filterTableView = TableView(style: .grouped)
+    fileprivate var filterBox: FilterBox?
+    
     fileprivate var tableView = TableView(style: .grouped)
 
     fileprivate let backgroundImageView = ImageView()
@@ -26,8 +29,13 @@ class OutfitViewController: AbstractViewController {
     fileprivate var outfits: [OutfitsDTO]? {
         didSet {
             tableView.reloadData()
+            filterTableView.reloadData()
         }
     }
+    
+    fileprivate let filterNameLabel = Label()
+    
+    fileprivate let showFilterButton = Button(type: .system)
 
     // MARK: - <Initializable>
     internal override func initializeElements() {
@@ -35,14 +43,28 @@ class OutfitViewController: AbstractViewController {
 
         backgroundImageView.image = #imageLiteral(resourceName: "purpleBg_image")
 
+        filterTableView.delegate = self
+        filterTableView.dataSource = self
+
+        filterBox = FilterBox(tableView: filterTableView)
+        filterBox?.isHidden = true
+
         tableView.register(OutfitTableViewCell.self)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = Palette[basic: .clear]
         tableView.separatorColor =  Palette[basic: .clear]
+        tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
 
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarbutton
+        
+        // TODO: @MS
+        showFilterButton.setTitle("Zobrazit", for: .normal)
+        showFilterButton.addTarget(self, action: #selector(showFilterButtonTapped), for: .touchUpInside)
+        
+        filterNameLabel.text = "Společenské šaty"
+        filterNameLabel.textColor = Palette[custom: .appColor]
     }
 
     internal override func addElements() {
@@ -51,20 +73,50 @@ class OutfitViewController: AbstractViewController {
         view.addSubviews(views:
             [
                 backgroundImageView,
+                filterNameLabel,
+                showFilterButton,
                 tableView,
             ]
         )
+        
+        if let filterBox = filterBox {
+            view.addSubview(filterBox)
+        }
     }
 
     internal override func setupConstraints() {
         super.setupConstraints()
 
+        filterNameLabel.snp.makeConstraints { make in
+            make.leading.equalTo(view).inset(10)
+            make.top.equalTo(view).inset(10)
+            make.height.equalTo(30)
+            make.width.equalTo(150)
+        }
+        
+        showFilterButton.snp.makeConstraints { make in
+            make.trailing.equalTo(view).inset(10)
+            make.width.equalTo(60)
+            make.height.equalTo(30)
+            make.top.equalTo(view).inset(10)
+        }
+        
         backgroundImageView.snp.makeConstraints { make in
             make.edges.equalTo(view)
         }
 
         tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view)
+            make.top.equalTo(filterNameLabel.snp.bottom).offset(10)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.bottom.equalTo(view)
+        }
+        
+        filterBox?.snp.makeConstraints { make in
+            make.leading.equalTo(view).inset(20)
+            make.trailing.equalTo(view).inset(20)
+            make.height.equalTo(78)
+            make.top.equalTo(showFilterButton.snp.bottom).offset(5)
         }
     }
 
@@ -92,7 +144,21 @@ class OutfitViewController: AbstractViewController {
         openMessagesView()
     }
 
+    func showFilterButtonTapped() {
+        openFilter()
+    }
+
     // MARK: - Actions
+    fileprivate func openFilter() {
+        UIView.animate(withDuration: GUIConfiguration.DefaultAnimationDuration, animations: {
+            if let filterBox = self.filterBox {
+                filterBox.isHidden = !filterBox.isHidden
+            }
+                self.view.layoutIfNeeded()
+            }) { completed in
+        }
+    }
+    
     fileprivate func openSettingsView() {
         let navigationController = UINavigationController(rootViewController: SettingsViewController())
         navigationController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
@@ -129,6 +195,16 @@ class OutfitViewController: AbstractViewController {
 extension OutfitViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == filterTableView {
+            let cell: TableViewCellWithImage = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.accessoryType = .disclosureIndicator
+            let item = FilterMenu.allCases[indexPath.row]
+            
+            cell.leftCellImage = item.image
+            cell.labelText = item.cellName
+            
+            return cell
+        }
         let cell: OutfitTableViewCell = tableView.dequeueReusableCell()
 
         if let outfit = outfits?[safe: indexPath.row], let count = outfits?.count {
@@ -144,7 +220,10 @@ extension OutfitViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return outfits?.count ?? 0
+        if tableView == filterTableView {
+            return FilterMenu.allCases.count
+        }
+        return outfits?.count ?? 0
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -153,6 +232,9 @@ extension OutfitViewController: UITableViewDataSource {
 
     @objc(tableView:heightForRowAtIndexPath:)
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if tableView == filterTableView {
+            return 40 // TODO: @MS
+        }
         return CGFloat(GUIConfiguration.OutfitCellHeight)
     }
 }

@@ -118,7 +118,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .outfits:
             return [
                 "token": Keychains[.accessTokenKey].forcedValue,
-                "clientId": "29"
+                "clientId": Keychains[.clientId].forcedValue,
             ]
         case let .outfitDetail(
             outfitId,
@@ -126,7 +126,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
             ):
             return [
                 "token": Keychains[.accessTokenKey].forcedValue,
-                "clientId": "29",
+                "clientId": Keychains[.clientId].forcedValue,
                 "outfitId": "\(outfitId)",
                 "photoType": "\(photoType)"
             ]
