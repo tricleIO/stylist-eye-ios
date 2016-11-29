@@ -23,10 +23,10 @@ struct UserDTO: Mappable {
     }
 
     mutating func mapping(map: Map) {
-        firstname <- map["FirstName"]
-        email <- map["Email"]
-        surname <- map["Surname"]
-        token <- map["Token"]
-        clientId <- map["ClientId"]
+        firstname <- map["user"]["givenName"]
+        email <- map["user"]["email"]
+        surname <- map["user"]["familyName"]
+        token <- map["token"]
+        clientId <- map["user"]["id"]
     }
 }

@@ -36,7 +36,14 @@ extension NetworkExecutable {
         guard let url = urlManager.url else {
             return
         }
+        print(urlManager.addressParams)
+        print(urlManager.method)
+        print(urlManager.params)
+        print(urlManager.url)
         Alamofire.request(url, method: urlManager.method, parameters: urlManager.params, encoding: URLEncoding.default, headers: nil).responseObject { (response: DataResponse<ObjectResponse<Data>>) in
+            print(response.result.value?.statusCode)
+            print(response.result.value?.objects)
+            print(response.result.value?.errorMessage)
             switch response.result {
             case let .success(value):
                 switch response.result.value?.errorMessage {
@@ -70,7 +77,7 @@ extension NetworkExecutable {
                         }
                     }
                 default:
-                   completion(.success(object: value.objects, objectsArray: value.objectsArray, apiResponse: ApiResponse(code: response.result.value?.statusCode ?? 0)))
+                   completion(.success(object: value.objects, objectsArray: value.objectsArray, apiResponse: ApiResponse(code: value.statusCode ?? 0)))
                 }
             case .failure:
                 completion(.failure(message: response.result.value?.errorMessage ?? String.empty, apiResponse: ApiResponse(code: response.result.value?.statusCode ?? 0)))

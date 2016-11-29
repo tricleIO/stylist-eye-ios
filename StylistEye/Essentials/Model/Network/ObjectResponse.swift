@@ -23,9 +23,9 @@ public final class ObjectResponse<Object: Mappable>: Mappable {
     }
 
     public func mapping(map: Map) {
-        objects <- map["Data"]
-        objectsArray <- map["Data"]
-        errorMessage <- map["Message"]
-        statusCode <- map["Result"]
+        objects <- map["data"]
+        objectsArray <- map["data"]
+        errorMessage <- map["error"]["message"]
+        statusCode <- map["result"]
     }
 }

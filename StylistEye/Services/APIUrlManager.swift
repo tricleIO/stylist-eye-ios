@@ -73,15 +73,15 @@ enum APIUrlManager: APIUrlManagerProtocol {
         var urlString: String = String.empty
         switch self {
         case .login:
-            urlString = "/api/MobileAccount/login"
+            urlString = "/mapi/v1/user/login"
         case .logout:
-            urlString = "/api/MobileAccount/logout"
+            urlString = "/mapi/MobileAccount/logout"
         case .messages:
-            urlString = "/api/MobileMessages/unreaded"
+            urlString = "/mapi/MobileMessages/unreaded"
         case .outfits:
-            urlString = "/api/MobileOutfit/outfits"
+            urlString = "/mapi/MobileOutfit/outfits"
         case .outfitDetail:
-            urlString = "/api/MobileOutfit/outfitphotos"
+            urlString = "/mapi/MobileOutfit/outfitphotos"
         }
 
         guard let url = URL(string: urlString, relativeTo: baseUrl) else {
@@ -103,14 +103,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
     /// GET parameters.
     var addressParams: [String: String]? {
         switch self {
-        case let .login(
-            email,
-            password
-            ):
-            return [
-                "userName": "\(email)",
-                "password": "\(password)",
-            ]
+        case .login:
+            return nil
         case .logout:
             fallthrough
         case .messages:
@@ -136,8 +130,14 @@ enum APIUrlManager: APIUrlManagerProtocol {
     /// Url parameters.
     var params: [String : String] {
         switch self {
-        case .login:
-            fallthrough
+        case let .login(
+            email,
+            password
+            ):
+            return [
+                "email": "\(email)",
+                "password": "\(password)",
+            ]
         case .logout:
             fallthrough
         case .messages:
@@ -153,7 +153,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
     var method: HTTPMethod {
         switch self {
         case .login:
-            fallthrough
+            return .post
         case .logout:
             fallthrough
         case .messages:
