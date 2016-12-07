@@ -19,7 +19,7 @@ class MessagesViewController: AbstractViewController {
 
     fileprivate var tableView = TableView(style: .grouped)
 
-    fileprivate var messagesDTO: [MessagesDTO]? {
+    fileprivate var messagesDTO: MessagesDTO? {
         didSet {
             tableView.reloadData()
         }
@@ -97,14 +97,14 @@ class MessagesViewController: AbstractViewController {
         KVNProgress.show()
         MessagesCommand().executeCommand { data in
             switch data {
-            case let .success(_, objectsArray: data, apiResponse: apiResponse):
+            case let .success(data, objectsArray: _, apiResponse: apiResponse):
                 // TODO: @MS
                 switch apiResponse {
                 case .ok:
                     KVNProgress.dismiss()
                     self.messagesDTO = data
                 case .fail:
-                    KVNProgress.showError()
+                    KVNProgress.showError(withStatus: "Fail code msgs")
                 }
             case .failure:
                 KVNProgress.showError()
@@ -121,11 +121,11 @@ extension MessagesViewController: UITableViewDataSource {
 
         cell.backgroundColor = Palette[basic: .clear]
 
-        if let messagesDTO = messagesDTO?[safe: indexPath.row], let count = self.messagesDTO?.count {
-            if indexPath.row < count  {
-                cell.subjectText = "Subject"
-                cell.messageText = messagesDTO.text
-                cell.senderName = "Marek Abraham"
+        if let message = messagesDTO?.lastMessages[safe: indexPath.row] {
+            cell.subjectText = "Subject"
+            cell.messageText = message.content
+            if let firstname = message.author?.givenName, let secondname = message.author?.familyName {
+                cell.senderName = firstname + secondname
             }
         }
 
@@ -133,7 +133,7 @@ extension MessagesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messagesDTO?.count ?? 0
+        return messagesDTO?.lastMessages.count ?? 0
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

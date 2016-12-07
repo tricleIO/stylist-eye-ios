@@ -182,10 +182,10 @@ class OutfitViewController: AbstractViewController {
                     KVNProgress.dismiss()
                     self.outfits = data
                 case .fail:
-                    KVNProgress.showError()
+                    KVNProgress.showError(withStatus: "Fail code outfit VC")
                 }
-            case .failure:
-                KVNProgress.showError()
+            case let .failure(message: message, apiResponse: response):
+                KVNProgress.showError(withStatus: "ougfit detail: \(message)")
             }
         }
     }

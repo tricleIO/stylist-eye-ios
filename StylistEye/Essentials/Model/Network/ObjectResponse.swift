@@ -16,8 +16,8 @@ public final class ObjectResponse<Object: Mappable>: Mappable {
 
     var objects: Object?
     var objectsArray: [Object]?
-    var errorMessage: String?
-    var statusCode: Int?
+    var errorMessage: ErrorMEssageDTO?
+    var result: Int?
 
     required public init?(map: Map) {
     }
@@ -25,7 +25,20 @@ public final class ObjectResponse<Object: Mappable>: Mappable {
     public func mapping(map: Map) {
         objects <- map["data"]
         objectsArray <- map["data"]
-        errorMessage <- map["error"]["message"]
-        statusCode <- map["result"]
+        errorMessage <- map["error"]
+        result <- map["result"]
     }
 }
+
+struct ErrorMEssageDTO: Mappable {
+    
+    var message: String?
+    
+    public init?(map: Map) {
+    }
+    
+    mutating func mapping(map: Map) {
+        message <- map["message"]
+    }
+}
+

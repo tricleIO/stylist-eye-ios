@@ -13,7 +13,7 @@ import Alamofire
  */
 protocol APIUrlManagerProtocol {
     var url: String? {get}
-    var params: [String: String] {get}
+    var params: [String: Any] {get}
     var method: HTTPMethod {get}
 }
 
@@ -77,7 +77,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .logout:
             urlString = "/mapi/MobileAccount/logout"
         case .messages:
-            urlString = "/mapi/MobileMessages/unreaded"
+            urlString = "/mapi/v1/messages"
         case .outfits:
             urlString = "/mapi/MobileOutfit/outfits"
         case .outfitDetail:
@@ -128,7 +128,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
     }
 
     /// Url parameters.
-    var params: [String : String] {
+    var params: [String : Any] {
         switch self {
         case let .login(
             email,

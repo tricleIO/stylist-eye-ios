@@ -36,19 +36,19 @@ extension NetworkExecutable {
         guard let url = urlManager.url else {
             return
         }
-        print(urlManager.addressParams)
-        print(urlManager.method)
-        print(urlManager.params)
-        print(urlManager.url)
-        Alamofire.request(url, method: urlManager.method, parameters: urlManager.params, encoding: URLEncoding.default, headers: nil).responseObject { (response: DataResponse<ObjectResponse<Data>>) in
-            print(response.result.value?.statusCode)
-            print(response.result.value?.objects)
-            print(response.result.value?.errorMessage)
+        Alamofire.request(url, method: urlManager.method, parameters: urlManager.params, encoding: URLEncoding.methodDependent, headers: nil).responseObject { (response: DataResponse<ObjectResponse<Data>>) in
             switch response.result {
             case let .success(value):
-                switch response.result.value?.errorMessage {
-                // TODO: @MS
-                case "Wrong token. "?:
+//                switch response.result.value?.errorMessage?.message {
+//                // TODO: @MS
+//                case "Wrong token. "?:
+//      
+//                default:
+                   completion(.success(object: value.objects, objectsArray: value.objectsArray, apiResponse: ApiResponse(code: value.result ?? 0)))
+//                }
+            case .failure:
+                // TODO
+                if let wrongToken = response.response?.statusCode, wrongToken == 404 {
                     guard let email = Keychains[.userEmail], let password = Keychains[.userPassword] else {
                         return
                     }
@@ -67,20 +67,19 @@ extension NetworkExecutable {
                             Alamofire.request(lastCommandUrl, method: self.urlManager.method, parameters: self.urlManager.params, encoding: URLEncoding.default, headers: nil).responseObject { (lastResponse: DataResponse<ObjectResponse<Data>>) in
                                 switch lastResponse.result {
                                 case let .success(lastValue):
-                                    completion(.success(object: lastValue.objects, objectsArray: lastValue.objectsArray, apiResponse: ApiResponse(code: lastResponse.result.value?.statusCode ?? 0)))
+                                    completion(.success(object: lastValue.objects, objectsArray: lastValue.objectsArray, apiResponse: ApiResponse(code: lastResponse.result.value?.result ?? 0)))
                                 case .failure:
-                                    completion(.failure(message: lastResponse.result.value?.errorMessage ?? String.empty, apiResponse: ApiResponse(code: lastResponse.result.value?.statusCode ?? 0)))
+                                    completion(.failure(message: lastResponse.result.value?.errorMessage?.message ?? String.empty, apiResponse: ApiResponse(code: lastResponse.result.value?.result ?? 0)))
                                 }
                             }
                         case .failure:
-                            completion(.failure(message: response.result.value?.errorMessage ?? String.empty, apiResponse: ApiResponse(code: response.result.value?.statusCode ?? 0)))
+                            completion(.failure(message: response.result.value?.errorMessage?.message ?? String.empty, apiResponse: ApiResponse(code: response.result.value?.result ?? 0)))
                         }
                     }
-                default:
-                   completion(.success(object: value.objects, objectsArray: value.objectsArray, apiResponse: ApiResponse(code: value.statusCode ?? 0)))
                 }
-            case .failure:
-                completion(.failure(message: response.result.value?.errorMessage ?? String.empty, apiResponse: ApiResponse(code: response.result.value?.statusCode ?? 0)))
+                else {
+                    completion(.failure(message: response.result.value?.errorMessage?.message ?? String.empty, apiResponse: ApiResponse(code: response.result.value?.result ?? 0)))
+                }
             }
         }
     }

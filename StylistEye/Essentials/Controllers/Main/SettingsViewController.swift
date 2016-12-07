@@ -148,8 +148,8 @@ extension SettingsViewController: UITableViewDelegate {
                     case .fail:
                         KVNProgress.showError()
                     }
-                case .failure:
-                    KVNProgress.showError()
+                case let .failure(message):
+                    KVNProgress.showError(withStatus: message.message)
                 }
             }
         }

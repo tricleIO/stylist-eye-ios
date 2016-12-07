@@ -10,24 +10,44 @@ import ObjectMapper
 
 struct MessagesDTO: Mappable {
 
-    var msgId: Int?
-    var text: String?
-    var data: Date?
-    var stylistFirstName: String?
-    var stylistLastName: String?
-    var stylistId: Int?
-    var source: Int?
-
+    var messagesCount: Int?
+    var lastMessages: [LastMessagesDTO] = []
+    
     init?(map: Map) {
     }
 
     mutating func mapping(map: Map) {
-        msgId <- map["MsgId"]
-        text <- map["Text"]
-        data <- map["Data"]
-        stylistFirstName <- map["StylistFirstName"]
-        stylistLastName <- map["StylistLastName"]
-        stylistId <- map["StylistId"]
-        source <- map["Source"]
+        messagesCount <- map["messageCount"]
+        lastMessages <- map["lastMessage"]
     }
 }
+
+struct LastMessagesDTO: Mappable {
+    
+    var identifier: Int
+    var author: AuthorDTO?
+    var content: String?
+    var timestamp: String? // TODO
+    var read: Bool?
+    var systemOriginate: Bool?
+    
+    init?(map: Map) {
+        var id: Int?
+        id <- map["id"]
+        guard let identifier = id else {
+            return nil
+        }
+        self.identifier = identifier
+    }
+    
+    mutating func mapping(map: Map) {
+        author <- map["author"]
+        content <- map["content"]
+        timestamp <- map["timestamp"]
+        read <- map["read"]
+        systemOriginate <- map["systemOriginate"]
+    }
+}
+
+
+

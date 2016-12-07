@@ -195,10 +195,10 @@ class OutfitDetailViewController: AbstractViewController {
                     KVNProgress.dismiss()
                     self.outfitTableData = data
                 case .fail:
-                    KVNProgress.showError()
+                    KVNProgress.showError(withStatus: "Fail code - outfit detail")
                 }
-            case .failure:
-                KVNProgress.showError()
+            case let .failure(message):
+                KVNProgress.showError(withStatus: message.message)
             }
         }
     }

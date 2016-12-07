@@ -49,6 +49,7 @@
 		31400F0B1DB53E2A00A088A0 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400F0A1DB53E2A00A088A0 /* PrivacyViewController.swift */; };
 		31400F0D1DB53F2800A088A0 /* QuestionnaireDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400F0C1DB53F2800A088A0 /* QuestionnaireDetailViewController.swift */; };
 		31400F131DB54A7800A088A0 /* QuestionnaireTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400F121DB54A7800A088A0 /* QuestionnaireTableViewCell.swift */; };
+		314280DB1DF7ED21003C454A /* AuthorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314280DA1DF7ED21003C454A /* AuthorDTO.swift */; };
 		31508DCF1DB3C73200D26F53 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31508DCE1DB3C73200D26F53 /* CameraViewController.swift */; };
 		31508DD11DB3D0F700D26F53 /* CaptureImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31508DD01DB3D0F700D26F53 /* CaptureImageViewController.swift */; };
 		31582A241DBCB86E009D7139 /* FilterBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31582A231DBCB86E009D7139 /* FilterBox.swift */; };
@@ -167,6 +168,7 @@
 		31400F0A1DB53E2A00A088A0 /* PrivacyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		31400F0C1DB53F2800A088A0 /* QuestionnaireDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionnaireDetailViewController.swift; sourceTree = "<group>"; };
 		31400F121DB54A7800A088A0 /* QuestionnaireTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionnaireTableViewCell.swift; sourceTree = "<group>"; };
+		314280DA1DF7ED21003C454A /* AuthorDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorDTO.swift; sourceTree = "<group>"; };
 		31508DCE1DB3C73200D26F53 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		31508DD01DB3D0F700D26F53 /* CaptureImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureImageViewController.swift; sourceTree = "<group>"; };
 		31582A231DBCB86E009D7139 /* FilterBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterBox.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 				317F6CF51DB2C61100DE0679 /* OutfitsDTO.swift */,
 				31FC67051DB38D5300ECC5A7 /* OutfitDetailDTO.swift */,
 				31FE19421DB7DFE30087D095 /* GarmentTypeDTO.swift */,
+				314280DA1DF7ED21003C454A /* AuthorDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -869,7 +872,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		969573373C4207D46F6653E9 /* [CP] Embed Pods Frameworks */ = {
@@ -961,6 +964,7 @@
 				311D1F121DAE4AE900A7F545 /* Initializable.swift in Sources */,
 				3109198C1DAE9B2C0083A2C8 /* AccountSession.swift in Sources */,
 				317F6CF61DB2C61100DE0679 /* OutfitsDTO.swift in Sources */,
+				314280DB1DF7ED21003C454A /* AuthorDTO.swift in Sources */,
 				31E30E9D1DAECD5E007F4A5A /* Button.swift in Sources */,
 				3109198A1DAE99280083A2C8 /* AccessToken.swift in Sources */,
 				317F6CF81DB2C6D600DE0679 /* OutfitsCommand.swift in Sources */,
