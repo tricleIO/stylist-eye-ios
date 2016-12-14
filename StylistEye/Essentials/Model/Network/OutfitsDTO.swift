@@ -11,21 +11,32 @@ import ObjectMapper
 struct OutfitsDTO: Mappable {
 
     var outfitId: Int?
-    var stylistId: Int?
-    var outfitName: String?
     var dressStyle: Int?
+    var photos: [PhotosDTO]?
     var outfitComment: String?
-    var author: String?
+    var stylist: StylistDTO?
+    var address: AddressDTO?
+    var components: [ComponentsDTO]?
+    var isFavourite: Bool?
 
     init?(map: Map) {
+        var id: Int?
+        id <- map["id"]
+        guard let oID = id else {
+            return nil
+        }
+        outfitId = oID
     }
 
     mutating func mapping(map: Map) {
-        outfitId <- map["Id"]
-        stylistId <- map["StylistId"]
-        outfitName <- map["OutfitName"]
-        dressStyle <- map["DressStyleId"]
-        outfitComment <- map["OutfitComment"]
-        author <- map["Author"]
+        outfitId <- map["id"]
+        stylist <- map["stylist"]
+        dressStyle <- map["dressStyle"]
+        outfitComment <- map["comment"]
+        photos <- map["photos"]
+        address <- map["address"]
+        components <- map["components"]
+        isFavourite <- map["isFavourite"]
     }
 }
+

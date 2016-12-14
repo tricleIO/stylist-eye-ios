@@ -16,17 +16,70 @@ struct UserDTO: Mappable {
     var firstname: String?
     var surname: String?
     var email: String?
-    var token: String?
     var clientId: Int?
+    var atavar: UserAvatarDTO?
 
     init?(map: Map) {
+        var id: Int?
+        id <- map["id"]
+        guard let userId = id else {
+            return nil
+        }
+        clientId = userId
     }
 
     mutating func mapping(map: Map) {
-        firstname <- map["user"]["givenName"]
-        email <- map["user"]["email"]
-        surname <- map["user"]["familyName"]
+        firstname <- map["givenName"]
+        email <- map["email"]
+        surname <- map["familyName"]
+        atavar <- map["atavar"]
+    }
+}
+
+struct UserAvatarDTO: Mappable {
+    
+    var image: AvatarImageDTO?
+    
+    init?(map: Map) {
+    }
+    
+    mutating func mapping(map: Map) {
+        image <- map["image"]
+    }
+}
+
+struct AvatarImageDTO: Mappable {
+    
+    var image: String?
+    
+    init?(map: Map) {
+    }
+    
+    mutating func mapping(map: Map) {
+        image <- map["src"]
+    }
+}
+
+
+struct LoginDTO: Mappable {
+    
+    var token: String?
+    var expiration: Date?
+    var lastLogin: Date?
+    var user: UserDTO?
+    
+    init?(map: Map) {
+        var token: String?
         token <- map["token"]
-        clientId <- map["user"]["id"]
+        guard let ret = token else {
+            return nil
+        }
+        token = ret
+    }
+    
+    mutating func mapping(map: Map) {
+        expiration <- map["expiration"]
+        lastLogin <- map["lastLogin"]
+        user <- map["user"]
     }
 }

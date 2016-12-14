@@ -30,17 +30,7 @@ class MessagesTableViewCell: AbstractTableViewCell {
         }
     }
 
-    var subjectText: String? {
-        get {
-            return subjectLabel.text.forcedValue
-        }
-        set {
-            subjectLabel.text = newValue
-        }
-    }
-
     // MARK: < private
-    fileprivate let subjectLabel = Label()
     fileprivate let nameLabel = Label()
     fileprivate let descriptionLabel = Label()
     fileprivate let timeLabel = Label()
@@ -85,7 +75,6 @@ class MessagesTableViewCell: AbstractTableViewCell {
                 timeLabel,
                 descriptionLabel,
                 nameLabel,
-                subjectLabel,
                 notificationImageView,
             ]
         )
@@ -121,18 +110,11 @@ class MessagesTableViewCell: AbstractTableViewCell {
             make.width.equalTo(20)
             make.height.equalTo(20)
         }
-
-        subjectLabel.snp.makeConstraints { make in
-            make.leading.equalTo(toImageView.snp.trailing).offset(10)
-            make.top.equalTo(nameLabel.snp.bottom)
-            make.width.equalTo(180)
-            make.height.equalTo(20)
-        }
-
+    
         descriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(contentView).inset(70)
             make.trailing.equalTo(contentView).inset(10)
-            make.top.equalTo(subjectLabel.snp.bottom).offset(10)
+            make.top.equalTo(nameLabel.snp.bottom).offset(10)
             make.bottom.equalTo(contentView)
         }
 

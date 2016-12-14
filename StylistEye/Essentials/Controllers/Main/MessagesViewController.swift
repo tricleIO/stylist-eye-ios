@@ -121,19 +121,18 @@ extension MessagesViewController: UITableViewDataSource {
 
         cell.backgroundColor = Palette[basic: .clear]
 
-        if let message = messagesDTO?.lastMessages[safe: indexPath.row] {
-            cell.subjectText = "Subject"
-            cell.messageText = message.content
-            if let firstname = message.author?.givenName, let secondname = message.author?.familyName {
-                cell.senderName = firstname + secondname
-            }
-        }
+//        if let message = messagesDTO?.lastMessages[safe: indexPath.row] {
+            cell.messageText = "Testovací text"
+//            if let firstname = message.author?.givenName, let secondname = message.author?.familyName {
+                cell.senderName = "Michael Loe"
+//            }
+//        }
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messagesDTO?.lastMessages.count ?? 0
+        return messagesDTO?.lastMessages.count ?? 10
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

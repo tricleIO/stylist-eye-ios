@@ -75,11 +75,11 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .login:
             urlString = "/mapi/v1/user/login"
         case .logout:
-            urlString = "/mapi/MobileAccount/logout"
+            urlString = "/mapi/v1/user/logout"
         case .messages:
             urlString = "/mapi/v1/messages"
         case .outfits:
-            urlString = "/mapi/MobileOutfit/outfits"
+            urlString = "/mapi/v1/outfits"
         case .outfitDetail:
             urlString = "/mapi/MobileOutfit/outfitphotos"
         }
@@ -106,13 +106,18 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .login:
             return nil
         case .logout:
-            fallthrough
+            return [
+                "token": Keychains[.accessTokenKey].forcedValue
+            ]
         case .messages:
             fallthrough
         case .outfits:
+            guard let token = Keychains[.accessTokenKey] else {
+                return [:]
+            }
             return [
-                "token": Keychains[.accessTokenKey].forcedValue,
-                "clientId": Keychains[.clientId].forcedValue,
+                "token": token,
+                "expanded": "stylistDetails,photos,dressStyle,components",
             ]
         case let .outfitDetail(
             outfitId,
@@ -120,7 +125,6 @@ enum APIUrlManager: APIUrlManagerProtocol {
             ):
             return [
                 "token": Keychains[.accessTokenKey].forcedValue,
-                "clientId": Keychains[.clientId].forcedValue,
                 "outfitId": "\(outfitId)",
                 "photoType": "\(photoType)"
             ]

@@ -184,7 +184,7 @@ class OutfitViewController: AbstractViewController {
                 case .fail:
                     KVNProgress.showError(withStatus: "Fail code outfit VC")
                 }
-            case let .failure(message: message, apiResponse: response):
+            case let .failure(message: message, apiResponse: _):
                 KVNProgress.showError(withStatus: "ougfit detail: \(message)")
             }
         }
@@ -210,7 +210,7 @@ extension OutfitViewController: UITableViewDataSource {
         if let outfit = outfits?[safe: indexPath.row], let count = outfits?.count {
             if indexPath.row < count {
                 cell.backgroundColor = Palette[basic: .clear]
-                cell.stylistNameText = outfit.author
+                cell.stylistNameText = outfit.stylist?.givenName
                 cell.descriptionText = outfit.outfitComment
                 cell.selectionStyle = .none
             }

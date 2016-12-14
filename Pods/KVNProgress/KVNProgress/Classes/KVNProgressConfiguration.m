@@ -15,8 +15,8 @@
 - (id)init
 {
 	if (self = [super init]) {
-		_backgroundFillColor = [UIColor colorWithWhite:1.0f alpha:0.85f];
-		_backgroundTintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6f];
+		_backgroundFillColor = [UIColor clearColor];
+		_backgroundTintColor = [UIColor clearColor];
 		_backgroundType = KVNProgressBackgroundTypeBlurred;
 		_fullScreen = NO;
 		_showStop = NO;

@@ -54,6 +54,10 @@
 		31508DD11DB3D0F700D26F53 /* CaptureImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31508DD01DB3D0F700D26F53 /* CaptureImageViewController.swift */; };
 		31582A241DBCB86E009D7139 /* FilterBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31582A231DBCB86E009D7139 /* FilterBox.swift */; };
 		31582A281DBCC370009D7139 /* FilterMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31582A271DBCC370009D7139 /* FilterMenu.swift */; };
+		3161C2B81E01D267007DC0FB /* PhotosDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3161C2B71E01D267007DC0FB /* PhotosDTO.swift */; };
+		3161C2BA1E01D2BF007DC0FB /* StylistDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3161C2B91E01D2BF007DC0FB /* StylistDTO.swift */; };
+		3161C2BC1E01D2F6007DC0FB /* AddressDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3161C2BB1E01D2F6007DC0FB /* AddressDTO.swift */; };
+		3161C2BE1E01D474007DC0FB /* ComponentsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3161C2BD1E01D474007DC0FB /* ComponentsDTO.swift */; };
 		3163A7D41DBA32DC00D009BB /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163A7D31DBA32DC00D009BB /* Optional.swift */; };
 		317D60F11DB0A38D0044D46B /* AbstractTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D60F01DB0A38D0044D46B /* AbstractTableViewCell.swift */; };
 		317D60F31DB0A4230044D46B /* TableViewCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D60F21DB0A4230044D46B /* TableViewCellWithImage.swift */; };
@@ -173,6 +177,10 @@
 		31508DD01DB3D0F700D26F53 /* CaptureImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureImageViewController.swift; sourceTree = "<group>"; };
 		31582A231DBCB86E009D7139 /* FilterBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterBox.swift; sourceTree = "<group>"; };
 		31582A271DBCC370009D7139 /* FilterMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterMenu.swift; sourceTree = "<group>"; };
+		3161C2B71E01D267007DC0FB /* PhotosDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosDTO.swift; sourceTree = "<group>"; };
+		3161C2B91E01D2BF007DC0FB /* StylistDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistDTO.swift; sourceTree = "<group>"; };
+		3161C2BB1E01D2F6007DC0FB /* AddressDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressDTO.swift; sourceTree = "<group>"; };
+		3161C2BD1E01D474007DC0FB /* ComponentsDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsDTO.swift; sourceTree = "<group>"; };
 		3163A7D31DBA32DC00D009BB /* Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		317D60F01DB0A38D0044D46B /* AbstractTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewCell.swift; sourceTree = "<group>"; };
 		317D60F21DB0A4230044D46B /* TableViewCellWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellWithImage.swift; sourceTree = "<group>"; };
@@ -303,6 +311,10 @@
 				31FC67051DB38D5300ECC5A7 /* OutfitDetailDTO.swift */,
 				31FE19421DB7DFE30087D095 /* GarmentTypeDTO.swift */,
 				314280DA1DF7ED21003C454A /* AuthorDTO.swift */,
+				3161C2B71E01D267007DC0FB /* PhotosDTO.swift */,
+				3161C2B91E01D2BF007DC0FB /* StylistDTO.swift */,
+				3161C2BB1E01D2F6007DC0FB /* AddressDTO.swift */,
+				3161C2BD1E01D474007DC0FB /* ComponentsDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -919,6 +931,7 @@
 				31818E4D1DAFEB87004883D2 /* SettingsItem.swift in Sources */,
 				3102869F1DAFA41A007EE87B /* MainTabBarController.swift in Sources */,
 				31818E571DAFF265004883D2 /* UITabeViewCell+SE.swift in Sources */,
+				3161C2BC1E01D2F6007DC0FB /* AddressDTO.swift in Sources */,
 				310919901DAE9D830083A2C8 /* AccountSessionManager.swift in Sources */,
 				311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */,
 				310919941DAE9FF60083A2C8 /* Typealiases.swift in Sources */,
@@ -938,6 +951,7 @@
 				310919961DAEA0260083A2C8 /* UserDefaultKeys.swift in Sources */,
 				31818E5A1DB00295004883D2 /* LogoutCommand.swift in Sources */,
 				310919851DAE91970083A2C8 /* Keychain.swift in Sources */,
+				3161C2BE1E01D474007DC0FB /* ComponentsDTO.swift in Sources */,
 				310919871DAE94AE0083A2C8 /* KeychainKeys.swift in Sources */,
 				310286A81DAFA569007EE87B /* QuestionnaireViewController.swift in Sources */,
 				3197B65B1DB23B7E0096EF16 /* MessagesViewController.swift in Sources */,
@@ -973,6 +987,7 @@
 				3163A7D41DBA32DC00D009BB /* Optional.swift in Sources */,
 				31818E731DB00BAC004883D2 /* Label.swift in Sources */,
 				31400F0D1DB53F2800A088A0 /* QuestionnaireDetailViewController.swift in Sources */,
+				3161C2B81E01D267007DC0FB /* PhotosDTO.swift in Sources */,
 				31CD44EC1DB161D9007A5E1C /* GradientImageView.swift in Sources */,
 				310919721DAE81170083A2C8 /* LoginCommand.swift in Sources */,
 				31400F131DB54A7800A088A0 /* QuestionnaireTableViewCell.swift in Sources */,
@@ -985,6 +1000,7 @@
 				31CD44EA1DB161BF007A5E1C /* ProductDetailViewController.swift in Sources */,
 				310919751DAE823E0083A2C8 /* EmptyDTO.swift in Sources */,
 				31FC67061DB38D5300ECC5A7 /* OutfitDetailDTO.swift in Sources */,
+				3161C2BA1E01D2BF007DC0FB /* StylistDTO.swift in Sources */,
 				311D1F1A1DAE4C7F00A7F545 /* APIUrlManager.swift in Sources */,
 				31E05E271DAF5512007AE913 /* UIFont.swift in Sources */,
 				31FC67041DB3821E00ECC5A7 /* OutfitDetailViewController.swift in Sources */,
@@ -1153,7 +1169,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ms.StylistEye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3dfc5cf4-9597-41e8-a3d1-d2bbfb30d49a";
+				PROVISIONING_PROFILE = "423bcb2d-122e-471b-9e7d-b3eaae00a3ee";
 				PROVISIONING_PROFILE_SPECIFIER = "Stylist dev";
 				SWIFT_VERSION = 3.0;
 			};
