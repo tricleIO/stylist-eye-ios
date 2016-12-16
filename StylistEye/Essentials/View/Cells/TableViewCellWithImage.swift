@@ -39,7 +39,9 @@ class TableViewCellWithImage: AbstractTableViewCell {
     // MARK: - <Initialize>
     override func initializeElements() {
         super.initializeElements()
-
+        
+        customTextLabel.textColor = Palette[custom: .purple]
+        
         leftImageView.contentMode = .scaleAspectFit
     }
 
@@ -66,7 +68,7 @@ class TableViewCellWithImage: AbstractTableViewCell {
         leftImageView.snp.makeConstraints { make in
             make.leading.equalTo(contentView)
             make.centerY.equalTo(contentView)
-            make.width.equalTo(70)
+            make.width.equalTo(40)
             make.height.equalTo(35)
         }
     }

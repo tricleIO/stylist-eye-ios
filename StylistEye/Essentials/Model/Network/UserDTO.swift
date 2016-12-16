@@ -60,18 +60,17 @@ struct AvatarImageDTO: Mappable {
     }
 }
 
-
 struct LoginDTO: Mappable {
     
-    var token: String?
+    var token: String
     var expiration: Date?
     var lastLogin: Date?
     var user: UserDTO?
     
     init?(map: Map) {
-        var token: String?
-        token <- map["token"]
-        guard let ret = token else {
+        var accessToken: String?
+        accessToken <- map["token"]
+        guard let ret = accessToken else {
             return nil
         }
         token = ret

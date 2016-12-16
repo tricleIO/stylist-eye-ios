@@ -55,16 +55,20 @@ extension UIColor {
     internal enum CustomPaletteColors {
         /// App color.
         case appColor
-        /// Purple
+        /// Purple.
         case purple
+        /// Title.
+        case title
     }
 
     subscript(custom custom: CustomPaletteColors) -> UIColor {
         switch custom {
         case .appColor:
-            return UIColor(rgba: 0x94776d)
+            return #colorLiteral(red: 0.5803921569, green: 0.4666666667, blue: 0.4274509804, alpha: 1)
         case .purple:
-            return UIColor(rgba: 0x41223e)
+            return #colorLiteral(red: 0.2549019608, green: 0.1333333333, blue: 0.2274509804, alpha: 1)
+        case .title:
+            return #colorLiteral(red: 0.7882352941, green: 0.7411764706, blue: 0.5294117647, alpha: 1)
         }
     }
 

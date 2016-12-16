@@ -39,12 +39,39 @@ extension NetworkExecutable {
         Alamofire.request(url, method: urlManager.method, parameters: urlManager.params, encoding: URLEncoding.methodDependent, headers: nil).responseObject { (response: DataResponse<ObjectResponse<Data>>) in
             switch response.result {
             case let .success(value):
-                print(value.objectsArray)
-                print(value.errorMessage?.message)
-                completion(.success(object: value.objects, objectsArray: value.objectsArray, apiResponse: ApiResponse(code: value.result ?? 0)))
+                if let errorMessage = value.errorMessage?.message, errorMessage == "Wrong token. " {
+                    self.loginWithExpireToken()
+                }
+                else {
+                    completion(.success(object: value.objects, objectsArray: value.objectsArray, apiResponse: ApiResponse(code: value.result ?? 0)))
+                }
             case .failure:
-                print(response.result.value?.errorMessage?.message)
                 completion(.failure(message: response.result.value?.errorMessage?.message ?? String.empty, apiResponse: ApiResponse(code: response.result.value?.result ?? 0)))
+            }
+        }
+    }
+    
+    fileprivate func loginWithExpireToken() {
+        if let email = Keychains[.userEmail], let password = Keychains[.userPassword] {
+            LoginCommand(email: email, password: password).executeCommand { data in
+                switch data {
+                case let .success(object: data, _, apiResponse: apiResponse):
+                    // TODO: @MS
+                    AccountSessionManager.manager.closeSession()
+                    switch apiResponse {
+                    case .ok:
+                        Keychains[.userEmail] = email
+                        Keychains[.userPassword] = password
+                        AccountSessionManager.manager.accountSession = AccountSession(response: data)
+                        if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
+                            window.rootViewController = MainTabBarController()
+                        }
+                    case .fail:
+                        break
+                    }
+                case .failure:
+                    break
+                }
             }
         }
     }

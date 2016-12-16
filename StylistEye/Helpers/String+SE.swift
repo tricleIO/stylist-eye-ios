@@ -19,6 +19,10 @@ extension String {
     static var empty: String {
         return ""
     }
+    
+    static var space: String {
+        return " "
+    }
 }
 
 extension String {

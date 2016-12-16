@@ -45,6 +45,7 @@ class OutfitViewController: AbstractViewController {
 
         filterTableView.delegate = self
         filterTableView.dataSource = self
+        filterTableView.separatorColor = Palette[custom: .purple]
 
         filterBox = FilterBox(tableView: filterTableView)
         filterBox?.isHidden = true
@@ -61,6 +62,7 @@ class OutfitViewController: AbstractViewController {
         
         // TODO: @MS
         showFilterButton.setTitle("Zobrazit", for: .normal)
+        showFilterButton.tintColor = Palette[custom: .title]
         showFilterButton.addTarget(self, action: #selector(showFilterButtonTapped), for: .touchUpInside)
         
         filterNameLabel.text = "Společenské šaty"
@@ -197,6 +199,7 @@ extension OutfitViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == filterTableView {
             let cell: TableViewCellWithImage = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
             let item = FilterMenu.allCases[indexPath.row]
             
@@ -210,9 +213,13 @@ extension OutfitViewController: UITableViewDataSource {
         if let outfit = outfits?[safe: indexPath.row], let count = outfits?.count {
             if indexPath.row < count {
                 cell.backgroundColor = Palette[basic: .clear]
-                cell.stylistNameText = outfit.stylist?.givenName
+                if let stylistName = outfit.stylist?.givenName, let stylistLastname = outfit.stylist?.familyName {
+                    cell.stylistNameText = stylistName + String.space + stylistLastname
+                }
                 cell.descriptionText = outfit.outfitComment
                 cell.selectionStyle = .none
+                cell.mainImageString = outfit.photos?.first?.image
+                cell.stylistImageString = outfit.stylist?.photo?.image
             }
         }
 
@@ -243,6 +250,11 @@ extension OutfitViewController: UITableViewDataSource {
 extension OutfitViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == filterTableView {
+            navigationController?.pushViewController(StylistListViewController(), animated: true)
+            return
+        }
+        
         let outfitDetailVC = OutfitDetailViewController()
         outfitDetailVC.outfitId = outfits?[safe: indexPath.row]?.outfitId
         outfitDetailVC.hidesBottomBarWhenPushed = true

@@ -90,6 +90,10 @@
 		3197B65F1DB28DA20096EF16 /* MessagesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B65E1DB28DA20096EF16 /* MessagesDTO.swift */; };
 		3197B6611DB28E4C0096EF16 /* MessagesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B6601DB28E4C0096EF16 /* MessagesCommand.swift */; };
 		31B9F3601DB17C740049F08E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B9F35F1DB17C740049F08E /* Array.swift */; };
+		31C8BB321E04808B00D8CBD0 /* StylistListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8BB311E04808B00D8CBD0 /* StylistListDTO.swift */; };
+		31C8BB341E04811C00D8CBD0 /* StylistCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */; };
+		31C8BB371E04822600D8CBD0 /* StylistListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8BB361E04822600D8CBD0 /* StylistListViewController.swift */; };
+		31C8BB391E04848100D8CBD0 /* StylistListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8BB381E04848100D8CBD0 /* StylistListTableViewCell.swift */; };
 		31CD44E61DB14AF8007A5E1C /* OutfitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD44E51DB14AF8007A5E1C /* OutfitTableViewCell.swift */; };
 		31CD44E81DB14CD8007A5E1C /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD44E71DB14CD8007A5E1C /* View.swift */; };
 		31CD44EA1DB161BF007A5E1C /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD44E91DB161BF007A5E1C /* ProductDetailViewController.swift */; };
@@ -217,6 +221,10 @@
 		3197B65E1DB28DA20096EF16 /* MessagesDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesDTO.swift; sourceTree = "<group>"; };
 		3197B6601DB28E4C0096EF16 /* MessagesCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCommand.swift; sourceTree = "<group>"; };
 		31B9F35F1DB17C740049F08E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		31C8BB311E04808B00D8CBD0 /* StylistListDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListDTO.swift; sourceTree = "<group>"; };
+		31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistCommand.swift; sourceTree = "<group>"; };
+		31C8BB361E04822600D8CBD0 /* StylistListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListViewController.swift; sourceTree = "<group>"; };
+		31C8BB381E04848100D8CBD0 /* StylistListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListTableViewCell.swift; sourceTree = "<group>"; };
 		31CD44E51DB14AF8007A5E1C /* OutfitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitTableViewCell.swift; sourceTree = "<group>"; };
 		31CD44E71DB14CD8007A5E1C /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		31CD44E91DB161BF007A5E1C /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
@@ -315,6 +323,7 @@
 				3161C2B91E01D2BF007DC0FB /* StylistDTO.swift */,
 				3161C2BB1E01D2F6007DC0FB /* AddressDTO.swift */,
 				3161C2BD1E01D474007DC0FB /* ComponentsDTO.swift */,
+				31C8BB311E04808B00D8CBD0 /* StylistListDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -473,6 +482,7 @@
 		311D1F0D1DAE465F00A7F545 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				31C8BB351E04820200D8CBD0 /* Stylist */,
 				31400F111DB53FCA00A088A0 /* Wardrobe */,
 				31400F101DB53FAB00A088A0 /* Questionnaire */,
 				31400F0F1DB53FA200A088A0 /* Outfit */,
@@ -545,6 +555,7 @@
 				3197B6601DB28E4C0096EF16 /* MessagesCommand.swift */,
 				317F6CF71DB2C6D600DE0679 /* OutfitsCommand.swift */,
 				31FC67071DB38F1D00ECC5A7 /* OutfitDetailCommand.swift */,
+				31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -595,6 +606,7 @@
 				317D60F21DB0A4230044D46B /* TableViewCellWithImage.swift */,
 				31FC67091DB3AB6C00ECC5A7 /* OutfitDetailTableViewCell.swift */,
 				31400F121DB54A7800A088A0 /* QuestionnaireTableViewCell.swift */,
+				31C8BB381E04848100D8CBD0 /* StylistListTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -644,6 +656,14 @@
 				31897D941DAF6B8D00BFFED0 /* Launch Screen.storyboard */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		31C8BB351E04820200D8CBD0 /* Stylist */ = {
+			isa = PBXGroup;
+			children = (
+				31C8BB361E04822600D8CBD0 /* StylistListViewController.swift */,
+			);
+			path = Stylist;
 			sourceTree = "<group>";
 		};
 		31E05E251DAF53DF007AE913 /* Entilements */ = {
@@ -932,6 +952,7 @@
 				3102869F1DAFA41A007EE87B /* MainTabBarController.swift in Sources */,
 				31818E571DAFF265004883D2 /* UITabeViewCell+SE.swift in Sources */,
 				3161C2BC1E01D2F6007DC0FB /* AddressDTO.swift in Sources */,
+				31C8BB321E04808B00D8CBD0 /* StylistListDTO.swift in Sources */,
 				310919901DAE9D830083A2C8 /* AccountSessionManager.swift in Sources */,
 				311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */,
 				310919941DAE9FF60083A2C8 /* Typealiases.swift in Sources */,
@@ -943,6 +964,9 @@
 				310919811DAE8DA30083A2C8 /* TextField.swift in Sources */,
 				310286AA1DAFA574007EE87B /* WardrobeViewController.swift in Sources */,
 				3197B6611DB28E4C0096EF16 /* MessagesCommand.swift in Sources */,
+				31C8BB391E04848100D8CBD0 /* StylistListTableViewCell.swift in Sources */,
+				31C8BB371E04822600D8CBD0 /* StylistListViewController.swift in Sources */,
+				31C8BB341E04811C00D8CBD0 /* StylistCommand.swift in Sources */,
 				3197B6591DB236C30096EF16 /* MessagesTableViewCell.swift in Sources */,
 				310286A31DAFA4C7007EE87B /* UIViewController+SE.swift in Sources */,
 				3109197A1DAE850E0083A2C8 /* UserDTO.swift in Sources */,

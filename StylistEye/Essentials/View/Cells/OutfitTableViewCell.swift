@@ -19,7 +19,7 @@ class OutfitTableViewCell: AbstractTableViewCell {
             return String.empty
         }
         set {
-            if let url = self.mainImageString?.urlValue {
+            if let url = newValue?.urlValue {
                 mainImageView.kf.setImage(with: ImageResource(downloadURL: url))
             }
         }
@@ -30,8 +30,8 @@ class OutfitTableViewCell: AbstractTableViewCell {
             return String.empty
         }
         set {
-            if let url = self.stylistImageString?.urlValue {
-                mainImageView.kf.setImage(with: ImageResource(downloadURL: url))
+            if let url = newValue?.urlValue {
+                stylistProfileImageView.kf.setImage(with: ImageResource(downloadURL: url))
             }
         }
     }
@@ -82,7 +82,7 @@ class OutfitTableViewCell: AbstractTableViewCell {
         stylistProfileImageView.layer.cornerRadius = 20
         stylistProfileImageView.image = #imageLiteral(resourceName: "placeholder")
 
-        stylistNameLabel.textColor = Palette[custom: .appColor]
+        stylistNameLabel.textColor = Palette[custom: .title]
         stylistNameLabel.numberOfLines = 0
         stylistNameLabel.font = SystemFont[.title]
 

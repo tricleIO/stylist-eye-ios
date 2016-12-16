@@ -63,7 +63,12 @@ enum APIUrlManager: APIUrlManagerProtocol {
         outfitId: Int,
         photoType: Int
     )
-
+    
+    /**
+     Stylist list.
+     */
+    case stylistList
+    
     /// Url path.
     var url: String? {
         var baseUrl: URL? {
@@ -82,6 +87,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             urlString = "/mapi/v1/outfits"
         case .outfitDetail:
             urlString = "/mapi/MobileOutfit/outfitphotos"
+        case .stylistList:
+            urlString = "/mapi/v1/stylists"
         }
 
         guard let url = URL(string: urlString, relativeTo: baseUrl) else {
@@ -119,12 +126,23 @@ enum APIUrlManager: APIUrlManagerProtocol {
                 "token": token,
                 "expanded": "stylistDetails,photos,dressStyle,components",
             ]
+        case .stylistList:
+            guard let token = Keychains[.accessTokenKey] else {
+                return [:]
+            }
+            return [
+                "token": token,
+                "expanded": "photos"
+            ]
         case let .outfitDetail(
             outfitId,
             photoType
             ):
+            guard let token = Keychains[.accessTokenKey] else {
+                return [:]
+            }
             return [
-                "token": Keychains[.accessTokenKey].forcedValue,
+                "token": token,
                 "outfitId": "\(outfitId)",
                 "photoType": "\(photoType)"
             ]
@@ -148,6 +166,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             fallthrough
         case .outfits:
             fallthrough
+        case .stylistList:
+            fallthrough
         case .outfitDetail:
             return [:]
         }
@@ -165,6 +185,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .outfits:
             fallthrough
         case .outfitDetail:
+            fallthrough
+        case .stylistList:
             return .get
         }
     }
