@@ -11,6 +11,18 @@ import SnapKit
 import UIKit
 
 class OutfitViewController: AbstractViewController {
+    
+    // MARK: - Enum definition
+    enum OutfitFilterIndexes: Int {
+        
+        case stylist
+        case outfitCategory
+        case unknown
+        
+        init(index: Int) {
+            self = OutfitFilterIndexes(rawValue: index) ?? .unknown
+        }
+    }
 
     // MARK: - Properties
     // MARK: > private
@@ -29,17 +41,28 @@ class OutfitViewController: AbstractViewController {
     fileprivate var outfits: [OutfitsDTO]? {
         didSet {
             stylistId = nil
+            categoryId = nil
             tableView.reloadData()
             filterTableView.reloadData()
         }
     }
     
-    fileprivate let filterNameLabel = Label()
+    fileprivate var filterNameLabel = Label()
     
     fileprivate let showFilterButton = Button(type: .system)
 
+    fileprivate var selectedFilterTitle: String? {
+        didSet {
+            guard let selectedFilterTitle = selectedFilterTitle else {
+                return
+            }
+            filterNameLabel.text = selectedFilterTitle
+        }
+    }
+    
     // MARK: > properties for command
     fileprivate var stylistId: String?
+    fileprivate var categoryId: String?
     
     // MARK: - <Initializable>
     internal override func initializeElements() {
@@ -179,7 +202,7 @@ class OutfitViewController: AbstractViewController {
 
     fileprivate func loadOutfits() {
         KVNProgress.show()
-        OutfitsCommand(stylistId: stylistId).executeCommand { data in
+        OutfitsCommand(stylistId: stylistId, dressstyle: categoryId).executeCommand { data in
             switch data {
             case let .success(_, objectsArray: data, apiResponse: apiResponse):
                 // TODO: @MS
@@ -245,7 +268,7 @@ extension OutfitViewController: UITableViewDataSource {
         if tableView == filterTableView {
             return 40 // TODO: @MS
         }
-        return CGFloat(GUIConfiguration.OutfitCellHeight)
+        return GUIConfiguration.OutfitCellHeight
     }
 }
 
@@ -254,13 +277,29 @@ extension OutfitViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == filterTableView {
-            let stylistList = StylistListViewController()
-            stylistList.callback = { stylistId in
-                self.stylistId = stylistId
-                self.loadOutfits()
+            switch OutfitFilterIndexes(index: indexPath.row) {
+
+            case .stylist:
+                let stylistList = StylistListViewController()
+                stylistList.callback = { stylistId, selectedFilterTitle in
+                    self.selectedFilterTitle = selectedFilterTitle
+                    self.stylistId = stylistId
+                    self.loadOutfits()
+                }
+                openFilter()
+                navigationController?.pushViewController(stylistList, animated: true)
+            case .outfitCategory:
+                let outfitCategory = OutfitCategoryViewController()
+                outfitCategory.callback = { categoryId, selectedFilterTitle in
+                    self.selectedFilterTitle = selectedFilterTitle
+                    self.categoryId = categoryId
+                    self.loadOutfits()
+                }
+                openFilter()
+                navigationController?.pushViewController(outfitCategory, animated: true)
+            case .unknown:
+                break
             }
-            openFilter()
-            navigationController?.pushViewController(stylistList, animated: true)
             return
         }
         

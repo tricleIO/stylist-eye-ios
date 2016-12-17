@@ -40,7 +40,8 @@ enum Languages: String, LanguageProtocol {
 
     case czech = "cs"
     case english = "en"
- 
+    case unknown = "unknown"
+    
     init(language: String) {
         self = Languages(rawValue: language) ?? .english
     }

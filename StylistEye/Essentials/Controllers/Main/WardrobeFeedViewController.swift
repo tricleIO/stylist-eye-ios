@@ -95,7 +95,7 @@ class WardrobeFeedViewController: AbstractViewController {
 
     // MARK: - User Action
     func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
+        let _ = navigationController?.popViewController(animated: true)
     }
 
     func cameraImageViewTapped() {

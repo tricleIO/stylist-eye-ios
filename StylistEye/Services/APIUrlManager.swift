@@ -50,9 +50,13 @@ enum APIUrlManager: APIUrlManagerProtocol {
 
     /**
      Outfits
+     - Parameters:
+     - stylistId
+     - dressstyle
      */
     case outfits(
-        stylistId: String?
+        stylistId: String?,
+        dressstyle: String?
     )
 
     /**
@@ -62,9 +66,13 @@ enum APIUrlManager: APIUrlManagerProtocol {
         - photoType
      */
     case outfitDetail (
-        outfitId: Int,
-        photoType: Int
+        outfitId: Int
     )
+    
+    /**
+     Outfits category.
+     */
+    case outfitCategory
     
     /**
      Stylist list.
@@ -86,11 +94,13 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .messages:
             urlString = "/mapi/v1/messages"
         case .outfits:
-            urlString = "/mapi/v1/outfits"
+            fallthrough
         case .outfitDetail:
-            urlString = "/mapi/MobileOutfit/outfitphotos"
+            urlString = "/mapi/v1/outfits/"
         case .stylistList:
             urlString = "/mapi/v1/stylists"
+        case .outfitCategory:
+            urlString = "/mapi/v1/lists/currentOutfitCat"
         }
 
         guard let url = URL(string: urlString, relativeTo: baseUrl) else {
@@ -119,13 +129,18 @@ enum APIUrlManager: APIUrlManagerProtocol {
         switch self {
         case .login:
             return nil
+        case .outfitCategory:
+            fallthrough
         case .logout:
             fallthrough
         case .messages:
             return params
-        case let .outfits(stylistId):
+        case let .outfits(stylistId, dressstyle):
             if let stylistId = stylistId {
                 params["stylist"] = stylistId
+            }
+            if let dressstyle = dressstyle {
+                params["dressstyle"] = dressstyle
             }
             params["expanded"] = "stylistDetails,photos,dressStyle,components"
             return params
@@ -133,11 +148,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
             params["expanded"] = "photos"
             return params
         case let .outfitDetail(
-            outfitId,
-            photoType
+            outfitId
             ):
-            params["outfitId"] = "\(outfitId)"
-            params["photoType"] = "\(photoType)"
+            params["outfit_id"] = String(outfitId)
+            params["expanded"] = "stylistDetails,photos,dressStyle,components"
             return params
         }
     }
@@ -162,6 +176,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .stylistList:
             fallthrough
         case .outfitDetail:
+            fallthrough
+        case .outfitCategory:
             return [:]
         }
     }
@@ -180,6 +196,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .outfitDetail:
             fallthrough
         case .stylistList:
+            fallthrough
+        case .outfitCategory:
             return .get
         }
     }

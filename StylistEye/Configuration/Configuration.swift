@@ -6,6 +6,7 @@
 //  Copyright © 2016 Michal Severín. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 /**
@@ -23,11 +24,11 @@ struct APIConfiguration {
 struct GUIConfiguration {
 
     /// Height for message cell.
-    static let MessageCellHeight = 100.0
+    static let MessageCellHeight: CGFloat = 100.0
     /// Height for default cell.
-    static let CellHeight = 65.0
+    static let CellHeight: CGFloat = 65.0
     /// Height for outfit cell.
-    static let OutfitCellHeight = 350.0
+    static let OutfitCellHeight: CGFloat = 350.0
     /// Default animation duration.
     static let DefaultAnimationDuration: Double = 0.3
 }

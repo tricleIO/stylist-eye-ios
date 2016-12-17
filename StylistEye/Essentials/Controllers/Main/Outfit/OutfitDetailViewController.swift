@@ -29,7 +29,7 @@ class OutfitDetailViewController: AbstractViewController {
 
     fileprivate var tableView = TableView(style: .grouped)
 
-    fileprivate var outfitTableData: [OutfitDetailDTO]? {
+    fileprivate var outfitTableData: OutfitDetailDTO? {
         didSet {
             stylistDefinition()
             tableView.reloadData()
@@ -177,7 +177,7 @@ class OutfitDetailViewController: AbstractViewController {
 
     // MARK: - User Action
     func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
+        let _ = navigationController?.popViewController(animated: true)
     }
 
     // MARK: - Actions
@@ -186,9 +186,9 @@ class OutfitDetailViewController: AbstractViewController {
             return
         }
         KVNProgress.show()
-        OutfitDetailCommand(outfitId: outfitId, photoType: 1).executeCommand { data in
+        OutfitDetailCommand(outfitId: outfitId).executeCommand { data in
             switch data {
-            case let .success(_, objectsArray: data, apiResponse: apiResponse):
+            case let .success(data, objectsArray: _, apiResponse: apiResponse):
                 // TODO: @MS
                 switch apiResponse {
                 case .ok:
@@ -209,22 +209,28 @@ class OutfitDetailViewController: AbstractViewController {
         stylistProfileImageView.layer.cornerRadius = 20
         stylistProfileImageView.contentMode = .scaleToFill
         stylistProfileImageView.clipsToBounds = true
+        
+        
+        if let stylist = outfitTableData?.stylist {
+            if let stylistName = stylist.givenName, let familyName = stylist.familyName {
+                stylistNameLabel.text = stylistName + String.space + familyName
+            }
+            stylistDescriptionLabel.text = "stylist description"
+        }
 
-        stylistNameLabel.text = "Stylist Name"
         stylistNameLabel.font = SystemFont[.title]
         stylistNameLabel.textColor = Palette[custom: .appColor]
 
-        stylistDescriptionLabel.text = "Stylist description"
         stylistDescriptionLabel.font = SystemFont[.description]
         stylistDescriptionLabel.textColor = Palette[custom: .appColor]
 
         outfitNameLabel.text = "Outfit name"
         outfitNameLabel.textColor = Palette[custom: .appColor]
 
-        dressStyleLabel.text = "Dress style"
+        dressStyleLabel.text = outfitTableData?.dressStyle?.name
         dressStyleLabel.textColor = Palette[custom: .appColor]
 
-        outfitDescriptionLabel.text = "Outfit description"
+        outfitDescriptionLabel.text = outfitTableData?.comment
         outfitDescriptionLabel.textColor = Palette[custom: .appColor]
         outfitDescriptionLabel.numberOfLines = 0
     }
@@ -237,19 +243,17 @@ extension OutfitDetailViewController: UITableViewDataSource {
         let cell: OutfitDetailTableViewCell = tableView.dequeueReusableCell(.value1)
 
         cell.backgroundColor = Palette[basic: .clear]
-
-        if let outfit = outfitTableData?[safe: indexPath.row], let count = outfitTableData?.count {
-            if indexPath.row < count  {
-                cell.labelText = outfit.pictureText
-                cell.mainImageString = outfit.pictureUrl
-            }
+        
+        if let components = outfitTableData?.components[safe: indexPath.row] {
+            cell.labelText = components.garmetType?.name
+            cell.mainImageString = components.photo?.image
         }
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return outfitTableData?.count ?? 0
+        return outfitTableData?.components.count ?? 0
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

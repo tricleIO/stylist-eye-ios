@@ -19,7 +19,7 @@ struct OutfitDetailCommand: NetworkExecutable {
     /// Url manager.
     var urlManager: APIUrlManager
 
-    init(outfitId: Int, photoType: Int) {
-        urlManager = .outfitDetail(outfitId: outfitId, photoType: photoType)
+    init(outfitId: Int) {
+        urlManager = .outfitDetail(outfitId: outfitId)
     }
 }

@@ -13,7 +13,7 @@ class StylistListViewController: AbstractViewController {
     
     // MARK: - Properties
     // MARK: > public
-    var callback: ((_ stylistId: String?) -> Swift.Void)?
+    var callback: ((_ stylistId: String?, _ selectedFilterTitle: String?) -> Swift.Void)?
     
     // MARK: > private
     fileprivate var stylistListData: [StylistListDTO]? = [] {
@@ -31,6 +31,7 @@ class StylistListViewController: AbstractViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(StylistListTableViewCell.self)
+        tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
     }
     
     internal override func setupView() {
@@ -82,8 +83,15 @@ extension StylistListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: StylistListTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         cell.backgroundColor = Palette[basic: .clear]
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.selectionStyle = .none
+        
         if let data = stylistListData?[safe: indexPath.row] {
-            cell.textLabel?.text = data.familyName
+            if let name = data.givenName, let familyName = data.familyName {
+                cell.stylistName = name + String.space + familyName
+            }
+            cell.stylistPhoto = data.photo?.image
+            cell.descriptionText = data.address?.street
         }
         
         return cell
@@ -101,9 +109,17 @@ extension StylistListViewController: UITableViewDataSource {
 
 extension StylistListViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return GUIConfiguration.CellHeight
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let data = stylistListData?[safe: indexPath.row] {
-            callback?(data.stylistId)
+            var selectedFilterTitle = String.empty
+            if let name = data.givenName, let familyName = data.familyName {
+                selectedFilterTitle = name + String.space + familyName
+            }
+            callback?(data.stylistId, selectedFilterTitle)
             let _ = navigationController?.popViewController(animated: true)
         }
     }
