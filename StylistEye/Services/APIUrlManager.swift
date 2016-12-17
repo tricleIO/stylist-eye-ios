@@ -51,7 +51,9 @@ enum APIUrlManager: APIUrlManagerProtocol {
     /**
      Outfits
      */
-    case outfits
+    case outfits(
+        stylistId: String?
+    )
 
     /**
      Oufit detail.
@@ -109,43 +111,34 @@ enum APIUrlManager: APIUrlManagerProtocol {
 
     /// GET parameters.
     var addressParams: [String: String]? {
+        guard let token = Keychains[.accessTokenKey] else {
+            return [:]
+        }
+        var params: [String: String] = [:]
+        params["token"] = token
         switch self {
         case .login:
             return nil
         case .logout:
-            return [
-                "token": Keychains[.accessTokenKey].forcedValue
-            ]
-        case .messages:
             fallthrough
-        case .outfits:
-            guard let token = Keychains[.accessTokenKey] else {
-                return [:]
+        case .messages:
+            return params
+        case let .outfits(stylistId):
+            if let stylistId = stylistId {
+                params["stylist"] = stylistId
             }
-            return [
-                "token": token,
-                "expanded": "stylistDetails,photos,dressStyle,components",
-            ]
+            params["expanded"] = "stylistDetails,photos,dressStyle,components"
+            return params
         case .stylistList:
-            guard let token = Keychains[.accessTokenKey] else {
-                return [:]
-            }
-            return [
-                "token": token,
-                "expanded": "photos"
-            ]
+            params["expanded"] = "photos"
+            return params
         case let .outfitDetail(
             outfitId,
             photoType
             ):
-            guard let token = Keychains[.accessTokenKey] else {
-                return [:]
-            }
-            return [
-                "token": token,
-                "outfitId": "\(outfitId)",
-                "photoType": "\(photoType)"
-            ]
+            params["outfitId"] = "\(outfitId)"
+            params["photoType"] = "\(photoType)"
+            return params
         }
     }
 

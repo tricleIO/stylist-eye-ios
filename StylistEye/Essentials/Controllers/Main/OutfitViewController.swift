@@ -28,6 +28,7 @@ class OutfitViewController: AbstractViewController {
 
     fileprivate var outfits: [OutfitsDTO]? {
         didSet {
+            stylistId = nil
             tableView.reloadData()
             filterTableView.reloadData()
         }
@@ -37,6 +38,9 @@ class OutfitViewController: AbstractViewController {
     
     fileprivate let showFilterButton = Button(type: .system)
 
+    // MARK: > properties for command
+    fileprivate var stylistId: String?
+    
     // MARK: - <Initializable>
     internal override func initializeElements() {
         super.initializeElements()
@@ -152,10 +156,10 @@ class OutfitViewController: AbstractViewController {
 
     // MARK: - Actions
     fileprivate func openFilter() {
+        if let filterBox = self.filterBox {
+            filterBox.isHidden = !filterBox.isHidden
+        }
         UIView.animate(withDuration: GUIConfiguration.DefaultAnimationDuration, animations: {
-            if let filterBox = self.filterBox {
-                filterBox.isHidden = !filterBox.isHidden
-            }
                 self.view.layoutIfNeeded()
             }) { completed in
         }
@@ -175,7 +179,7 @@ class OutfitViewController: AbstractViewController {
 
     fileprivate func loadOutfits() {
         KVNProgress.show()
-        OutfitsCommand().executeCommand { data in
+        OutfitsCommand(stylistId: stylistId).executeCommand { data in
             switch data {
             case let .success(_, objectsArray: data, apiResponse: apiResponse):
                 // TODO: @MS
@@ -208,19 +212,18 @@ extension OutfitViewController: UITableViewDataSource {
             
             return cell
         }
+
         let cell: OutfitTableViewCell = tableView.dequeueReusableCell()
 
-        if let outfit = outfits?[safe: indexPath.row], let count = outfits?.count {
-            if indexPath.row < count {
-                cell.backgroundColor = Palette[basic: .clear]
-                if let stylistName = outfit.stylist?.givenName, let stylistLastname = outfit.stylist?.familyName {
-                    cell.stylistNameText = stylistName + String.space + stylistLastname
-                }
-                cell.descriptionText = outfit.outfitComment
-                cell.selectionStyle = .none
-                cell.mainImageString = outfit.photos?.first?.image
-                cell.stylistImageString = outfit.stylist?.photo?.image
+        if let outfit = outfits?[safe: indexPath.row] {
+            cell.backgroundColor = Palette[basic: .clear]
+            if let stylistName = outfit.stylist?.givenName, let stylistLastname = outfit.stylist?.familyName {
+                cell.stylistNameText = stylistName + String.space + stylistLastname
             }
+            cell.descriptionText = outfit.outfitComment
+            cell.selectionStyle = .none
+            cell.mainImageString = outfit.photos?.first?.image
+            cell.stylistImageString = outfit.stylist?.photo?.image
         }
 
         return cell
@@ -251,7 +254,13 @@ extension OutfitViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == filterTableView {
-            navigationController?.pushViewController(StylistListViewController(), animated: true)
+            let stylistList = StylistListViewController()
+            stylistList.callback = { stylistId in
+                self.stylistId = stylistId
+                self.loadOutfits()
+            }
+            openFilter()
+            navigationController?.pushViewController(stylistList, animated: true)
             return
         }
         

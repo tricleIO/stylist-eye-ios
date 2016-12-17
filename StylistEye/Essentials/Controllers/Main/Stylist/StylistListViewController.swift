@@ -13,6 +13,7 @@ class StylistListViewController: AbstractViewController {
     
     // MARK: - Properties
     // MARK: > public
+    var callback: ((_ stylistId: String?) -> Swift.Void)?
     
     // MARK: > private
     fileprivate var stylistListData: [StylistListDTO]? = [] {
@@ -20,7 +21,7 @@ class StylistListViewController: AbstractViewController {
             tableView.reloadData()
         }
     }
-    
+
     fileprivate let tableView = TableView(style: .grouped)
     
     // MARK: - Initialize
@@ -36,6 +37,29 @@ class StylistListViewController: AbstractViewController {
         super.setupView()
         
         view.backgroundColor = Palette[basic: .white]
+        tableView.backgroundColor = Palette[basic: .clear]
+    }
+    
+    internal override func setupBackgroundImage() {
+        super.setupBackgroundImage()
+    }
+    
+    internal override func addElements() {
+        super.addElements()
+        
+        view.addSubview(tableView)
+    }
+    
+    internal override func setupConstraints() {
+        super.setupConstraints()
+        
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(view)
+        }
+    }
+    
+    override func customInit() {
+        
     }
     
     internal override func loadData() {
@@ -57,7 +81,7 @@ extension StylistListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: StylistListTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        
+        cell.backgroundColor = Palette[basic: .clear]
         if let data = stylistListData?[safe: indexPath.row] {
             cell.textLabel?.text = data.familyName
         }
@@ -77,5 +101,11 @@ extension StylistListViewController: UITableViewDataSource {
 
 extension StylistListViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let data = stylistListData?[safe: indexPath.row] {
+            callback?(data.stylistId)
+            let _ = navigationController?.popViewController(animated: true)
+        }
+    }
     
 }

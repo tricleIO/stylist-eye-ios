@@ -28,4 +28,5 @@ extension UIViewController: InitializableProtocol {
     func setupConstraints() {}
     func loadData() {}
     func setupView() {}
+    func setupBackgroundImage() {}
 }

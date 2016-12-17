@@ -10,7 +10,7 @@ import ObjectMapper
 
 struct StylistListDTO: Mappable {
     
-    var stylistId: Int?
+    var stylistId: String?
     var givenName: String?
     var familyName: String?
     var photo: PhotosDTO?
@@ -23,7 +23,7 @@ struct StylistListDTO: Mappable {
         guard let sId = id else {
             return nil
         }
-        stylistId = sId
+        stylistId = String(sId)
     }
     
     mutating func mapping(map: Map) {

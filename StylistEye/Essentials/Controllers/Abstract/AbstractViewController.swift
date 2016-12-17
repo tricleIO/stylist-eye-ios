@@ -17,6 +17,9 @@ class AbstractViewController: UIViewController {
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
     }
+    
+    // MARK: - Properties
+    let backgroundImage = ImageView(image: #imageLiteral(resourceName: "whiteBg_image"))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +39,16 @@ class AbstractViewController: UIViewController {
         ]
     }
 
+    internal override func addElements() {
+        view.addSubview(backgroundImage)
+    }
+
+    internal override func setupBackgroundImage() {
+        backgroundImage.snp.makeConstraints { make in
+            make.edges.equalTo(view)
+        }
+    }
+    
     internal override func customInit() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss)))
     }

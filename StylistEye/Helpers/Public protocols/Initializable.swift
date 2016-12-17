@@ -45,6 +45,11 @@ protocol InitializableProtocol {
      Load data from API
      */
     func loadData()
+    
+    /**
+     Setup defualt background image.
+     */
+    func setupBackgroundImage()
 }
 
 extension InitializableProtocol {
@@ -59,6 +64,7 @@ extension InitializableProtocol {
         }
         initializeElements()
         addElements()
+        setupBackgroundImage()
         setupView()
     }
 
