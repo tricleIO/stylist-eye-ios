@@ -19,7 +19,7 @@ class MessagesViewController: AbstractViewController {
 
     fileprivate var tableView = TableView(style: .grouped)
 
-    fileprivate var messagesDTO: MessagesDTO? {
+    fileprivate var messagesDTO: [MessagesListDTO] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -46,7 +46,7 @@ class MessagesViewController: AbstractViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = Palette[basic: .clear]
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 0)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
 
         navigationItem.leftBarButtonItem = backButton
     }
@@ -90,19 +90,21 @@ class MessagesViewController: AbstractViewController {
 
     // MARK: - Actions
     fileprivate func popViewController() {
-        self.navigationController?.popViewController(animated: true)
+        let _ = navigationController?.popViewController(animated: true)
     }
 
     fileprivate func loadMessages() {
         KVNProgress.show()
         MessagesCommand().executeCommand { data in
             switch data {
-            case let .success(data, objectsArray: _, apiResponse: apiResponse):
+            case let .success(_, objectsArray: data, apiResponse: apiResponse):
                 // TODO: @MS
                 switch apiResponse {
                 case .ok:
                     KVNProgress.dismiss()
-                    self.messagesDTO = data
+                    if let messages = data {
+                        self.messagesDTO = messages
+                    }
                 case .fail:
                     KVNProgress.showError(withStatus: "Fail code msgs")
                 }
@@ -121,18 +123,19 @@ extension MessagesViewController: UITableViewDataSource {
 
         cell.backgroundColor = Palette[basic: .clear]
 
-//        if let message = messagesDTO?.lastMessages[safe: indexPath.row] {
-            cell.messageText = "Testovací text"
-//            if let firstname = message.author?.givenName, let secondname = message.author?.familyName {
-                cell.senderName = "Michael Loe"
-//            }
-//        }
+        if let message = messagesDTO[safe: indexPath.row] {
+            cell.messageText = message.lastMessage?.content
+            cell.time = message.lastMessage?.timestamp
+            if let firstname = message.lastMessage?.author?.givenName, let secondname = message.lastMessage?.author?.familyName {
+                cell.senderName = firstname + String.space + secondname
+            }
+        }
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messagesDTO?.lastMessages.count ?? 10
+        return messagesDTO.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -141,14 +144,25 @@ extension MessagesViewController: UITableViewDataSource {
 
     @objc(tableView:heightForRowAtIndexPath:)
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(GUIConfiguration.MessageCellHeight)
+        return GUIConfiguration.MessageCellHeight
     }
 }
 
 // MARK: - <UITableViewDelegate>
 extension MessagesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(MessageDetailViewController(), animated: true)
+        let msgDetail = MessageDetailViewController()
+        if let mesg = messagesDTO[safe: indexPath.row], let author = mesg.lastMessage?.author, let firstname = author.givenName, let familyname = author.familyName {
+            let authorName = firstname + String.space + familyname
+            msgDetail.senderId = String(author.identifier)
+            msgDetail.senderDisplayName = authorName
+            msgDetail.orderId = mesg.lastMessage?.identifier
+        }
+        else {
+            msgDetail.senderId = String.empty
+            msgDetail.senderDisplayName = String.empty
+        }
+        navigationController?.pushViewController(msgDetail, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

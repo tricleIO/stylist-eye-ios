@@ -14,7 +14,7 @@ class MessagesTableViewCell: AbstractTableViewCell {
     // MARK: < public
     var messageText: String? {
         get {
-            return descriptionLabel.text.forcedValue
+            return descriptionLabel.text
         }
         set {
             descriptionLabel.text = newValue
@@ -23,10 +23,19 @@ class MessagesTableViewCell: AbstractTableViewCell {
 
     var senderName: String? {
         get {
-            return nameLabel.text.forcedValue
+            return nameLabel.text
         }
         set {
             nameLabel.text = newValue
+        }
+    }
+    
+    var time: String? {
+        get {
+            return timeLabel.text
+        }
+        set {
+            timeLabel.text = newValue
         }
     }
 
@@ -35,32 +44,37 @@ class MessagesTableViewCell: AbstractTableViewCell {
     fileprivate let descriptionLabel = Label()
     fileprivate let timeLabel = Label()
 
-    fileprivate let toImageView = ImageView()
     fileprivate let disclosureImageView = ImageView()
     fileprivate let stapleImageView = ImageView()
     fileprivate let notificationImageView = ImageView()
+    
+    fileprivate let userImageView = ImageView(image: #imageLiteral(resourceName: "placeholder"))
 
     // MARK: - <Initializable>
     internal override func initializeElements() {
         super.initializeElements()
 
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        nameLabel.textColor = Palette[basic: .black]
+        
         notificationImageView.contentMode = .scaleAspectFit
         notificationImageView.image = #imageLiteral(resourceName: "unreadMark_image")
+        
+        userImageView.layer.cornerRadius = 20
+        userImageView.contentMode = .scaleAspectFit
+        userImageView.clipsToBounds = true
 
-        stapleImageView.image = #imageLiteral(resourceName: "msg_attachment_image")
-        stapleImageView.contentMode = .scaleAspectFit
+//        stapleImageView.image = #imageLiteral(resourceName: "msg_attachment_image")
+//        stapleImageView.contentMode = .scaleAspectFit
 
         disclosureImageView.image = #imageLiteral(resourceName: "message_disclButton_image")
         disclosureImageView.contentMode = .scaleAspectFit
 
-        toImageView.image = #imageLiteral(resourceName: "messageMarkTo_image")
-        toImageView.contentMode = .scaleAspectFit
-
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textColor = Palette[basic: .gray]
 
-        timeLabel.text = "9:30"
         timeLabel.textAlignment = .right
+        timeLabel.adjustsFontSizeToFitWidth = true
 
     }
 
@@ -71,27 +85,29 @@ class MessagesTableViewCell: AbstractTableViewCell {
             [
                 stapleImageView,
                 disclosureImageView,
-                toImageView,
                 timeLabel,
                 descriptionLabel,
                 nameLabel,
                 notificationImageView,
+                userImageView,
             ]
         )
     }
 
     internal override func setupConstraints() {
         super.setupConstraints()
+        
+        
 
         notificationImageView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(40)
-            make.top.equalTo(contentView).inset(14)
+            make.leading.equalTo(contentView).inset(50)
+            make.top.equalTo(contentView).inset(9)
             make.width.equalTo(10)
             make.height.equalTo(10)
         }
 
         stapleImageView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(40)
+            make.leading.equalTo(contentView).inset(50)
             make.top.equalTo(notificationImageView.snp.bottom).offset(8)
             make.width.equalTo(10)
             make.height.equalTo(10)
@@ -99,22 +115,15 @@ class MessagesTableViewCell: AbstractTableViewCell {
 
         nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(notificationImageView.snp.trailing).offset(10)
-            make.top.equalTo(contentView).inset(10)
+            make.top.equalTo(contentView).inset(4.7)
             make.trailing.equalTo(timeLabel.snp.leading).inset(10)
             make.height.equalTo(20)
         }
 
-        toImageView.snp.makeConstraints { make in
-            make.leading.equalTo(stapleImageView.snp.trailing).offset(10)
-            make.top.equalTo(nameLabel.snp.bottom)
-            make.width.equalTo(20)
-            make.height.equalTo(20)
-        }
-    
         descriptionLabel.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(70)
+            make.leading.equalTo(notificationImageView.snp.trailing).offset(10)
             make.trailing.equalTo(contentView).inset(10)
-            make.top.equalTo(nameLabel.snp.bottom).offset(10)
+            make.top.equalTo(nameLabel.snp.bottom).offset(2)
             make.bottom.equalTo(contentView)
         }
 
@@ -128,7 +137,14 @@ class MessagesTableViewCell: AbstractTableViewCell {
         timeLabel.snp.makeConstraints { make in
             make.trailing.equalTo(disclosureImageView.snp.leading).offset(-5)
             make.width.equalTo(80)
-            make.top.equalTo(contentView).inset(10)
+            make.top.equalTo(contentView).inset(5)
+        }
+        
+        userImageView.snp.makeConstraints { make in
+            make.leading.equalTo(contentView).inset(15)
+            make.top.equalTo(contentView).inset(25)
+            make.width.equalTo(40)
+            make.height.equalTo(40)
         }
     }
 }

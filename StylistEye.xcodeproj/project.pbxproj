@@ -92,6 +92,7 @@
 		3197B65D1DB288250096EF16 /* WardrobeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B65C1DB288250096EF16 /* WardrobeFeedViewController.swift */; };
 		3197B65F1DB28DA20096EF16 /* MessagesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B65E1DB28DA20096EF16 /* MessagesDTO.swift */; };
 		3197B6611DB28E4C0096EF16 /* MessagesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B6601DB28E4C0096EF16 /* MessagesCommand.swift */; };
+		31A252701E06C7980090EFD8 /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2526F1E06C7980090EFD8 /* MessageDetail.swift */; };
 		31B9F3601DB17C740049F08E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B9F35F1DB17C740049F08E /* Array.swift */; };
 		31C8BB321E04808B00D8CBD0 /* StylistListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8BB311E04808B00D8CBD0 /* StylistListDTO.swift */; };
 		31C8BB341E04811C00D8CBD0 /* StylistCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */; };
@@ -226,6 +227,7 @@
 		3197B65C1DB288250096EF16 /* WardrobeFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeFeedViewController.swift; sourceTree = "<group>"; };
 		3197B65E1DB28DA20096EF16 /* MessagesDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesDTO.swift; sourceTree = "<group>"; };
 		3197B6601DB28E4C0096EF16 /* MessagesCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCommand.swift; sourceTree = "<group>"; };
+		31A2526F1E06C7980090EFD8 /* MessageDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetail.swift; sourceTree = "<group>"; };
 		31B9F35F1DB17C740049F08E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		31C8BB311E04808B00D8CBD0 /* StylistListDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListDTO.swift; sourceTree = "<group>"; };
 		31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistCommand.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 				31FC67071DB38F1D00ECC5A7 /* OutfitDetailCommand.swift */,
 				31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */,
 				3175F4E31E05621D001C89C6 /* OutfitCategoryCommand.swift */,
+				31A2526F1E06C7980090EFD8 /* MessageDetail.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -966,6 +969,7 @@
 				311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */,
 				310919941DAE9FF60083A2C8 /* Typealiases.swift in Sources */,
 				31508DD11DB3D0F700D26F53 /* CaptureImageViewController.swift in Sources */,
+				31A252701E06C7980090EFD8 /* MessageDetail.swift in Sources */,
 				3175F4E21E05614C001C89C6 /* OutfitCategoryDTO.swift in Sources */,
 				31FC670E1DB3BEF700ECC5A7 /* ScrollView.swift in Sources */,
 				31F5FB9C1DAE2BE300418D36 /* AppDelegate.swift in Sources */,

@@ -47,6 +47,9 @@ enum APIUrlManager: APIUrlManagerProtocol {
     Messages
      */
     case messages
+    case messageDetail(
+        orderId: Int?
+    )
 
     /**
      Outfits
@@ -93,6 +96,11 @@ enum APIUrlManager: APIUrlManagerProtocol {
             urlString = "/mapi/v1/user/logout"
         case .messages:
             urlString = "/mapi/v1/messages"
+        case let .messageDetail(id):
+            guard let id = id else {
+                break
+            }
+            urlString = "/mapi/v1/\(id)"
         case .outfits:
             fallthrough
         case .outfitDetail:
@@ -134,6 +142,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .logout:
             fallthrough
         case .messages:
+            params["expanded"] = "userDetails,lastMessage"
+            return params
+        case .messageDetail:
+            params["expanded"] = "userDetails"
             return params
         case let .outfits(stylistId, dressstyle):
             if let stylistId = stylistId {
@@ -177,6 +189,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             fallthrough
         case .outfitDetail:
             fallthrough
+        case .messageDetail:
+            fallthrough
         case .outfitCategory:
             return [:]
         }
@@ -196,6 +210,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .outfitDetail:
             fallthrough
         case .stylistList:
+            fallthrough
+        case .messageDetail:
             fallthrough
         case .outfitCategory:
             return .get

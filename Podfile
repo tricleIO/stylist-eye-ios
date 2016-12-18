@@ -7,6 +7,7 @@ platform :ios, ’9.0’
 def shared_pods
     pod 'AlamofireObjectMapper'
     pod 'Alamofire'
+    pod 'JSQMessagesViewController'
     pod 'Kingfisher'
     pod 'KVNProgress'
     pod 'ObjectMapper'

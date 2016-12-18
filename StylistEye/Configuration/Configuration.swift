@@ -24,7 +24,7 @@ struct APIConfiguration {
 struct GUIConfiguration {
 
     /// Height for message cell.
-    static let MessageCellHeight: CGFloat = 100.0
+    static let MessageCellHeight: CGFloat = 80.0
     /// Height for default cell.
     static let CellHeight: CGFloat = 65.0
     /// Height for outfit cell.
