@@ -33,9 +33,8 @@ class MessageDetailViewController: JSQMessagesViewController {
             }
             for message in msgs.messages {
                 if let content = message.content {
-                    if let author = message.author, let firstname = author.givenName, let familyname = author.familyName {
-                        let authorName = firstname + String.space + familyname
-                        let jsqMessge: JSQMessage = JSQMessage(senderId: String(author.identifier), senderDisplayName: authorName, date: Date(), text: content)
+                    if let author = message.author {
+                        let jsqMessge: JSQMessage = JSQMessage(senderId: String(author.identifier), senderDisplayName: "", date: message.timestamp ?? Date(), text: content)
                         messages.append(jsqMessge)
                     }
                 }
@@ -95,6 +94,16 @@ extension MessageDetailViewController {
 
 // MARK: - <Delegate>
 extension MessageDetailViewController {
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAt indexPath: IndexPath!) -> CGFloat {
+        return 20
+    }
+
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+        let message: JSQMessage = self.messages[indexPath.item]
+        return JSQMessagesTimestampFormatter.shared().attributedTimestamp(for: message.date)
+    }
+
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         return nil

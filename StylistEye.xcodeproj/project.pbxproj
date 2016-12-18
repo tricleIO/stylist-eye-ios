@@ -93,6 +93,8 @@
 		3197B65F1DB28DA20096EF16 /* MessagesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B65E1DB28DA20096EF16 /* MessagesDTO.swift */; };
 		3197B6611DB28E4C0096EF16 /* MessagesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B6601DB28E4C0096EF16 /* MessagesCommand.swift */; };
 		31A252701E06C7980090EFD8 /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2526F1E06C7980090EFD8 /* MessageDetail.swift */; };
+		31A252721E06E04B0090EFD8 /* TimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A252711E06E04B0090EFD8 /* TimeHelper.swift */; };
+		31A252741E06E0EB0090EFD8 /* DatetimeTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A252731E06E0EB0090EFD8 /* DatetimeTransform.swift */; };
 		31B9F3601DB17C740049F08E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B9F35F1DB17C740049F08E /* Array.swift */; };
 		31C8BB321E04808B00D8CBD0 /* StylistListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8BB311E04808B00D8CBD0 /* StylistListDTO.swift */; };
 		31C8BB341E04811C00D8CBD0 /* StylistCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */; };
@@ -228,6 +230,8 @@
 		3197B65E1DB28DA20096EF16 /* MessagesDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesDTO.swift; sourceTree = "<group>"; };
 		3197B6601DB28E4C0096EF16 /* MessagesCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCommand.swift; sourceTree = "<group>"; };
 		31A2526F1E06C7980090EFD8 /* MessageDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetail.swift; sourceTree = "<group>"; };
+		31A252711E06E04B0090EFD8 /* TimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeHelper.swift; sourceTree = "<group>"; };
+		31A252731E06E0EB0090EFD8 /* DatetimeTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatetimeTransform.swift; sourceTree = "<group>"; };
 		31B9F35F1DB17C740049F08E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		31C8BB311E04808B00D8CBD0 /* StylistListDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListDTO.swift; sourceTree = "<group>"; };
 		31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistCommand.swift; sourceTree = "<group>"; };
@@ -375,7 +379,9 @@
 				3163A7D31DBA32DC00D009BB /* Optional.swift */,
 				3109197B1DAE860B0083A2C8 /* String+SE.swift */,
 				310919931DAE9FF60083A2C8 /* Typealiases.swift */,
+				31A252731E06E0EB0090EFD8 /* DatetimeTransform.swift */,
 				310919911DAE9FDB0083A2C8 /* UserDefaults.swift */,
+				31A252711E06E04B0090EFD8 /* TimeHelper.swift */,
 				318901DF1DBBBA020027566A /* CurrentLanguageChecker.swift */,
 				31582A271DBCC370009D7139 /* FilterMenu.swift */,
 			);
@@ -993,6 +999,7 @@
 				310919871DAE94AE0083A2C8 /* KeychainKeys.swift in Sources */,
 				3175F4E41E05621D001C89C6 /* OutfitCategoryCommand.swift in Sources */,
 				310286A81DAFA569007EE87B /* QuestionnaireViewController.swift in Sources */,
+				31A252741E06E0EB0090EFD8 /* DatetimeTransform.swift in Sources */,
 				3197B65B1DB23B7E0096EF16 /* MessagesViewController.swift in Sources */,
 				31E05E1E1DAEEADC007AE913 /* Serializable.swift in Sources */,
 				317D60F31DB0A4230044D46B /* TableViewCellWithImage.swift in Sources */,
@@ -1036,6 +1043,7 @@
 				31400F0B1DB53E2A00A088A0 /* PrivacyViewController.swift in Sources */,
 				317D60F11DB0A38D0044D46B /* AbstractTableViewCell.swift in Sources */,
 				311D1F1D1DAE4C9500A7F545 /* NetworkExecutable.swift in Sources */,
+				31A252721E06E04B0090EFD8 /* TimeHelper.swift in Sources */,
 				310919981DAEA0790083A2C8 /* KeyRepresentable.swift in Sources */,
 				31CD44EA1DB161BF007A5E1C /* ProductDetailViewController.swift in Sources */,
 				310919751DAE823E0083A2C8 /* EmptyDTO.swift in Sources */,

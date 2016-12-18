@@ -156,10 +156,10 @@ extension MessagesViewController: UITableViewDelegate {
             let authorName = firstname + String.space + familyname
             msgDetail.senderId = String(author.identifier)
             msgDetail.senderDisplayName = authorName
-            msgDetail.orderId = mesg.lastMessage?.identifier
+            msgDetail.orderId = mesg.order?.identifier
         }
         else {
-            msgDetail.senderId = String.empty
+            msgDetail.senderId = "99"
             msgDetail.senderDisplayName = String.empty
         }
         navigationController?.pushViewController(msgDetail, animated: true)

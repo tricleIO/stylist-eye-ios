@@ -100,7 +100,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
             guard let id = id else {
                 break
             }
-            urlString = "/mapi/v1/\(id)"
+            urlString = "/mapi/v1/messages/\(id)"
         case .outfits:
             fallthrough
         case .outfitDetail:
