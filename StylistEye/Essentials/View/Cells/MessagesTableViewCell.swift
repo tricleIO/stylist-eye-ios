@@ -30,12 +30,12 @@ class MessagesTableViewCell: AbstractTableViewCell {
         }
     }
     
-    var time: String? {
+    var time: Date? {
         get {
-            return timeLabel.text
+            return TimeFormatsEnum.czDate.dateFromString(timeLabel.text)
         }
         set {
-            timeLabel.text = newValue
+            timeLabel.text = TimeFormatsEnum.czDate.stringFromDate(newValue)
         }
     }
 

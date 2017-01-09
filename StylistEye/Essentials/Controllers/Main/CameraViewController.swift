@@ -55,6 +55,9 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
 
         setQRCamera()
     }
+    
+    override func setupBackgroundImage() {
+    }
 
     override func setupConstraints() {
         super.setupConstraints()
@@ -71,6 +74,8 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         captureButton.snp.makeConstraints { make in
             make.centerX.equalTo(actionBox)
             make.centerY.equalTo(actionBox)
+            make.width.equalTo(45)
+            make.height.equalTo(45)
         }
     }
 

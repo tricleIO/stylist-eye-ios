@@ -21,6 +21,8 @@ class QuestionnaireViewController: AbstractViewController {
     ]
 
     fileprivate var tableView = TableView(style: .grouped)
+    
+    fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburger_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
 
     fileprivate let backgroundImageView = ImageView()
 
@@ -29,6 +31,8 @@ class QuestionnaireViewController: AbstractViewController {
         super.initializeElements()
 
         backgroundImageView.image = #imageLiteral(resourceName: "whiteBg_image")
+        
+        navigationItem.leftBarButtonItem = leftBarButton
 
         tableView.register(TableViewCellWithImage.self)
         tableView.delegate = self
@@ -74,13 +78,25 @@ class QuestionnaireViewController: AbstractViewController {
         title = StringContainer[.questionnaire]
         view.backgroundColor = Palette[basic: .white]
     }
+    
+    // MARK: - User Action
+    func settingsButtonTapped() {
+        openSettingsView()
+    }
+
+    // MARK: - Actions
+    fileprivate func openSettingsView() {
+        let navigationController = UINavigationController(rootViewController: SettingsViewController())
+        navigationController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
+        present(navigationController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - <UITableViewDataSource>
 extension QuestionnaireViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TableViewCellWithImage = tableView.dequeueReusableCell()
+        let cell: TableViewCellWithImage = tableView.dequeueReusableCell(forIndexPath: indexPath)
         let settingItem = QuestionnaireViewController.cellItem[safe: indexPath.row]
 
         cell.backgroundColor = Palette[basic: .clear]

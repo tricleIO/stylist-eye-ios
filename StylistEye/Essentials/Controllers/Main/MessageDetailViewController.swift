@@ -54,6 +54,8 @@ class MessageDetailViewController: JSQMessagesViewController {
                 break
             }
         }
+        
+        self.inputToolbar.contentView.leftBarButtonItem = nil
     }
     
     // MARK: - Actions

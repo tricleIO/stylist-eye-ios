@@ -13,6 +13,7 @@ struct GarmentTypeDTO: Mappable {
     var typeId: Int?
     var languageId: Languages?
     var name: String?
+    var icon: String?
 
     init?(map: Map) {
         var id: Int?
@@ -26,6 +27,7 @@ struct GarmentTypeDTO: Mappable {
     mutating func mapping(map: Map) {
         languageId <- (map["language"], EnumTransform<Languages>())
         name <- map["name"]
+        icon <- map["icon"]
     }
 }
 
@@ -36,13 +38,13 @@ protocol LanguageProtocol {
 extension LanguageProtocol where Self: RawRepresentable, Self.RawValue == String {
 }
 
-enum Languages: String, LanguageProtocol {
+enum Languages: Int, LanguageProtocol {
 
-    case czech = "cs"
-    case english = "en"
-    case unknown = "unknown"
+    case czech = 1
+    case english = 2
+    case unknown = 3
     
-    init(language: String) {
+    init(language: Int) {
         self = Languages(rawValue: language) ?? .english
     }
 }

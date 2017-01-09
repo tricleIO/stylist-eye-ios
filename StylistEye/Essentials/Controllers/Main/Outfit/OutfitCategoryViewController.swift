@@ -86,7 +86,7 @@ class OutfitCategoryViewController: AbstractViewController {
 extension OutfitCategoryViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TableViewCellWithImage = tableView.dequeueReusableCell()
+        let cell: TableViewCellWithImage = tableView.dequeueReusableCell(forIndexPath: indexPath)
         
         cell.backgroundColor = Palette[basic: .clear]
         cell.textLabel?.textColor = Palette[custom: .purple]

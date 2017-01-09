@@ -12,6 +12,13 @@ import UIKit
 class WardrobeFeedViewController: AbstractViewController {
 
     // MARK: - Properties
+    // MARK: > public
+    var garmentId: Int? {
+        didSet {
+            
+        }
+    }
+
     // MARK: > private
     fileprivate lazy var backButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "backArrow_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backButtonTapped))
 
@@ -114,7 +121,7 @@ class WardrobeFeedViewController: AbstractViewController {
 extension WardrobeFeedViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: OutfitTableViewCell = tableView.dequeueReusableCell()
+        let cell: OutfitTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
 
         cell.backgroundColor = Palette[basic: .clear]
         cell.stylistNameText = "Michal Severín"

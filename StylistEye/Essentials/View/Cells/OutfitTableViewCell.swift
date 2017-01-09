@@ -122,9 +122,9 @@ class OutfitTableViewCell: AbstractTableViewCell {
         }
 
         mainImageView.snp.makeConstraints { make in
-            make.leading.equalTo(coverView).inset(5)
-            make.trailing.equalTo(coverView).inset(5)
-            make.top.equalTo(coverView).inset(5)
+            make.leading.equalTo(coverView).inset(10)
+            make.trailing.equalTo(coverView).inset(10)
+            make.top.equalTo(coverView).inset(10)
             make.height.equalTo(200)
         }
 

@@ -26,6 +26,11 @@ protocol APIUrlManagerProtocol {
 enum APIUrlManager: APIUrlManagerProtocol {
 
     /**
+     GarmentType
+     */
+    case garmentType
+    
+    /**
      Login
      - Parameters:
         - userName: User name.
@@ -102,13 +107,15 @@ enum APIUrlManager: APIUrlManagerProtocol {
             }
             urlString = "/mapi/v1/messages/\(id)"
         case .outfits:
-            fallthrough
-        case .outfitDetail:
             urlString = "/mapi/v1/outfits/"
+        case let .outfitDetail(outfitId):
+            urlString = "/mapi/v1/outfits/\(outfitId)"
         case .stylistList:
             urlString = "/mapi/v1/stylists"
         case .outfitCategory:
             urlString = "/mapi/v1/lists/currentOutfitCat"
+        case .garmentType:
+            urlString = "/mapi/v1/lists/garmenttypes"
         }
 
         guard let url = URL(string: urlString, relativeTo: baseUrl) else {
@@ -165,6 +172,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             params["outfit_id"] = String(outfitId)
             params["expanded"] = "stylistDetails,photos,dressStyle,components"
             return params
+        case .garmentType:
+            return params
         }
     }
 
@@ -192,6 +201,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .messageDetail:
             fallthrough
         case .outfitCategory:
+            fallthrough
+        case .garmentType:
             return [:]
         }
     }
@@ -212,6 +223,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .stylistList:
             fallthrough
         case .messageDetail:
+            fallthrough
+        case .garmentType:
             fallthrough
         case .outfitCategory:
             return .get

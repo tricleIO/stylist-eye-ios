@@ -14,15 +14,23 @@ class WardrobeViewController: AbstractViewController {
     // MARK: > public
 
     // MARK: > private
-    internal static let cellItem: [CellItem] = [
-        CellItem(image: #imageLiteral(resourceName: "pants_image"), name: StringContainer[.pants], controller: WardrobeFeedViewController()),
-        CellItem(image: #imageLiteral(resourceName: "dress_image"), name: StringContainer[.dress], controller: WardrobeFeedViewController()),
-        CellItem(image: #imageLiteral(resourceName: "jacket_image"), name: StringContainer[.jacket], controller: WardrobeFeedViewController()),
-        CellItem(image: #imageLiteral(resourceName: "shoe_image"), name: StringContainer[.shoe], controller: WardrobeFeedViewController()),
-        CellItem(image: #imageLiteral(resourceName: "shirt_image"), name: StringContainer[.shirt], controller: WardrobeFeedViewController()),
-    ]
+//    internal static let cellItem: [CellItem] = [
+//        CellItem(image: #imageLiteral(resourceName: "pants_image"), name: StringContainer[.pants], controller: WardrobeFeedViewController()),
+//        CellItem(image: #imageLiteral(resourceName: "dress_image"), name: StringContainer[.dress], controller: WardrobeFeedViewController()),
+//        CellItem(image: #imageLiteral(resourceName: "jacket_image"), name: StringContainer[.jacket], controller: WardrobeFeedViewController()),
+//        CellItem(image: #imageLiteral(resourceName: "shoe_image"), name: StringContainer[.shoe], controller: WardrobeFeedViewController()),
+//        CellItem(image: #imageLiteral(resourceName: "shirt_image"), name: StringContainer[.shirt], controller: WardrobeFeedViewController()),
+//    ]
+    
+    fileprivate var garmentTypes: [GarmentTypeDTO] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     fileprivate var tableView = TableView(style: .grouped)
+    
+    fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburger_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
 
     fileprivate let backgroundImageView = ImageView()
 
@@ -31,17 +39,29 @@ class WardrobeViewController: AbstractViewController {
         super.initializeElements()
 
         backgroundImageView.image = #imageLiteral(resourceName: "whiteBg_image")
+        
+        navigationItem.leftBarButtonItem = leftBarButton
 
         tableView.register(TableViewCellWithImage.self)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = Palette[basic: .clear]
-        tableView.isScrollEnabled = false
         tableView.separatorColor =  Palette[custom: .purple]
         tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
 
         // TODO: @MS
         print(Keychains[.accessTokenKey])
+        
+        GarmentTypeCommand().executeCommand { data in
+            switch data {
+            case let .success(object: _, objectsArray: objects, apiResponse: _):
+                if let objects = objects {
+                    self.garmentTypes = objects.filter {$0.languageId == .czech}
+                }
+            case .failure:
+                break
+            }
+        }
     }
 
     internal override func addElements() {
@@ -69,14 +89,28 @@ class WardrobeViewController: AbstractViewController {
             make.bottom.equalTo(view)
         }
     }
-
-    override func customInit() {}
-
+    
+    override func customInit() {
+        
+    }
+ 
     internal override func setupView() {
         super.setupView()
 
         title = StringContainer[.wardrobe]
         view.backgroundColor = Palette[basic: .white]
+    }
+    
+    // MARK: - User Action
+    func settingsButtonTapped() {
+        openSettingsView()
+    }
+    
+    // MARK: - Actions
+    fileprivate func openSettingsView() {
+        let navigationController = UINavigationController(rootViewController: SettingsViewController())
+        navigationController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
+        present(navigationController, animated: true, completion: nil)
     }
 }
 
@@ -84,8 +118,7 @@ class WardrobeViewController: AbstractViewController {
 extension WardrobeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TableViewCellWithImage = tableView.dequeueReusableCell()
-        let settingItem = WardrobeViewController.cellItem[safe: indexPath.row]
+        let cell: TableViewCellWithImage = tableView.dequeueReusableCell(forIndexPath: indexPath)
 
         cell.backgroundColor = Palette[basic: .clear]
         cell.textLabel?.textColor = Palette[custom: .purple]
@@ -95,16 +128,15 @@ extension WardrobeViewController: UITableViewDataSource {
         cell.separatorInset = UIEdgeInsets.zero
         cell.selectionStyle = .gray
 
-        if indexPath.row < WardrobeViewController.cellItem.count {
-            cell.leftCellImage = settingItem?.image
-            cell.labelText = settingItem?.name
+        if let garmentType = garmentTypes[safe: indexPath.row] {
+            cell.labelText = garmentType.name
         }
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return WardrobeViewController.cellItem.count
+        return garmentTypes.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -122,9 +154,11 @@ extension WardrobeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let controller = WardrobeViewController.cellItem[indexPath.row].controller {
-            controller.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(controller, animated: true)
+        if let garmentType = garmentTypes[safe: indexPath.row] {
+            let vc = WardrobeFeedViewController()
+            vc.garmentId = garmentType.typeId
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

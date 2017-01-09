@@ -32,6 +32,10 @@ class OutfitDetailViewController: AbstractViewController {
     fileprivate var outfitTableData: OutfitDetailDTO? {
         didSet {
             stylistDefinition()
+            if let image = outfitTableData?.stylist?.photo?.image, let imageUrl = URL(string: image) {
+                stylistProfileImageView.kf.setImage(with: imageUrl)
+            }
+           
             tableView.reloadData()
         }
     }

@@ -59,6 +59,7 @@
 		3161C2BC1E01D2F6007DC0FB /* AddressDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3161C2BB1E01D2F6007DC0FB /* AddressDTO.swift */; };
 		3161C2BE1E01D474007DC0FB /* ComponentsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3161C2BD1E01D474007DC0FB /* ComponentsDTO.swift */; };
 		3163A7D41DBA32DC00D009BB /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163A7D31DBA32DC00D009BB /* Optional.swift */; };
+		316F69331E24160100EC0972 /* GarmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316F69321E24160100EC0972 /* GarmentType.swift */; };
 		3175F4E21E05614C001C89C6 /* OutfitCategoryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175F4E11E05614C001C89C6 /* OutfitCategoryDTO.swift */; };
 		3175F4E41E05621D001C89C6 /* OutfitCategoryCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175F4E31E05621D001C89C6 /* OutfitCategoryCommand.swift */; };
 		3175F4E61E05638D001C89C6 /* OutfitCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175F4E51E05638D001C89C6 /* OutfitCategoryViewController.swift */; };
@@ -192,6 +193,7 @@
 		3161C2BB1E01D2F6007DC0FB /* AddressDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressDTO.swift; sourceTree = "<group>"; };
 		3161C2BD1E01D474007DC0FB /* ComponentsDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsDTO.swift; sourceTree = "<group>"; };
 		3163A7D31DBA32DC00D009BB /* Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
+		316F69321E24160100EC0972 /* GarmentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarmentType.swift; sourceTree = "<group>"; };
 		3175F4E11E05614C001C89C6 /* OutfitCategoryDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCategoryDTO.swift; sourceTree = "<group>"; };
 		3175F4E31E05621D001C89C6 /* OutfitCategoryCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCategoryCommand.swift; sourceTree = "<group>"; };
 		3175F4E51E05638D001C89C6 /* OutfitCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCategoryViewController.swift; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 				31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */,
 				3175F4E31E05621D001C89C6 /* OutfitCategoryCommand.swift */,
 				31A2526F1E06C7980090EFD8 /* MessageDetail.swift */,
+				316F69321E24160100EC0972 /* GarmentType.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -817,7 +820,7 @@
 					31F5FB971DAE2BE300418D36 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = G7TAUN84TA;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -990,6 +993,7 @@
 				3197B6591DB236C30096EF16 /* MessagesTableViewCell.swift in Sources */,
 				310286A31DAFA4C7007EE87B /* UIViewController+SE.swift in Sources */,
 				3109197A1DAE850E0083A2C8 /* UserDTO.swift in Sources */,
+				316F69331E24160100EC0972 /* GarmentType.swift in Sources */,
 				31CD44EE1DB17338007A5E1C /* ProductInfo.swift in Sources */,
 				317D60F51DB0ADD60044D46B /* LanguagesViewController.swift in Sources */,
 				310919961DAEA0260083A2C8 /* UserDefaultKeys.swift in Sources */,
@@ -1206,19 +1210,19 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/StylistEye/Resources/Entilements/StylistEye.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = G7TAUN84TA;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/KVNProgress",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/StylistEye/Resources/Property lists/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ms.StylistEye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "423bcb2d-122e-471b-9e7d-b3eaae00a3ee";
-				PROVISIONING_PROFILE_SPECIFIER = "Stylist dev";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1234,19 +1238,19 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/StylistEye/Resources/Entilements/StylistEye.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = G7TAUN84TA;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/KVNProgress",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/StylistEye/Resources/Property lists/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ms.StylistEye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3dfc5cf4-9597-41e8-a3d1-d2bbfb30d49a";
-				PROVISIONING_PROFILE_SPECIFIER = "Stylist dev";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};

@@ -48,6 +48,7 @@ class QuestionnaireTableViewCell: AbstractTableViewCell {
         coverView.backgroundColor = Palette[basic: .white]
 
         mainImageView.contentMode = .scaleAspectFill
+        mainImageView.clipsToBounds = true
     }
 
     override func addElements() {
@@ -56,6 +57,11 @@ class QuestionnaireTableViewCell: AbstractTableViewCell {
         contentView.addSubviews(views:
             [
                 coverView,
+            ]
+        )
+        
+        coverView.addSubviews(views:
+            [
                 mainImageView,
                 descriptionLabel,
             ]
@@ -74,16 +80,15 @@ class QuestionnaireTableViewCell: AbstractTableViewCell {
 
         // TODO: @MS - insets
         descriptionLabel.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(10)
-            make.trailing.equalTo(contentView).inset(10)
+            make.leading.equalTo(coverView).inset(10)
+            make.trailing.equalTo(coverView).inset(10)
             make.top.equalTo(mainImageView.snp.bottom).offset(10)
-            make.bottom.equalTo(contentView)
         }
 
         mainImageView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(10)
-            make.trailing.equalTo(contentView).inset(10)
-            make.top.equalTo(mainImageView).inset(10)
+            make.leading.equalTo(coverView).inset(10)
+            make.trailing.equalTo(coverView).inset(10)
+            make.top.equalTo(coverView).inset(10)
             make.height.equalTo(220)
         }
     }

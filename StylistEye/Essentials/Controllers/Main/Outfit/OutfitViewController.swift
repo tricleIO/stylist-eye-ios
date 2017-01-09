@@ -31,6 +31,7 @@ class OutfitViewController: AbstractViewController {
 
     fileprivate let filterTableView = TableView(style: .grouped)
     fileprivate var filterBox: FilterBox?
+    fileprivate var lightPanel = View()
     
     fileprivate var tableView = TableView(style: .grouped)
 
@@ -51,11 +52,24 @@ class OutfitViewController: AbstractViewController {
     
     fileprivate let showFilterButton = Button(type: .system)
 
+    // MARK: TODO
     fileprivate var selectedFilterTitle: String? {
         didSet {
             guard let selectedFilterTitle = selectedFilterTitle else {
+                lightPanel.layer.borderWidth = 0
+                lightPanel.backgroundColor = Palette[basic: .white].withAlphaComponent(0)
+                showFilterButton.setTitle("Zobrazit", for: .normal)
+                showFilterButton.tintColor = Palette[custom: .title]
+                showFilterButton.removeTarget(self, action: #selector(resetFilterButtonTapped), for: .touchUpInside)
+                showFilterButton.addTarget(self, action: #selector(showFilterButtonTapped), for: .touchUpInside)
                 return
             }
+            lightPanel.layer.borderWidth = 1
+            lightPanel.backgroundColor = Palette[basic: .white].withAlphaComponent(0.1)
+            showFilterButton.setTitle("X", for: .normal)
+            showFilterButton.tintColor = Palette[custom: .title]
+            showFilterButton.removeTarget(self, action: #selector(showFilterButtonTapped), for: .touchUpInside)
+            showFilterButton.addTarget(self, action: #selector(resetFilterButtonTapped), for: .touchUpInside)
             filterNameLabel.text = selectedFilterTitle
         }
     }
@@ -76,23 +90,27 @@ class OutfitViewController: AbstractViewController {
 
         filterBox = FilterBox(tableView: filterTableView)
         filterBox?.isHidden = true
+        
 
         tableView.register(OutfitTableViewCell.self)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = Palette[basic: .clear]
         tableView.separatorColor =  Palette[basic: .clear]
-        tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: -30, left: 0, bottom: 0, right: 0)
 
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarbutton
+        
+        lightPanel.backgroundColor = Palette[basic: .white].withAlphaComponent(0)
+        lightPanel.layer.borderColor = Palette[custom: .title].cgColor
+        lightPanel.layer.borderWidth = 0
         
         // TODO: @MS
         showFilterButton.setTitle("Zobrazit", for: .normal)
         showFilterButton.tintColor = Palette[custom: .title]
         showFilterButton.addTarget(self, action: #selector(showFilterButtonTapped), for: .touchUpInside)
         
-        filterNameLabel.text = "Společenské šaty"
         filterNameLabel.textColor = Palette[custom: .appColor]
     }
 
@@ -102,9 +120,14 @@ class OutfitViewController: AbstractViewController {
         view.addSubviews(views:
             [
                 backgroundImageView,
+                tableView,
+                lightPanel,
+            ]
+        )
+        
+        lightPanel.addSubviews(views: [
                 filterNameLabel,
                 showFilterButton,
-                tableView,
             ]
         )
         
@@ -117,17 +140,17 @@ class OutfitViewController: AbstractViewController {
         super.setupConstraints()
 
         filterNameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(view).inset(10)
-            make.top.equalTo(view).inset(10)
+            make.leading.equalTo(lightPanel).inset(10)
+            make.top.equalTo(lightPanel).inset(10)
             make.height.equalTo(30)
             make.width.equalTo(150)
         }
         
         showFilterButton.snp.makeConstraints { make in
-            make.trailing.equalTo(view).inset(10)
+            make.trailing.equalTo(lightPanel).inset(10)
             make.width.equalTo(60)
             make.height.equalTo(30)
-            make.top.equalTo(view).inset(10)
+            make.top.equalTo(lightPanel).inset(10)
         }
         
         backgroundImageView.snp.makeConstraints { make in
@@ -146,6 +169,13 @@ class OutfitViewController: AbstractViewController {
             make.trailing.equalTo(view).inset(20)
             make.height.equalTo(78)
             make.top.equalTo(showFilterButton.snp.bottom).offset(5)
+        }
+        
+        lightPanel.snp.makeConstraints { make in
+            make.leading.equalTo(view).inset(-1)
+            make.top.equalTo(view).inset(10)
+            make.height.equalTo(50)
+            make.trailing.equalTo(view).inset(-1)
         }
     }
 
@@ -176,8 +206,20 @@ class OutfitViewController: AbstractViewController {
     func showFilterButtonTapped() {
         openFilter()
     }
+    
+    func resetFilterButtonTapped() {
+        resetFilter()
+    }
 
     // MARK: - Actions
+    fileprivate func resetFilter() {
+        selectedFilterTitle = nil
+        filterNameLabel.text = nil
+        stylistId = nil
+        categoryId = nil
+        loadOutfits()
+    }
+
     fileprivate func openFilter() {
         if let filterBox = self.filterBox {
             filterBox.isHidden = !filterBox.isHidden
@@ -236,7 +278,7 @@ extension OutfitViewController: UITableViewDataSource {
             return cell
         }
 
-        let cell: OutfitTableViewCell = tableView.dequeueReusableCell()
+        let cell: OutfitTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
 
         if let outfit = outfits?[safe: indexPath.row] {
             cell.backgroundColor = Palette[basic: .clear]

@@ -48,7 +48,7 @@ class QuestionnaireDetailViewController: AbstractViewController {
             [
                 mainImageview,
                 tableView,
-                photoBox,
+//                photoBox,
             ]
         )
     }
@@ -60,15 +60,15 @@ class QuestionnaireDetailViewController: AbstractViewController {
             make.edges.equalTo(view)
         }
 
-        photoBox.snp.makeConstraints { make in
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.top.equalTo(view)
-            make.height.equalTo(85)
-        }
+//        photoBox.snp.makeConstraints { make in
+//            make.leading.equalTo(view)
+//            make.trailing.equalTo(view)
+//            make.top.equalTo(view)
+//            make.height.equalTo(85)
+//        }
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(photoBox.snp.bottom)
+            make.top.equalTo(view)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
             make.bottom.equalTo(view)
@@ -92,7 +92,7 @@ class QuestionnaireDetailViewController: AbstractViewController {
 extension QuestionnaireDetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: QuestionnaireTableViewCell = tableView.dequeueReusableCell()
+        let cell: QuestionnaireTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
 
         cell.backgroundColor = Palette[basic: .clear]
         cell.mainImage = #imageLiteral(resourceName: "placeholder")
@@ -111,7 +111,7 @@ extension QuestionnaireDetailViewController: UITableViewDataSource {
 
     @objc(tableView:heightForRowAtIndexPath:)
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(GUIConfiguration.OutfitCellHeight)
+        return GUIConfiguration.OutfitCellHeight
     }
 }
 
