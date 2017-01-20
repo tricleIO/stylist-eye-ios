@@ -72,8 +72,8 @@ class QuestionnaireTableViewCell: AbstractTableViewCell {
         super.setupConstraints()
 
         coverView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(5)
-            make.trailing.equalTo(contentView).inset(5)
+            make.leading.equalTo(contentView).inset(10)
+            make.trailing.equalTo(contentView).inset(10)
             make.top.equalTo(contentView).inset(5)
             make.bottom.equalTo(contentView).inset(5)
         }

@@ -11,6 +11,7 @@ import ObjectMapper
 struct StylistDTO: Mappable {
     
     var stylistId: Int?
+    var rating: Int?
     var givenName: String?
     var familyName: String?
     var photo: PhotosDTO?
@@ -28,5 +29,6 @@ struct StylistDTO: Mappable {
         givenName <- map["givenName"]
         familyName <- map["familyName"]
         photo <- map["photo"]
+        rating <- map["rating"]
     }
 }

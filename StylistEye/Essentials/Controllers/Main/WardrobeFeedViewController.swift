@@ -18,6 +18,12 @@ class WardrobeFeedViewController: AbstractViewController {
             
         }
     }
+    
+    var categoryName: String? {
+        didSet {
+            navigationItem.title = categoryName
+        }
+    }
 
     // MARK: > private
     fileprivate lazy var backButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "backArrow_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backButtonTapped))
@@ -94,7 +100,6 @@ class WardrobeFeedViewController: AbstractViewController {
     internal override func setupView() {
         super.setupView()
 
-        title = StringContainer[.outfit]
         view.backgroundColor = Palette[basic: .white]
     }
 

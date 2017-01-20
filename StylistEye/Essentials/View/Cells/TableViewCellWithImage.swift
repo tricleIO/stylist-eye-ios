@@ -61,15 +61,15 @@ class TableViewCellWithImage: AbstractTableViewCell {
 
         customTextLabel.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
-            make.leading.equalTo(leftImageView.snp.trailing).offset(5)
+            make.leading.equalTo(leftImageView.snp.trailing).offset(10)
             make.trailing.equalTo(contentView).inset(15)
         }
 
         leftImageView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView)
+            make.leading.equalTo(contentView).inset(5)
             make.centerY.equalTo(contentView)
-            make.width.equalTo(40)
-            make.height.equalTo(35)
+            make.width.equalTo(18)
+            make.height.equalTo(18)
         }
     }
 }

@@ -29,9 +29,10 @@ class WardrobeViewController: AbstractViewController {
     }
 
     fileprivate var tableView = TableView(style: .grouped)
-    
-    fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburger_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
+    fileprivate lazy var rightBarbutton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "message_icon"), style: .plain, target: self, action: #selector(messagesButtonTapped))
 
+    fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburger_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
+    fileprivate let messagesController = MessagesViewController()
     fileprivate let backgroundImageView = ImageView()
 
     // MARK: - <Initializable>
@@ -48,6 +49,8 @@ class WardrobeViewController: AbstractViewController {
         tableView.backgroundColor = Palette[basic: .clear]
         tableView.separatorColor =  Palette[custom: .purple]
         tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
+        
+        navigationItem.rightBarButtonItem = rightBarbutton
 
         // TODO: @MS
         print(Keychains[.accessTokenKey])
@@ -106,11 +109,21 @@ class WardrobeViewController: AbstractViewController {
         openSettingsView()
     }
     
+    func messagesButtonTapped() {
+        openMessagesView()
+    }
+    
     // MARK: - Actions
     fileprivate func openSettingsView() {
         let navigationController = UINavigationController(rootViewController: SettingsViewController())
         navigationController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
         present(navigationController, animated: true, completion: nil)
+    }
+    
+    fileprivate func openMessagesView() {
+        messagesController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(messagesController, animated: true)
+        
     }
 }
 
@@ -156,6 +169,7 @@ extension WardrobeViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if let garmentType = garmentTypes[safe: indexPath.row] {
             let vc = WardrobeFeedViewController()
+            vc.categoryName = garmentType.name
             vc.garmentId = garmentType.typeId
             vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)

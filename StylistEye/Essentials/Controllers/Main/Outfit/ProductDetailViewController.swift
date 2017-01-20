@@ -25,7 +25,6 @@ class ProductDetailViewController: AbstractViewController {
     }
 
     // MARK: < private
-    fileprivate let productNameLabel = Label()
     fileprivate let productDescriptionLabel = Label()
 
     fileprivate let footerView = View()
@@ -56,9 +55,6 @@ class ProductDetailViewController: AbstractViewController {
         productDescriptionLabel.font = SystemFont[.litleDescription]
         productDescriptionLabel.numberOfLines = 0
 
-        productNameLabel.textColor = Palette[custom: .appColor]
-        productNameLabel.font = SystemFont[.description]
-
         mainImageview.image = #imageLiteral(resourceName: "placeholder")
 
         footerView.backgroundColor = Palette[custom: .purple]
@@ -71,7 +67,6 @@ class ProductDetailViewController: AbstractViewController {
             [
                 mainImageview,
                 productDescriptionLabel,
-                productNameLabel,
                 footerView,
             ]
         )
@@ -95,12 +90,6 @@ class ProductDetailViewController: AbstractViewController {
             make.leading.equalTo(view).inset(10)
             make.trailing.equalTo(view).inset(10)
             make.bottom.equalTo(view).inset(60)
-        }
-
-        productNameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(view).inset(10)
-            make.trailing.equalTo(view).inset(10)
-            make.bottom.equalTo(productDescriptionLabel.snp.top)
         }
 
         footerView.snp.makeConstraints { make in
@@ -142,7 +131,6 @@ class ProductDetailViewController: AbstractViewController {
 
     // MARK: - Actions
     fileprivate func reloadProductInformation(productInfo: ProductInfo) {
-        productNameLabel.text = productInfo.name
         productDescriptionLabel.text = productInfo.infoText
     }
 

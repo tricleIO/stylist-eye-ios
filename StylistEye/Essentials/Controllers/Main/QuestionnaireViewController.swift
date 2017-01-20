@@ -19,11 +19,13 @@ class QuestionnaireViewController: AbstractViewController {
         CellItem(image: #imageLiteral(resourceName: "shoe_image"), name: StringContainer[.shoe], controller: QuestionnaireDetailViewController()),
         CellItem(image: #imageLiteral(resourceName: "earings_image"), name: StringContainer[.earings], controller: QuestionnaireDetailViewController()),
     ]
+    
+    fileprivate lazy var rightBarbutton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "message_icon"), style: .plain, target: self, action: #selector(messagesButtonTapped))
 
     fileprivate var tableView = TableView(style: .grouped)
     
     fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburger_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
-
+    fileprivate let messagesController = MessagesViewController()
     fileprivate let backgroundImageView = ImageView()
 
     // MARK: - <Initializable>
@@ -42,6 +44,7 @@ class QuestionnaireViewController: AbstractViewController {
         tableView.separatorColor =  Palette[custom: .purple]
         tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
 
+        navigationItem.rightBarButtonItem = rightBarbutton
     }
 
     internal override func addElements() {
@@ -83,12 +86,22 @@ class QuestionnaireViewController: AbstractViewController {
     func settingsButtonTapped() {
         openSettingsView()
     }
-
+    
+    func messagesButtonTapped() {
+        openMessagesView()
+    }
+    
     // MARK: - Actions
     fileprivate func openSettingsView() {
         let navigationController = UINavigationController(rootViewController: SettingsViewController())
         navigationController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
         present(navigationController, animated: true, completion: nil)
+    }
+
+    fileprivate func openMessagesView() {
+        messagesController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(messagesController, animated: true)
+        
     }
 }
 
@@ -134,9 +147,9 @@ extension QuestionnaireViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let controller = QuestionnaireViewController.cellItem[indexPath.row].controller {
-            controller.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(controller, animated: true)
-        }
+        let controller = QuestionnaireDetailViewController()
+        controller.questName = QuestionnaireViewController.cellItem[indexPath.row].name
+        controller.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

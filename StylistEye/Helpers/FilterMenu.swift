@@ -37,9 +37,9 @@ enum FilterMenu: FilterProtocol {
     var image: UIImage {
         switch self {
         case .outfitsCategory:
-            fallthrough
+            return #imageLiteral(resourceName: "panel")
         case .stylists:
-            return UIImage()
+            return #imageLiteral(resourceName: "profileImage")
         }
     }
     

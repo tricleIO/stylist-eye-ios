@@ -13,6 +13,13 @@ import UIKit
 class QuestionnaireDetailViewController: AbstractViewController {
 
     // MARK: - Properties
+    // MARK: < public
+    var questName: String? {
+        didSet {
+            navigationItem.title = questName
+        }
+    }
+    
     // MARK: < private
     fileprivate lazy var backButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "backArrow_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backButtonTapped))
 

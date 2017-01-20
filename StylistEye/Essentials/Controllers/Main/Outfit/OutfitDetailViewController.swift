@@ -10,6 +10,50 @@ import KVNProgress
 import SnapKit
 import UIKit
 
+class RatingView: View {
+    
+    // MARK: - Properties
+    var rating: Int? {
+        didSet {
+            guard let rating = rating, rating <= 5 else {
+                return
+            }
+            var firstStartImageView: ImageView?
+            var cycle: Int = 0
+            for _ in 0 ..< 5 {
+                cycle += 1
+                let starImageView: ImageView
+                if cycle <= rating {
+                    starImageView = ImageView(image: #imageLiteral(resourceName: "fullStar"))
+                }
+                else {
+                    starImageView = ImageView(image: #imageLiteral(resourceName: "emptyStar"))
+                }
+                starImageView.contentMode = .scaleAspectFit
+                addSubview(starImageView)
+                if let firstStartImageView = firstStartImageView {
+                    starImageView.snp.makeConstraints { make in
+                        make.leading.equalTo(firstStartImageView.snp.trailing).offset(5)
+                        make.height.equalTo(15)
+                        make.width.equalTo(15)
+                        make.top.equalTo(self)
+                    }
+                }
+                else {
+                    starImageView.snp.makeConstraints { make in
+                        make.leading.equalTo(self)
+                        make.height.equalTo(15)
+                        make.width.equalTo(15)
+                        make.top.equalTo(self)
+                    }
+                }
+                firstStartImageView = starImageView
+            }
+        }
+    }
+}
+
+
 class OutfitDetailViewController: AbstractViewController {
 
     // MARK: - Properties
@@ -35,18 +79,21 @@ class OutfitDetailViewController: AbstractViewController {
             if let image = outfitTableData?.stylist?.photo?.image, let imageUrl = URL(string: image) {
                 stylistProfileImageView.kf.setImage(with: imageUrl)
             }
-           
+            ratingView.rating = 3
+            outfitDescriptionLabel.text = outfitTableData?.comment
+            dressStyleLabel.text = outfitTableData?.dressStyle?.name
             tableView.reloadData()
         }
     }
 
-    fileprivate let stylistInfoBox = View()
+    fileprivate let stylistInfoBox = View(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 180))
 
     fileprivate let stylistProfileImageView = ImageView()
 
+    fileprivate let ratingView = RatingView()
+    
     fileprivate let stylistNameLabel = Label()
     fileprivate let stylistDescriptionLabel = Label()
-    fileprivate let outfitNameLabel = Label()
     fileprivate let dressStyleLabel = Label()
     fileprivate let outfitDescriptionLabel = Label()
 
@@ -59,6 +106,8 @@ class OutfitDetailViewController: AbstractViewController {
         tableView.delegate = self
         tableView.separatorColor = Palette[basic: .clear]
         tableView.backgroundColor = Palette[basic: .clear]
+        tableView.tableHeaderView = stylistInfoBox
+        tableView.sectionHeaderHeight = 180
 
         navigationItem.leftBarButtonItem = backButton
 
@@ -85,13 +134,17 @@ class OutfitDetailViewController: AbstractViewController {
                 productDescriptionLabel,
                 productNameLabel,
                 tableView,
-                stylistInfoBox,
+            ]
+        )
+        
+        stylistInfoBox.addSubviews(views:
+            [
                 stylistProfileImageView,
                 stylistNameLabel,
                 stylistDescriptionLabel,
-                outfitNameLabel,
                 outfitDescriptionLabel,
                 dressStyleLabel,
+                ratingView,
             ]
         )
     }
@@ -114,16 +167,9 @@ class OutfitDetailViewController: AbstractViewController {
             make.trailing.equalTo(view).inset(10)
             make.bottom.equalTo(productDescriptionLabel.snp.top)
         }
-
-        stylistInfoBox.snp.makeConstraints { make in
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.height.equalTo(180)
-            make.top.equalTo(view)
-        }
-
+    
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(stylistInfoBox.snp.bottom)
+            make.top.equalTo(view)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
             make.bottom.equalTo(view)
@@ -150,25 +196,25 @@ class OutfitDetailViewController: AbstractViewController {
             make.top.equalTo(stylistNameLabel.snp.bottom).offset(5)
         }
 
-        outfitNameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
-            make.trailing.equalTo(stylistInfoBox).inset(5)
-            make.height.equalTo(20)
-            make.top.equalTo(stylistDescriptionLabel.snp.bottom).offset(5)
-        }
-
         dressStyleLabel.snp.makeConstraints { make in
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
             make.height.equalTo(20)
-            make.top.equalTo(outfitNameLabel.snp.bottom).offset(5)
+            make.top.equalTo(outfitDescriptionLabel.snp.bottom).offset(5)
+        }
+        
+        ratingView.snp.makeConstraints { make in
+            make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
+            make.trailing.equalTo(stylistInfoBox).inset(5)
+            make.height.equalTo(30)
+            make.top.equalTo(stylistDescriptionLabel.snp.bottom).offset(5)
         }
 
         outfitDescriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
             make.height.equalTo(20)
-            make.top.equalTo(dressStyleLabel.snp.bottom).offset(5)
+            make.top.equalTo(ratingView.snp.bottom).offset(5)
         }
 
     }
@@ -227,9 +273,6 @@ class OutfitDetailViewController: AbstractViewController {
 
         stylistDescriptionLabel.font = SystemFont[.description]
         stylistDescriptionLabel.textColor = Palette[custom: .appColor]
-
-        outfitNameLabel.text = "Outfit name"
-        outfitNameLabel.textColor = Palette[custom: .appColor]
 
         dressStyleLabel.text = outfitTableData?.dressStyle?.name
         dressStyleLabel.textColor = Palette[custom: .appColor]

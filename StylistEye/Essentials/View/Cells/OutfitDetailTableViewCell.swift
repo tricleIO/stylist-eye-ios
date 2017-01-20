@@ -35,6 +35,8 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
 
     // MARK: > private
     fileprivate let mainImageView = ImageView()
+    fileprivate let zoomImageView = ImageView(image: #imageLiteral(resourceName: "zoom"))
+    
     fileprivate let coverView = View()
 
     fileprivate let customTextLabel = Label()
@@ -49,6 +51,7 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
         customTextLabel.font = SystemFont[.title]
 
         mainImageView.contentMode = .scaleAspectFit
+        zoomImageView.contentMode = .scaleAspectFit
     }
 
     override func addElements() {
@@ -58,6 +61,7 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
             [
                 coverView,
                 customTextLabel,
+                zoomImageView,
             ]
         )
 
@@ -67,9 +71,16 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
     override func setupConstraints() {
         super.setupConstraints()
 
+        zoomImageView.snp.makeConstraints { make in
+            make.trailing.equalTo(coverView).inset(10)
+            make.top.equalTo(coverView).inset(10)
+            make.width.equalTo(30)
+            make.height.equalTo(30)
+        }
+        
         coverView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(5)
-            make.trailing.equalTo(contentView).inset(5)
+            make.leading.equalTo(contentView).inset(10)
+            make.trailing.equalTo(contentView).inset(10)
             make.top.equalTo(customTextLabel.snp.bottom).offset(15)
             make.height.equalTo(200)
             make.bottom.equalTo(contentView).inset(5)
@@ -83,10 +94,10 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
         }
 
         mainImageView.snp.makeConstraints { make in
-            make.leading.equalTo(coverView).inset(5)
-            make.top.equalTo(coverView).inset(5)
-            make.bottom.equalTo(coverView).inset(5)
-            make.trailing.equalTo(coverView).inset(5)
+            make.leading.equalTo(coverView).inset(10)
+            make.top.equalTo(coverView).inset(10)
+            make.bottom.equalTo(coverView).inset(10)
+            make.trailing.equalTo(coverView).inset(10)
         }
     }
 }

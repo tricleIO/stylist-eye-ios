@@ -62,7 +62,7 @@ class OutfitTableViewCell: AbstractTableViewCell {
 
     fileprivate let coverView = View()
 
-    fileprivate let zoomButton = Button(type: .system)
+    fileprivate let zoomButton = ImageView(image: #imageLiteral(resourceName: "zoom"))
 
     fileprivate let descriptionLabel = Label()
     fileprivate let stylistNameLabel = Label()
@@ -90,10 +90,11 @@ class OutfitTableViewCell: AbstractTableViewCell {
         descriptionLabel.font = SystemFont[.litleDescription]
         descriptionLabel.numberOfLines = 0
 
-        zoomButton.setImage(#imageLiteral(resourceName: "placeholder"), for: .normal)
-        zoomButton.addTarget(self, action: #selector(zoomButtonTapped), for: .touchUpInside)
+        zoomButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(zoomButtonTapped)))
+        zoomButton.isUserInteractionEnabled = true
         zoomButton.layer.cornerRadius = 15
         zoomButton.clipsToBounds = true
+        zoomButton.contentMode = .scaleAspectFit
     }
 
     internal override func addElements() {
@@ -115,8 +116,8 @@ class OutfitTableViewCell: AbstractTableViewCell {
         super.setupConstraints()
 
         coverView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(5)
-            make.trailing.equalTo(contentView).inset(5)
+            make.leading.equalTo(contentView).inset(10)
+            make.trailing.equalTo(contentView).inset(10)
             make.top.equalTo(contentView).inset(5)
             make.bottom.equalTo(contentView).inset(5)
         }
