@@ -13,5 +13,6 @@ struct OutfitsCommand: NetworkExecutable {
 
     init(stylistId: String? = nil, dressstyle: String? = nil) {
         urlManager = .outfits(stylistId: stylistId, dressstyle: dressstyle)
+        
     }
 }

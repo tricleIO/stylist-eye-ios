@@ -126,9 +126,11 @@ extension MessagesViewController: UITableViewDataSource {
         if let message = messagesDTO[safe: indexPath.row] {
             cell.messageText = message.lastMessage?.content
             cell.time = message.lastMessage?.timestamp
+            cell.isRead = message.lastMessage?.read
             if let firstname = message.lastMessage?.author?.givenName, let secondname = message.lastMessage?.author?.familyName {
                 cell.senderName = firstname + String.space + secondname
             }
+            cell.isSystemMessage = message.lastMessage?.systemOriginate
         }
 
         return cell
@@ -152,6 +154,24 @@ extension MessagesViewController: UITableViewDataSource {
 extension MessagesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let msgDetail = MessageDetailViewController()
+        if let msgId = messagesDTO[safe: indexPath.row]?.lastMessage?.identifier, let isSelectedMessageRead = messagesDTO[safe: indexPath.row]?.lastMessage?.read, !isSelectedMessageRead {
+            self.messagesDTO[indexPath.row].lastMessage?.read = true
+            UpdateMessageStatusCommand(msgId: msgId).executeCommand(completion: { response in
+                switch response {
+                case let .success(object: _, objectsArray: _, apiResponse: apiResponse):
+                    switch apiResponse {
+                    case .ok:
+                        fallthrough
+                    case .fail:
+                        break // TODO
+                    }
+                case let .failure(message: errorMessage, apiResponse: _):
+                    break // TODO
+                }
+            })
+        }
+        print(messagesDTO[safe: indexPath.row]?.lastMessage?.systemOriginate)
+        msgDetail.isSystem = messagesDTO[safe: indexPath.row]?.lastMessage?.systemOriginate
         if let mesg = messagesDTO[safe: indexPath.row], let author = mesg.lastMessage?.author, let firstname = author.givenName, let familyname = author.familyName {
             let authorName = firstname + String.space + familyname
             msgDetail.senderId = String(author.identifier)

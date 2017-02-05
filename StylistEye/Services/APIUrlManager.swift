@@ -52,6 +52,14 @@ enum APIUrlManager: APIUrlManagerProtocol {
     Messages
      */
     case messages
+    case updateMessagesStatus(
+        msgId: Int
+    )
+    case newMessage(
+        thread: Int,
+        content: String,
+        orderId: Int
+    )
     case messageDetail(
         orderId: Int?
     )
@@ -100,7 +108,11 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .logout:
             urlString = "/mapi/v1/user/logout"
         case .messages:
-            urlString = "/mapi/v1/messages"
+            fallthrough
+        case .updateMessagesStatus:
+            urlString = "/mapi/v1/messages/"
+        case let .newMessage(_, _, orderId):
+            urlString = "/mapi/v1/messages/\(orderId)"
         case let .messageDetail(id):
             guard let id = id else {
                 break
@@ -146,6 +158,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return nil
         case .outfitCategory:
             fallthrough
+        case .updateMessagesStatus:
+            fallthrough
+        case .newMessage:
+            return params
         case .logout:
             fallthrough
         case .messages:
@@ -188,6 +204,22 @@ enum APIUrlManager: APIUrlManagerProtocol {
                 "email": "\(email)",
                 "password": "\(password)",
             ]
+        case let .updateMessagesStatus(
+                msgId
+            ):
+            return [
+                "message": "\(msgId)",
+                "read": "true",
+            ]
+        case let .newMessage(
+                thread,
+                content,
+                _
+            ):
+            return [
+                "thread": "\(thread)",
+                "content": content,
+            ]
         case .logout:
             fallthrough
         case .messages:
@@ -228,6 +260,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
             fallthrough
         case .outfitCategory:
             return .get
+        case .updateMessagesStatus:
+            return .put
+        case .newMessage:
+            return .post
         }
     }
 }

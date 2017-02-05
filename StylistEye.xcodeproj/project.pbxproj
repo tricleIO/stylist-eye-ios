@@ -44,6 +44,7 @@
 		311D1F1A1DAE4C7F00A7F545 /* APIUrlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */; };
 		311D1F1D1DAE4C9500A7F545 /* NetworkExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */; };
 		311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D1F1E1DAE4E4500A7F545 /* LoginViewController.swift */; };
+		312F04A81E47722700252D22 /* SendMessageCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312F04A71E47722700252D22 /* SendMessageCommand.swift */; };
 		31400F071DB53E0600A088A0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400F061DB53E0600A088A0 /* AboutViewController.swift */; };
 		31400F091DB53E1700A088A0 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400F081DB53E1700A088A0 /* NoteViewController.swift */; };
 		31400F0B1DB53E2A00A088A0 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400F0A1DB53E2A00A088A0 /* PrivacyViewController.swift */; };
@@ -88,6 +89,7 @@
 		31818E731DB00BAC004883D2 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31818E721DB00BAC004883D2 /* Label.swift */; };
 		318901E01DBBBA020027566A /* CurrentLanguageChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318901DF1DBBBA020027566A /* CurrentLanguageChecker.swift */; };
 		31897D951DAF6B8D00BFFED0 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31897D941DAF6B8D00BFFED0 /* Launch Screen.storyboard */; };
+		318FD7731E472A16008EEA23 /* UpdateMessageStatusCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FD7721E472A16008EEA23 /* UpdateMessageStatusCommand.swift */; };
 		3197B6591DB236C30096EF16 /* MessagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B6581DB236C30096EF16 /* MessagesTableViewCell.swift */; };
 		3197B65B1DB23B7E0096EF16 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B65A1DB23B7E0096EF16 /* MessagesViewController.swift */; };
 		3197B65D1DB288250096EF16 /* WardrobeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B65C1DB288250096EF16 /* WardrobeFeedViewController.swift */; };
@@ -178,6 +180,7 @@
 		311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUrlManager.swift; sourceTree = "<group>"; };
 		311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExecutable.swift; sourceTree = "<group>"; };
 		311D1F1E1DAE4E4500A7F545 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		312F04A71E47722700252D22 /* SendMessageCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageCommand.swift; sourceTree = "<group>"; };
 		31400F061DB53E0600A088A0 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		31400F081DB53E1700A088A0 /* NoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		31400F0A1DB53E2A00A088A0 /* PrivacyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +229,7 @@
 		31818E721DB00BAC004883D2 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		318901DF1DBBBA020027566A /* CurrentLanguageChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLanguageChecker.swift; sourceTree = "<group>"; };
 		31897D941DAF6B8D00BFFED0 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		318FD7721E472A16008EEA23 /* UpdateMessageStatusCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateMessageStatusCommand.swift; sourceTree = "<group>"; };
 		3197B6581DB236C30096EF16 /* MessagesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTableViewCell.swift; sourceTree = "<group>"; };
 		3197B65A1DB23B7E0096EF16 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		3197B65C1DB288250096EF16 /* WardrobeFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeFeedViewController.swift; sourceTree = "<group>"; };
@@ -576,6 +580,8 @@
 				3175F4E31E05621D001C89C6 /* OutfitCategoryCommand.swift */,
 				31A2526F1E06C7980090EFD8 /* MessageDetail.swift */,
 				316F69321E24160100EC0972 /* GarmentType.swift */,
+				318FD7721E472A16008EEA23 /* UpdateMessageStatusCommand.swift */,
+				312F04A71E47722700252D22 /* SendMessageCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -979,6 +985,7 @@
 				310919941DAE9FF60083A2C8 /* Typealiases.swift in Sources */,
 				31508DD11DB3D0F700D26F53 /* CaptureImageViewController.swift in Sources */,
 				31A252701E06C7980090EFD8 /* MessageDetail.swift in Sources */,
+				312F04A81E47722700252D22 /* SendMessageCommand.swift in Sources */,
 				3175F4E21E05614C001C89C6 /* OutfitCategoryDTO.swift in Sources */,
 				31FC670E1DB3BEF700ECC5A7 /* ScrollView.swift in Sources */,
 				31F5FB9C1DAE2BE300418D36 /* AppDelegate.swift in Sources */,
@@ -1009,6 +1016,7 @@
 				317D60F31DB0A4230044D46B /* TableViewCellWithImage.swift in Sources */,
 				31CD44E81DB14CD8007A5E1C /* View.swift in Sources */,
 				31818E551DAFF10E004883D2 /* Reusable.swift in Sources */,
+				318FD7731E472A16008EEA23 /* UpdateMessageStatusCommand.swift in Sources */,
 				3197B65D1DB288250096EF16 /* WardrobeFeedViewController.swift in Sources */,
 				31818E531DAFF0D5004883D2 /* UITableView+SE.swift in Sources */,
 				31582A281DBCC370009D7139 /* FilterMenu.swift in Sources */,

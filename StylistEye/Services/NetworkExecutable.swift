@@ -43,6 +43,9 @@ extension NetworkExecutable {
                     self.loginWithExpireToken()
                 }
                 else {
+                    print(value.result)
+                    print(value)
+                    print(response.response?.statusCode)
                     completion(.success(object: value.objects, objectsArray: value.objectsArray, apiResponse: ApiResponse(code: value.result ?? 0)))
                 }
             case .failure:

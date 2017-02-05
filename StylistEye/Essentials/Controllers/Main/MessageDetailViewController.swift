@@ -15,6 +15,7 @@ class MessageDetailViewController: JSQMessagesViewController {
     // MARK: - Properties
     // MARK: > public
     var orderId: Int?
+    var isSystem: Bool?
     
     // MARK: > private
     lazy var outgoingBubbleImageView: JSQMessagesBubbleImage = self.setupOutgoingBubble()
@@ -55,7 +56,13 @@ class MessageDetailViewController: JSQMessagesViewController {
             }
         }
         
-        self.inputToolbar.contentView.leftBarButtonItem = nil
+        if let isSystem = isSystem, inputToolbar != nil {
+            inputToolbar.contentView.leftBarButtonItem = nil
+            inputToolbar.isHidden = isSystem
+            
+            if isSystem {
+            }
+        }
     }
     
     // MARK: - Actions
@@ -109,5 +116,28 @@ extension MessageDetailViewController {
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         return nil
+    }
+    
+    override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
+        guard let threadId = dtoMessages?.order?.identifier, let orderId = dtoMessages?.order?.identifier else {
+            return
+        }
+        var newMessage: MyMessagesDTO?
+        SendMessageCommand(thread: threadId, content: text, orderId: orderId).executeCommand { response in
+            switch response {
+            case let .success(object: message, objectsArray: _, apiResponse: apiResponse):
+                switch apiResponse {
+                case .ok:
+                    newMessage = message
+                    if let newMsg = message {
+                        self.dtoMessages?.messages.append(newMsg)
+                    }
+                case .fail:
+                    break
+                }
+            case .failure:
+                break
+            }
+        }
     }
 }

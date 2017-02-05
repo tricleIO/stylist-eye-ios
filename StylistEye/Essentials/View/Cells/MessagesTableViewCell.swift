@@ -21,14 +21,7 @@ class MessagesTableViewCell: AbstractTableViewCell {
         }
     }
 
-    var senderName: String? {
-        get {
-            return nameLabel.text
-        }
-        set {
-            nameLabel.text = newValue
-        }
-    }
+    var senderName: String?
     
     var time: Date? {
         get {
@@ -36,6 +29,21 @@ class MessagesTableViewCell: AbstractTableViewCell {
         }
         set {
             timeLabel.text = TimeFormatsEnum.czDate.stringFromDate(newValue)
+        }
+    }
+    
+    var isRead: Bool? {
+        didSet {
+            notificationImageView.isHidden = isRead ?? false
+        }
+    }
+    
+    var isSystemMessage: Bool? {
+        didSet {
+            guard let isSystemMsg = isSystemMessage else {
+                return
+            }
+            nameLabel.text = isSystemMsg ? "StylistEye" : senderName
         }
     }
 
