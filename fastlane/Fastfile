@@ -5,55 +5,77 @@ default_platform :ios
 platform :ios do
 
 
-  lane :beta do
-	fabric(scheme: "StylistEye",type:"internal")
+  lane :beta do |values|
+    # Fabric generated this lane for deployment to Crashlytics Beta
+    # set 'export_method' to 'ad-hoc' if your Crashlytics Beta distribution uses ad-hoc provisioning
+    gym(scheme: 'StylistEye', export_method: 'ad-hoc')
+
+    emails = values[:test_email] ? values[:test_email] : ['martin.stachon@tricle.io'] # You can list more emails here
+    groups = values[:test_email] ? nil : ['Tricle'] # You can define groups on the web and reference them here
+
+    crashlytics(api_token: 'c6851fbad59df66d027293ebb9cbceb2ef2f14d8',
+             build_secret: 'edbcbb6c790cda1d367c2c6cc0d97830ce10eb70bf9651a7f18879c7a45730c9',
+                   emails: emails,
+                   groups: groups,
+                    notes: 'Distributed with fastlane', # Check out the changelog_from_git_commits action
+            notifications: true) # Should this distribution notify your testers via email?
+
+    # for all available options run `fastlane action crashlytics`
+
+    # You can notify your team in chat that a beta build has been uploaded
+    # slack(
+    #   slack_url: "https://hooks.slack.com/services/YOUR/TEAM/INFO"
+    #   channel: "beta-releases",
+    #   message: "Successfully uploaded a beta release - see it at https://fabric.io/_/beta"
+    # )
   end
 
-  private_lane :fabric do |options|
-    scheme = options[:scheme]
-    ENV["RELEASE_TYPE"] = options[:type]
-    release = options[:type]
-	build = Actions.lane_context[Actions::SharedValues::BUILD_NUMBER]
-    
-    cert
+  # private_lane :fabric do |options|
+  #   scheme = options[:scheme]
+  #   ENV["RELEASE_TYPE"] = options[:type]
+  #   release = options[:type]
+	# build = Actions.lane_context[Actions::SharedValues::BUILD_NUMBER]
+  #
+  #   cert
+  #
+  #   sigh(
+  #     skip_install: true,
+  #     adhoc: true
+  #   )
+  #
+  #   gym(
+  # 	workspace: "StylistEye.xcworkspace",
+  # 	configuration: "Release",
+  # 	scheme: scheme,
+	# use_legacy_build_api: true,
+  # 	silent: true,
+  # 	clean: true,
+ # 	output_name: "StylistEye.ipa",
+  # 	output_directory:"./products/#{build}/",       # specify the name of the .ipa file to generate (including file extension)
+  #   )
+  #   crashlytics(
+  #     api_token: '73233866dacc590edbd0c2dbabfa2276d7d2c287',
+  #     build_secret: 'd64f459bbf77d03307fe8e09db9050dcd14552cfc58dd685152eb05416c825fa',
+  #     emails: ['xmichal.severin@gmail.com'],
+  #     notes: 'Distributed with fastlane’,
+  #     notifications: true
+  #   )
+  #   slack(
+  #    slack_url: "https://hooks.slack.com/services/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”,
+  #    channel: "general",
+  #    message: "Successfully uploaded a beta release - see it at https://fabric.io/_/beta”,
+  #   )
+  # end
 
-    sigh(
-      skip_install: true,
-      adhoc: true
-    )
 
-    gym(
-  	workspace: "StylistEye.xcworkspace",
-  	configuration: "Release",
-  	scheme: scheme,
-	use_legacy_build_api: true,
-  	silent: true,
-  	clean: true,
- 	output_name: "StylistEye.ipa",
-  	output_directory:"./products/#{build}/",       # specify the name of the .ipa file to generate (including file extension)
-    )
-    crashlytics(
-      api_token: '73233866dacc590edbd0c2dbabfa2276d7d2c287',
-      build_secret: 'd64f459bbf77d03307fe8e09db9050dcd14552cfc58dd685152eb05416c825fa',
-      emails: ['xmichal.severin@gmail.com'],
-      notes: 'Distributed with fastlane’,
-      notifications: true
-    )
-    slack(
-     slack_url: "https://hooks.slack.com/services/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”,
-     channel: "general",
-     message: "Successfully uploaded a beta release - see it at https://fabric.io/_/beta”,
-    )
-  end 
-
-  after_all do
-    scan(
-      workspace: "StylistEye.xcworkspace”,
-      scheme: "StylistEye”,
-      clean: true,
-      device: "iPhone SE”,
-      slack_url: "https://hooks.slack.com/services/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”,
-      slack_channel: "general”,
-    )
-  end 
+  #after_all do
+  #  scan(
+  #    workspace: "StylistEye.xcworkspace”,
+  #    scheme: "StylistEye”,
+  #    clean: true,
+  #    device: "iPhone SE”,
+  #    slack_url: "https://hooks.slack.com/services/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”,
+  #    slack_channel: "general”,
+  #  )
+  #end
 end

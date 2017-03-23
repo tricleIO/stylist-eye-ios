@@ -89,20 +89,20 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
     }
 
     func torchButtonTapped() {
-        fireUpTorch()
+        fireUpFlash()
     }
 
     // MARK: - Actions
-    fileprivate func fireUpTorch() {
+    fileprivate func fireUpFlash() {
         if let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo) {
-            if (device.hasTorch) {
+            if (device.hasFlash) {
                 do {
                     try device.lockForConfiguration()
-                    if device.torchMode == AVCaptureTorchMode.on {
-                        device.torchMode = AVCaptureTorchMode.off
+                    if device.flashMode == .on {
+                        device.flashMode = .off
                     }
                     else {
-                        try device.setTorchModeOnWithLevel(1.0)
+                        device.flashMode = .on
                     }
                     device.unlockForConfiguration()
                 }
@@ -143,10 +143,10 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         catch {
             // TODO: @MS
         }
-
+      
         videoPreviewLayer.session = captureSession
         videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         videoPreviewLayer.frame = view.layer.bounds
-        view.layer.addSublayer(videoPreviewLayer)
+        backgroundImage.layer.addSublayer(videoPreviewLayer)
     }
 }
