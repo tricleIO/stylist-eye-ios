@@ -143,6 +143,9 @@ extension WardrobeViewController: UITableViewDataSource {
 
         if let garmentType = garmentTypes[safe: indexPath.row] {
             cell.labelText = garmentType.name
+            if let iconUrl = garmentType.icon {
+                cell.leftImageSetFrom(url: URL(string: iconUrl))
+            }
         }
 
         return cell

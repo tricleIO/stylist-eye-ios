@@ -72,4 +72,13 @@ class TableViewCellWithImage: AbstractTableViewCell {
             make.height.equalTo(18)
         }
     }
+  
+    func leftImageSetFrom(url: URL?) {
+        leftImageView.kf.setImage(with: url)
+    }
+    
+    override func prepareForReuse() {
+        leftImageView.kf.cancelDownloadTask()
+        leftImageView.image = nil
+    }
 }
