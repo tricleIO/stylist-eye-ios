@@ -110,7 +110,6 @@
 		31E05E211DAF50BB007AE913 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E05E201DAF50BB007AE913 /* ImageView.swift */; };
 		31E05E231DAF5227007AE913 /* UINavigationBar+SE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E05E221DAF5227007AE913 /* UINavigationBar+SE.swift */; };
 		31E05E271DAF5512007AE913 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E05E261DAF5512007AE913 /* UIFont.swift */; };
-		31E05E291DAF55A6007AE913 /* KVNProgress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E05E281DAF55A6007AE913 /* KVNProgress.framework */; };
 		31E30E9D1DAECD5E007F4A5A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E30E9C1DAECD5E007F4A5A /* Button.swift */; };
 		31F5FB9C1DAE2BE300418D36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5FB9B1DAE2BE300418D36 /* AppDelegate.swift */; };
 		31F5FBB41DAE2BE300418D36 /* StylistEyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5FBB31DAE2BE300418D36 /* StylistEyeTests.swift */; };
@@ -249,7 +248,6 @@
 		31E05E221DAF5227007AE913 /* UINavigationBar+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+SE.swift"; sourceTree = "<group>"; };
 		31E05E241DAF53CB007AE913 /* StylistEye.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StylistEye.entitlements; sourceTree = "<group>"; };
 		31E05E261DAF5512007AE913 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
-		31E05E281DAF55A6007AE913 /* KVNProgress.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KVNProgress.framework; path = "Pods/../build/Debug-iphoneos/KVNProgress/KVNProgress.framework"; sourceTree = "<group>"; };
 		31E30E9C1DAECD5E007F4A5A /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		31F5FB981DAE2BE300418D36 /* StylistEye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StylistEye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31F5FB9B1DAE2BE300418D36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -277,7 +275,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31E05E291DAF55A6007AE913 /* KVNProgress.framework in Frameworks */,
 				0CBFBEEBBA70B08AB0AAB582 /* Pods_StylistEye.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,7 +308,6 @@
 		2FCE7EF81D47C8B374200615 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				31E05E281DAF55A6007AE913 /* KVNProgress.framework */,
 				B11FB7410EB3E97B7902E759 /* Pods_StylistEye.framework */,
 			);
 			name = Frameworks;
