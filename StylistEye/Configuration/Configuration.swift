@@ -28,7 +28,7 @@ struct GUIConfiguration {
     /// Height for default cell.
     static let CellHeight: CGFloat = 65.0
     /// Height for outfit cell.
-    static let OutfitCellHeight: CGFloat = 350.0
+    static let OutfitCellHeight: CGFloat = 700.0
     /// Default animation duration.
     static let DefaultAnimationDuration: Double = 0.3
 }

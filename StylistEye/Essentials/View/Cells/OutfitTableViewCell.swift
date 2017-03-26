@@ -126,7 +126,7 @@ class OutfitTableViewCell: AbstractTableViewCell {
             make.leading.equalTo(coverView).inset(10)
             make.trailing.equalTo(coverView).inset(10)
             make.top.equalTo(coverView).inset(10)
-            make.height.equalTo(200)
+            make.height.equalTo(550)
         }
 
         stylistProfileImageView.snp.makeConstraints { make in
@@ -158,6 +158,12 @@ class OutfitTableViewCell: AbstractTableViewCell {
         }
     }
 
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    mainImageView.kf.cancelDownloadTask()
+  }
+  
     // MARK: - User Action
     func zoomButtonTapped() {
         zoomButtonCallback?()
