@@ -287,7 +287,11 @@ extension OutfitViewController: UITableViewDataSource {
             }
             cell.descriptionText = outfit.outfitComment
             cell.selectionStyle = .none
-            cell.mainImageString = outfit.photos?.first?.image
+            if let outfitImage = outfit.photos?.first?.image {
+                cell.mainImageString = outfitImage
+            } else {
+                cell.mosaicImages = outfit.components?.flatMap({$0.photo?.image})
+            }
             cell.stylistImageString = outfit.stylist?.photo?.image
         }
 

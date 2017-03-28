@@ -147,7 +147,7 @@
 		3102869E1DAFA41A007EE87B /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = ../Main/MainTabBarController.swift; sourceTree = "<group>"; };
 		310286A01DAFA49B007EE87B /* AbstractTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTabBarViewController.swift; sourceTree = "<group>"; };
 		310286A21DAFA4C7007EE87B /* UIViewController+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SE.swift"; sourceTree = "<group>"; };
-		310286A51DAFA54A007EE87B /* OutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
+		310286A51DAFA54A007EE87B /* OutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		310286A71DAFA569007EE87B /* QuestionnaireViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionnaireViewController.swift; sourceTree = "<group>"; };
 		310286A91DAFA574007EE87B /* WardrobeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = WardrobeViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		310286AC1DAFA716007EE87B /* Main.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Main.strings; sourceTree = "<group>"; };
@@ -241,7 +241,7 @@
 		31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistCommand.swift; sourceTree = "<group>"; };
 		31C8BB361E04822600D8CBD0 /* StylistListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListViewController.swift; sourceTree = "<group>"; };
 		31C8BB381E04848100D8CBD0 /* StylistListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListTableViewCell.swift; sourceTree = "<group>"; };
-		31CD44E51DB14AF8007A5E1C /* OutfitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitTableViewCell.swift; sourceTree = "<group>"; };
+		31CD44E51DB14AF8007A5E1C /* OutfitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = OutfitTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		31CD44E71DB14CD8007A5E1C /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		31CD44E91DB161BF007A5E1C /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		31CD44EB1DB161D9007A5E1C /* GradientImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientImageView.swift; sourceTree = "<group>"; };
