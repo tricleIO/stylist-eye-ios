@@ -100,4 +100,10 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
             make.trailing.equalTo(coverView).inset(10)
         }
     }
+  
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        mainImageView.kf.cancelDownloadTask()
+    }
 }

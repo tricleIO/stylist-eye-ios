@@ -58,7 +58,7 @@
 		3161C2BC1E01D2F6007DC0FB /* AddressDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3161C2BB1E01D2F6007DC0FB /* AddressDTO.swift */; };
 		3161C2BE1E01D474007DC0FB /* ComponentsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3161C2BD1E01D474007DC0FB /* ComponentsDTO.swift */; };
 		3163A7D41DBA32DC00D009BB /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163A7D31DBA32DC00D009BB /* Optional.swift */; };
-		316F69331E24160100EC0972 /* GarmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316F69321E24160100EC0972 /* GarmentType.swift */; };
+		316F69331E24160100EC0972 /* GarmentTypeCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316F69321E24160100EC0972 /* GarmentTypeCommand.swift */; };
 		3175F4E21E05614C001C89C6 /* OutfitCategoryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175F4E11E05614C001C89C6 /* OutfitCategoryDTO.swift */; };
 		3175F4E41E05621D001C89C6 /* OutfitCategoryCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175F4E31E05621D001C89C6 /* OutfitCategoryCommand.swift */; };
 		3175F4E61E05638D001C89C6 /* OutfitCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175F4E51E05638D001C89C6 /* OutfitCategoryViewController.swift */; };
@@ -93,7 +93,7 @@
 		3197B65D1DB288250096EF16 /* WardrobeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B65C1DB288250096EF16 /* WardrobeFeedViewController.swift */; };
 		3197B65F1DB28DA20096EF16 /* MessagesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B65E1DB28DA20096EF16 /* MessagesDTO.swift */; };
 		3197B6611DB28E4C0096EF16 /* MessagesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197B6601DB28E4C0096EF16 /* MessagesCommand.swift */; };
-		31A252701E06C7980090EFD8 /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2526F1E06C7980090EFD8 /* MessageDetail.swift */; };
+		31A252701E06C7980090EFD8 /* MessageDetailCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2526F1E06C7980090EFD8 /* MessageDetailCommand.swift */; };
 		31A252721E06E04B0090EFD8 /* TimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A252711E06E04B0090EFD8 /* TimeHelper.swift */; };
 		31A252741E06E0EB0090EFD8 /* DatetimeTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A252731E06E0EB0090EFD8 /* DatetimeTransform.swift */; };
 		31B9F3601DB17C740049F08E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B9F35F1DB17C740049F08E /* Array.swift */; };
@@ -121,6 +121,9 @@
 		31FC670C1DB3BEB300ECC5A7 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FC670B1DB3BEB300ECC5A7 /* MessageDetailViewController.swift */; };
 		31FC670E1DB3BEF700ECC5A7 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FC670D1DB3BEF700ECC5A7 /* ScrollView.swift */; };
 		31FE19431DB7DFE30087D095 /* GarmentTypeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FE19421DB7DFE30087D095 /* GarmentTypeDTO.swift */; };
+		A8F746571E8533E200FEDCD9 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F746561E8533E200FEDCD9 /* Languages.swift */; };
+		A8F746591E85340500FEDCD9 /* DressStyleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F746581E85340500FEDCD9 /* DressStyleDTO.swift */; };
+		A8F7465B1E8534CF00FEDCD9 /* DressStyleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F7465A1E8534CF00FEDCD9 /* DressStyleCommand.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,7 +175,7 @@
 		311D1F111DAE4AE900A7F545 /* Initializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Initializable.swift; path = "../Public protocols/Initializable.swift"; sourceTree = "<group>"; };
 		311D1F131DAE4B3000A7F545 /* AbstractViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractViewController.swift; sourceTree = "<group>"; };
 		311D1F161DAE4B4B00A7F545 /* UIView+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SE.swift"; sourceTree = "<group>"; };
-		311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUrlManager.swift; sourceTree = "<group>"; };
+		311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = APIUrlManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExecutable.swift; sourceTree = "<group>"; };
 		311D1F1E1DAE4E4500A7F545 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		312F04A71E47722700252D22 /* SendMessageCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageCommand.swift; sourceTree = "<group>"; };
@@ -191,10 +194,10 @@
 		3161C2BB1E01D2F6007DC0FB /* AddressDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressDTO.swift; sourceTree = "<group>"; };
 		3161C2BD1E01D474007DC0FB /* ComponentsDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsDTO.swift; sourceTree = "<group>"; };
 		3163A7D31DBA32DC00D009BB /* Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
-		316F69321E24160100EC0972 /* GarmentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarmentType.swift; sourceTree = "<group>"; };
+		316F69321E24160100EC0972 /* GarmentTypeCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarmentTypeCommand.swift; sourceTree = "<group>"; };
 		3175F4E11E05614C001C89C6 /* OutfitCategoryDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCategoryDTO.swift; sourceTree = "<group>"; };
 		3175F4E31E05621D001C89C6 /* OutfitCategoryCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCategoryCommand.swift; sourceTree = "<group>"; };
-		3175F4E51E05638D001C89C6 /* OutfitCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCategoryViewController.swift; sourceTree = "<group>"; };
+		3175F4E51E05638D001C89C6 /* OutfitCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = OutfitCategoryViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		317D60F01DB0A38D0044D46B /* AbstractTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewCell.swift; sourceTree = "<group>"; };
 		317D60F21DB0A4230044D46B /* TableViewCellWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellWithImage.swift; sourceTree = "<group>"; tabWidth = 4; };
 		317D60F41DB0ADD50044D46B /* LanguagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagesViewController.swift; sourceTree = "<group>"; };
@@ -230,7 +233,7 @@
 		3197B65C1DB288250096EF16 /* WardrobeFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeFeedViewController.swift; sourceTree = "<group>"; };
 		3197B65E1DB28DA20096EF16 /* MessagesDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesDTO.swift; sourceTree = "<group>"; };
 		3197B6601DB28E4C0096EF16 /* MessagesCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCommand.swift; sourceTree = "<group>"; };
-		31A2526F1E06C7980090EFD8 /* MessageDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetail.swift; sourceTree = "<group>"; };
+		31A2526F1E06C7980090EFD8 /* MessageDetailCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailCommand.swift; sourceTree = "<group>"; };
 		31A252711E06E04B0090EFD8 /* TimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeHelper.swift; sourceTree = "<group>"; };
 		31A252731E06E0EB0090EFD8 /* DatetimeTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatetimeTransform.swift; sourceTree = "<group>"; };
 		31B9F35F1DB17C740049F08E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -261,10 +264,13 @@
 		31FC67031DB3821E00ECC5A7 /* OutfitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailViewController.swift; sourceTree = "<group>"; };
 		31FC67051DB38D5300ECC5A7 /* OutfitDetailDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailDTO.swift; sourceTree = "<group>"; };
 		31FC67071DB38F1D00ECC5A7 /* OutfitDetailCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailCommand.swift; sourceTree = "<group>"; };
-		31FC67091DB3AB6C00ECC5A7 /* OutfitDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailTableViewCell.swift; sourceTree = "<group>"; };
+		31FC67091DB3AB6C00ECC5A7 /* OutfitDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		31FC670B1DB3BEB300ECC5A7 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
 		31FC670D1DB3BEF700ECC5A7 /* ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollView.swift; path = ../Cells/ScrollView.swift; sourceTree = "<group>"; };
 		31FE19421DB7DFE30087D095 /* GarmentTypeDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarmentTypeDTO.swift; sourceTree = "<group>"; };
+		A8F746561E8533E200FEDCD9 /* Languages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
+		A8F746581E85340500FEDCD9 /* DressStyleDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressStyleDTO.swift; sourceTree = "<group>"; };
+		A8F7465A1E8534CF00FEDCD9 /* DressStyleCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressStyleCommand.swift; sourceTree = "<group>"; };
 		B11FB7410EB3E97B7902E759 /* Pods_StylistEye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StylistEye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3CA3A0A26CA10F0E2AD5B3D /* Pods-StylistEye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylistEye.release.xcconfig"; path = "Pods/Target Support Files/Pods-StylistEye/Pods-StylistEye.release.xcconfig"; sourceTree = "<group>"; };
 		C8E134B3C3EF262318421358 /* Pods-StylistEye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylistEye.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StylistEye/Pods-StylistEye.debug.xcconfig"; sourceTree = "<group>"; };
@@ -331,6 +337,8 @@
 				3161C2BD1E01D474007DC0FB /* ComponentsDTO.swift */,
 				31C8BB311E04808B00D8CBD0 /* StylistListDTO.swift */,
 				3175F4E11E05614C001C89C6 /* OutfitCategoryDTO.swift */,
+				A8F746561E8533E200FEDCD9 /* Languages.swift */,
+				A8F746581E85340500FEDCD9 /* DressStyleDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -566,10 +574,11 @@
 				31FC67071DB38F1D00ECC5A7 /* OutfitDetailCommand.swift */,
 				31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */,
 				3175F4E31E05621D001C89C6 /* OutfitCategoryCommand.swift */,
-				31A2526F1E06C7980090EFD8 /* MessageDetail.swift */,
-				316F69321E24160100EC0972 /* GarmentType.swift */,
+				31A2526F1E06C7980090EFD8 /* MessageDetailCommand.swift */,
+				316F69321E24160100EC0972 /* GarmentTypeCommand.swift */,
 				318FD7721E472A16008EEA23 /* UpdateMessageStatusCommand.swift */,
 				312F04A71E47722700252D22 /* SendMessageCommand.swift */,
+				A8F7465A1E8534CF00FEDCD9 /* DressStyleCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -972,8 +981,9 @@
 				310919901DAE9D830083A2C8 /* AccountSessionManager.swift in Sources */,
 				311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */,
 				310919941DAE9FF60083A2C8 /* Typealiases.swift in Sources */,
+				A8F746591E85340500FEDCD9 /* DressStyleDTO.swift in Sources */,
 				31508DD11DB3D0F700D26F53 /* CaptureImageViewController.swift in Sources */,
-				31A252701E06C7980090EFD8 /* MessageDetail.swift in Sources */,
+				31A252701E06C7980090EFD8 /* MessageDetailCommand.swift in Sources */,
 				312F04A81E47722700252D22 /* SendMessageCommand.swift in Sources */,
 				3175F4E21E05614C001C89C6 /* OutfitCategoryDTO.swift in Sources */,
 				31FC670E1DB3BEF700ECC5A7 /* ScrollView.swift in Sources */,
@@ -989,7 +999,7 @@
 				3197B6591DB236C30096EF16 /* MessagesTableViewCell.swift in Sources */,
 				310286A31DAFA4C7007EE87B /* UIViewController+SE.swift in Sources */,
 				3109197A1DAE850E0083A2C8 /* UserDTO.swift in Sources */,
-				316F69331E24160100EC0972 /* GarmentType.swift in Sources */,
+				316F69331E24160100EC0972 /* GarmentTypeCommand.swift in Sources */,
 				31CD44EE1DB17338007A5E1C /* ProductInfo.swift in Sources */,
 				317D60F51DB0ADD60044D46B /* LanguagesViewController.swift in Sources */,
 				310919961DAEA0260083A2C8 /* UserDefaultKeys.swift in Sources */,
@@ -1019,6 +1029,7 @@
 				3197B65F1DB28DA20096EF16 /* MessagesDTO.swift in Sources */,
 				310286A61DAFA54A007EE87B /* OutfitViewController.swift in Sources */,
 				31818E4F1DAFEBF7004883D2 /* SettingsViewController.swift in Sources */,
+				A8F746571E8533E200FEDCD9 /* Languages.swift in Sources */,
 				310286A11DAFA49B007EE87B /* AbstractTabBarViewController.swift in Sources */,
 				31FC670A1DB3AB6C00ECC5A7 /* OutfitDetailTableViewCell.swift in Sources */,
 				31400F091DB53E1700A088A0 /* NoteViewController.swift in Sources */,
@@ -1033,6 +1044,7 @@
 				31CD44E61DB14AF8007A5E1C /* OutfitTableViewCell.swift in Sources */,
 				31818E511DAFF003004883D2 /* TableView.swift in Sources */,
 				3163A7D41DBA32DC00D009BB /* Optional.swift in Sources */,
+				A8F7465B1E8534CF00FEDCD9 /* DressStyleCommand.swift in Sources */,
 				31818E731DB00BAC004883D2 /* Label.swift in Sources */,
 				31400F0D1DB53F2800A088A0 /* QuestionnaireDetailViewController.swift in Sources */,
 				3161C2B81E01D267007DC0FB /* PhotosDTO.swift in Sources */,

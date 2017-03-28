@@ -42,7 +42,7 @@ class OutfitViewController: AbstractViewController {
     fileprivate var outfits: [OutfitsDTO]? {
         didSet {
             stylistId = nil
-            categoryId = nil
+            styleId = nil
             tableView.reloadData()
             filterTableView.reloadData()
         }
@@ -76,7 +76,7 @@ class OutfitViewController: AbstractViewController {
     
     // MARK: > properties for command
     fileprivate var stylistId: String?
-    fileprivate var categoryId: String?
+    fileprivate var styleId: String?
     
     // MARK: - <Initializable>
     internal override func initializeElements() {
@@ -216,7 +216,7 @@ class OutfitViewController: AbstractViewController {
         selectedFilterTitle = nil
         filterNameLabel.text = nil
         stylistId = nil
-        categoryId = nil
+        styleId = nil
         loadOutfits()
     }
 
@@ -244,7 +244,7 @@ class OutfitViewController: AbstractViewController {
 
     fileprivate func loadOutfits() {
         KVNProgress.show()
-        OutfitsCommand(stylistId: stylistId, dressstyle: categoryId).executeCommand { data in
+        OutfitsCommand(stylistId: stylistId, dressstyle: styleId).executeCommand { data in
             switch data {
             case let .success(_, objectsArray: data, apiResponse: apiResponse):
                 // TODO: @MS
@@ -332,9 +332,9 @@ extension OutfitViewController: UITableViewDelegate {
                 navigationController?.pushViewController(stylistList, animated: true)
             case .outfitCategory:
                 let outfitCategory = OutfitCategoryViewController()
-                outfitCategory.callback = { categoryId, selectedFilterTitle in
+                outfitCategory.callback = { styleId, selectedFilterTitle in
                     self.selectedFilterTitle = selectedFilterTitle
-                    self.categoryId = categoryId
+                    self.styleId = styleId
                     self.loadOutfits()
                 }
                 openFilter()

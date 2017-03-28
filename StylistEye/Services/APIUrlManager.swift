@@ -95,6 +95,11 @@ enum APIUrlManager: APIUrlManagerProtocol {
      */
     case stylistList
     
+    /**
+     Dress styles
+     */
+    case dressStyle
+    
     /// Url path.
     var url: String? {
         var baseUrl: URL? {
@@ -128,6 +133,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             urlString = "/mapi/v1/lists/currentOutfitCat"
         case .garmentType:
             urlString = "/mapi/v1/lists/garmenttypes"
+        case .dressStyle:
+            urlString = "/mapi/v1/lists/dressstyles"
         }
 
         guard let url = URL(string: urlString, relativeTo: baseUrl) else {
@@ -190,6 +197,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return params
         case .garmentType:
             return params
+        case .dressStyle:
+            return params
         }
     }
 
@@ -235,6 +244,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .outfitCategory:
             fallthrough
         case .garmentType:
+            fallthrough
+        case .dressStyle:
             return [:]
         }
     }
@@ -264,6 +275,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return .put
         case .newMessage:
             return .post
+        case .dressStyle:
+            return .get
         }
     }
 }

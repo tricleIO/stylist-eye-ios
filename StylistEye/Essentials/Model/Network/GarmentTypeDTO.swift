@@ -30,21 +30,3 @@ struct GarmentTypeDTO: Mappable {
         icon <- map["icon"]
     }
 }
-
-
-protocol LanguageProtocol {
-}
-
-extension LanguageProtocol where Self: RawRepresentable, Self.RawValue == String {
-}
-
-enum Languages: Int, LanguageProtocol {
-
-    case czech = 1
-    case english = 2
-    case unknown = 3
-    
-    init(language: Int) {
-        self = Languages(rawValue: language) ?? .english
-    }
-}

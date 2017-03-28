@@ -18,5 +18,7 @@ extension UserDefaults {
 
         /// User name info.
         case userProfileInfo
+        /// Selected language
+        
     }
 }

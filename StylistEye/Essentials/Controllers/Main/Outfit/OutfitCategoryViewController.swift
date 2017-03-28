@@ -12,12 +12,12 @@ class OutfitCategoryViewController: AbstractViewController {
     
     // MARK: - Properties
     // MARK: > public
-    var callback: ((_ categoryId: String?, _ selectedFilterTitle: String?) -> Swift.Void)?
+    var callback: ((_ styleId: String?, _ selectedFilterTitle: String?) -> Swift.Void)?
     
     // MARK: > private
     fileprivate var tableView = TableView(style: .grouped)
     
-    fileprivate var categories: [OutfitCategoryDTO]? = [] {
+    fileprivate var categories: [DressStyleDTO]? = [] {
         didSet {
             tableView.reloadData()
         }
@@ -62,11 +62,12 @@ class OutfitCategoryViewController: AbstractViewController {
     
     internal override func loadData() {
         super.loadData()
-        
-        OutfitCategoryCommand().executeCommand { data in
+      
+        DressStyleTypeCommand().executeCommand { data in
             switch data {
             case let .success(data):
-                self.categories = data.objectsArray
+                // TODO: select language
+                self.categories = data.objectsArray?.filter {$0.languageId == Languages.czech}
             case .failure:
                 break
             }
@@ -126,7 +127,7 @@ extension OutfitCategoryViewController: UITableViewDelegate {
             if let name = category.name {
                 selectedFilterTitle = name
             }
-            callback?(category.categoryId, selectedFilterTitle)
+            callback?(category.styleId, selectedFilterTitle)
             navigationController?.popViewController(animated: true)
         }
     }
