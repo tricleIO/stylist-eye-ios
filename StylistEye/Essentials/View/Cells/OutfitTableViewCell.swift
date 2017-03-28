@@ -60,6 +60,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         didSet {
             if let mosaicImages = mosaicImages {
                 imageMosaicContainer.isHidden = false
+                imageMosaicCollectionView.reloadData()
             }
         }
     }
