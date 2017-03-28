@@ -9,7 +9,7 @@
 import Kingfisher
 import UIKit
 
-class OutfitDetailTableViewCell: AbstractTableViewCell {
+class OutfitDetailTableViewCell: AbstractTableViewCell, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     // MARK: - Properties
     // MARK: > public
@@ -32,9 +32,22 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
             customTextLabel.text = newValue
         }
     }
+    
+    var mosaicImages: [String]? {
+        didSet {
+            if let mosaicImages = mosaicImages {
+                imageMosaicContainer.isHidden = false
+                imageMosaicCollectionView.reloadData()
+            }
+        }
+    }
 
     // MARK: > private
     fileprivate let mainImageView = ImageView()
+    
+    fileprivate let imageMosaicContainer = View()
+    fileprivate var imageMosaicCollectionView: UICollectionView!
+    
     fileprivate let zoomImageView = ImageView(image: #imageLiteral(resourceName: "zoom"))
     
     fileprivate let coverView = View()
@@ -45,6 +58,22 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
     override func initializeElements() {
         super.initializeElements()
 
+        imageMosaicContainer.isHidden = true
+        let collectionLayout = UICollectionViewFlowLayout()
+        collectionLayout.minimumLineSpacing = 0
+        collectionLayout.minimumInteritemSpacing = 0
+        collectionLayout.scrollDirection = .horizontal
+        
+        // TODO: https://cocoapods.org/pods/ADMozaicCollectionViewLayout
+        imageMosaicCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionLayout)
+        imageMosaicCollectionView.collectionViewLayout = collectionLayout
+        imageMosaicCollectionView.isScrollEnabled = false
+        imageMosaicCollectionView.dataSource = self
+        imageMosaicCollectionView.delegate = self
+        imageMosaicCollectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
+        imageMosaicCollectionView.backgroundColor = UIColor.white
+        imageMosaicCollectionView.isUserInteractionEnabled = false
+        
         coverView.backgroundColor = Palette[basic: .white]
 
         customTextLabel.textColor = Palette[custom: .appColor]
@@ -66,6 +95,9 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
         )
 
         coverView.addSubview(mainImageView)
+        coverView.addSubview(imageMosaicContainer)
+        
+        imageMosaicContainer.addSubview(imageMosaicCollectionView)
     }
 
     override func setupConstraints() {
@@ -99,11 +131,86 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
             make.bottom.equalTo(coverView).inset(10)
             make.trailing.equalTo(coverView).inset(10)
         }
+        
+        imageMosaicContainer.snp.makeConstraints { make in
+            make.leading.equalTo(mainImageView)
+            make.trailing.equalTo(mainImageView)
+            make.top.equalTo(mainImageView)
+            make.bottom.equalTo(mainImageView)
+        }
+        
+        imageMosaicCollectionView.snp.makeConstraints { make in
+            make.leading.equalTo(imageMosaicContainer)
+            make.trailing.equalTo(imageMosaicContainer)
+            make.top.equalTo(imageMosaicContainer)
+            make.bottom.equalTo(imageMosaicContainer)
+        }
     }
   
     override func prepareForReuse() {
         super.prepareForReuse()
         
         mainImageView.kf.cancelDownloadTask()
+        imageMosaicContainer.isHidden = true
+        mosaicImages = nil
     }
+    
+    // MARK: - UICollectionViewDataSource
+    
+    class ImageCell: UICollectionViewCell {
+        
+        var imageView: UIImageView!
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            contentView.addSubview(imageView)
+            
+            imageView.snp.makeConstraints { make in
+                make.leading.equalTo(self.contentView)
+                make.trailing.equalTo(self.contentView)
+                make.top.equalTo(self.contentView)
+                make.bottom.equalTo(self.contentView)
+            }
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        override func prepareForReuse() {
+            imageView.kf.cancelDownloadTask()
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return mosaicImages?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
+        guard let image = mosaicImages?[safe: indexPath.item] else {
+            return cell
+        }
+        cell.imageView.kf.setImage(with: URL(string: image), completionHandler: {
+            _ in
+            self.imageMosaicCollectionView.collectionViewLayout.invalidateLayout()
+        })
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ImageCell, let image = cell.imageView.image
+            else {
+                return CGSize(width: 50, height: 50)
+        }
+        let w = collectionView.frame.width/2
+        let h = w * image.size.height / (image.size.width + 1)
+        return CGSize(width: w, height: h)
+    }
+
 }

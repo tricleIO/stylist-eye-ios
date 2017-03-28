@@ -155,7 +155,7 @@
 		310919741DAE823E0083A2C8 /* EmptyDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDTO.swift; sourceTree = "<group>"; };
 		310919771DAE83240083A2C8 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		310919791DAE850E0083A2C8 /* UserDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
-		3109197B1DAE860B0083A2C8 /* String+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SE.swift"; sourceTree = "<group>"; };
+		3109197B1DAE860B0083A2C8 /* String+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "String+SE.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		3109197D1DAE87570083A2C8 /* ObjectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
 		310919801DAE8DA30083A2C8 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		310919821DAE8FF80083A2C8 /* UIColor+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+SE.swift"; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 		31F5FBBA1DAE2BE300418D36 /* StylistEyeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StylistEyeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		31F5FBBE1DAE2BE300418D36 /* StylistEyeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylistEyeUITests.swift; sourceTree = "<group>"; };
 		31F5FBC01DAE2BE300418D36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		31FC67031DB3821E00ECC5A7 /* OutfitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailViewController.swift; sourceTree = "<group>"; };
+		31FC67031DB3821E00ECC5A7 /* OutfitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		31FC67051DB38D5300ECC5A7 /* OutfitDetailDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailDTO.swift; sourceTree = "<group>"; };
 		31FC67071DB38F1D00ECC5A7 /* OutfitDetailCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailCommand.swift; sourceTree = "<group>"; };
 		31FC67091DB3AB6C00ECC5A7 /* OutfitDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };

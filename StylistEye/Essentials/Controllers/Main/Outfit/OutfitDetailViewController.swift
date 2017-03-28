@@ -287,20 +287,37 @@ class OutfitDetailViewController: AbstractViewController {
 extension OutfitDetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: OutfitDetailTableViewCell = tableView.dequeueReusableCell(.value1)
-
-        cell.backgroundColor = Palette[basic: .clear]
         
-        if let components = outfitTableData?.components[safe: indexPath.row] {
-            cell.labelText = components.garmetType?.name
-            cell.mainImageString = components.photo?.image
+        let cell: OutfitDetailTableViewCell = tableView.dequeueReusableCell(.value1)
+        
+        cell.backgroundColor = Palette[basic: .clear]
+      
+        let row = indexPath.row
+        if row == 0 {
+            
+            cell.labelText = StringContainer[.outfitOverview]
+            cell.mosaicImages = outfitTableData?.components.flatMap {$0.photo?.image}
+            
+            return cell
+            
+        } else {
+            
+            if let components = outfitTableData?.components[safe: indexPath.row-1] {
+                cell.labelText = components.garmetType?.name
+                cell.mainImageString = components.photo?.image
+            }
+            
         }
-
+        
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return outfitTableData?.components.count ?? 0
+        if let count = outfitTableData?.components.count {
+            return count + 1
+        } else {
+            return 0
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
