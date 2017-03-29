@@ -281,6 +281,12 @@ class OutfitDetailViewController: AbstractViewController {
         outfitDescriptionLabel.textColor = Palette[custom: .appColor]
         outfitDescriptionLabel.numberOfLines = 0
     }
+    
+    fileprivate func openCamera() {
+        let navController = UINavigationController(rootViewController: CameraViewController())
+        navController.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))
+        present(navController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - <UITableViewDataSource>
@@ -334,6 +340,10 @@ extension OutfitDetailViewController: UITableViewDataSource {
 extension OutfitDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.row == 0 {
+            openCamera()
+        }
     }
 }
 

@@ -80,6 +80,7 @@ class OutfitDetailTableViewCell: AbstractTableViewCell, UICollectionViewDelegate
         addPhotoOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         addPhotoButton.setImage(#imageLiteral(resourceName: "cmeraPlus_icon").withRenderingMode(.alwaysTemplate), for: .normal)
         addPhotoButton.tintColor = Palette[custom: .title]
+        addPhotoButton.isUserInteractionEnabled = false
         
         addPhotoLabel.text = StringContainer[.takePhoto]
         addPhotoLabel.textColor = Palette[custom: .title]
