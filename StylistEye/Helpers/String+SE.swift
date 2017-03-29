@@ -102,6 +102,7 @@ extension String {
         case earings
         case messages
         case outfitOverview
+        case takePhoto
 
         var localizedString: String {
             var stringToReturn: String = String.empty
@@ -148,6 +149,8 @@ extension String {
                 stringToReturn = "messages"
             case .outfitOverview:
                 stringToReturn = "outfit-overview"
+            case .takePhoto:
+                stringToReturn = "take-photo"
             }
             return stringToReturn
         }

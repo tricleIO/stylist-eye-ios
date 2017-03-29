@@ -47,6 +47,9 @@ class OutfitDetailTableViewCell: AbstractTableViewCell, UICollectionViewDelegate
     
     fileprivate let imageMosaicContainer = View()
     fileprivate var imageMosaicCollectionView: UICollectionView!
+    fileprivate var addPhotoOverlay = View()
+    fileprivate var addPhotoButton = UIButton()
+    fileprivate var addPhotoLabel = UILabel()
     
     fileprivate let zoomImageView = ImageView(image: #imageLiteral(resourceName: "zoom"))
     
@@ -74,6 +77,14 @@ class OutfitDetailTableViewCell: AbstractTableViewCell, UICollectionViewDelegate
         imageMosaicCollectionView.backgroundColor = UIColor.white
         imageMosaicCollectionView.isUserInteractionEnabled = false
         
+        addPhotoOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        addPhotoButton.setImage(#imageLiteral(resourceName: "cmeraPlus_icon").withRenderingMode(.alwaysTemplate), for: .normal)
+        addPhotoButton.tintColor = Palette[custom: .title]
+        
+        addPhotoLabel.text = StringContainer[.takePhoto]
+        addPhotoLabel.textColor = Palette[custom: .title]
+        addPhotoLabel.textAlignment = .center
+        
         coverView.backgroundColor = Palette[basic: .white]
 
         customTextLabel.textColor = Palette[custom: .appColor]
@@ -98,6 +109,9 @@ class OutfitDetailTableViewCell: AbstractTableViewCell, UICollectionViewDelegate
         coverView.addSubview(imageMosaicContainer)
         
         imageMosaicContainer.addSubview(imageMosaicCollectionView)
+        imageMosaicContainer.addSubview(addPhotoOverlay)
+        addPhotoOverlay.addSubview(addPhotoButton)
+        addPhotoOverlay.addSubview(addPhotoLabel)
     }
 
     override func setupConstraints() {
@@ -145,6 +159,23 @@ class OutfitDetailTableViewCell: AbstractTableViewCell, UICollectionViewDelegate
             make.top.equalTo(imageMosaicContainer)
             make.bottom.equalTo(imageMosaicContainer)
         }
+        
+        addPhotoOverlay.snp.makeConstraints { make in
+            make.leading.equalTo(imageMosaicCollectionView)
+            make.top.equalTo(imageMosaicCollectionView)
+            make.bottom.equalTo(imageMosaicCollectionView)
+            make.trailing.equalTo(imageMosaicCollectionView)
+        }
+        
+        addPhotoButton.snp.makeConstraints { make in
+            make.center.equalTo(addPhotoOverlay)
+        }
+        
+        addPhotoLabel.snp.makeConstraints { make in
+            make.topMargin.equalTo(addPhotoButton.snp.bottomMargin).offset(20)
+            make.centerX.equalTo(addPhotoButton)
+        }
+        
     }
   
     override func prepareForReuse() {

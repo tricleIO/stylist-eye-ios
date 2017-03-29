@@ -6,12 +6,13 @@ platform :ios do
 
 
   lane :beta do |values|
+    #increment_build_number
     # Fabric generated this lane for deployment to Crashlytics Beta
     # set 'export_method' to 'ad-hoc' if your Crashlytics Beta distribution uses ad-hoc provisioning
     gym(scheme: 'StylistEye', export_method: 'ad-hoc')
 
     emails = values[:test_email] ? values[:test_email] : ['martin.stachon@tricle.io'] # You can list more emails here
-    groups = values[:test_email] ? nil : ['Tricle'] # You can define groups on the web and reference them here
+    groups = values[:groups] ? values[:groups] : ['Tricle'] # You can define groups on the web and reference them here
 
     crashlytics(api_token: 'c6851fbad59df66d027293ebb9cbceb2ef2f14d8',
              build_secret: 'edbcbb6c790cda1d367c2c6cc0d97830ce10eb70bf9651a7f18879c7a45730c9',
@@ -61,9 +62,9 @@ platform :ios do
   #     notifications: true
   #   )
   #   slack(
-  #    slack_url: "https://hooks.slack.com/services/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”,
+  #    slack_url: "https://hooks.slack.com/services/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",
   #    channel: "general",
-  #    message: "Successfully uploaded a beta release - see it at https://fabric.io/_/beta”,
+  #    message: "Successfully uploaded a beta release - see it at https://fabric.io/_/beta",
   #   )
   # end
 
