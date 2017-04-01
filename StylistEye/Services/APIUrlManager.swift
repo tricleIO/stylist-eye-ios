@@ -100,6 +100,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
      */
     case dressStyle
     
+    
+    
     /// Url path.
     var url: String? {
         var baseUrl: URL? {
@@ -144,7 +146,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
         if let queryParams = addressParams, var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) {
             urlComponents.queryItems = []
             for (queryName, queryValue) in queryParams {
-                let stringValue = String(queryValue)
+                let stringValue = String(describing: queryValue)
                 urlComponents.queryItems?.append(URLQueryItem(name: queryName, value: stringValue))
             }
             return urlComponents.url?.absoluteString
@@ -154,12 +156,13 @@ enum APIUrlManager: APIUrlManagerProtocol {
     }
 
     /// GET parameters.
-    var addressParams: [String: String]? {
+    var addressParams: [String: Any]? {
         guard let token = Keychains[.accessTokenKey] else {
             return [:]
         }
-        var params: [String: String] = [:]
+        var params: [String: Any] = [:]
         params["token"] = token
+        print("token=\(token)")
         switch self {
         case .login:
             return nil
@@ -173,6 +176,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
             fallthrough
         case .messages:
             params["expanded"] = "userDetails,lastMessage"
+            params["size"] = 100
             return params
         case .messageDetail:
             params["expanded"] = "userDetails"

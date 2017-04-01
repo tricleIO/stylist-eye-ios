@@ -9,10 +9,15 @@
 import SnapKit
 import UIKit
 import AVFoundation
+    
+typealias CameraPickerHandler = ( (UIImage, (() -> Void) ) -> Void )
 
 class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     // MARK: - Properties
+  
+    var imagePicked: CameraPickerHandler?
+  
     // MARK: < private
     fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cross_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(closeButtonTapped))
     fileprivate lazy var rightBarbutton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "torch_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(torchButtonTapped))
@@ -121,6 +126,7 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
                                 let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: .right)
                                 let imageVC = CaptureImageViewController()
                                 imageVC.capturedImage = image
+                                imageVC.imagePicked = self.imagePicked
                                 self.navigationController?.pushViewController(imageVC, animated: true)
                             }
                         }

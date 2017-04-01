@@ -17,6 +17,8 @@ class CaptureImageViewController: AbstractViewController {
             imageView.image = capturedImage
         }
     }
+  
+    var imagePicked: CameraPickerHandler?
 
     // MARK: < private
     fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "backArrow_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backButtonTapped))
@@ -80,11 +82,10 @@ class CaptureImageViewController: AbstractViewController {
     }
 
     func uploadButtonTapped() {
-        uploadImageToServer()
-    }
-
-    // MARK: - Actions
-    fileprivate func uploadImageToServer() {
-        // TODO: @MS
+        if let image = capturedImage {
+            imagePicked?(image) {
+                dismiss(animated: true, completion: nil)
+            }
+        }
     }
 }
