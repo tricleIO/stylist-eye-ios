@@ -60,8 +60,8 @@ struct MyMessagesDTO: Mappable {
     
     mutating func mapping(map: Map) {
         author <- map["author"]
-        content <- map["contnet"]
-        timestamp <- (map["timeStamp"], DateTimeTransform(.iso8601Date))
+        content <- map["content"]
+        timestamp <- (map["timestamp"], DateTimeTransform(.iso8601Date))
         read <- map["read"]
         systemOriginate <- map["systemOriginate"]
     }

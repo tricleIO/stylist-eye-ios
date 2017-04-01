@@ -32,13 +32,11 @@ class MessageDetailViewController: JSQMessagesViewController {
             guard let msgs = dtoMessages else {
                 return
             }
-            for message in msgs.messages {
-                if let content = message.content {
-                    if let author = message.author {
-                        let jsqMessge: JSQMessage = JSQMessage(senderId: String(author.identifier), senderDisplayName: "", date: message.timestamp ?? Date(), text: content)
-                        messages.append(jsqMessge)
-                    }
+            messages = msgs.messages.flatMap { message in
+                guard let content = message.content, let author = message.author else {
+                    return nil
                 }
+                return JSQMessage(senderId: String(author.identifier), senderDisplayName: "", date: message.timestamp ?? Date(), text: content)
             }
         }
     }
@@ -128,9 +126,12 @@ extension MessageDetailViewController {
             case let .success(object: message, objectsArray: _, apiResponse: apiResponse):
                 switch apiResponse {
                 case .ok:
+                    self.inputToolbar.contentView.textView.text = ""
+                    
                     newMessage = message
                     if let newMsg = message {
-                        self.dtoMessages?.messages.append(newMsg)
+                        self.dtoMessages?.messages.insert(newMsg, at: 0)
+                        self.scroll(to: IndexPath(item: 0, section: 0), animated: true)
                     }
                 case .fail:
                     break

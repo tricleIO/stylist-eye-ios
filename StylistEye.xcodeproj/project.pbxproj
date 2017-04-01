@@ -265,7 +265,7 @@
 		31FC67051DB38D5300ECC5A7 /* OutfitDetailDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailDTO.swift; sourceTree = "<group>"; };
 		31FC67071DB38F1D00ECC5A7 /* OutfitDetailCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailCommand.swift; sourceTree = "<group>"; };
 		31FC67091DB3AB6C00ECC5A7 /* OutfitDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = OutfitDetailTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
-		31FC670B1DB3BEB300ECC5A7 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
+		31FC670B1DB3BEB300ECC5A7 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		31FC670D1DB3BEF700ECC5A7 /* ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollView.swift; path = ../Cells/ScrollView.swift; sourceTree = "<group>"; };
 		31FE19421DB7DFE30087D095 /* GarmentTypeDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarmentTypeDTO.swift; sourceTree = "<group>"; };
 		A8F746561E8533E200FEDCD9 /* Languages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };

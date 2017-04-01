@@ -172,14 +172,14 @@ extension MessagesViewController: UITableViewDelegate {
         }
         print(messagesDTO[safe: indexPath.row]?.lastMessage?.systemOriginate)
         msgDetail.isSystem = messagesDTO[safe: indexPath.row]?.lastMessage?.systemOriginate
+        msgDetail.orderId = messagesDTO[safe: indexPath.row]?.order?.identifier
         if let mesg = messagesDTO[safe: indexPath.row], let author = mesg.lastMessage?.author, let firstname = author.givenName, let familyname = author.familyName {
             let authorName = firstname + String.space + familyname
             msgDetail.senderId = String(author.identifier)
             msgDetail.senderDisplayName = authorName
-            msgDetail.orderId = mesg.order?.identifier
         }
         else {
-            msgDetail.senderId = "99"
+            msgDetail.senderId = "99" // TODO: ???
             msgDetail.senderDisplayName = String.empty
         }
         navigationController?.pushViewController(msgDetail, animated: true)
