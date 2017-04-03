@@ -42,7 +42,7 @@ public enum TimeFormatsEnum {
         case .dateTimeLog:
             return "yyyy-MM-dd HH:mm:ss.SSS"
         case .iso8601Date:
-            return "yyyy-MM-dd'T'HH:mm:ss"
+            return "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         case .timeShort:
             return "HH:mm"
         }

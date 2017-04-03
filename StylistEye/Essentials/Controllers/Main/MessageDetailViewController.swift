@@ -32,12 +32,13 @@ class MessageDetailViewController: JSQMessagesViewController {
             guard let msgs = dtoMessages else {
                 return
             }
-            messages = msgs.messages.flatMap { message in
+            messages = msgs.messages
+                .flatMap { message in
                 guard let content = message.content, let author = message.author else {
                     return nil
                 }
                 return JSQMessage(senderId: String(author.identifier), senderDisplayName: "", date: message.timestamp ?? Date(), text: content)
-            }
+                }.sorted(by: {$0.date.timeIntervalSince1970 < $1.date.timeIntervalSince1970})
         }
     }
 
@@ -49,6 +50,7 @@ class MessageDetailViewController: JSQMessagesViewController {
             switch data {
             case let .success(object: data, objectsArray: _, apiResponse: _):
                 self.dtoMessages = data
+                self.scrollToBottom(animated: true)
             case .failure(message: _, apiResponse: _):
                 break
             }
@@ -130,8 +132,8 @@ extension MessageDetailViewController {
                     
                     newMessage = message
                     if let newMsg = message {
-                        self.dtoMessages?.messages.insert(newMsg, at: 0)
-                        self.scroll(to: IndexPath(item: 0, section: 0), animated: true)
+                        self.dtoMessages?.messages.append(newMsg)
+                        self.scrollToBottom(animated: true)
                     }
                 case .fail:
                     break
