@@ -52,6 +52,8 @@ class CaptureImageViewController: AbstractViewController {
                 actionBox,
             ]
         )
+        
+        actionBox.addSubview(uploadButton)
     }
 
     internal override func setupConstraints() {
@@ -70,6 +72,13 @@ class CaptureImageViewController: AbstractViewController {
             make.height.equalTo(50)
             make.bottom.equalTo(view)
         }
+        
+        uploadButton.snp.makeConstraints { make in
+            make.centerX.equalTo(actionBox)
+            make.centerY.equalTo(actionBox)
+            make.width.equalTo(45)
+            make.height.equalTo(45)
+        }
     }
 
     // MARK: - User Action
@@ -83,9 +92,8 @@ class CaptureImageViewController: AbstractViewController {
 
     func uploadButtonTapped() {
         if let image = capturedImage {
-            imagePicked?(image) {
-                dismiss(animated: true, completion: nil)
-            }
+            imagePicked?(image)
+            dismiss(animated: true, completion: nil)
         }
     }
 }

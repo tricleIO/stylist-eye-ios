@@ -10,7 +10,7 @@ import SnapKit
 import UIKit
 import AVFoundation
     
-typealias CameraPickerHandler = ( (UIImage, (() -> Void) ) -> Void )
+typealias CameraPickerHandler = ( (UIImage) -> Void )
 
 class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjectsDelegate {
 

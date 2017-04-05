@@ -9,6 +9,8 @@ platform :ios do
     #increment_build_number
     # Fabric generated this lane for deployment to Crashlytics Beta
     # set 'export_method' to 'ad-hoc' if your Crashlytics Beta distribution uses ad-hoc provisioning
+    cert
+    sigh(adhoc: true)
     gym(scheme: 'StylistEye', export_method: 'ad-hoc')
 
     emails = values[:test_email] ? values[:test_email] : ['martin.stachon@tricle.io'] # You can list more emails here

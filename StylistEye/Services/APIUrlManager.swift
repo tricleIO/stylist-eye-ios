@@ -15,6 +15,13 @@ protocol APIUrlManagerProtocol {
     var url: String? {get}
     var params: [String: Any] {get}
     var method: HTTPMethod {get}
+    var request: RequestType {get}
+    var multipartData: [String: Data] {get}
+}
+
+enum RequestType {
+    case request
+    case upload
 }
 
 /**
@@ -100,6 +107,11 @@ enum APIUrlManager: APIUrlManagerProtocol {
      */
     case dressStyle
     
+    /**
+     Upload wardrobe photo
+    */
+    case uploadWardrobePhoto(id: Int, photoType: Int, photo: Data)
+    
     
     
     /// Url path.
@@ -137,6 +149,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             urlString = "/mapi/v1/lists/garmenttypes"
         case .dressStyle:
             urlString = "/mapi/v1/lists/dressstyles"
+        case let .uploadWardrobePhoto(id, _, _):
+            urlString = "/mapi/v1/photos/wardrobe/\(id)"
         }
 
         guard let url = URL(string: urlString, relativeTo: baseUrl) else {
@@ -203,6 +217,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return params
         case .dressStyle:
             return params
+        case .uploadWardrobePhoto:
+            return params
         }
     }
 
@@ -251,6 +267,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             fallthrough
         case .dressStyle:
             return [:]
+        case .uploadWardrobePhoto:
+            return [:]
         }
     }
 
@@ -281,6 +299,29 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return .post
         case .dressStyle:
             return .get
+        case .uploadWardrobePhoto:
+            return .post
+        }
+    }
+    
+    var request: RequestType {
+        switch self {
+        case .uploadWardrobePhoto:
+            return .upload
+        default:
+            return .request
+        }
+    }
+    
+    var multipartData: [String : Data] {
+        switch self {
+        case let .uploadWardrobePhoto(_, photoType, photo):
+            return [
+                "PhotoType": "\(photoType)".data(using: .ascii)!,
+                "file": photo
+            ]
+        default:
+            return [:]
         }
     }
 }

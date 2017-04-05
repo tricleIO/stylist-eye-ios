@@ -283,7 +283,36 @@ class OutfitDetailViewController: AbstractViewController {
     }
     
     fileprivate func openCamera() {
-        let navController = UINavigationController(rootViewController: CameraViewController())
+        guard let outfitId = outfitId else {
+            return
+        }
+        
+        let cameraController = CameraViewController()
+        cameraController.imagePicked = {
+            image in
+            
+            let imageJpeg = image.jpegData()
+            let uploadCommand = UploadWardrobePhotoCommand(id: outfitId, photoType: .OutfitPhotoBase, photo: imageJpeg)
+            
+            KVNProgress.show()
+            uploadCommand.executeCommand {
+                data in
+                
+                switch data {
+                case let .success(data, objectsArray: _, apiResponse: apiResponse):
+                    // TODO: @MS
+                    switch apiResponse {
+                    case .ok:
+                        KVNProgress.dismiss()
+                    case .fail:
+                        KVNProgress.showError(withStatus: "Upload failed")
+                    }
+                case let .failure(message):
+                    KVNProgress.showError(withStatus: message.message)
+                }
+            }
+        }
+        let navController = UINavigationController(rootViewController: cameraController)
         navController.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))
         present(navController, animated: true, completion: nil)
     }
