@@ -59,6 +59,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
     var mosaicImages: [String]? {
         didSet {
             if let mosaicImages = mosaicImages {
+                self.mosaicImages = Array(mosaicImages.prefix(through: min(3, mosaicImages.count-1) ))
                 imageMosaicContainer.isHidden = false
                 imageMosaicCollectionView.reloadData()
             }
@@ -270,7 +271,13 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
             return CGSize(width: 50, height: 50)
         }
         let w = collectionView.frame.width/2
-        let h = w * image.size.height / (image.size.width + 1)
+        let coef: CGFloat
+        if indexPath.item % 3 == 0 {
+            coef = 2.0/5.0
+        } else {
+            coef = 3.0/5.0
+        }
+        let h = collectionView.frame.height*coef
         return CGSize(width: w, height: h)
     }
 }
