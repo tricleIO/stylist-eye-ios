@@ -71,6 +71,9 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
     
     fileprivate let imageMosaicContainer = View()
     fileprivate var imageMosaicCollectionView: UICollectionView!
+    fileprivate var addPhotoOverlay = View()
+    fileprivate var addPhotoButton = UIButton()
+    fileprivate var addPhotoLabel = UILabel()
     
     fileprivate let stylistProfileImageView = ImageView()
     
@@ -107,6 +110,15 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         imageMosaicCollectionView.backgroundColor = UIColor.white
         imageMosaicCollectionView.isUserInteractionEnabled = false
         
+        addPhotoOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        addPhotoButton.setImage(#imageLiteral(resourceName: "cmeraPlus_icon").withRenderingMode(.alwaysTemplate), for: .normal)
+        addPhotoButton.tintColor = Palette[custom: .title]
+        addPhotoButton.isUserInteractionEnabled = false
+        
+        addPhotoLabel.text = StringContainer[.takePhoto]
+        addPhotoLabel.textColor = Palette[custom: .title]
+        addPhotoLabel.textAlignment = .center
+        
         stylistProfileImageView.contentMode = .scaleAspectFit
         stylistProfileImageView.clipsToBounds = true
         stylistProfileImageView.layer.cornerRadius = 20
@@ -142,6 +154,9 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
                 ]
         )
         imageMosaicContainer.addSubview(imageMosaicCollectionView)
+        imageMosaicContainer.addSubview(addPhotoOverlay)
+        addPhotoOverlay.addSubview(addPhotoButton)
+        addPhotoOverlay.addSubview(addPhotoLabel)
     }
     
     internal override func setupConstraints() {
@@ -173,6 +188,22 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
             make.trailing.equalTo(imageMosaicContainer)
             make.top.equalTo(imageMosaicContainer)
             make.bottom.equalTo(imageMosaicContainer)
+        }
+        
+        addPhotoOverlay.snp.makeConstraints { make in
+            make.leading.equalTo(imageMosaicCollectionView)
+            make.top.equalTo(imageMosaicCollectionView)
+            make.bottom.equalTo(imageMosaicCollectionView)
+            make.trailing.equalTo(imageMosaicCollectionView)
+        }
+        
+        addPhotoButton.snp.makeConstraints { make in
+            make.center.equalTo(addPhotoOverlay)
+        }
+        
+        addPhotoLabel.snp.makeConstraints { make in
+            make.topMargin.equalTo(addPhotoButton.snp.bottomMargin).offset(20)
+            make.centerX.equalTo(addPhotoButton)
         }
         
         stylistProfileImageView.snp.makeConstraints { make in
