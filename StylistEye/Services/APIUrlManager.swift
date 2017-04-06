@@ -16,7 +16,7 @@ protocol APIUrlManagerProtocol {
     var params: [String: Any] {get}
     var method: HTTPMethod {get}
     var request: RequestType {get}
-    var multipartData: [String: Data] {get}
+    var multipartData: ((MultipartFormData) -> Void) {get}
 }
 
 enum RequestType {
@@ -112,6 +112,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
     */
     case uploadWardrobePhoto(id: Int, photoType: Int, photo: Data)
     
+    /**
+     Upload outfit photo
+     */
+    case uploadOutfitPhoto(id: Int, photoType: Int, photo: Data)
     
     
     /// Url path.
@@ -151,6 +155,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             urlString = "/mapi/v1/lists/dressstyles"
         case let .uploadWardrobePhoto(id, _, _):
             urlString = "/mapi/v1/photos/wardrobe/\(id)"
+        case let .uploadOutfitPhoto(id, _, _):
+            urlString = "/mapi/v1/photos/outfit/\(id)"
         }
 
         guard let url = URL(string: urlString, relativeTo: baseUrl) else {
@@ -217,7 +223,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return params
         case .dressStyle:
             return params
-        case .uploadWardrobePhoto:
+        case .uploadWardrobePhoto, .uploadOutfitPhoto:
             return params
         }
     }
@@ -267,7 +273,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
             fallthrough
         case .dressStyle:
             return [:]
-        case .uploadWardrobePhoto:
+        case .uploadWardrobePhoto, .uploadOutfitPhoto:
             return [:]
         }
     }
@@ -299,29 +305,34 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return .post
         case .dressStyle:
             return .get
-        case .uploadWardrobePhoto:
+        case .uploadWardrobePhoto, .uploadOutfitPhoto:
             return .post
         }
     }
     
     var request: RequestType {
         switch self {
-        case .uploadWardrobePhoto:
+        case .uploadWardrobePhoto, .uploadOutfitPhoto:
             return .upload
         default:
             return .request
         }
     }
     
-    var multipartData: [String : Data] {
+    var multipartData: ((MultipartFormData) -> Void) {
         switch self {
-        case let .uploadWardrobePhoto(_, photoType, photo):
-            return [
-                "PhotoType": "\(photoType)".data(using: .ascii)!,
-                "file": photo
-            ]
+        case let .uploadWardrobePhoto(_, photoType, photo), let .uploadOutfitPhoto(_, photoType, photo):
+            return { multipartFormData in
+                    multipartFormData.append("\(photoType)".data(using: .utf8)!, withName: "PhotoType")
+                    multipartFormData.append(photo, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
+            }
         default:
-            return [:]
+            return {
+                multipartFormData in
+            }
         }
     }
+    
+    
+    
 }

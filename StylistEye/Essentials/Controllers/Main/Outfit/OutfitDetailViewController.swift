@@ -292,7 +292,7 @@ class OutfitDetailViewController: AbstractViewController {
             image in
             
             let imageJpeg = image.jpegData()
-            let uploadCommand = UploadWardrobePhotoCommand(id: outfitId, photoType: .OutfitPhotoBase, photo: imageJpeg)
+            let uploadCommand = UploadOutfitPhotoCommand(id: outfitId, photoType: .OutfitPhotoBase, photo: imageJpeg)
             
             KVNProgress.show()
             uploadCommand.executeCommand {
@@ -303,7 +303,8 @@ class OutfitDetailViewController: AbstractViewController {
                     // TODO: @MS
                     switch apiResponse {
                     case .ok:
-                        KVNProgress.dismiss()
+                        KVNProgress.showSuccess()
+                        self.getOutfitDetailInfo(outfitId: outfitId)
                     case .fail:
                         KVNProgress.showError(withStatus: "Upload failed")
                     }
@@ -331,7 +332,14 @@ extension OutfitDetailViewController: UITableViewDataSource {
         if row == 0 {
             
             cell.labelText = StringContainer[.outfitOverview]
-            cell.mosaicImages = outfitTableData?.components.flatMap {$0.photo?.image}
+            
+            // if have user provided foto, use it
+            if let photo = outfitTableData?.photos.first {
+                cell.mainImageString = photo.image
+            } else {
+                // otherwise, use collection of compoments
+                cell.mosaicImages = outfitTableData?.components.flatMap {$0.photo?.image}
+            }
             
             return cell
             

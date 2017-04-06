@@ -1,8 +1,8 @@
 //
-//  UploadWardrobePhotoCommand.swift
+//  UploadOutfitPhotoCommand.swift
 //  StylistEye
 //
-//  Created by Martin Stachon on 05.04.17.
+//  Created by Martin Stachon on 06.04.17.
 //  Copyright © 2017 Michal Severín. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import Foundation
 /**
  Uplad wardrobe command.
  */
-struct UploadWardrobePhotoCommand: NetworkExecutable {
+struct UploadOutfitPhotoCommand: NetworkExecutable {
   
   /// Outfit model.
   typealias Data = EmptyDTO
@@ -20,6 +20,6 @@ struct UploadWardrobePhotoCommand: NetworkExecutable {
   var urlManager: APIUrlManager
   
   init(id: Int, photoType: PhotoType, photo: Foundation.Data) {
-    urlManager = .uploadWardrobePhoto(id: id, photoType: photoType.rawValue, photo: photo)
+    urlManager = .uploadOutfitPhoto(id: id, photoType: photoType.rawValue, photo: photo)
   }
 }

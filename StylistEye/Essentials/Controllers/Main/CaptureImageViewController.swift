@@ -41,6 +41,11 @@ class CaptureImageViewController: AbstractViewController {
 
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarbutton
+        
+        imageView.contentMode = .scaleAspectFit
+        
+        backgroundImage.image = nil
+        backgroundImage.backgroundColor = UIColor.black
     }
 
     internal override func addElements() {

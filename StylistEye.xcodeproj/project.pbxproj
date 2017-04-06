@@ -121,6 +121,8 @@
 		31FC670C1DB3BEB300ECC5A7 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FC670B1DB3BEB300ECC5A7 /* MessageDetailViewController.swift */; };
 		31FC670E1DB3BEF700ECC5A7 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FC670D1DB3BEF700ECC5A7 /* ScrollView.swift */; };
 		31FE19431DB7DFE30087D095 /* GarmentTypeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FE19421DB7DFE30087D095 /* GarmentTypeDTO.swift */; };
+		A82F6DA41E964A0F0053B6D1 /* PhotoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F6DA31E964A0F0053B6D1 /* PhotoType.swift */; };
+		A82F6DA61E964A380053B6D1 /* UploadOutfitPhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */; };
 		A8C434E61E94E07100FF8832 /* UploadWardrobePhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */; };
 		A8C434E81E94E2A300FF8832 /* UIImage+base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E71E94E2A300FF8832 /* UIImage+base64.swift */; };
 		A8F746571E8533E200FEDCD9 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F746561E8533E200FEDCD9 /* Languages.swift */; };
@@ -175,7 +177,7 @@
 		311D1F031DAE461D00A7F545 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		311D1F0A1DAE464E00A7F545 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Login.strings; sourceTree = "<group>"; };
 		311D1F111DAE4AE900A7F545 /* Initializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Initializable.swift; path = "../Public protocols/Initializable.swift"; sourceTree = "<group>"; };
-		311D1F131DAE4B3000A7F545 /* AbstractViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractViewController.swift; sourceTree = "<group>"; };
+		311D1F131DAE4B3000A7F545 /* AbstractViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = AbstractViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		311D1F161DAE4B4B00A7F545 /* UIView+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SE.swift"; sourceTree = "<group>"; };
 		311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = APIUrlManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExecutable.swift; sourceTree = "<group>"; };
@@ -270,6 +272,8 @@
 		31FC670B1DB3BEB300ECC5A7 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		31FC670D1DB3BEF700ECC5A7 /* ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollView.swift; path = ../Cells/ScrollView.swift; sourceTree = "<group>"; };
 		31FE19421DB7DFE30087D095 /* GarmentTypeDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarmentTypeDTO.swift; sourceTree = "<group>"; };
+		A82F6DA31E964A0F0053B6D1 /* PhotoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoType.swift; sourceTree = "<group>"; };
+		A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOutfitPhotoCommand.swift; sourceTree = "<group>"; };
 		A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadWardrobePhotoCommand.swift; sourceTree = "<group>"; };
 		A8C434E71E94E2A300FF8832 /* UIImage+base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+base64.swift"; sourceTree = "<group>"; };
 		A8F746561E8533E200FEDCD9 /* Languages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -343,6 +347,7 @@
 				3175F4E11E05614C001C89C6 /* OutfitCategoryDTO.swift */,
 				A8F746561E8533E200FEDCD9 /* Languages.swift */,
 				A8F746581E85340500FEDCD9 /* DressStyleDTO.swift */,
+				A82F6DA31E964A0F0053B6D1 /* PhotoType.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -585,6 +590,7 @@
 				312F04A71E47722700252D22 /* SendMessageCommand.swift */,
 				A8F7465A1E8534CF00FEDCD9 /* DressStyleCommand.swift */,
 				A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */,
+				A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -1030,6 +1036,7 @@
 				3109197C1DAE860B0083A2C8 /* String+SE.swift in Sources */,
 				311D1F171DAE4B4B00A7F545 /* UIView+SE.swift in Sources */,
 				31FC670C1DB3BEB300ECC5A7 /* MessageDetailViewController.swift in Sources */,
+				A82F6DA41E964A0F0053B6D1 /* PhotoType.swift in Sources */,
 				31400F071DB53E0600A088A0 /* AboutViewController.swift in Sources */,
 				31508DCF1DB3C73200D26F53 /* CameraViewController.swift in Sources */,
 				3197B65F1DB28DA20096EF16 /* MessagesDTO.swift in Sources */,
@@ -1064,6 +1071,7 @@
 				A8C434E81E94E2A300FF8832 /* UIImage+base64.swift in Sources */,
 				317D60F11DB0A38D0044D46B /* AbstractTableViewCell.swift in Sources */,
 				311D1F1D1DAE4C9500A7F545 /* NetworkExecutable.swift in Sources */,
+				A82F6DA61E964A380053B6D1 /* UploadOutfitPhotoCommand.swift in Sources */,
 				31A252721E06E04B0090EFD8 /* TimeHelper.swift in Sources */,
 				310919981DAEA0790083A2C8 /* KeyRepresentable.swift in Sources */,
 				31CD44EA1DB161BF007A5E1C /* ProductDetailViewController.swift in Sources */,

@@ -62,11 +62,7 @@ extension NetworkExecutable {
     case .upload:
       
       Alamofire.upload(
-        multipartFormData: { multipartFormData in
-          for (name, value) in self.urlManager.multipartData {
-            multipartFormData.append(value, withName: name)
-          }
-      },
+        multipartFormData: urlManager.multipartData,
         to: url,
         encodingCompletion: { encodingResult in
           switch encodingResult {

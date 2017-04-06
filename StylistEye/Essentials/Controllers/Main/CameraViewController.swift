@@ -27,6 +27,7 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
     fileprivate let videoPreviewLayer = AVCaptureVideoPreviewLayer()
     fileprivate let stillImageOutput = AVCaptureStillImageOutput()
 
+    fileprivate let videoView = UIView()
     fileprivate let actionBox = View()
 
     fileprivate let captureButton = Button(type: .system)
@@ -41,6 +42,7 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
     override func addElements() {
         super.addElements()
 
+        view.addSubview(videoView)
         view.addSubview(actionBox)
         actionBox.addSubview(captureButton)
     }
@@ -58,6 +60,11 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarbutton
 
+        
+        backgroundImage.image = nil
+        backgroundImage.backgroundColor = UIColor.black
+        videoView.backgroundColor = UIColor.black
+        
         setQRCamera()
     }
     
@@ -67,8 +74,13 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
     override func setupConstraints() {
         super.setupConstraints()
 
-        videoPreviewLayer.frame = view.bounds
-
+        videoView.snp.makeConstraints { make in
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.top.equalTo(view.snp.top)
+            make.bottom.equalTo(actionBox.snp.top)
+        }
+        
         actionBox.snp.makeConstraints { make in
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
@@ -83,7 +95,13 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
             make.height.equalTo(45)
         }
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        videoPreviewLayer.frame = videoView.bounds
+    }
+    
     // MARK: - User action
     func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
@@ -151,8 +169,8 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         }
       
         videoPreviewLayer.session = captureSession
-        videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-        videoPreviewLayer.frame = view.layer.bounds
-        backgroundImage.layer.addSublayer(videoPreviewLayer)
+        videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect
+        videoPreviewLayer.frame = videoView.layer.bounds
+        videoView.layer.addSublayer(videoPreviewLayer)
     }
 }

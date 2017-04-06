@@ -30,6 +30,12 @@ class AbstractViewController: UIViewController {
         /// Load data from API.
         loadData()
     }
+  
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadData()
+    }
 
     // MARK: - <Initializable>
     internal override func setupView() {
@@ -52,9 +58,10 @@ class AbstractViewController: UIViewController {
     internal override func customInit() {
         // NOTE from Martin: without cancelsTouchesInView, this gesture recognizer causes strange
         // behaviours of UITableViewDelegate - didSelectRowAt not called etc.
-        let tap = UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+        // NOTE even with cancelsTouchesInView it causes problems with camera
+        //let tap = UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss))
+        //tap.cancelsTouchesInView = false
+        //view.addGestureRecognizer(tap)
     }
 
     // MARK: - Action
