@@ -55,6 +55,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
     }
     
     var zoomButtonCallback: (VoidBlock)?
+    var addPhotoCallback: (VoidBlock)?
     
     var mosaicImages: [String]? {
         didSet {
@@ -114,6 +115,9 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         addPhotoButton.setImage(#imageLiteral(resourceName: "cmeraPlus_icon").withRenderingMode(.alwaysTemplate), for: .normal)
         addPhotoButton.tintColor = Palette[custom: .title]
         addPhotoButton.isUserInteractionEnabled = false
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoOverlayTapped))
+        addPhotoOverlay.isUserInteractionEnabled = true
+        addPhotoOverlay.addGestureRecognizer(tapGesture)
         
         addPhotoLabel.text = StringContainer[.takePhoto]
         addPhotoLabel.textColor = Palette[custom: .title]
@@ -246,6 +250,10 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
     // MARK: - User Action
     func zoomButtonTapped() {
         zoomButtonCallback?()
+    }
+    
+    func photoOverlayTapped() {
+        addPhotoCallback?()
     }
     
     // MARK: - UICollectionViewDataSource

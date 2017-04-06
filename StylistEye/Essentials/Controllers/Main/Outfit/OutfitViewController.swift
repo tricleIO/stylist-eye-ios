@@ -251,7 +251,8 @@ class OutfitViewController: AbstractViewController {
                 switch apiResponse {
                 case .ok:
                     KVNProgress.dismiss()
-                    self.outfits = data
+                    // outfits without photo are shown first
+                    self.outfits = data?.sorted(by: {$0.photos?.first == nil && $1.photos?.first != nil})
                 case .fail:
                     KVNProgress.showError(withStatus: "Fail code outfit VC")
                 }
@@ -259,6 +260,39 @@ class OutfitViewController: AbstractViewController {
                 KVNProgress.showError(withStatus: "ougfit detail: \(message)")
             }
         }
+    }
+    
+    fileprivate func openCamera(outfitId: Int) {
+        
+        let cameraController = CameraViewController()
+        cameraController.imagePicked = {
+            image in
+            
+            let imageJpeg = image.jpegData()
+            let uploadCommand = UploadOutfitPhotoCommand(id: outfitId, photoType: .OutfitPhotoBase, photo: imageJpeg)
+            
+            KVNProgress.show()
+            uploadCommand.executeCommand {
+                data in
+                
+                switch data {
+                case let .success(data, objectsArray: _, apiResponse: apiResponse):
+                    // TODO: @MS
+                    switch apiResponse {
+                    case .ok:
+                        KVNProgress.showSuccess()
+                        self.loadOutfits()
+                    case .fail:
+                        KVNProgress.showError(withStatus: "Upload failed")
+                    }
+                case let .failure(message):
+                    KVNProgress.showError(withStatus: message.message)
+                }
+            }
+        }
+        let navController = UINavigationController(rootViewController: cameraController)
+        navController.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))
+        present(navController, animated: true, completion: nil)
     }
 }
 
@@ -288,9 +322,14 @@ extension OutfitViewController: UITableViewDataSource {
             cell.descriptionText = outfit.outfitComment
             cell.selectionStyle = .none
             if let outfitImage = outfit.photos?.first?.image {
+                // image provided by user
                 cell.mainImageString = outfitImage
             } else {
+                // use collection mosaic
                 cell.mosaicImages = outfit.components?.flatMap({$0.photo?.image})
+                cell.addPhotoCallback = {
+                    self.openCamera(outfitId: outfit.outfitId)
+                }
             }
             cell.stylistImageString = outfit.stylist?.photo?.image
         }
