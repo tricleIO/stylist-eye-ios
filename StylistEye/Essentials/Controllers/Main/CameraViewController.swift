@@ -78,13 +78,13 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
             make.top.equalTo(view.snp.top)
-            make.bottom.equalTo(actionBox.snp.top)
+            make.height.equalTo(view.snp.width).multipliedBy(4.0/3.0)
         }
         
         actionBox.snp.makeConstraints { make in
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.height.equalTo(50)
+            make.top.equalTo(videoView.snp.bottom)
             make.bottom.equalTo(view)
         }
 
@@ -135,18 +135,23 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
     }
 
     fileprivate func captureImage() {
-        if let videoConnection = stillImageOutput.connection(withMediaType: AVMediaTypeVideo) {
-            stillImageOutput.captureStillImageAsynchronously(from: videoConnection) { sampleBuffer, error -> Void in
-                if let _ = sampleBuffer {
-                    if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer) {
-                        if let dataProvider = CGDataProvider(data: imageData as CFData) {
-                            if let cgImageRef = CGImage(jpegDataProviderSource: dataProvider, decode: nil, shouldInterpolate: true, intent: .defaultIntent) {
-                                let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: .right)
-                                let imageVC = CaptureImageViewController()
-                                imageVC.capturedImage = image
-                                imageVC.imagePicked = self.imagePicked
-                                self.navigationController?.pushViewController(imageVC, animated: true)
-                            }
+        guard let videoConnection = stillImageOutput.connection(withMediaType: AVMediaTypeVideo) else {
+            return
+        }
+        if videoConnection.isVideoOrientationSupported {
+            videoConnection.videoOrientation = .portrait
+        }
+        stillImageOutput.captureStillImageAsynchronously(from: videoConnection) { sampleBuffer, error -> Void in
+            if let _ = sampleBuffer {
+                if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer) {
+                    if let dataProvider = CGDataProvider(data: imageData as CFData) {
+                        if let cgImageRef = CGImage(jpegDataProviderSource: dataProvider, decode: nil, shouldInterpolate: true, intent: .defaultIntent) {
+                            // need to rotate the image using fixedOrientation(), because the server ignores EXIF rotation
+                            let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: .right).fixedOrientation()
+                            let imageVC = CaptureImageViewController()
+                            imageVC.capturedImage = image
+                            imageVC.imagePicked = self.imagePicked
+                            self.navigationController?.pushViewController(imageVC, animated: true)
                         }
                     }
                 }
@@ -158,6 +163,7 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
 
         do {
+            captureSession.sessionPreset = AVCaptureSessionPresetPhoto
             let input = try AVCaptureDeviceInput(device: captureDevice) as AVCaptureDeviceInput
             captureSession.addInput(input as AVCaptureInput)
             if captureSession.canAddOutput(stillImageOutput) {
@@ -169,7 +175,7 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         }
       
         videoPreviewLayer.session = captureSession
-        videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect
+        videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         videoPreviewLayer.frame = videoView.layer.bounds
         videoView.layer.addSublayer(videoPreviewLayer)
     }

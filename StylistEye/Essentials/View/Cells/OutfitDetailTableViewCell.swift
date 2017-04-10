@@ -92,7 +92,8 @@ class OutfitDetailTableViewCell: AbstractTableViewCell, UICollectionViewDelegate
         customTextLabel.textColor = Palette[custom: .appColor]
         customTextLabel.font = SystemFont[.title]
 
-        mainImageView.contentMode = .scaleAspectFit
+        mainImageView.contentMode = .scaleAspectFill
+        mainImageView.clipsToBounds = true
         zoomImageView.contentMode = .scaleAspectFit
     }
 
@@ -229,18 +230,11 @@ class OutfitDetailTableViewCell: AbstractTableViewCell, UICollectionViewDelegate
         guard let image = mosaicImages?[safe: indexPath.item] else {
             return cell
         }
-        cell.imageView.kf.setImage(with: URL(string: image), completionHandler: {
-            _ in
-            self.imageMosaicCollectionView.collectionViewLayout.invalidateLayout()
-        })
+        cell.imageView.kf.setImage(with: URL(string: image))
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? ImageCell, let image = cell.imageView.image
-            else {
-                return CGSize(width: 50, height: 50)
-        }
         let w = collectionView.frame.width/2
         let coef: CGFloat
         if indexPath.item % 3 == 0 {

@@ -68,13 +68,13 @@ class CaptureImageViewController: AbstractViewController {
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
             make.top.equalTo(view)
-            make.bottom.equalTo(actionBox.snp.top)
+            make.height.equalTo(view.snp.width).multipliedBy(4.0/3.0)
         }
 
         actionBox.snp.makeConstraints { make in
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.height.equalTo(50)
+            make.top.equalTo(imageView.snp.bottom)
             make.bottom.equalTo(view)
         }
         
