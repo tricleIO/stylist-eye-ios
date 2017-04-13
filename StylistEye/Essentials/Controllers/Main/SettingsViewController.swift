@@ -135,7 +135,7 @@ extension SettingsViewController: UITableViewDelegate {
             KVNProgress.show()
             LogoutCommand().executeCommand { data in
                 switch data {
-                case let .success(_, _, apiResponse: apiResponse):
+                case let .success(_, _, _, apiResponse: apiResponse):
                     // TODO: @MS
                     switch apiResponse {
                     case .ok:

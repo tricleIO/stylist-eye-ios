@@ -121,6 +121,8 @@
 		31FC670C1DB3BEB300ECC5A7 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FC670B1DB3BEB300ECC5A7 /* MessageDetailViewController.swift */; };
 		31FC670E1DB3BEF700ECC5A7 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FC670D1DB3BEF700ECC5A7 /* ScrollView.swift */; };
 		31FE19431DB7DFE30087D095 /* GarmentTypeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FE19421DB7DFE30087D095 /* GarmentTypeDTO.swift */; };
+		A820A98A1E9FA6E400ECE3F8 /* PaginationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A820A9891E9FA6E400ECE3F8 /* PaginationDTO.swift */; };
+		A820A98C1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A820A98B1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift */; };
 		A82F6DA41E964A0F0053B6D1 /* PhotoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F6DA31E964A0F0053B6D1 /* PhotoType.swift */; };
 		A82F6DA61E964A380053B6D1 /* UploadOutfitPhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */; };
 		A8C434E61E94E07100FF8832 /* UploadWardrobePhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */; };
@@ -160,7 +162,7 @@
 		310919771DAE83240083A2C8 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		310919791DAE850E0083A2C8 /* UserDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		3109197B1DAE860B0083A2C8 /* String+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "String+SE.swift"; sourceTree = "<group>"; tabWidth = 4; };
-		3109197D1DAE87570083A2C8 /* ObjectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
+		3109197D1DAE87570083A2C8 /* ObjectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; tabWidth = 4; };
 		310919801DAE8DA30083A2C8 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		310919821DAE8FF80083A2C8 /* UIColor+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+SE.swift"; sourceTree = "<group>"; };
 		310919841DAE91970083A2C8 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -233,7 +235,7 @@
 		31897D941DAF6B8D00BFFED0 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		318FD7721E472A16008EEA23 /* UpdateMessageStatusCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateMessageStatusCommand.swift; sourceTree = "<group>"; };
 		3197B6581DB236C30096EF16 /* MessagesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTableViewCell.swift; sourceTree = "<group>"; };
-		3197B65A1DB23B7E0096EF16 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		3197B65A1DB23B7E0096EF16 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		3197B65C1DB288250096EF16 /* WardrobeFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeFeedViewController.swift; sourceTree = "<group>"; };
 		3197B65E1DB28DA20096EF16 /* MessagesDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesDTO.swift; sourceTree = "<group>"; };
 		3197B6601DB28E4C0096EF16 /* MessagesCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCommand.swift; sourceTree = "<group>"; };
@@ -272,6 +274,8 @@
 		31FC670B1DB3BEB300ECC5A7 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		31FC670D1DB3BEF700ECC5A7 /* ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollView.swift; path = ../Cells/ScrollView.swift; sourceTree = "<group>"; };
 		31FE19421DB7DFE30087D095 /* GarmentTypeDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarmentTypeDTO.swift; sourceTree = "<group>"; };
+		A820A9891E9FA6E400ECE3F8 /* PaginationDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationDTO.swift; sourceTree = "<group>"; };
+		A820A98B1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+isAtBottom.swift"; sourceTree = "<group>"; };
 		A82F6DA31E964A0F0053B6D1 /* PhotoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoType.swift; sourceTree = "<group>"; };
 		A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOutfitPhotoCommand.swift; sourceTree = "<group>"; };
 		A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadWardrobePhotoCommand.swift; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 				A8F746561E8533E200FEDCD9 /* Languages.swift */,
 				A8F746581E85340500FEDCD9 /* DressStyleDTO.swift */,
 				A82F6DA31E964A0F0053B6D1 /* PhotoType.swift */,
+				A820A9891E9FA6E400ECE3F8 /* PaginationDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -552,6 +557,7 @@
 		311D1F151DAE4B3D00A7F545 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A820A98B1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift */,
 				310919821DAE8FF80083A2C8 /* UIColor+SE.swift */,
 				31E05E261DAF5512007AE913 /* UIFont.swift */,
 				31E05E221DAF5227007AE913 /* UINavigationBar+SE.swift */,
@@ -990,6 +996,7 @@
 				31818E571DAFF265004883D2 /* UITabeViewCell+SE.swift in Sources */,
 				3161C2BC1E01D2F6007DC0FB /* AddressDTO.swift in Sources */,
 				31C8BB321E04808B00D8CBD0 /* StylistListDTO.swift in Sources */,
+				A820A98C1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift in Sources */,
 				310919901DAE9D830083A2C8 /* AccountSessionManager.swift in Sources */,
 				311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */,
 				310919941DAE9FF60083A2C8 /* Typealiases.swift in Sources */,
@@ -1025,6 +1032,7 @@
 				3197B65B1DB23B7E0096EF16 /* MessagesViewController.swift in Sources */,
 				31E05E1E1DAEEADC007AE913 /* Serializable.swift in Sources */,
 				317D60F31DB0A4230044D46B /* TableViewCellWithImage.swift in Sources */,
+				A820A98A1E9FA6E400ECE3F8 /* PaginationDTO.swift in Sources */,
 				31CD44E81DB14CD8007A5E1C /* View.swift in Sources */,
 				31818E551DAFF10E004883D2 /* Reusable.swift in Sources */,
 				318FD7731E472A16008EEA23 /* UpdateMessageStatusCommand.swift in Sources */,

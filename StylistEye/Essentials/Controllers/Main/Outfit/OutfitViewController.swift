@@ -51,6 +51,9 @@ class OutfitViewController: AbstractViewController {
     fileprivate var filterNameLabel = Label()
     
     fileprivate let showFilterButton = Button(type: .system)
+    
+    fileprivate var pagination: PaginationDTO?
+    fileprivate var isRefreshing = false
 
     // MARK: TODO
     fileprivate var selectedFilterTitle: String? {
@@ -242,17 +245,26 @@ class OutfitViewController: AbstractViewController {
 
     }
 
-    fileprivate func loadOutfits() {
+    fileprivate func loadOutfits(page: Int = 1) {
         KVNProgress.show()
-        OutfitsCommand(stylistId: stylistId, dressstyle: styleId).executeCommand { data in
+        isRefreshing = true
+        OutfitsCommand(stylistId: stylistId, dressstyle: styleId).executeCommand(page: page) { data in
+            self.isRefreshing = false
             switch data {
-            case let .success(_, objectsArray: data, apiResponse: apiResponse):
+            case let .success(_, objectsArray: data, pagination: pagination, apiResponse: apiResponse):
                 // TODO: @MS
                 switch apiResponse {
                 case .ok:
+                    self.pagination = pagination
                     KVNProgress.dismiss()
                     // outfits without photo are shown first
-                    self.outfits = data?.sorted(by: {$0.photos?.first == nil && $1.photos?.first != nil})
+                    // TODO: this will probably interfere with pagination
+                    let outfitsData = data?.sorted(by: {$0.photos?.first == nil && $1.photos?.first != nil})
+                    if page == 1 {
+                        self.outfits = outfitsData
+                    } else if let outfits = self.outfits, let outfitsData = outfitsData {
+                        self.outfits = outfits + outfitsData
+                    }
                 case .fail:
                     KVNProgress.showError(withStatus: "Fail code outfit VC")
                 }
@@ -322,7 +334,7 @@ extension OutfitViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 600
     }
 }
 
@@ -361,5 +373,13 @@ extension OutfitViewController: UITableViewDelegate {
         outfitDetailVC.outfitId = outfits?[safe: indexPath.row]?.outfitId
         outfitDetailVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(outfitDetailVC, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let pagination = pagination, let currentPage = pagination.page {
+            if scrollView.isAtBottom() && !isRefreshing && currentPage < pagination.totalPages {
+                self.loadOutfits(page: currentPage+1)
+            }
+        }
     }
 }

@@ -24,6 +24,9 @@ class MessagesViewController: AbstractViewController {
             tableView.reloadData()
         }
     }
+    
+    fileprivate var pagination: PaginationDTO?
+    fileprivate var isRefreshing = false
 
     // MARK: - <Initializable>
     internal override func addElements() {
@@ -93,17 +96,24 @@ class MessagesViewController: AbstractViewController {
         let _ = navigationController?.popViewController(animated: true)
     }
 
-    fileprivate func loadMessages() {
+    fileprivate func loadMessages(page: Int = 1) {
         KVNProgress.show()
-        MessagesCommand().executeCommand { data in
+        isRefreshing = true
+        MessagesCommand().executeCommand(page: page) { data in
+            self.isRefreshing = false
             switch data {
-            case let .success(_, objectsArray: data, apiResponse: apiResponse):
+            case let .success(_, objectsArray: data, pagination: pagination, apiResponse: apiResponse):
                 // TODO: @MS
                 switch apiResponse {
                 case .ok:
                     KVNProgress.dismiss()
                     if let messages = data {
-                        self.messagesDTO = messages
+                        self.pagination = pagination
+                        if pagination?.page == 1 {
+                            self.messagesDTO = messages
+                        } else {
+                            self.messagesDTO = self.messagesDTO + messages
+                        }
                     }
                 case .fail:
                     KVNProgress.showError(withStatus: "Fail code msgs")
@@ -158,7 +168,7 @@ extension MessagesViewController: UITableViewDelegate {
             self.messagesDTO[indexPath.row].lastMessage?.read = true
             UpdateMessageStatusCommand(msgId: msgId).executeCommand(completion: { response in
                 switch response {
-                case let .success(object: _, objectsArray: _, apiResponse: apiResponse):
+                case let .success(object: _, objectsArray: _, pagination: _, apiResponse: apiResponse):
                     switch apiResponse {
                     case .ok:
                         fallthrough
@@ -186,5 +196,13 @@ extension MessagesViewController: UITableViewDelegate {
         }
         navigationController?.pushViewController(msgDetail, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let pagination = pagination, let currentPage = pagination.page {
+            if scrollView.isAtBottom() && !isRefreshing && currentPage < pagination.totalPages {
+                self.loadMessages(page: currentPage+1)
+            }
+        }
     }
 }

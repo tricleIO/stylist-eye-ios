@@ -238,7 +238,7 @@ class OutfitDetailViewController: AbstractViewController {
         KVNProgress.show()
         OutfitDetailCommand(outfitId: outfitId).executeCommand { data in
             switch data {
-            case let .success(data, objectsArray: _, apiResponse: apiResponse):
+            case let .success(data, objectsArray: _, pagination: _, apiResponse: apiResponse):
                 // TODO: @MS
                 switch apiResponse {
                 case .ok:
@@ -299,7 +299,7 @@ class OutfitDetailViewController: AbstractViewController {
                 data in
                 
                 switch data {
-                case let .success(data, objectsArray: _, apiResponse: apiResponse):
+                case let .success(_, objectsArray: _, _, apiResponse: apiResponse):
                     // TODO: @MS
                     switch apiResponse {
                     case .ok:

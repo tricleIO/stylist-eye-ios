@@ -18,6 +18,7 @@ public final class ObjectResponse<Object: Mappable>: Mappable {
     var objectsArray: [Object]?
     var errorMessage: ErrorMEssageDTO?
     var result: Int?
+    var pagination: PaginationDTO?
 
     required public init?(map: Map) {
     }
@@ -27,6 +28,7 @@ public final class ObjectResponse<Object: Mappable>: Mappable {
         objectsArray <- map["data"]
         errorMessage <- map["error"]
         result <- map["result"]
+        pagination <- map["pagination"]
     }
 }
 

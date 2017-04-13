@@ -34,6 +34,7 @@ class WardrobeViewController: AbstractViewController {
     fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburger_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
     fileprivate let messagesController = MessagesViewController()
     fileprivate let backgroundImageView = ImageView()
+    fileprivate var pagination: PaginationDTO?
 
     // MARK: - <Initializable>
     internal override func initializeElements() {
@@ -57,7 +58,7 @@ class WardrobeViewController: AbstractViewController {
         
         GarmentTypeCommand().executeCommand { data in
             switch data {
-            case let .success(object: _, objectsArray: objects, apiResponse: _):
+            case let .success(object: _, objectsArray: objects, pagination: _, apiResponse: _):
                 if let objects = objects {
                     self.garmentTypes = objects.filter {$0.languageId == .czech}
                 }

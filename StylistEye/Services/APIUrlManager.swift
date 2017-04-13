@@ -196,7 +196,6 @@ enum APIUrlManager: APIUrlManagerProtocol {
             fallthrough
         case .messages:
             params["expanded"] = "userDetails,lastMessage"
-            params["size"] = 100
             return params
         case .messageDetail:
             params["expanded"] = "userDetails"

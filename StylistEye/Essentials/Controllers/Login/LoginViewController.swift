@@ -171,7 +171,7 @@ class LoginViewController: AbstractViewController {
             KVNProgress.show()
             LoginCommand(email: email, password: password).executeCommand { data in
                 switch data {
-                case let .success(object: data, _, apiResponse: apiResponse):
+                case let .success(object: data, _, _, apiResponse: apiResponse):
                 // TODO: @MS
                     switch apiResponse {
                     case .ok:

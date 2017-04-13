@@ -42,13 +42,16 @@ class MessageDetailViewController: JSQMessagesViewController {
         }
     }
 
+    fileprivate var pagination: PaginationDTO?
+    
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         MessagesDetailCommand(orderId: orderId).executeCommand { data in
             switch data {
-            case let .success(object: data, objectsArray: _, apiResponse: _):
+            case let .success(object: data, objectsArray: _, pagination: pagination, apiResponse: _):
+                self.pagination = pagination
                 self.dtoMessages = data
                 self.scrollToBottom(animated: true)
             case .failure(message: _, apiResponse: _):
@@ -125,7 +128,7 @@ extension MessageDetailViewController {
         var newMessage: MyMessagesDTO?
         SendMessageCommand(thread: threadId, content: text, orderId: orderId).executeCommand { response in
             switch response {
-            case let .success(object: message, objectsArray: _, apiResponse: apiResponse):
+            case let .success(object: message, objectsArray: _, pagination: _, apiResponse: apiResponse):
                 switch apiResponse {
                 case .ok:
                     self.inputToolbar.contentView.textView.text = ""
