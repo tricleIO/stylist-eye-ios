@@ -36,6 +36,10 @@ class LoginViewController: AbstractViewController {
         )
         emailTextField.textColor = Palette[custom: .appColor]
         emailTextField.tintColor = Palette[custom: .appColor]
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.spellCheckingType = .no
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
         let emailImageView = ImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 12))
         emailImageView.image = #imageLiteral(resourceName: "human_image")
         emailImageView.contentMode = .scaleAspectFit

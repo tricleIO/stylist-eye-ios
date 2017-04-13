@@ -262,38 +262,6 @@ class OutfitViewController: AbstractViewController {
         }
     }
     
-    fileprivate func openCamera(outfitId: Int) {
-        
-        let cameraController = CameraViewController()
-        cameraController.imagePicked = {
-            image in
-            
-            let imageJpeg = image.jpegData()
-            let uploadCommand = UploadOutfitPhotoCommand(id: outfitId, photoType: .OutfitPhotoBase, photo: imageJpeg)
-            
-            KVNProgress.show()
-            uploadCommand.executeCommand {
-                data in
-                
-                switch data {
-                case let .success(data, objectsArray: _, apiResponse: apiResponse):
-                    // TODO: @MS
-                    switch apiResponse {
-                    case .ok:
-                        KVNProgress.showSuccess()
-                        self.loadOutfits()
-                    case .fail:
-                        KVNProgress.showError(withStatus: "Upload failed")
-                    }
-                case let .failure(message):
-                    KVNProgress.showError(withStatus: message.message)
-                }
-            }
-        }
-        let navController = UINavigationController(rootViewController: cameraController)
-        navController.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))
-        present(navController, animated: true, completion: nil)
-    }
 }
 
 // MARK: - <UITableViewDataSource>
@@ -327,9 +295,6 @@ extension OutfitViewController: UITableViewDataSource {
             } else {
                 // use collection mosaic
                 cell.mosaicImages = outfit.components?.flatMap({$0.photo?.image})
-                cell.addPhotoCallback = {
-                    self.openCamera(outfitId: outfit.outfitId)
-                }
             }
             cell.stylistImageString = outfit.stylist?.photo?.image
         }
@@ -353,7 +318,11 @@ extension OutfitViewController: UITableViewDataSource {
         if tableView == filterTableView {
             return 40 // TODO: @MS
         }
-        return GUIConfiguration.OutfitCellHeight
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
     }
 }
 

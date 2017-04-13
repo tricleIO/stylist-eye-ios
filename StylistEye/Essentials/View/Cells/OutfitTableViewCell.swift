@@ -115,9 +115,6 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         addPhotoButton.setImage(#imageLiteral(resourceName: "cmeraPlus_icon").withRenderingMode(.alwaysTemplate), for: .normal)
         addPhotoButton.tintColor = Palette[custom: .title]
         addPhotoButton.isUserInteractionEnabled = false
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoOverlayTapped))
-        addPhotoOverlay.isUserInteractionEnabled = true
-        addPhotoOverlay.addGestureRecognizer(tapGesture)
         
         addPhotoLabel.text = StringContainer[.takePhoto]
         addPhotoLabel.textColor = Palette[custom: .title]
@@ -146,17 +143,16 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
     internal override func addElements() {
         super.addElements()
         
-        contentView.addSubviews(views:
-            [
-                coverView,
-                mainImageView,
-                imageMosaicContainer,
-                stylistProfileImageView,
-                stylistNameLabel,
-                descriptionLabel,
-                zoomButton,
-                ]
-        )
+        contentView.addSubview(coverView)
+        coverView.addSubviews(views: [
+            mainImageView,
+            imageMosaicContainer,
+            stylistProfileImageView,
+            stylistNameLabel,
+            descriptionLabel,
+            zoomButton
+        ])
+        
         imageMosaicContainer.addSubview(imageMosaicCollectionView)
         imageMosaicContainer.addSubview(addPhotoOverlay)
         addPhotoOverlay.addSubview(addPhotoButton)
@@ -177,7 +173,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
             make.leading.equalTo(coverView).inset(10)
             make.trailing.equalTo(coverView).inset(10)
             make.top.equalTo(coverView).inset(10)
-            make.height.equalTo(550)
+            make.height.equalTo(mainImageView.snp.width).multipliedBy(4.0/3.0)
         }
         
         imageMosaicContainer.snp.makeConstraints { make in

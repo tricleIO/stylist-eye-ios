@@ -100,16 +100,15 @@ class OutfitDetailTableViewCell: AbstractTableViewCell, UICollectionViewDelegate
     override func addElements() {
         super.addElements()
 
-        contentView.addSubviews(views:
+        contentView.addSubview(coverView)
+        coverView.addSubviews(views:
             [
-                coverView,
                 customTextLabel,
                 zoomImageView,
+                mainImageView,
+                imageMosaicContainer
             ]
         )
-
-        coverView.addSubview(mainImageView)
-        coverView.addSubview(imageMosaicContainer)
         
         imageMosaicContainer.addSubview(imageMosaicCollectionView)
         imageMosaicContainer.addSubview(addPhotoOverlay)
@@ -131,7 +130,6 @@ class OutfitDetailTableViewCell: AbstractTableViewCell, UICollectionViewDelegate
             make.leading.equalTo(contentView).inset(10)
             make.trailing.equalTo(contentView).inset(10)
             make.top.equalTo(customTextLabel.snp.bottom).offset(15)
-            make.height.equalTo(200)
             make.bottom.equalTo(contentView).inset(5)
         }
 
@@ -147,6 +145,7 @@ class OutfitDetailTableViewCell: AbstractTableViewCell, UICollectionViewDelegate
             make.top.equalTo(coverView).inset(10)
             make.bottom.equalTo(coverView).inset(10)
             make.trailing.equalTo(coverView).inset(10)
+            make.height.equalTo(mainImageView.snp.width).multipliedBy(4.0/3.0)
         }
         
         imageMosaicContainer.snp.makeConstraints { make in
