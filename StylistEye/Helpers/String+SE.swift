@@ -103,6 +103,7 @@ extension String {
         case messages
         case outfitOverview
         case takePhoto
+        case noPhotoYet
 
         var localizedString: String {
             var stringToReturn: String = String.empty
@@ -151,6 +152,8 @@ extension String {
                 stringToReturn = "outfit-overview"
             case .takePhoto:
                 stringToReturn = "take-photo"
+            case .noPhotoYet:
+                stringToReturn = "no-photo-yet"
             }
             return stringToReturn
         }

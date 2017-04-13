@@ -338,7 +338,7 @@ extension OutfitDetailViewController: UITableViewDataSource {
                 cell.mainImageString = photo.image
             } else {
                 // otherwise, use collection of compoments
-                cell.mosaicImages = outfitTableData?.components.flatMap {$0.photo?.image}
+                cell.showPlaceholder()
             }
             
             return cell
