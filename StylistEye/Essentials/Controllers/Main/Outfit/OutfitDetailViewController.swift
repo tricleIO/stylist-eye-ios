@@ -96,6 +96,22 @@ class OutfitDetailViewController: AbstractViewController {
     fileprivate let stylistDescriptionLabel = Label()
     fileprivate let dressStyleLabel = Label()
     fileprivate let outfitDescriptionLabel = Label()
+    
+    fileprivate var componentsCount: Int {
+        if let count = outfitTableData?.components.count {
+            return count
+        } else {
+            return 0
+        }
+    }
+    
+    fileprivate var outfitPhotosCount: Int {
+        if let count = outfitTableData?.photos.count {
+            return min(count, 3)
+        } else {
+            return 1 // placeholder
+        }
+    }
 
     // MARK: - <Initializable>
     internal override func initializeElements() {
@@ -329,12 +345,12 @@ extension OutfitDetailViewController: UITableViewDataSource {
         cell.backgroundColor = Palette[basic: .clear]
       
         let row = indexPath.row
-        if row == 0 {
+        if row < outfitPhotosCount {
             
             cell.labelText = StringContainer[.outfitOverview]
             
             // if have user provided foto, use it
-            if let photo = outfitTableData?.photos.first {
+            if let photo = outfitTableData?.photos[safe: row] {
                 cell.mainImageString = photo.image
             } else {
                 // otherwise, use collection of compoments
@@ -345,7 +361,7 @@ extension OutfitDetailViewController: UITableViewDataSource {
             
         } else {
             
-            if let components = outfitTableData?.components[safe: indexPath.row-1] {
+            if let components = outfitTableData?.components[safe: indexPath.row-outfitPhotosCount] {
                 cell.labelText = components.garmetType?.name
                 cell.mainImageString = components.photo?.image
             }
@@ -356,11 +372,7 @@ extension OutfitDetailViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let count = outfitTableData?.components.count {
-            return count + 1
-        } else {
-            return 0
-        }
+        return outfitPhotosCount + componentsCount
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
