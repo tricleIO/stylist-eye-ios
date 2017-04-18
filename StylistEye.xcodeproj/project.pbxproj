@@ -125,6 +125,7 @@
 		A820A98C1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A820A98B1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift */; };
 		A82F6DA41E964A0F0053B6D1 /* PhotoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F6DA31E964A0F0053B6D1 /* PhotoType.swift */; };
 		A82F6DA61E964A380053B6D1 /* UploadOutfitPhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */; };
+		A86CCF561EA649C0006D3245 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86CCF551EA649C0006D3245 /* PhotoDetailViewController.swift */; };
 		A8C434E61E94E07100FF8832 /* UploadWardrobePhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */; };
 		A8C434E81E94E2A300FF8832 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E71E94E2A300FF8832 /* UIImage.swift */; };
 		A8F746571E8533E200FEDCD9 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F746561E8533E200FEDCD9 /* Languages.swift */; };
@@ -278,6 +279,7 @@
 		A820A98B1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+isAtBottom.swift"; sourceTree = "<group>"; };
 		A82F6DA31E964A0F0053B6D1 /* PhotoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoType.swift; sourceTree = "<group>"; };
 		A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOutfitPhotoCommand.swift; sourceTree = "<group>"; };
+		A86CCF551EA649C0006D3245 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadWardrobePhotoCommand.swift; sourceTree = "<group>"; };
 		A8C434E71E94E2A300FF8832 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		A8F746561E8533E200FEDCD9 /* Languages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 				31818E4E1DAFEBF7004883D2 /* SettingsViewController.swift */,
 				31508DCE1DB3C73200D26F53 /* CameraViewController.swift */,
 				31508DD01DB3D0F700D26F53 /* CaptureImageViewController.swift */,
+				A86CCF551EA649C0006D3245 /* PhotoDetailViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -995,6 +998,7 @@
 				3102869F1DAFA41A007EE87B /* MainTabBarController.swift in Sources */,
 				31818E571DAFF265004883D2 /* UITabeViewCell+SE.swift in Sources */,
 				3161C2BC1E01D2F6007DC0FB /* AddressDTO.swift in Sources */,
+				A86CCF561EA649C0006D3245 /* PhotoDetailViewController.swift in Sources */,
 				31C8BB321E04808B00D8CBD0 /* StylistListDTO.swift in Sources */,
 				A820A98C1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift in Sources */,
 				310919901DAE9D830083A2C8 /* AccountSessionManager.swift in Sources */,

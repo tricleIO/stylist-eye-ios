@@ -112,6 +112,8 @@ class OutfitDetailViewController: AbstractViewController {
             return 1 // placeholder
         }
     }
+    
+    fileprivate var toolbar = UIToolbar()
 
     // MARK: - <Initializable>
     internal override func initializeElements() {
@@ -139,6 +141,8 @@ class OutfitDetailViewController: AbstractViewController {
         stylistInfoBox.backgroundColor = Palette[basic: .white].withAlphaComponent(0.2)
         stylistInfoBox.layer.borderColor = Palette[custom: .appColor].cgColor
         stylistInfoBox.layer.borderWidth = 1
+        
+        toolbar.barTintColor = Palette[custom: .purple]
     }
 
     internal override func addElements() {
@@ -150,6 +154,7 @@ class OutfitDetailViewController: AbstractViewController {
                 productDescriptionLabel,
                 productNameLabel,
                 tableView,
+                toolbar,
             ]
         )
         
@@ -233,6 +238,11 @@ class OutfitDetailViewController: AbstractViewController {
             make.top.equalTo(ratingView.snp.bottom).offset(5)
         }
 
+        toolbar.snp.makeConstraints { make in
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.bottom.equalTo(view)
+        }
     }
 
     internal override func setupView() {
@@ -260,6 +270,7 @@ class OutfitDetailViewController: AbstractViewController {
                 case .ok:
                     KVNProgress.dismiss()
                     self.outfitTableData = data
+                    self.configureToolbar()
                 case .fail:
                     KVNProgress.showError(withStatus: "Fail code - outfit detail")
                 }
@@ -298,7 +309,7 @@ class OutfitDetailViewController: AbstractViewController {
         outfitDescriptionLabel.numberOfLines = 0
     }
     
-    fileprivate func openCamera() {
+    fileprivate func openCamera(photoType: PhotoType) {
         guard let outfitId = outfitId else {
             return
         }
@@ -308,7 +319,7 @@ class OutfitDetailViewController: AbstractViewController {
             image in
             
             let imageJpeg = image.jpegData()
-            let uploadCommand = UploadOutfitPhotoCommand(id: outfitId, photoType: .OutfitPhotoBase, photo: imageJpeg)
+            let uploadCommand = UploadOutfitPhotoCommand(id: outfitId, photoType: photoType, photo: imageJpeg)
             
             KVNProgress.show()
             uploadCommand.executeCommand {
@@ -333,6 +344,35 @@ class OutfitDetailViewController: AbstractViewController {
         navController.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))
         present(navController, animated: true, completion: nil)
     }
+    
+    fileprivate func configureToolbar() {
+        switch outfitTableData?.photos.count ?? 0 {
+        case 0:
+            let filler1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            let filler2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            let button = UIBarButtonItem(image: #imageLiteral(resourceName: "camera_icon"), style: .plain, target: self, action: #selector(addFirstPhotoTapped))
+            button.tintColor = Palette[custom: .title]
+            toolbar.items = [filler1, button, filler2]
+            toolbar.isHidden = false
+        case 1,2:
+            let filler1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            let filler2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            let button = UIBarButtonItem(image: #imageLiteral(resourceName: "cmeraPlus_icon"), style: .plain, target: self, action: #selector(addMorePhotosTapped))
+            button.tintColor = Palette[custom: .title]
+            toolbar.items = [filler1, button, filler2]
+            toolbar.isHidden = false
+        default:
+            toolbar.isHidden = true
+        }
+    }
+    
+    func addFirstPhotoTapped() {
+        openCamera(photoType: .OutfitPhotoBase)
+    }
+    
+    func addMorePhotosTapped() {
+        openCamera(photoType: .OtherOutfitPhoto)
+    }
 }
 
 // MARK: - <UITableViewDataSource>
@@ -343,6 +383,7 @@ extension OutfitDetailViewController: UITableViewDataSource {
         let cell: OutfitDetailTableViewCell = tableView.dequeueReusableCell(.value1)
         
         cell.backgroundColor = Palette[basic: .clear]
+        cell.delegate = self
       
         let row = indexPath.row
         if row < outfitPhotosCount {
@@ -395,8 +436,32 @@ extension OutfitDetailViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.row == 0 {
-            openCamera()
+            openCamera(photoType: .OutfitPhotoBase)
         }
     }
+}
+
+extension OutfitDetailViewController: OutfitDetailCellDelegateProtocol {
+    
+    func zoomTapped(cell: OutfitDetailTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell), let data = outfitTableData else {
+            return
+        }
+        
+        let detail = PhotoDetailViewController()
+        
+        if indexPath.row < outfitPhotosCount {
+            detail.imageUrl = data.photos[safe: indexPath.row]?.image?.urlValue
+        } else {
+            let index = indexPath.row - outfitPhotosCount
+            detail.imageUrl = data.components[safe: index]?.photo?.image?.urlValue
+        }
+        
+        let nav = UINavigationController(rootViewController: detail)
+        nav.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))
+        
+        self.present(nav, animated: true, completion: nil)
+    }
+    
 }
 

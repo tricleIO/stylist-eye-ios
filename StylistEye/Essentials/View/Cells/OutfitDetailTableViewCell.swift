@@ -9,6 +9,12 @@
 import Kingfisher
 import UIKit
 
+protocol OutfitDetailCellDelegateProtocol: class {
+    
+    func zoomTapped(cell: OutfitDetailTableViewCell)
+    
+}
+
 class OutfitDetailTableViewCell: AbstractTableViewCell {
 
     // MARK: - Properties
@@ -45,6 +51,8 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
     fileprivate let coverView = View()
 
     fileprivate let customTextLabel = Label()
+    
+    weak var delegate: OutfitDetailCellDelegateProtocol?
 
     // MARK: - <Initialize>
     override func initializeElements() {
@@ -68,7 +76,11 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
 
         mainImageView.contentMode = .scaleAspectFill
         mainImageView.clipsToBounds = true
+        
         zoomImageView.contentMode = .scaleAspectFit
+        zoomImageView.isUserInteractionEnabled = true
+        let zoomTap = UITapGestureRecognizer(target: self, action: #selector(zoomTapped))
+        zoomImageView.addGestureRecognizer(zoomTap)
     }
 
     override func addElements() {
@@ -78,8 +90,8 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
         coverView.addSubviews(views:
             [
                 customTextLabel,
-                zoomImageView,
                 mainImageView,
+                zoomImageView,
             ]
         )
         
@@ -141,6 +153,10 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
         
         mainImageView.kf.cancelDownloadTask()
         addPhotoOverlay.isHidden = true
+    }
+    
+    func zoomTapped() {
+        delegate?.zoomTapped(cell: self)
     }
     
 }

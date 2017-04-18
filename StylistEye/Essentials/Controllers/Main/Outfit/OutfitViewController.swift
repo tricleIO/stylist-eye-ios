@@ -259,10 +259,10 @@ class OutfitViewController: AbstractViewController {
                     KVNProgress.dismiss()
                     // outfits without photo are shown first
                     // TODO: this will probably interfere with pagination
-                    let outfitsData = data?.sorted(by: {$0.photos?.first == nil && $1.photos?.first != nil})
+                    //let outfitsData = data?.sorted(by: {$0.photos?.first == nil && $1.photos?.first != nil})
                     if page == 1 {
-                        self.outfits = outfitsData
-                    } else if let outfits = self.outfits, let outfitsData = outfitsData {
+                        self.outfits = data
+                    } else if let outfits = self.outfits, let outfitsData = data {
                         self.outfits = outfits + outfitsData
                     }
                 case .fail:

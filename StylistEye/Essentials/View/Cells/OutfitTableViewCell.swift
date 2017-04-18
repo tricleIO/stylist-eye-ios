@@ -59,11 +59,13 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
     
     var mosaicImages: [String]? {
         didSet {
+            /*
             if let mosaicImages = mosaicImages {
                 self.mosaicImages = Array(mosaicImages.prefix(through: min(3, mosaicImages.count-1) ))
                 imageMosaicContainer.isHidden = false
                 imageMosaicCollectionView.reloadData()
             }
+            */
         }
     }
     
@@ -71,7 +73,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
     fileprivate let mainImageView = ImageView()
     
     fileprivate let imageMosaicContainer = View()
-    fileprivate var imageMosaicCollectionView: UICollectionView!
+    //fileprivate var imageMosaicCollectionView: UICollectionView!
     fileprivate var addPhotoOverlay = View()
     fileprivate var addPhotoButton = UIButton()
     fileprivate var addPhotoLabel = UILabel()
@@ -101,6 +103,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         collectionLayout.minimumInteritemSpacing = 0
         collectionLayout.scrollDirection = .horizontal
         
+        /*
         // TODO: https://cocoapods.org/pods/ADMozaicCollectionViewLayout
         imageMosaicCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionLayout)
         imageMosaicCollectionView.collectionViewLayout = collectionLayout
@@ -110,6 +113,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         imageMosaicCollectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
         imageMosaicCollectionView.backgroundColor = UIColor.white
         imageMosaicCollectionView.isUserInteractionEnabled = false
+        */
         
         addPhotoOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         addPhotoButton.setImage(#imageLiteral(resourceName: "cmeraPlus_icon").withRenderingMode(.alwaysTemplate), for: .normal)
@@ -153,7 +157,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
             zoomButton
         ])
         
-        imageMosaicContainer.addSubview(imageMosaicCollectionView)
+        //imageMosaicContainer.addSubview(imageMosaicCollectionView)
         imageMosaicContainer.addSubview(addPhotoOverlay)
         addPhotoOverlay.addSubview(addPhotoButton)
         addPhotoOverlay.addSubview(addPhotoLabel)
@@ -183,18 +187,20 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
             make.bottom.equalTo(mainImageView)
         }
         
+        /*
         imageMosaicCollectionView.snp.makeConstraints { make in
             make.leading.equalTo(imageMosaicContainer)
             make.trailing.equalTo(imageMosaicContainer)
             make.top.equalTo(imageMosaicContainer)
             make.bottom.equalTo(imageMosaicContainer)
         }
+        */
         
         addPhotoOverlay.snp.makeConstraints { make in
-            make.leading.equalTo(imageMosaicCollectionView)
-            make.top.equalTo(imageMosaicCollectionView)
-            make.bottom.equalTo(imageMosaicCollectionView)
-            make.trailing.equalTo(imageMosaicCollectionView)
+            make.leading.equalTo(mainImageView)
+            make.top.equalTo(mainImageView)
+            make.bottom.equalTo(mainImageView)
+            make.trailing.equalTo(mainImageView)
         }
         
         addPhotoButton.snp.makeConstraints { make in
