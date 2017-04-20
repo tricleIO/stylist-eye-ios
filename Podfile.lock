@@ -9,10 +9,10 @@ PODS:
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
-  - Kingfisher (3.2.1)
+  - Kingfisher (3.6.2)
   - KVNProgress (2.3.1)
   - ObjectMapper (2.2.1)
-  - SnapKit (3.0.2)
+  - SnapKit (3.2.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -32,10 +32,10 @@ SPEC CHECKSUMS:
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-  Kingfisher: 64ef28c6d3d6f344e3ae2d7f5c9da80439505d99
+  Kingfisher: 2c94e72c6830622c71d06adf4ea024c37d316830
   KVNProgress: 8167b1f19e2758290c0b6143020ed9dcbb0477a1
   ObjectMapper: 41e43e1a89f8060ef5ea5d04ba852e269a621d68
-  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
 
 PODFILE CHECKSUM: a1d7d30ef0b583c43b9524dc3e03a2dc5c21269e
 

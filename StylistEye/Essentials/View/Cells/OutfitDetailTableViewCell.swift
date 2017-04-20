@@ -159,4 +159,8 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
         delegate?.zoomTapped(cell: self)
     }
     
+    func zoomButton(shown: Bool) {
+        zoomImageView.isHidden = !shown
+    }
+    
 }

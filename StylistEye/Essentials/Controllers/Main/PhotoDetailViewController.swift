@@ -74,7 +74,11 @@ class PhotoDetailViewController: AbstractViewController {
     // MARK: - Actions
     
     func deleteButtonAction() {
-        
+        guard let id = imageId else {
+            return
+        }
+        let cmd = DeleteOutfitPhotoCommand(id: id)
+        // TODO
     }
     
     func cancelBarAction() {

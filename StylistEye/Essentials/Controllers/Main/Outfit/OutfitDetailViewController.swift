@@ -388,7 +388,13 @@ extension OutfitDetailViewController: UITableViewDataSource {
         let row = indexPath.row
         if row < outfitPhotosCount {
             
-            cell.labelText = StringContainer[.outfitOverview]
+            cell.zoomButton(shown: true)
+            
+            if row == 0 {
+                cell.labelText = StringContainer[.outfitOverview]
+            } else {
+                cell.labelText = ""
+            }
             
             // if have user provided foto, use it
             if let photo = outfitTableData?.photos[safe: row] {
@@ -401,6 +407,8 @@ extension OutfitDetailViewController: UITableViewDataSource {
             return cell
             
         } else {
+            
+            cell.zoomButton(shown: false)
             
             if let components = outfitTableData?.components[safe: indexPath.row-outfitPhotosCount] {
                 cell.labelText = components.garmetType?.name
@@ -426,7 +434,7 @@ extension OutfitDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 600
     }
 }
 
