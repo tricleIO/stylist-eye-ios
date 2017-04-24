@@ -457,18 +457,32 @@ extension OutfitDetailViewController: OutfitDetailCellDelegateProtocol {
         }
         
         let detail = PhotoDetailViewController()
+        detail.delegate = self
         
         if indexPath.row < outfitPhotosCount {
             detail.imageUrl = data.photos[safe: indexPath.row]?.image?.urlValue
+            detail.imageId = data.photos[safe: indexPath.row]?.id
         } else {
             let index = indexPath.row - outfitPhotosCount
             detail.imageUrl = data.components[safe: index]?.photo?.image?.urlValue
+            detail.imageId = data.components[safe: index]?.photo?.id
         }
         
         let nav = UINavigationController(rootViewController: detail)
         nav.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))
         
         self.present(nav, animated: true, completion: nil)
+    }
+    
+}
+
+extension OutfitDetailViewController: PhotoDetailDelegate {
+    
+    func photoDeleted() {
+        guard let outfitId = outfitId else {
+            return
+        }
+        self.getOutfitDetailInfo(outfitId: outfitId)
     }
     
 }

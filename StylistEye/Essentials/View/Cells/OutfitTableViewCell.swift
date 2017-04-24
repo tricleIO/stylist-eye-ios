@@ -245,6 +245,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         super.prepareForReuse()
         
         mainImageView.kf.cancelDownloadTask()
+        mainImageView.image = nil
         imageMosaicContainer.isHidden = true
         mosaicImages = nil
     }

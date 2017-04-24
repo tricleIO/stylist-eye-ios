@@ -152,6 +152,7 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
         super.prepareForReuse()
         
         mainImageView.kf.cancelDownloadTask()
+        mainImageView.image = nil
         addPhotoOverlay.isHidden = true
     }
     

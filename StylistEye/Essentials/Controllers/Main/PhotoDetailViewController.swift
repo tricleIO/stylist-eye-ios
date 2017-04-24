@@ -10,6 +10,13 @@ import Foundation
 import UIKit
 import SnapKit
 import Kingfisher
+import KVNProgress
+
+protocol PhotoDetailDelegate: class {
+    
+    func photoDeleted()
+    
+}
 
 class PhotoDetailViewController: AbstractViewController {
     
@@ -18,6 +25,8 @@ class PhotoDetailViewController: AbstractViewController {
     
     fileprivate var imageView = UIImageView()
     fileprivate var toolbar = UIToolbar()
+    
+    weak var delegate: PhotoDetailDelegate?
     
     override func initializeElements() {
         super.initializeElements()
@@ -77,8 +86,24 @@ class PhotoDetailViewController: AbstractViewController {
         guard let id = imageId else {
             return
         }
-        let cmd = DeleteOutfitPhotoCommand(id: id)
-        // TODO
+        KVNProgress.show()
+        let cmd = DeleteOutfitPhotoCommand(id: id).executeCommand() {
+            data in
+            switch data {
+            case let .success(_, objectsArray: _, pagination: _, apiResponse: apiResponse):
+                // TODO: @MS
+                switch apiResponse {
+                case .ok:
+                    KVNProgress.dismiss()
+                    self.delegate?.photoDeleted()
+                    self.dismiss(animated: true, completion: nil)
+                case .fail:
+                    KVNProgress.showError(withStatus: "Fail code - delete photo")
+                }
+            case let .failure(message):
+                KVNProgress.showError(withStatus: message.message)
+            }
+        }
     }
     
     func cancelBarAction() {
