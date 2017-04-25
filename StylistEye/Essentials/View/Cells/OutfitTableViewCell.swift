@@ -115,6 +115,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         imageMosaicCollectionView.isUserInteractionEnabled = false
         */
         
+        addPhotoOverlay.isHidden = true
         addPhotoOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         addPhotoButton.setImage(#imageLiteral(resourceName: "cmeraPlus_icon").withRenderingMode(.alwaysTemplate), for: .normal)
         addPhotoButton.tintColor = Palette[custom: .title]
@@ -158,7 +159,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         ])
         
         //imageMosaicContainer.addSubview(imageMosaicCollectionView)
-        imageMosaicContainer.addSubview(addPhotoOverlay)
+        mainImageView.addSubview(addPhotoOverlay)
         addPhotoOverlay.addSubview(addPhotoButton)
         addPhotoOverlay.addSubview(addPhotoLabel)
     }
@@ -241,6 +242,11 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         }
     }
     
+    func showPlaceholder() {
+        addPhotoOverlay.isHidden = false
+        mainImageView.image = #imageLiteral(resourceName: "background_image")
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -248,6 +254,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         mainImageView.image = nil
         imageMosaicContainer.isHidden = true
         mosaicImages = nil
+        addPhotoOverlay.isHidden = true
     }
     
     // MARK: - User Action

@@ -105,9 +105,10 @@ class OutfitDetailViewController: AbstractViewController {
         }
     }
     
-    fileprivate var outfitPhotosCount: Int {
+    fileprivate var outfitCellsCount: Int {
         if let count = outfitTableData?.photos.count {
-            return min(count, 3)
+            let count = min(count, 3) // show max 3 photos
+            return max(count, 1) // if no photos, show placeholder
         } else {
             return 1 // placeholder
         }
@@ -386,7 +387,7 @@ extension OutfitDetailViewController: UITableViewDataSource {
         cell.delegate = self
       
         let row = indexPath.row
-        if row < outfitPhotosCount {
+        if row < outfitCellsCount {
             
             cell.zoomButton(shown: true)
             
@@ -410,7 +411,7 @@ extension OutfitDetailViewController: UITableViewDataSource {
             
             cell.zoomButton(shown: false)
             
-            if let components = outfitTableData?.components[safe: indexPath.row-outfitPhotosCount] {
+            if let components = outfitTableData?.components[safe: indexPath.row-outfitCellsCount] {
                 cell.labelText = components.garmetType?.name
                 cell.mainImageString = components.photo?.image
             }
@@ -421,7 +422,7 @@ extension OutfitDetailViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return outfitPhotosCount + componentsCount
+        return outfitCellsCount + componentsCount
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -443,8 +444,13 @@ extension OutfitDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row == 0 {
+        if indexPath.row == 0 && (outfitTableData?.photos.count ?? 0) == 0 {
+            // placeholder - take photo
             openCamera(photoType: .OutfitPhotoBase)
+        } else {
+            // existing photo - show detail
+            let cell = tableView.cellForRow(at: indexPath) as! OutfitDetailTableViewCell
+            zoomTapped(cell: cell)
         }
     }
 }
@@ -459,11 +465,11 @@ extension OutfitDetailViewController: OutfitDetailCellDelegateProtocol {
         let detail = PhotoDetailViewController()
         detail.delegate = self
         
-        if indexPath.row < outfitPhotosCount {
+        if indexPath.row < outfitCellsCount {
             detail.imageUrl = data.photos[safe: indexPath.row]?.image?.urlValue
             detail.imageId = data.photos[safe: indexPath.row]?.id
         } else {
-            let index = indexPath.row - outfitPhotosCount
+            let index = indexPath.row - outfitCellsCount
             detail.imageUrl = data.components[safe: index]?.photo?.image?.urlValue
             detail.imageId = data.components[safe: index]?.photo?.id
         }

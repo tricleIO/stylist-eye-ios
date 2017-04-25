@@ -257,9 +257,6 @@ class OutfitViewController: AbstractViewController {
                 case .ok:
                     self.pagination = pagination
                     KVNProgress.dismiss()
-                    // outfits without photo are shown first
-                    // TODO: this will probably interfere with pagination
-                    //let outfitsData = data?.sorted(by: {$0.photos?.first == nil && $1.photos?.first != nil})
                     if page == 1 {
                         self.outfits = data
                     } else if let outfits = self.outfits, let outfitsData = data {
@@ -306,7 +303,8 @@ extension OutfitViewController: UITableViewDataSource {
                 cell.mainImageString = outfitImage
             } else {
                 // use collection mosaic
-                cell.mosaicImages = outfit.components?.flatMap({$0.photo?.image})
+                // cell.mosaicImages = outfit.components?.flatMap({$0.photo?.image})
+                cell.showPlaceholder()
             }
             cell.stylistImageString = outfit.stylist?.photo?.image
         }
