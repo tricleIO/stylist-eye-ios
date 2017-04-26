@@ -96,6 +96,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         mainImageView.contentMode = .scaleAspectFill
         mainImageView.clipsToBounds = true
         mainImageView.image = #imageLiteral(resourceName: "placeholder")
+        mainImageView.kf.indicatorType = .activity
         
         imageMosaicContainer.isHidden = true
         let collectionLayout = UICollectionViewFlowLayout()

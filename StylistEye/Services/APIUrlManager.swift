@@ -207,7 +207,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return params
         case let .outfits(stylistId, dressstyle):
             if let stylistId = stylistId {
-                params["stylist"] = stylistId
+                params["stylists"] = stylistId
             }
             if let dressstyle = dressstyle {
                 params["dressstyle"] = dressstyle

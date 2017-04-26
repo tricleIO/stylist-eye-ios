@@ -76,6 +76,7 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
 
         mainImageView.contentMode = .scaleAspectFill
         mainImageView.clipsToBounds = true
+        mainImageView.kf.indicatorType = .activity
         
         zoomImageView.contentMode = .scaleAspectFit
         zoomImageView.isUserInteractionEnabled = true

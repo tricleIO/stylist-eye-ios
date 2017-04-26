@@ -32,9 +32,9 @@ class PhotoDetailViewController: AbstractViewController {
         super.initializeElements()
         
         backgroundImage.image = nil
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = Palette[custom: .purple]
         
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         
         let filler1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let filler2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -43,7 +43,7 @@ class PhotoDetailViewController: AbstractViewController {
         toolbar.items = [filler1, deleteButton, filler2]
         toolbar.barTintColor = Palette[custom: .purple]
         
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(cancelBarAction))
+        let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "backArrow_icon"), style: .plain, target: self, action: #selector(cancelBarAction))
         cancelButton.tintColor = Palette[custom: .title]
         navigationItem.leftBarButtonItem = cancelButton
     }
@@ -64,13 +64,14 @@ class PhotoDetailViewController: AbstractViewController {
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
             make.top.equalTo(view)
-            make.bottom.equalTo(view)
+            make.height.equalTo(view.snp.width).multipliedBy(4.0/3.0)
         }
         
         toolbar.snp.makeConstraints { make in
             make.bottom.equalTo(view)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
+            make.top.equalTo(imageView.snp.bottom)
         }
     }
     
