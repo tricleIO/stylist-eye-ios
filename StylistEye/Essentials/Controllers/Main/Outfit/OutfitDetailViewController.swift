@@ -93,7 +93,7 @@ class OutfitDetailViewController: AbstractViewController {
     fileprivate let ratingView = RatingView()
     
     fileprivate let stylistNameLabel = Label()
-    fileprivate let stylistDescriptionLabel = Label()
+    //fileprivate let stylistDescriptionLabel = Label()
     fileprivate let dressStyleLabel = Label()
     fileprivate let outfitDescriptionLabel = Label()
     
@@ -163,7 +163,7 @@ class OutfitDetailViewController: AbstractViewController {
             [
                 stylistProfileImageView,
                 stylistNameLabel,
-                stylistDescriptionLabel,
+                //stylistDescriptionLabel,
                 outfitDescriptionLabel,
                 dressStyleLabel,
                 ratingView,
@@ -211,32 +211,34 @@ class OutfitDetailViewController: AbstractViewController {
             make.height.equalTo(20)
         }
 
+        /*
         stylistDescriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
             make.height.equalTo(20)
             make.top.equalTo(stylistNameLabel.snp.bottom).offset(5)
         }
-
-        dressStyleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
-            make.trailing.equalTo(stylistInfoBox).inset(5)
-            make.height.equalTo(20)
-            make.top.equalTo(outfitDescriptionLabel.snp.bottom).offset(5)
-        }
+        */
         
         ratingView.snp.makeConstraints { make in
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
-            make.height.equalTo(30)
-            make.top.equalTo(stylistDescriptionLabel.snp.bottom).offset(5)
+            make.height.equalTo(20)
+            make.top.equalTo(stylistNameLabel.snp.bottom).offset(5)
         }
 
         outfitDescriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
-            make.height.equalTo(20)
             make.top.equalTo(ratingView.snp.bottom).offset(5)
+        }
+        
+        dressStyleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
+            make.trailing.equalTo(stylistInfoBox).inset(5)
+            make.height.equalTo(20)
+            make.top.equalTo(outfitDescriptionLabel.snp.bottom).offset(5)
+            make.bottom.equalTo(stylistInfoBox).inset(5)
         }
 
         toolbar.snp.makeConstraints { make in
@@ -291,16 +293,21 @@ class OutfitDetailViewController: AbstractViewController {
         
         if let stylist = outfitTableData?.stylist {
             if let stylistName = stylist.givenName, let familyName = stylist.familyName {
-                stylistNameLabel.text = stylistName + String.space + familyName
+                if let place = stylist.address?.country {
+                    stylistNameLabel.text = "\(stylistName) \(familyName), \(place)"
+                } else {
+                    stylistNameLabel.text = "\(stylistName) \(familyName)"
+                }
+                
             }
-            stylistDescriptionLabel.text = "stylist description"
+            //stylistDescriptionLabel.text = "stylist description"
         }
 
         stylistNameLabel.font = SystemFont[.title]
         stylistNameLabel.textColor = Palette[custom: .appColor]
 
-        stylistDescriptionLabel.font = SystemFont[.description]
-        stylistDescriptionLabel.textColor = Palette[custom: .appColor]
+        //stylistDescriptionLabel.font = SystemFont[.description]
+        //stylistDescriptionLabel.textColor = Palette[custom: .appColor]
 
         dressStyleLabel.text = outfitTableData?.dressStyle?.name
         dressStyleLabel.textColor = Palette[custom: .appColor]
@@ -468,10 +475,13 @@ extension OutfitDetailViewController: OutfitDetailCellDelegateProtocol {
         if indexPath.row < outfitCellsCount {
             detail.imageUrl = data.photos[safe: indexPath.row]?.image?.urlValue
             detail.imageId = data.photos[safe: indexPath.row]?.id
+            detail.isDeleteButtonShown = true
         } else {
             let index = indexPath.row - outfitCellsCount
             detail.imageUrl = data.components[safe: index]?.photo?.image?.urlValue
             detail.imageId = data.components[safe: index]?.photo?.id
+            
+            detail.isDeleteButtonShown = false
         }
         
         let nav = UINavigationController(rootViewController: detail)

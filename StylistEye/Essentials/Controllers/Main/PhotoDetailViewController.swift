@@ -22,9 +22,11 @@ class PhotoDetailViewController: AbstractViewController {
     
     var imageUrl: URL?
     var imageId: Int?
+    var isDeleteButtonShown = false
     
     fileprivate var imageView = UIImageView()
     fileprivate var toolbar = UIToolbar()
+    fileprivate var deleteButton: UIBarButtonItem?
     
     weak var delegate: PhotoDetailDelegate?
     
@@ -36,16 +38,11 @@ class PhotoDetailViewController: AbstractViewController {
         
         imageView.contentMode = .scaleAspectFill
         
-        let filler1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let filler2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let deleteButton = UIBarButtonItem(image: #imageLiteral(resourceName: "trash_icon"), style: .plain, target: self, action: #selector(deleteButtonAction))
-        deleteButton.tintColor = Palette[custom: .title]
-        toolbar.items = [filler1, deleteButton, filler2]
-        toolbar.barTintColor = Palette[custom: .purple]
-        
         let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "backArrow_icon"), style: .plain, target: self, action: #selector(cancelBarAction))
         cancelButton.tintColor = Palette[custom: .title]
         navigationItem.leftBarButtonItem = cancelButton
+        
+        toolbar.barTintColor = Palette[custom: .purple]
     }
     
     override func addElements() {
@@ -79,6 +76,15 @@ class PhotoDetailViewController: AbstractViewController {
         super.viewWillAppear(animated)
         
         imageView.kf.setImage(with: imageUrl, placeholder: #imageLiteral(resourceName: "placeholder"))
+        
+        if isDeleteButtonShown {
+            let filler1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            let filler2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            let deleteButton = UIBarButtonItem(image: #imageLiteral(resourceName: "trash_icon"), style: .plain, target: self, action: #selector(deleteButtonAction))
+            deleteButton.tintColor = Palette[custom: .title]
+            toolbar.items = [filler1, deleteButton, filler2]
+            self.deleteButton = deleteButton
+        }
     }
     
     // MARK: - Actions

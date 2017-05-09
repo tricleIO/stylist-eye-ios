@@ -11,7 +11,7 @@ import ObjectMapper
 struct OutfitsDTO: Mappable {
 
     var outfitId: Int
-    var dressStyle: Int?
+    var dressStyle: DressStyleDTO?
     var photos: [PhotosDTO]?
     var outfitComment: String?
     var stylist: StylistDTO?

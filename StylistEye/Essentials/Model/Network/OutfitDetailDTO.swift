@@ -12,7 +12,7 @@ struct OutfitDetailDTO: Mappable {
 
     var outfitId: Int?
     var isFavourite: String?
-    var dressStyle: OutfitCategoryDTO?
+    var dressStyle: DressStyleDTO?
     var photos: [PhotosDTO] = []
     var components: [ComponentsDTO] = []
     var stylist: StylistDTO?

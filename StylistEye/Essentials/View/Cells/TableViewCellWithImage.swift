@@ -66,10 +66,10 @@ class TableViewCellWithImage: AbstractTableViewCell {
         }
 
         leftImageView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(5)
+            make.leading.equalTo(contentView).inset(8)
             make.centerY.equalTo(contentView)
-            make.width.equalTo(18)
-            make.height.equalTo(18)
+            make.width.equalTo(30)
+            make.height.equalTo(30)
         }
     }
   

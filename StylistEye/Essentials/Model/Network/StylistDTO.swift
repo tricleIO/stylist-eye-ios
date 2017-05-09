@@ -15,6 +15,7 @@ struct StylistDTO: Mappable {
     var givenName: String?
     var familyName: String?
     var photo: PhotosDTO?
+    var address: AddressDTO?
     
     init?(map: Map) {
         var id: Int?
@@ -30,5 +31,6 @@ struct StylistDTO: Mappable {
         familyName <- map["familyName"]
         photo <- map["photo"]
         rating <- map["rating"]
+        address <- map["address"]
     }
 }

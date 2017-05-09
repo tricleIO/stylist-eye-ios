@@ -122,6 +122,15 @@ enum APIUrlManager: APIUrlManagerProtocol {
      */
     case deleteOutfitPhoto(id: Int)
     
+    /**
+     Wardrobe
+     */
+    case wardrobe(garmetType: Int)
+    
+    /**
+     Wardrobe item
+     */
+    case wardrobeItem(id: Int)
     
     /// Url path.
     var url: String? {
@@ -162,6 +171,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
             urlString = "/mapi/v1/photos/wardrobe/\(id)"
         case let .uploadOutfitPhoto(id, _, _), .deleteOutfitPhoto(let id):
             urlString = "/mapi/v1/photos/outfit/\(id)"
+        case .wardrobe:
+            urlString = "/mapi/v1/wardrobe"
+        case let .wardrobeItem(id):
+            urlString = "/mapi/v1/wardrobe/\(id)"
         }
 
         guard let url = URL(string: urlString, relativeTo: baseUrl) else {
@@ -229,6 +242,13 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return params
         case .uploadWardrobePhoto, .uploadOutfitPhoto, .deleteOutfitPhoto:
             return params
+        case let .wardrobe(garmetType):
+            params["garmettype"] = garmetType
+            params["expanded"] = "photos,garmentType,reviews"
+            return params
+        case .wardrobeItem:
+            params["expanded"] = "photos,garmentType,reviews"
+            return params
         }
     }
 
@@ -279,6 +299,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return [:]
         case .uploadWardrobePhoto, .uploadOutfitPhoto, .deleteOutfitPhoto:
             return [:]
+        case .wardrobe, .wardrobeItem:
+            return [:]
         }
     }
 
@@ -313,6 +335,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return .post
         case .deleteOutfitPhoto:
             return .delete
+        case .wardrobe:
+            return .get
+        case .wardrobeItem:
+            return .get
         }
     }
     

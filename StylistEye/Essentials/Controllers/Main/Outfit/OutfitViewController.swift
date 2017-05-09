@@ -41,8 +41,8 @@ class OutfitViewController: AbstractViewController {
 
     fileprivate var outfits: [OutfitsDTO]? {
         didSet {
-            stylistId = nil
-            styleId = nil
+            //stylistId = nil
+            //styleId = nil
             tableView.reloadData()
             filterTableView.reloadData()
         }
@@ -348,7 +348,8 @@ extension OutfitViewController: UITableViewDelegate {
                 stylistList.callback = { stylistId, selectedFilterTitle in
                     self.selectedFilterTitle = selectedFilterTitle
                     self.stylistId = stylistId
-                    self.loadOutfits()
+                    // load will be called by viewWillAppear
+                    //self.loadOutfits()
                 }
                 openFilter()
                 navigationController?.pushViewController(stylistList, animated: true)
@@ -357,7 +358,8 @@ extension OutfitViewController: UITableViewDelegate {
                 outfitCategory.callback = { styleId, selectedFilterTitle in
                     self.selectedFilterTitle = selectedFilterTitle
                     self.styleId = styleId
-                    self.loadOutfits()
+                    // load will be called by viewWillAppear
+                    //self.loadOutfits()
                 }
                 openFilter()
                 navigationController?.pushViewController(outfitCategory, animated: true)
