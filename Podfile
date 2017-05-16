@@ -17,7 +17,7 @@ def shared_pods
     pod 'Crashlytics'
 end
 
-target ‘StylistEye’ do
+target 'StylistEye' do
     shared_pods
 end
 

@@ -56,6 +56,7 @@ class ProductDetailViewController: AbstractViewController {
         productDescriptionLabel.numberOfLines = 0
 
         mainImageview.image = #imageLiteral(resourceName: "placeholder")
+        mainImageview.contentMode = .scaleAspectFit
 
         footerView.backgroundColor = Palette[custom: .purple]
     }

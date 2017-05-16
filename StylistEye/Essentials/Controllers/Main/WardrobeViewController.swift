@@ -14,13 +14,6 @@ class WardrobeViewController: AbstractViewController {
     // MARK: > public
 
     // MARK: > private
-//    internal static let cellItem: [CellItem] = [
-//        CellItem(image: #imageLiteral(resourceName: "pants_image"), name: StringContainer[.pants], controller: WardrobeFeedViewController()),
-//        CellItem(image: #imageLiteral(resourceName: "dress_image"), name: StringContainer[.dress], controller: WardrobeFeedViewController()),
-//        CellItem(image: #imageLiteral(resourceName: "jacket_image"), name: StringContainer[.jacket], controller: WardrobeFeedViewController()),
-//        CellItem(image: #imageLiteral(resourceName: "shoe_image"), name: StringContainer[.shoe], controller: WardrobeFeedViewController()),
-//        CellItem(image: #imageLiteral(resourceName: "shirt_image"), name: StringContainer[.shirt], controller: WardrobeFeedViewController()),
-//    ]
     
     fileprivate var garmentTypes: [GarmentTypeDTO] = [] {
         didSet {

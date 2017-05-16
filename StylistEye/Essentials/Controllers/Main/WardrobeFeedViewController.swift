@@ -58,7 +58,7 @@ class WardrobeFeedViewController: AbstractViewController {
         
         actionView.backgroundColor = Palette[custom: .purple]
         
-        tableView.register(OutfitTableViewCell.self)
+        tableView.register(WardrobeTableViewCell.self)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = Palette[basic: .clear]
@@ -172,16 +172,15 @@ class WardrobeFeedViewController: AbstractViewController {
 extension WardrobeFeedViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: OutfitTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        let cell: WardrobeTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         
         if let item = items?[safe: indexPath.row] {
         
             cell.backgroundColor = Palette[basic: .clear]
-            cell.stylistNameText = ""
-            cell.descriptionText = ""
-            if let photo = item.photos?.first {
-                cell.mainImageString = photo.image
+            if let photos = item.photos?.flatMap({$0.image}) {
+                cell.images = photos
             }
+            cell.reviews = item.reviews
             cell.selectionStyle = .none
         }
         
@@ -207,9 +206,15 @@ extension WardrobeFeedViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let item = items?[safe: indexPath.row] else {
+            return
+        }
+        
         let productVC = ProductDetailViewController()
-        productVC.productInfo = ProductInfo(name: categoryName ?? "", infoText: "A aksdfn asjkf oas kanfk jasdf sdf knsfk nasdkjfn jads adsf kasdnf nsdanf kasdf nasdf asdnf asdn jasnf kas.")
-        productVC.title = "Kalhoty velice krásné"
+        productVC.productInfo = ProductInfo(name: categoryName ?? "", infoText: "")
+        productVC.title = item.garmetType?.name
+        //productVC.mainImageview.kf.setImage(with: item.photos?.first?.image?.urlValue)
         productVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(productVC, animated: true)
     }
