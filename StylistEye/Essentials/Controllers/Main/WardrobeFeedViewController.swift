@@ -225,7 +225,7 @@ extension WardrobeFeedViewController: UITableViewDataSource {
     
     @objc(tableView:heightForRowAtIndexPath:)
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(GUIConfiguration.OutfitCellHeight)
+        return 560
     }
 }
 
