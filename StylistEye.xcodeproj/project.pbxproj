@@ -130,9 +130,8 @@
 		A86AAF1F1EBB7ABE0070B24D /* ReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86AAF1E1EBB7ABE0070B24D /* ReviewDTO.swift */; };
 		A86CCF561EA649C0006D3245 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86CCF551EA649C0006D3245 /* PhotoDetailViewController.swift */; };
 		A86CCF581EA693B9006D3245 /* DeleteOutfitPhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86CCF571EA693B9006D3245 /* DeleteOutfitPhotoCommand.swift */; };
-		A88967041ECAFDB0007580A2 /* MyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88967021ECAFDB0007580A2 /* MyCard.swift */; };
-		A88967051ECAFDB0007580A2 /* MyCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88967031ECAFDB0007580A2 /* MyCard.xib */; };
 		A88967071ECB0415007580A2 /* ImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88967061ECB0415007580A2 /* ImageSlider.swift */; };
+		A88967091ECB1ABC007580A2 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88967081ECB1ABC007580A2 /* ReviewView.swift */; };
 		A8C434E61E94E07100FF8832 /* UploadWardrobePhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */; };
 		A8C434E81E94E2A300FF8832 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E71E94E2A300FF8832 /* UIImage.swift */; };
 		A8C714361EC1C51B0073F2C6 /* OutfitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C714351EC1C51B0073F2C6 /* OutfitTableViewCell.swift */; };
@@ -294,9 +293,8 @@
 		A86AAF1E1EBB7ABE0070B24D /* ReviewDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewDTO.swift; sourceTree = "<group>"; };
 		A86CCF551EA649C0006D3245 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		A86CCF571EA693B9006D3245 /* DeleteOutfitPhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteOutfitPhotoCommand.swift; sourceTree = "<group>"; };
-		A88967021ECAFDB0007580A2 /* MyCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCard.swift; sourceTree = "<group>"; };
-		A88967031ECAFDB0007580A2 /* MyCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCard.xib; sourceTree = "<group>"; };
 		A88967061ECB0415007580A2 /* ImageSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlider.swift; sourceTree = "<group>"; };
+		A88967081ECB1ABC007580A2 /* ReviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadWardrobePhotoCommand.swift; sourceTree = "<group>"; };
 		A8C434E71E94E2A300FF8832 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		A8C714351EC1C51B0073F2C6 /* OutfitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitTableViewCell.swift; sourceTree = "<group>"; };
@@ -395,6 +393,7 @@
 				31582A231DBCB86E009D7139 /* FilterBox.swift */,
 				A8C714391EC1E18E0073F2C6 /* RatingView.swift */,
 				A88967061ECB0415007580A2 /* ImageSlider.swift */,
+				A88967081ECB1ABC007580A2 /* ReviewView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -680,8 +679,6 @@
 				31400F121DB54A7800A088A0 /* QuestionnaireTableViewCell.swift */,
 				31C8BB381E04848100D8CBD0 /* StylistListTableViewCell.swift */,
 				A8C714371EC1C5390073F2C6 /* WardrobeTableViewCell.swift */,
-				A88967021ECAFDB0007580A2 /* MyCard.swift */,
-				A88967031ECAFDB0007580A2 /* MyCard.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -929,7 +926,6 @@
 				31818E6E1DB00926004883D2 /* SanFranciscoText-LightItalic.otf in Resources */,
 				31818E6F1DB00926004883D2 /* SanFranciscoText-Medium.otf in Resources */,
 				31818E701DB00926004883D2 /* SanFranciscoText-MediumItalic.otf in Resources */,
-				A88967051ECAFDB0007580A2 /* MyCard.xib in Resources */,
 				31818E711DB00926004883D2 /* Avenir.ttc in Resources */,
 				31897D951DAF6B8D00BFFED0 /* Launch Screen.storyboard in Resources */,
 				310286AD1DAFA716007EE87B /* Main.strings in Resources */,
@@ -1076,7 +1072,6 @@
 				318FD7731E472A16008EEA23 /* UpdateMessageStatusCommand.swift in Sources */,
 				3197B65D1DB288250096EF16 /* WardrobeFeedViewController.swift in Sources */,
 				31818E531DAFF0D5004883D2 /* UITableView+SE.swift in Sources */,
-				A88967041ECAFDB0007580A2 /* MyCard.swift in Sources */,
 				31582A281DBCC370009D7139 /* FilterMenu.swift in Sources */,
 				3109198E1DAE9BB80083A2C8 /* UserInfo.swift in Sources */,
 				31B9F3601DB17C740049F08E /* Array.swift in Sources */,
@@ -1130,6 +1125,7 @@
 				310919751DAE823E0083A2C8 /* EmptyDTO.swift in Sources */,
 				31FC67061DB38D5300ECC5A7 /* OutfitDetailDTO.swift in Sources */,
 				3161C2BA1E01D2BF007DC0FB /* StylistDTO.swift in Sources */,
+				A88967091ECB1ABC007580A2 /* ReviewView.swift in Sources */,
 				311D1F1A1DAE4C7F00A7F545 /* APIUrlManager.swift in Sources */,
 				31E05E271DAF5512007AE913 /* UIFont.swift in Sources */,
 				31FC67041DB3821E00ECC5A7 /* OutfitDetailViewController.swift in Sources */,

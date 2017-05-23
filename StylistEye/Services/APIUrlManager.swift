@@ -26,12 +26,12 @@ enum RequestType {
 
 /**
  Define API url manager.
-    - login
-    - logout
-    - messages
+ - login
+ - logout
+ - messages
  */
 enum APIUrlManager: APIUrlManagerProtocol {
-
+    
     /**
      GarmentType
      */
@@ -40,23 +40,23 @@ enum APIUrlManager: APIUrlManagerProtocol {
     /**
      Login
      - Parameters:
-        - userName: User name.
-        - password: User password.
+     - userName: User name.
+     - password: User password.
      */
     case login(
         email: String,
         password: String
     )
-
+    
     /**
      Logout
      - Parameters:
-        - token: User token.
+     - token: User token.
      */
     case logout
-
+    
     /**
-    Messages
+     Messages
      */
     case messages
     case updateMessagesStatus(
@@ -70,7 +70,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
     case messageDetail(
         orderId: Int?
     )
-
+    
     /**
      Outfits
      - Parameters:
@@ -81,12 +81,12 @@ enum APIUrlManager: APIUrlManagerProtocol {
         stylistId: String?,
         dressstyle: String?
     )
-
+    
     /**
      Oufit detail.
      - Parameters:
-        - outfitId
-        - photoType
+     - outfitId
+     - photoType
      */
     case outfitDetail (
         outfitId: Int
@@ -109,8 +109,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
     
     /**
      Upload wardrobe photo
-    */
-    case uploadWardrobePhoto(id: Int, photoType: Int, photo: Data)
+     */
+    case uploadWardrobePhoto(id: Int, photo: Data)
     
     /**
      Upload outfit photo
@@ -137,7 +137,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
         var baseUrl: URL? {
             return URL(string: APIConfiguration.BaseUrl)
         }
-
+        
         var urlString: String = String.empty
         switch self {
         case .login:
@@ -167,7 +167,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
             urlString = "/mapi/v1/lists/garmenttypes"
         case .dressStyle:
             urlString = "/mapi/v1/lists/dressstyles"
-        case let .uploadWardrobePhoto(id, _, _):
+        case let .uploadWardrobePhoto(id, _):
             urlString = "/mapi/v1/photos/wardrobe/\(id)"
         case let .uploadOutfitPhoto(id, _, _), .deleteOutfitPhoto(let id):
             urlString = "/mapi/v1/photos/outfit/\(id)"
@@ -176,11 +176,11 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case let .wardrobeItem(id):
             urlString = "/mapi/v1/wardrobe/\(id)"
         }
-
+        
         guard let url = URL(string: urlString, relativeTo: baseUrl) else {
             return nil
         }
-
+        
         if let queryParams = addressParams, var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) {
             urlComponents.queryItems = []
             for (queryName, queryValue) in queryParams {
@@ -189,10 +189,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
             }
             return urlComponents.url?.absoluteString
         }
-
+        
         return url.absoluteString
     }
-
+    
     /// GET parameters.
     var addressParams: [String: Any]? {
         guard let token = Keychains[.accessTokenKey] else {
@@ -251,7 +251,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return params
         }
     }
-
+    
     /// Url parameters.
     var params: [String : Any] {
         switch self {
@@ -264,16 +264,16 @@ enum APIUrlManager: APIUrlManagerProtocol {
                 "password": "\(password)",
             ]
         case let .updateMessagesStatus(
-                msgId
+            msgId
             ):
             return [
                 "message": "\(msgId)",
                 "read": "true",
             ]
         case let .newMessage(
-                thread,
-                content,
-                _
+            thread,
+            content,
+            _
             ):
             return [
                 "thread": "\(thread)",
@@ -303,7 +303,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return [:]
         }
     }
-
+    
     /// Alamofire/Url method.
     var method: HTTPMethod {
         switch self {
@@ -353,10 +353,14 @@ enum APIUrlManager: APIUrlManagerProtocol {
     
     var multipartData: ((MultipartFormData) -> Void) {
         switch self {
-        case let .uploadWardrobePhoto(_, photoType, photo), let .uploadOutfitPhoto(_, photoType, photo):
+        case let .uploadWardrobePhoto(_, photo):
             return { multipartFormData in
-                    multipartFormData.append("\(photoType)".data(using: .utf8)!, withName: "PhotoType")
-                    multipartFormData.append(photo, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
+                multipartFormData.append(photo, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
+            }
+        case let .uploadOutfitPhoto(_, photoType, photo):
+            return { multipartFormData in
+                multipartFormData.append("\(photoType)".data(using: .utf8)!, withName: "PhotoType")
+                multipartFormData.append(photo, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
             }
         default:
             return {

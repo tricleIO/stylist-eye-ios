@@ -19,7 +19,7 @@ struct UploadWardrobePhotoCommand: NetworkExecutable {
   /// Set RUL manager
   var urlManager: APIUrlManager
   
-  init(id: Int, photoType: PhotoType, photo: Foundation.Data) {
-    urlManager = .uploadWardrobePhoto(id: id, photoType: photoType.rawValue, photo: photo)
+  init(id: Int, photo: Foundation.Data) {
+    urlManager = .uploadWardrobePhoto(id: id, photo: photo)
   }
 }

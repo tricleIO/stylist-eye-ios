@@ -22,8 +22,29 @@ class WardrobeTableViewCell: AbstractTableViewCell {
   
   var reviews: [ReviewDTO]? {
     didSet {
-      pageControl.numberOfPages = reviews?.count ?? 0
-      self.switchReviewPage(index: 0)
+      if let reviews = reviews {
+        pageControl.numberOfPages = reviews.count
+        
+        let width = self.reviewScrollView.frame.size.width
+        
+        for i in 0..<reviews.count {
+          let reviewView = ReviewView()
+          reviewView.setReview(reviews[i])
+          reviewScrollView.addSubview(reviewView)
+          
+          reviewView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(width*CGFloat(i))
+            make.width.equalTo(width)
+            make.height.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+          }
+          self.reviewScrollView.contentSize = CGSize(width: width * CGFloat(reviews.count),height: self.reviewScrollView.frame.size.height)
+        }
+        
+      } else {
+        pageControl.numberOfPages = 0
+      }
     }
   }
   
@@ -38,18 +59,10 @@ class WardrobeTableViewCell: AbstractTableViewCell {
   fileprivate var addPhotoLabel = UILabel()
   
   fileprivate let reviewScrollView = UIScrollView()
-  fileprivate let reviewContainer = View()
-  
-  fileprivate let stylistProfileImageView = ImageView()
-  
-  fileprivate let stylistRatingView = RatingView()
   
   fileprivate let coverView = View()
   
   fileprivate let zoomButton = ImageView(image: #imageLiteral(resourceName: "zoom"))
-  
-  fileprivate let descriptionLabel = Label()
-  fileprivate let stylistNameLabel = Label()
   
   fileprivate let pageControl = UIPageControl()
   
@@ -79,30 +92,21 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     addPhotoLabel.textColor = Palette[custom: .title]
     addPhotoLabel.textAlignment = .center
     
-    stylistProfileImageView.contentMode = .scaleAspectFit
-    stylistProfileImageView.clipsToBounds = true
-    stylistProfileImageView.layer.cornerRadius = 20
-    stylistProfileImageView.image = #imageLiteral(resourceName: "placeholder")
-    
-    stylistRatingView.rating = 0
-    
-    stylistNameLabel.textColor = Palette[custom: .title]
-    stylistNameLabel.numberOfLines = 0
-    stylistNameLabel.font = SystemFont[.title]
-    
-    descriptionLabel.textColor = Palette[custom: .purple]
-    descriptionLabel.font = SystemFont[.litleDescription]
-    descriptionLabel.numberOfLines = 0
-    
     pageControl.numberOfPages = 0
     pageControl.pageIndicatorTintColor = Palette[custom: .appColor]
     pageControl.currentPageIndicatorTintColor = Palette[custom: .purple]
+    pageControl.isUserInteractionEnabled = true
+    pageControl.addTarget(self, action: #selector(changePage(sender:)), for: .valueChanged)
     
     zoomButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(zoomButtonTapped)))
     zoomButton.isUserInteractionEnabled = true
     zoomButton.layer.cornerRadius = 15
     zoomButton.clipsToBounds = true
     zoomButton.contentMode = .scaleAspectFit
+    
+    reviewScrollView.isPagingEnabled = true
+    reviewScrollView.isScrollEnabled = true
+    reviewScrollView.delegate = self
   }
   
   internal override func addElements() {
@@ -115,14 +119,6 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       pageControl,
       zoomButton
       ])
-    
-    reviewScrollView.addSubview(reviewContainer)
-    reviewContainer.addSubviews(views: [
-      stylistProfileImageView,
-      stylistRatingView,
-      stylistNameLabel,
-      descriptionLabel,
-    ])
     
     stackImageView.addSubview(addPhotoOverlay)
     addPhotoOverlay.addSubview(addPhotoButton)
@@ -168,47 +164,6 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       make.top.equalTo(stackImageView.snp.bottom).offset(10)
     }
     
-    // scroll content
-    
-    reviewContainer.snp.makeConstraints { make in
-      make.leading.equalTo(reviewScrollView)
-      make.trailing.equalTo(reviewScrollView)
-      make.top.equalTo(reviewScrollView)
-      make.bottom.equalTo(reviewScrollView)
-      make.width.equalTo(reviewScrollView)
-      make.height.equalTo(reviewScrollView)
-    }
-    
-    stylistProfileImageView.snp.makeConstraints { make in
-      make.leading.equalTo(reviewContainer).inset(10)
-      make.top.equalTo(reviewContainer).inset(10)
-      make.width.equalTo(40)
-      make.height.equalTo(40)
-    }
-    
-    stylistNameLabel.snp.makeConstraints { make in
-      make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(10)
-      make.top.equalTo(reviewContainer).inset(15)
-      make.height.equalTo(30)
-      make.width.equalTo(200)
-    }
-    
-    stylistRatingView.snp.makeConstraints { make in
-      make.centerY.equalTo(stylistNameLabel)
-      make.trailing.equalTo(reviewContainer).inset(10)
-      make.height.equalTo(20)
-      make.width.equalTo(100)
-    }
-    
-    descriptionLabel.snp.makeConstraints { make in
-      make.leading.equalTo(reviewContainer).inset(10)
-      make.trailing.equalTo(reviewContainer).inset(10)
-      make.top.equalTo(stylistProfileImageView.snp.bottom).offset(10)
-      make.bottom.equalTo(reviewContainer).inset(10)
-    }
-    
-    // end scroll content
-    
     pageControl.snp.makeConstraints { make in
       make.centerX.equalTo(coverView)
       make.top.equalTo(reviewScrollView.snp.bottom).offset(10)
@@ -235,32 +190,11 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     //mainImageView.kf.cancelDownloadTask()
     //mainImageView.image = nil
     addPhotoOverlay.isHidden = true
-  }
-  
-  func switchReviewPage(index: Int) {
-    guard let review = reviews?[safe: index] else {
-      stylistNameLabel.text = nil
-      stylistProfileImageView.image = nil
-      descriptionLabel.text = nil
-      descriptionLabel.text = nil
-      stylistRatingView.rating = 0
-      stylistRatingView.isHidden = true
-      return
+    
+    for subview in reviewScrollView.subviews {
+      subview.removeFromSuperview()
     }
-    
-    if let url = review.stylist?.photo?.image?.urlValue {
-      stylistProfileImageView.kf.setImage(with: ImageResource(downloadURL: url))
-    }
-
-    descriptionLabel.text = review.comment
-    
-    if let stylistName = review.stylist?.givenName, let stylistLastname = review.stylist?.familyName {
-      stylistNameLabel.text = stylistName + String.space + stylistLastname
-    }
-    
-    stylistRatingView.isHidden = false
-    stylistRatingView.rating = review.rating ?? 0
-    
+    reviewScrollView.contentOffset = CGPoint(x: 0, y: 0)
   }
   
   // MARK: - User Action
@@ -271,5 +205,18 @@ class WardrobeTableViewCell: AbstractTableViewCell {
   func photoOverlayTapped() {
     addPhotoCallback?()
   }
+  
+  func changePage(sender: AnyObject) -> () {
+    let x = CGFloat(pageControl.currentPage) * reviewScrollView.frame.size.width
+    reviewScrollView.setContentOffset(CGPoint(x:x, y:0), animated: true)
+  }
 
+}
+
+extension WardrobeTableViewCell: UIScrollViewDelegate {
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    
+    let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
+    pageControl.currentPage = Int(pageNumber)
+  }
 }
