@@ -42,7 +42,7 @@ class ReviewView: View {
     stylistRatingView.rating = 0
     
     stylistNameLabel.textColor = Palette[custom: .title]
-    stylistNameLabel.numberOfLines = 0
+    stylistNameLabel.numberOfLines = 1
     stylistNameLabel.font = SystemFont[.title]
     
     descriptionLabel.textColor = Palette[custom: .purple]
@@ -73,17 +73,15 @@ class ReviewView: View {
     
     stylistNameLabel.snp.makeConstraints { make in
       make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(10)
-      make.top.equalToSuperview().inset(15)
-      make.height.equalTo(30)
-      make.width.equalTo(200)
+      make.top.equalTo(stylistProfileImageView)
+      make.trailing.equalToSuperview()
     }
     
-    
     stylistRatingView.snp.makeConstraints { make in
-      make.centerY.equalTo(stylistNameLabel)
-      make.trailing.equalToSuperview().inset(10)
-      make.height.equalTo(20)
-      make.width.equalTo(100)
+      make.leading.equalTo(stylistNameLabel)
+      make.bottom.equalTo(stylistProfileImageView)
+      make.height.equalTo(15)
+      make.trailing.equalToSuperview()
     }
     
     descriptionLabel.snp.makeConstraints { make in
