@@ -122,6 +122,8 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     reviewScrollView.isPagingEnabled = true
     reviewScrollView.isScrollEnabled = true
     reviewScrollView.delegate = self
+    
+    pageControl.hidesForSinglePage = true
   }
   
   internal override func addElements() {
