@@ -16,15 +16,46 @@ class WardrobeTableViewCell: AbstractTableViewCell {
   // MARK: > public
   var images = [String]() {
     didSet {
-      self.stackImageView.images = images
+      imagesPageControl.numberOfPages = images.count
+      
+      var imageViews = [UIImageView]()
+      
+      for i in 0..<images.count {
+        let imageView = UIImageView()
+        imageViews.append(imageView)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.kf.setImage(with: images[i].urlValue, placeholder: #imageLiteral(resourceName: "placeholder"))
+        imagesScrollContentView.addSubview(imageView)
+        
+        imageView.snp.makeConstraints { make in
+          if i == 0 {
+            make.leading.equalToSuperview()
+          } else {
+            make.leading.equalTo(imageViews[i-1].snp.trailing)
+          }
+          make.width.equalTo(imagesScrollContainer)
+          make.height.equalToSuperview()
+          make.top.equalToSuperview()
+          make.bottom.equalToSuperview()
+        }
+      }
+      imagesScrollContentView.snp.remakeConstraints { make in
+        make.leading.equalToSuperview()
+        make.trailing.equalToSuperview()
+        make.top.equalToSuperview()
+        make.width.equalTo(imagesScrollContainer).multipliedBy(images.count)
+        make.bottom.equalToSuperview()
+        make.height.equalToSuperview()
+      }
     }
   }
   
   var reviews: [ReviewDTO]? {
     didSet {
       if let reviews = reviews {
-        pageControl.numberOfPages = reviews.count
-        
+        reviewsPageControl.numberOfPages = reviews.count
+    
         var reviewViews = [ReviewView]()
         
         for i in 0..<reviews.count {
@@ -56,7 +87,7 @@ class WardrobeTableViewCell: AbstractTableViewCell {
         reviewScrollView.setNeedsLayout()
         
       } else {
-        pageControl.numberOfPages = 0
+        reviewsPageControl.numberOfPages = 0
       }
     }
   }
@@ -65,7 +96,10 @@ class WardrobeTableViewCell: AbstractTableViewCell {
   var addPhotoCallback: (VoidBlock)?
   
   // MARK: > private
-  fileprivate let stackImageView = ImageSlider()
+  fileprivate let imagesScrollContainer = View()
+  fileprivate let imagesScrollView = UIScrollView()
+  fileprivate let imagesScrollContentView = View()
+  fileprivate let imagesPageControl = UIPageControl()
   
   fileprivate var addPhotoOverlay = View()
   fileprivate var addPhotoButton = UIButton()
@@ -74,12 +108,11 @@ class WardrobeTableViewCell: AbstractTableViewCell {
   fileprivate let reviewScrollContainer = View()
   fileprivate let reviewScrollView = UIScrollView()
   fileprivate let reviewScrollContentView = View()
+  fileprivate let reviewsPageControl = UIPageControl()
   
   fileprivate let coverView = View()
   
   fileprivate let zoomButton = ImageView(image: #imageLiteral(resourceName: "zoom"))
-  
-  fileprivate let pageControl = UIPageControl()
   
   // MARK: - <Initializable>
   internal override func initializeElements() {
@@ -97,6 +130,18 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     //stackImageView.delegate = self
     //stackImageView.dataSource = self
     
+    imagesScrollView.isPagingEnabled = true
+    imagesScrollView.isScrollEnabled = true
+    imagesScrollView.delegate = self
+    imagesScrollView.alwaysBounceVertical = false
+    
+    imagesPageControl.numberOfPages = 0
+    imagesPageControl.pageIndicatorTintColor = Palette[custom: .appColor]
+    imagesPageControl.currentPageIndicatorTintColor = Palette[custom: .purple]
+    imagesPageControl.isUserInteractionEnabled = true
+    imagesPageControl.addTarget(self, action: #selector(changeImagePage(sender:)), for: .valueChanged)
+    imagesPageControl.hidesForSinglePage = true
+    
     addPhotoOverlay.isHidden = true
     addPhotoOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.5)
     addPhotoButton.setImage(#imageLiteral(resourceName: "cmeraPlus_icon").withRenderingMode(.alwaysTemplate), for: .normal)
@@ -107,11 +152,12 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     addPhotoLabel.textColor = Palette[custom: .title]
     addPhotoLabel.textAlignment = .center
     
-    pageControl.numberOfPages = 0
-    pageControl.pageIndicatorTintColor = Palette[custom: .appColor]
-    pageControl.currentPageIndicatorTintColor = Palette[custom: .purple]
-    pageControl.isUserInteractionEnabled = true
-    pageControl.addTarget(self, action: #selector(changePage(sender:)), for: .valueChanged)
+    reviewsPageControl.numberOfPages = 0
+    reviewsPageControl.pageIndicatorTintColor = Palette[custom: .appColor]
+    reviewsPageControl.currentPageIndicatorTintColor = Palette[custom: .purple]
+    reviewsPageControl.isUserInteractionEnabled = true
+    reviewsPageControl.addTarget(self, action: #selector(changeReviewPage(sender:)), for: .valueChanged)
+    reviewsPageControl.hidesForSinglePage = true
     
     zoomButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(zoomButtonTapped)))
     zoomButton.isUserInteractionEnabled = true
@@ -123,7 +169,6 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     reviewScrollView.isScrollEnabled = true
     reviewScrollView.delegate = self
     
-    pageControl.hidesForSinglePage = true
   }
   
   internal override func addElements() {
@@ -131,15 +176,19 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     
     contentView.addSubview(coverView)
     coverView.addSubviews(views: [
-      stackImageView,
+      imagesScrollContainer,
+      imagesPageControl,
       reviewScrollContainer,
-      pageControl,
+      reviewsPageControl,
       zoomButton
       ])
     
-    stackImageView.addSubview(addPhotoOverlay)
+    imagesScrollContainer.addSubview(addPhotoOverlay)
     addPhotoOverlay.addSubview(addPhotoButton)
     addPhotoOverlay.addSubview(addPhotoLabel)
+    
+    imagesScrollContainer.addSubview(imagesScrollView)
+    imagesScrollView.addSubview(imagesScrollContentView)
     
     reviewScrollContainer.addSubview(reviewScrollView)
     reviewScrollView.addSubview(reviewScrollContentView)
@@ -155,18 +204,40 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       make.bottom.equalTo(contentView).inset(5)
     }
     
-    stackImageView.snp.makeConstraints { make in
+    imagesScrollContainer.snp.makeConstraints { make in
       make.leading.equalTo(coverView).inset(10)
       make.trailing.equalTo(coverView).inset(10)
       make.top.equalTo(coverView).inset(10)
-      make.height.equalTo(stackImageView.snp.width).multipliedBy(4.0/3.0)
+      make.height.equalTo(imagesScrollContainer.snp.width).multipliedBy(4.0/3.0)
+    }
+    
+    imagesScrollView.snp.makeConstraints { make in
+      make.leading.equalTo(0)
+      make.trailing.equalTo(0)
+      make.top.equalTo(0)
+      make.bottom.equalTo(0)
+    }
+    
+    imagesScrollContentView.snp.makeConstraints { make in
+      make.leading.equalToSuperview()
+      make.trailing.equalToSuperview()
+      make.top.equalToSuperview()
+      make.width.equalTo(imagesScrollContainer).multipliedBy(1)
+      make.bottom.equalToSuperview()
+      make.height.equalToSuperview()
+    }
+    
+    imagesPageControl.snp.makeConstraints { make in
+      make.centerX.equalTo(coverView)
+      make.top.equalTo(imagesScrollContainer.snp.bottom).offset(10)
+      make.height.equalTo(10)
     }
     
     addPhotoOverlay.snp.makeConstraints { make in
-      make.leading.equalTo(stackImageView)
-      make.top.equalTo(stackImageView)
-      make.bottom.equalTo(stackImageView)
-      make.trailing.equalTo(stackImageView)
+      make.leading.equalTo(imagesScrollContainer)
+      make.top.equalTo(imagesScrollContainer)
+      make.bottom.equalTo(imagesScrollContainer)
+      make.trailing.equalTo(imagesScrollContainer)
     }
     
     addPhotoButton.snp.makeConstraints { make in
@@ -181,7 +252,7 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     reviewScrollContainer.snp.makeConstraints { make in
       make.leading.equalTo(coverView).inset(10)
       make.trailing.equalTo(coverView).inset(10)
-      make.top.equalTo(stackImageView.snp.bottom).offset(10)
+      make.top.equalTo(imagesPageControl.snp.bottom).offset(10)
       make.height.equalTo(150)
     }
     
@@ -201,7 +272,7 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       make.height.equalToSuperview()
     }
     
-    pageControl.snp.makeConstraints { make in
+    reviewsPageControl.snp.makeConstraints { make in
       make.centerX.equalTo(coverView)
       make.top.equalTo(reviewScrollView.snp.bottom).offset(10)
       make.bottom.equalTo(coverView).inset(10)
@@ -244,9 +315,14 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     addPhotoCallback?()
   }
   
-  func changePage(sender: AnyObject) -> () {
-    let x = CGFloat(pageControl.currentPage) * reviewScrollView.frame.size.width
+  func changeReviewPage(sender: AnyObject) -> () {
+    let x = CGFloat(reviewsPageControl.currentPage) * reviewScrollView.frame.size.width
     reviewScrollView.setContentOffset(CGPoint(x:x, y:0), animated: true)
+  }
+  
+  func changeImagePage(sender: AnyObject) -> () {
+    let x = CGFloat(imagesPageControl.currentPage) * imagesScrollView.frame.size.width
+    imagesScrollView.setContentOffset(CGPoint(x:x, y:0), animated: true)
   }
 
 }
@@ -254,7 +330,12 @@ class WardrobeTableViewCell: AbstractTableViewCell {
 extension WardrobeTableViewCell: UIScrollViewDelegate {
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     
-    let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
-    pageControl.currentPage = Int(pageNumber)
+    if scrollView === reviewScrollView {
+      let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
+      reviewsPageControl.currentPage = Int(pageNumber)
+    } else if scrollView === imagesScrollView {
+      let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
+      imagesPageControl.currentPage = Int(pageNumber)
+    }
   }
 }
