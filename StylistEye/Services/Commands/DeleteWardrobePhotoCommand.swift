@@ -1,17 +1,17 @@
 //
-//  DeleteOutfitPhotoCommand.swift
+//  DeleteWardrobePhotoCommand.swift
 //  StylistEye
 //
-//  Created by Martin Stachon on 18.04.17.
+//  Created by Martin Stachon on 24.05.17.
 //  Copyright © 2017 Michal Severín. All rights reserved.
 //
 
 import Foundation
 
 /**
- Delete outfit photo command.
+ Uplad wardrobe command.
  */
-struct DeleteOutfitPhotoCommand: NetworkExecutable {
+struct DeleteWardrobePhotoCommand: NetworkExecutable {
   
   /// Outfit model.
   typealias Data = EmptyDTO
@@ -20,6 +20,6 @@ struct DeleteOutfitPhotoCommand: NetworkExecutable {
   var urlManager: APIUrlManager
   
   init(id: Int) {
-    urlManager = .deleteOutfitPhoto(id: id)
+    urlManager = .deleteWardrobePhoto(id: id)
   }
 }

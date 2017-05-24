@@ -239,14 +239,18 @@ extension WardrobeFeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let cell = tableView.cellForRow(at: indexPath) as! WardrobeTableViewCell
+        
         guard let item = items?[safe: indexPath.row] else {
             return
         }
         
-        let productVC = ProductDetailViewController()
+        let productVC = WardrobeItemDetailViewController()
         productVC.productInfo = ProductInfo(name: categoryName ?? "", infoText: "")
         productVC.title = item.garmetType?.name
-        //productVC.mainImageview.kf.setImage(with: item.photos?.first?.image?.urlValue)
+        if let image = item.photos?[safe: cell.currentImagePage()]?.image?.urlValue {
+            productVC.mainImageview.kf.setImage(with: image, placeholder: #imageLiteral(resourceName: "placeholder"))
+        }
         productVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(productVC, animated: true)
     }

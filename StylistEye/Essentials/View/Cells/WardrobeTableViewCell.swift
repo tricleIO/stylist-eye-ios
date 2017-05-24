@@ -183,9 +183,9 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       zoomButton
       ])
     
-    imagesScrollContainer.addSubview(addPhotoOverlay)
-    addPhotoOverlay.addSubview(addPhotoButton)
-    addPhotoOverlay.addSubview(addPhotoLabel)
+    //imagesScrollContainer.addSubview(addPhotoOverlay)
+    //addPhotoOverlay.addSubview(addPhotoButton)
+    //addPhotoOverlay.addSubview(addPhotoLabel)
     
     imagesScrollContainer.addSubview(imagesScrollView)
     imagesScrollView.addSubview(imagesScrollContentView)
@@ -233,6 +233,7 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       make.height.equalTo(10)
     }
     
+    /*
     addPhotoOverlay.snp.makeConstraints { make in
       make.leading.equalTo(imagesScrollContainer)
       make.top.equalTo(imagesScrollContainer)
@@ -248,6 +249,7 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       make.topMargin.equalTo(addPhotoButton.snp.bottomMargin).offset(20)
       make.centerX.equalTo(addPhotoButton)
     }
+    */
     
     reviewScrollContainer.snp.makeConstraints { make in
       make.leading.equalTo(coverView).inset(10)
@@ -323,6 +325,10 @@ class WardrobeTableViewCell: AbstractTableViewCell {
   func changeImagePage(sender: AnyObject) -> () {
     let x = CGFloat(imagesPageControl.currentPage) * imagesScrollView.frame.size.width
     imagesScrollView.setContentOffset(CGPoint(x:x, y:0), animated: true)
+  }
+  
+  func currentImagePage() -> Int {
+    return imagesPageControl.currentPage
   }
 
 }

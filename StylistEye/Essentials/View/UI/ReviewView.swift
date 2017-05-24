@@ -34,7 +34,7 @@ class ReviewView: View {
   override func initializeElements() {
     super.initializeElements()
     
-    stylistProfileImageView.contentMode = .scaleAspectFit
+    stylistProfileImageView.contentMode = .scaleAspectFill
     stylistProfileImageView.clipsToBounds = true
     stylistProfileImageView.layer.cornerRadius = 20
     stylistProfileImageView.image = #imageLiteral(resourceName: "placeholder")

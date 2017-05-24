@@ -102,7 +102,7 @@
 		31C8BB371E04822600D8CBD0 /* StylistListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8BB361E04822600D8CBD0 /* StylistListViewController.swift */; };
 		31C8BB391E04848100D8CBD0 /* StylistListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8BB381E04848100D8CBD0 /* StylistListTableViewCell.swift */; };
 		31CD44E81DB14CD8007A5E1C /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD44E71DB14CD8007A5E1C /* View.swift */; };
-		31CD44EA1DB161BF007A5E1C /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD44E91DB161BF007A5E1C /* ProductDetailViewController.swift */; };
+		31CD44EA1DB161BF007A5E1C /* WardrobeItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD44E91DB161BF007A5E1C /* WardrobeItemDetailViewController.swift */; };
 		31CD44EC1DB161D9007A5E1C /* GradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD44EB1DB161D9007A5E1C /* GradientImageView.swift */; };
 		31CD44EE1DB17338007A5E1C /* ProductInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD44ED1DB17338007A5E1C /* ProductInfo.swift */; };
 		31E05E1E1DAEEADC007AE913 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E05E1D1DAEEADC007AE913 /* Serializable.swift */; };
@@ -137,6 +137,8 @@
 		A8C714361EC1C51B0073F2C6 /* OutfitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C714351EC1C51B0073F2C6 /* OutfitTableViewCell.swift */; };
 		A8C714381EC1C5390073F2C6 /* WardrobeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C714371EC1C5390073F2C6 /* WardrobeTableViewCell.swift */; };
 		A8C7143A1EC1E18E0073F2C6 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C714391EC1E18E0073F2C6 /* RatingView.swift */; };
+		A8DAEF441ED5B8D700C7766A /* DeleteWardrobePhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DAEF431ED5B8D700C7766A /* DeleteWardrobePhotoCommand.swift */; };
+		A8DAEF461ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DAEF451ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift */; };
 		A8F746571E8533E200FEDCD9 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F746561E8533E200FEDCD9 /* Languages.swift */; };
 		A8F746591E85340500FEDCD9 /* DressStyleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F746581E85340500FEDCD9 /* DressStyleDTO.swift */; };
 		A8F7465B1E8534CF00FEDCD9 /* DressStyleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F7465A1E8534CF00FEDCD9 /* DressStyleCommand.swift */; };
@@ -258,7 +260,7 @@
 		31C8BB361E04822600D8CBD0 /* StylistListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListViewController.swift; sourceTree = "<group>"; };
 		31C8BB381E04848100D8CBD0 /* StylistListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListTableViewCell.swift; sourceTree = "<group>"; };
 		31CD44E71DB14CD8007A5E1C /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		31CD44E91DB161BF007A5E1C /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		31CD44E91DB161BF007A5E1C /* WardrobeItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WardrobeItemDetailViewController.swift; path = Outfit/WardrobeItemDetailViewController.swift; sourceTree = "<group>"; };
 		31CD44EB1DB161D9007A5E1C /* GradientImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientImageView.swift; sourceTree = "<group>"; };
 		31CD44ED1DB17338007A5E1C /* ProductInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductInfo.swift; sourceTree = "<group>"; };
 		31E05E1D1DAEEADC007AE913 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
@@ -300,6 +302,8 @@
 		A8C714351EC1C51B0073F2C6 /* OutfitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitTableViewCell.swift; sourceTree = "<group>"; };
 		A8C714371EC1C5390073F2C6 /* WardrobeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeTableViewCell.swift; sourceTree = "<group>"; };
 		A8C714391EC1E18E0073F2C6 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		A8DAEF431ED5B8D700C7766A /* DeleteWardrobePhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteWardrobePhotoCommand.swift; sourceTree = "<group>"; };
+		A8DAEF451ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadWardrobeSecondPhotoCommand.swift; sourceTree = "<group>"; };
 		A8F746561E8533E200FEDCD9 /* Languages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
 		A8F746581E85340500FEDCD9 /* DressStyleDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressStyleDTO.swift; sourceTree = "<group>"; };
 		A8F7465A1E8534CF00FEDCD9 /* DressStyleCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressStyleCommand.swift; sourceTree = "<group>"; };
@@ -610,6 +614,7 @@
 			isa = PBXGroup;
 			children = (
 				A86CCF571EA693B9006D3245 /* DeleteOutfitPhotoCommand.swift */,
+				A8DAEF431ED5B8D700C7766A /* DeleteWardrobePhotoCommand.swift */,
 				A8F7465A1E8534CF00FEDCD9 /* DressStyleCommand.swift */,
 				316F69321E24160100EC0972 /* GarmentTypeCommand.swift */,
 				310919711DAE81170083A2C8 /* LoginCommand.swift */,
@@ -624,6 +629,7 @@
 				318FD7721E472A16008EEA23 /* UpdateMessageStatusCommand.swift */,
 				A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */,
 				A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */,
+				A8DAEF451ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift */,
 				A86AAF181EBB79240070B24D /* WardrobeCommand.swift */,
 				A86AAF1A1EBB796B0070B24D /* WardrobeItemCommand.swift */,
 			);
@@ -644,7 +650,6 @@
 			children = (
 				310286A51DAFA54A007EE87B /* OutfitViewController.swift */,
 				31FC67031DB3821E00ECC5A7 /* OutfitDetailViewController.swift */,
-				31CD44E91DB161BF007A5E1C /* ProductDetailViewController.swift */,
 				3175F4E51E05638D001C89C6 /* OutfitCategoryViewController.swift */,
 			);
 			path = Outfit;
@@ -664,6 +669,7 @@
 			children = (
 				310286A91DAFA574007EE87B /* WardrobeViewController.swift */,
 				3197B65C1DB288250096EF16 /* WardrobeFeedViewController.swift */,
+				31CD44E91DB161BF007A5E1C /* WardrobeItemDetailViewController.swift */,
 			);
 			name = Wardrobe;
 			sourceTree = "<group>";
@@ -1085,6 +1091,7 @@
 				310286A61DAFA54A007EE87B /* OutfitViewController.swift in Sources */,
 				31818E4F1DAFEBF7004883D2 /* SettingsViewController.swift in Sources */,
 				A86CCF581EA693B9006D3245 /* DeleteOutfitPhotoCommand.swift in Sources */,
+				A8DAEF441ED5B8D700C7766A /* DeleteWardrobePhotoCommand.swift in Sources */,
 				A8F746571E8533E200FEDCD9 /* Languages.swift in Sources */,
 				A8C714381EC1C5390073F2C6 /* WardrobeTableViewCell.swift in Sources */,
 				310286A11DAFA49B007EE87B /* AbstractTabBarViewController.swift in Sources */,
@@ -1097,6 +1104,7 @@
 				3175F4E61E05638D001C89C6 /* OutfitCategoryViewController.swift in Sources */,
 				314280DB1DF7ED21003C454A /* AuthorDTO.swift in Sources */,
 				31E30E9D1DAECD5E007F4A5A /* Button.swift in Sources */,
+				A8DAEF461ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift in Sources */,
 				3109198A1DAE99280083A2C8 /* AccessToken.swift in Sources */,
 				317F6CF81DB2C6D600DE0679 /* OutfitsCommand.swift in Sources */,
 				31818E511DAFF003004883D2 /* TableView.swift in Sources */,
@@ -1121,7 +1129,7 @@
 				A82F6DA61E964A380053B6D1 /* UploadOutfitPhotoCommand.swift in Sources */,
 				31A252721E06E04B0090EFD8 /* TimeHelper.swift in Sources */,
 				310919981DAEA0790083A2C8 /* KeyRepresentable.swift in Sources */,
-				31CD44EA1DB161BF007A5E1C /* ProductDetailViewController.swift in Sources */,
+				31CD44EA1DB161BF007A5E1C /* WardrobeItemDetailViewController.swift in Sources */,
 				310919751DAE823E0083A2C8 /* EmptyDTO.swift in Sources */,
 				31FC67061DB38D5300ECC5A7 /* OutfitDetailDTO.swift in Sources */,
 				3161C2BA1E01D2BF007DC0FB /* StylistDTO.swift in Sources */,

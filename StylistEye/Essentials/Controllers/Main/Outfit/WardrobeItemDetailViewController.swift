@@ -1,5 +1,5 @@
 //
-//  ProductDetailViewController.swift
+//  WardrobeItemDetailViewController.swift
 //  StylistEye
 //
 //  Created by Michal Severín on 14.10.16.
@@ -9,11 +9,11 @@
 import SnapKit
 import UIKit
 
-class ProductDetailViewController: AbstractViewController {
+class WardrobeItemDetailViewController: AbstractViewController {
 
     // MARK: - Properties
     // MARK: < public
-    var mainImageview = ImageViewWithGradient()
+    var mainImageview = ImageView() // ImageViewWithGradient
 
     var productInfo: ProductInfo? {
         didSet {
@@ -55,7 +55,9 @@ class ProductDetailViewController: AbstractViewController {
         productDescriptionLabel.font = SystemFont[.litleDescription]
         productDescriptionLabel.numberOfLines = 0
 
-        mainImageview.image = #imageLiteral(resourceName: "placeholder")
+        backgroundImage.image = nil
+        backgroundImage.backgroundColor = UIColor.black
+        //mainImageview.image = #imageLiteral(resourceName: "placeholder")
         mainImageview.contentMode = .scaleAspectFit
 
         footerView.backgroundColor = Palette[custom: .purple]
@@ -84,7 +86,10 @@ class ProductDetailViewController: AbstractViewController {
         super.setupConstraints()
 
         mainImageview.snp.makeConstraints { make in
-            make.edges.equalTo(view)
+          make.leading.equalTo(view)
+          make.trailing.equalTo(view)
+          make.top.equalTo(view)
+          make.height.equalTo(view.snp.width).multipliedBy(4.0/3.0)
         }
 
         productDescriptionLabel.snp.makeConstraints { make in
@@ -96,7 +101,7 @@ class ProductDetailViewController: AbstractViewController {
         footerView.snp.makeConstraints { make in
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.height.equalTo(40)
+            make.top.equalTo(mainImageview.snp.bottom)
             make.bottom.equalTo(view)
         }
 
