@@ -246,10 +246,14 @@ extension WardrobeFeedViewController: UITableViewDelegate {
         }
         
         let productVC = WardrobeItemDetailViewController()
-        productVC.productInfo = ProductInfo(name: categoryName ?? "", infoText: "")
+        productVC.wardrobeItem = item
         productVC.title = item.garmetType?.name
         if let image = item.photos?[safe: cell.currentImagePage()]?.image?.urlValue {
             productVC.mainImageview.kf.setImage(with: image, placeholder: #imageLiteral(resourceName: "placeholder"))
+            productVC.photoIndex = cell.currentImagePage()
+        } else {
+            productVC.mainImageview.image = #imageLiteral(resourceName: "placeholder")
+            productVC.photoIndex = -1
         }
         productVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(productVC, animated: true)
