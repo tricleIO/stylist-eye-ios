@@ -156,10 +156,11 @@ class WardrobeItemDetailViewController: AbstractViewController {
     }
     
     func deleteTapped() {
-        guard let photoId = wardrobeItem?.photos?[safe: photoIndex]?.id else {
+        guard let photoId = wardrobeItem?.photos?[safe: photoIndex]?.id,
+        let photoType = wardrobeItem?.photos?[safe: photoIndex]?.type else {
             return
         }
-        let deleteCommand = DeleteWardrobePhotoCommand(id: photoId)
+        let deleteCommand = DeleteWardrobePhotoCommand(id: photoId, type: photoType)
         
         KVNProgress.show()
         deleteCommand.executeCommand {
@@ -171,7 +172,7 @@ class WardrobeItemDetailViewController: AbstractViewController {
                 switch apiResponse {
                 case .ok:
                     KVNProgress.showSuccess()
-                    self.dismiss(animated: true, completion: nil)
+                    self.navigationController?.popViewController(animated: true)
                 case .fail:
                     KVNProgress.showError(withStatus: "Delete failed")
                 }
@@ -199,6 +200,7 @@ class WardrobeItemDetailViewController: AbstractViewController {
             image in
             
             let imageJpeg = image.jpegData()
+            self.mainImageview.image = image
             
             if photosCount > 0 {
                 let uploadCommand = UploadWardrobeSecondPhotoCommand(id: wardrobeId, photo: imageJpeg)
@@ -213,8 +215,8 @@ class WardrobeItemDetailViewController: AbstractViewController {
                         switch apiResponse {
                         case .ok:
                             KVNProgress.showSuccess()
-                            self.mainImageview.image = image
                             self.photoIndex = 2
+                            self.navigationController?.popViewController(animated: true)
                         case .fail:
                             KVNProgress.showError(withStatus: "Upload failed")
                         }
@@ -235,8 +237,8 @@ class WardrobeItemDetailViewController: AbstractViewController {
                         switch apiResponse {
                         case .ok:
                             KVNProgress.showSuccess()
-                            self.mainImageview.image = image
                             self.photoIndex = 1
+                            self.navigationController?.popViewController(animated: true)
                         case .fail:
                             KVNProgress.showError(withStatus: "Upload failed")
                         }

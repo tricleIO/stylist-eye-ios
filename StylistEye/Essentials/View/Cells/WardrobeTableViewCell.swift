@@ -133,7 +133,11 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     imagesScrollView.isPagingEnabled = true
     imagesScrollView.isScrollEnabled = true
     imagesScrollView.delegate = self
-    imagesScrollView.alwaysBounceVertical = false
+    imagesScrollView.bounces = false
+    // trick to enable tap to select, yet allowing scroll
+    // source: https://stackoverflow.com/questions/6636844/uiscrollview-inside-uitableviewcell-touch-detect
+    imagesScrollView.isUserInteractionEnabled = false
+    imagesScrollContainer.addGestureRecognizer(imagesScrollView.panGestureRecognizer)
     
     imagesPageControl.numberOfPages = 0
     imagesPageControl.pageIndicatorTintColor = Palette[custom: .appColor]
@@ -168,6 +172,9 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     reviewScrollView.isPagingEnabled = true
     reviewScrollView.isScrollEnabled = true
     reviewScrollView.delegate = self
+    reviewScrollView.bounces = false
+    reviewScrollView.isUserInteractionEnabled = false
+    reviewScrollContainer.addGestureRecognizer(reviewScrollView.panGestureRecognizer)
     
   }
   

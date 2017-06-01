@@ -19,7 +19,7 @@ struct DeleteWardrobePhotoCommand: NetworkExecutable {
   /// Set RUL manager
   var urlManager: APIUrlManager
   
-  init(id: Int) {
-    urlManager = .deleteWardrobePhoto(id: id)
+  init(id: Int, type: PhotoType) {
+    urlManager = .deleteWardrobePhoto(id: id, type: type.rawValue)
   }
 }
