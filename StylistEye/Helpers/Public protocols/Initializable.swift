@@ -58,14 +58,12 @@ extension InitializableProtocol {
      Initializable function contains all ordered initialzable methods from protocol.
      */
     func addElementsAndApplyConstraints() {
-        defer {
-            customInit()
-            setupConstraints()
-        }
         initializeElements()
         addElements()
         setupBackgroundImage()
         setupView()
+        customInit()
+        setupConstraints()
     }
 
     func initialize() {

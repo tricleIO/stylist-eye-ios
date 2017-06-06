@@ -12,85 +12,51 @@ import UIKit
 
 class WardrobeTableViewCell: AbstractTableViewCell {
   
+  let maxReviews = 3
+  let maxImages = 2
+  
   // MARK: - Properties
   // MARK: > public
   var images = [String]() {
     didSet {
-      imagesPageControl.numberOfPages = images.count
+      let imagesCount = min(maxImages, images.count)
+      imagesPageControl.numberOfPages = imagesCount
       
-      var imageViews = [UIImageView]()
+      for i in 0..<imagesCount {
+        imageViews[i].kf.setImage(with: images[i].urlValue, placeholder: #imageLiteral(resourceName: "placeholder"))
+      }
       
-      for i in 0..<images.count {
-        let imageView = UIImageView()
-        imageViews.append(imageView)
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.kf.setImage(with: images[i].urlValue, placeholder: #imageLiteral(resourceName: "placeholder"))
-        imagesScrollContentView.addSubview(imageView)
-        
-        imageView.snp.makeConstraints { make in
-          if i == 0 {
-            make.leading.equalToSuperview()
-          } else {
-            make.leading.equalTo(imageViews[i-1].snp.trailing)
-          }
-          make.width.equalTo(imagesScrollContainer)
-          make.height.equalToSuperview()
-          make.top.equalToSuperview()
-          make.bottom.equalToSuperview()
-        }
-      }
-      imagesScrollContentView.snp.remakeConstraints { make in
-        make.leading.equalToSuperview()
-        make.trailing.equalToSuperview()
-        make.top.equalToSuperview()
-        make.width.equalTo(imagesScrollContainer).multipliedBy(images.count)
-        make.bottom.equalToSuperview()
-        make.height.equalToSuperview()
-      }
+      let width = imagesScrollContainer.frame.width
+      let height = imagesScrollContainer.frame.height
+      
+      imagesScrollView.contentSize = CGSize(width: width*CGFloat(imagesCount), height: height)
     }
   }
+  fileprivate var imageViews = [UIImageView]()
   
   var reviews: [ReviewDTO]? {
     didSet {
-      if let reviews = reviews {
-        reviewsPageControl.numberOfPages = reviews.count
-    
-        var reviewViews = [ReviewView]()
+      if let reviews = reviews, reviews.count > 0 {
+        let reviewsCount = min(reviews.count, maxReviews)
+        reviewsPageControl.numberOfPages = reviewsCount
         
-        for i in 0..<reviews.count {
-          let reviewView = ReviewView()
-          reviewViews.append(reviewView)
-          reviewView.setReview(reviews[i])
-          reviewScrollContentView.addSubview(reviewView)
-          
-          reviewView.snp.makeConstraints { make in
-            if i == 0 {
-              make.leading.equalToSuperview()
-            } else {
-              make.leading.equalTo(reviewViews[i-1].snp.trailing)
-            }
-            make.width.equalTo(reviewScrollContainer)
-            make.height.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-          }
+        for i in 0..<reviewsCount {
+          reviewViews[i].setReview(reviews[i])
         }
-        reviewScrollContentView.snp.remakeConstraints { make in
-          make.leading.equalToSuperview()
-          make.trailing.equalToSuperview()
-          make.top.equalToSuperview()
-          make.width.equalTo(reviewScrollContainer).multipliedBy(reviews.count)
-          make.bottom.equalToSuperview()
-          make.height.equalToSuperview()
-        }
-        reviewScrollView.setNeedsLayout()
         
+        let width = reviewScrollContainer.frame.width
+        let height = reviewScrollContainer.frame.height
+        
+        reviewScrollView.contentSize = CGSize(width: width*CGFloat(reviewsCount), height: height)
+        
+        reviewScrollContainer.isHidden = false
       } else {
         reviewsPageControl.numberOfPages = 0
+        reviewScrollContainer.isHidden = true
       }
     }
   }
+  fileprivate var reviewViews = [ReviewView]()
   
   var zoomButtonCallback: (VoidBlock)?
   var addPhotoCallback: (VoidBlock)?
@@ -176,6 +142,78 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     reviewScrollView.isUserInteractionEnabled = false
     reviewScrollContainer.addGestureRecognizer(reviewScrollView.panGestureRecognizer)
     
+    
+  }
+  
+  func createImageViews(number: Int) {
+    
+    for _ in 0..<number {
+      let imageView = UIImageView()
+      imageViews.append(imageView)
+      imageView.contentMode = .scaleAspectFill
+      imageView.clipsToBounds = true
+      imagesScrollContentView.addSubview(imageView)
+    }
+  }
+  
+  func setupImageViewsConstraints() {
+    for i in 0..<imageViews.count {
+      let imageView = imageViews[i]
+      imageView.snp.makeConstraints { make in
+        if i == 0 {
+          make.leading.equalToSuperview()
+        } else {
+          make.leading.equalTo(imageViews[i-1].snp.trailing)
+        }
+        make.width.equalTo(imagesScrollContainer)
+        make.height.equalTo(imagesScrollContainer)
+        make.top.equalToSuperview()
+        make.bottom.equalToSuperview()
+      }
+    }
+    imagesScrollContentView.snp.makeConstraints { make in
+      make.leading.equalToSuperview()
+      make.trailing.equalToSuperview()
+      make.top.equalToSuperview()
+//      self.imagesContentWidthConstraint = make.width.equalTo(imagesScrollContainer).multipliedBy(imageViews.count).constraint
+      make.bottom.equalToSuperview()
+      make.height.equalToSuperview()
+    }
+  }
+  
+  func createReviews(number: Int) {
+    for _ in 0..<number {
+      let reviewView = ReviewView()
+      reviewViews.append(reviewView)
+      reviewScrollContentView.addSubview(reviewView)
+    }
+  }
+  
+  func setupReviewsConstraints() {
+    
+    for i in 0..<reviewViews.count {
+      let reviewView = reviewViews[i]
+      
+      reviewView.snp.makeConstraints { make in
+        if i == 0 {
+          make.leading.equalToSuperview()
+        } else {
+          make.leading.equalTo(reviewViews[i-1].snp.trailing)
+        }
+        make.width.equalTo(reviewScrollContainer)
+        make.height.equalTo(reviewScrollContainer)
+        make.top.equalToSuperview()
+        make.bottom.equalToSuperview()
+      }
+    }
+    reviewScrollContentView.snp.makeConstraints { make in
+      make.leading.equalToSuperview()
+      make.trailing.equalToSuperview()
+      make.top.equalToSuperview()
+//      self.reviewsContentWidthConstraint = make.width.equalTo(reviewScrollContainer).multipliedBy(reviewViews.count).constraint
+      make.bottom.equalToSuperview()
+      make.height.equalToSuperview()
+    }
   }
   
   internal override func addElements() {
@@ -199,6 +237,9 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     
     reviewScrollContainer.addSubview(reviewScrollView)
     reviewScrollView.addSubview(reviewScrollContentView)
+    
+    createImageViews(number: maxImages)
+    createReviews(number: maxReviews)
   }
   
   internal override func setupConstraints() {
@@ -223,15 +264,6 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       make.trailing.equalTo(0)
       make.top.equalTo(0)
       make.bottom.equalTo(0)
-    }
-    
-    imagesScrollContentView.snp.makeConstraints { make in
-      make.leading.equalToSuperview()
-      make.trailing.equalToSuperview()
-      make.top.equalToSuperview()
-      make.width.equalTo(imagesScrollContainer).multipliedBy(1)
-      make.bottom.equalToSuperview()
-      make.height.equalToSuperview()
     }
     
     imagesPageControl.snp.makeConstraints { make in
@@ -272,15 +304,6 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       make.bottom.equalTo(0)
     }
     
-    reviewScrollContentView.snp.makeConstraints { make in
-      make.leading.equalToSuperview()
-      make.trailing.equalToSuperview()
-      make.top.equalToSuperview()
-      make.width.equalTo(reviewScrollContainer).multipliedBy(1)
-      make.bottom.equalToSuperview()
-      make.height.equalToSuperview()
-    }
-    
     reviewsPageControl.snp.makeConstraints { make in
       make.centerX.equalTo(coverView)
       make.top.equalTo(reviewScrollView.snp.bottom).offset(10)
@@ -294,6 +317,9 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       make.width.equalTo(30)
       make.height.equalTo(30)
     }
+    
+    setupImageViewsConstraints()
+    setupReviewsConstraints()
 
   }
   
@@ -309,10 +335,11 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     //mainImageView.image = nil
     addPhotoOverlay.isHidden = true
     
-    for subview in reviewScrollContentView.subviews {
-      subview.removeFromSuperview()
-    }
     reviewScrollView.contentOffset = CGPoint(x: 0, y: 0)
+    imagesScrollView.contentOffset = CGPoint(x: 0, y: 0)
+    
+    reviewsPageControl.currentPage = 0
+    imagesPageControl.currentPage = 0
   }
   
   // MARK: - User Action
