@@ -93,9 +93,19 @@ enum APIUrlManager: APIUrlManagerProtocol {
     )
     
     /**
-     Outfits category.
+     Current Outfits category list.
      */
-    case outfitCategory
+    case currentOutfitCategories
+    
+    /**
+     Current Outfits.
+     */
+    case currentOutfits
+    
+    /**
+     Current Outfit item detail.
+     */
+    case currentOutfitDetail(id: Int)
     
     /**
      Stylist list.
@@ -171,8 +181,12 @@ enum APIUrlManager: APIUrlManagerProtocol {
             urlString = "/mapi/v1/outfits/\(outfitId)"
         case .stylistList:
             urlString = "/mapi/v1/stylists"
-        case .outfitCategory:
-            urlString = "/mapi/v1/lists/currentOutfitCat"
+        case .currentOutfitCategories:
+            urlString = "/mapi/v1/lists/currentoutfitcat"
+        case .currentOutfits:
+            urlString = "/mapi/v1/lists/currentoutfits"
+        case let .currentOutfitDetail(id):
+            urlString = "/mapi/v1/lists/currentoutfits/\(id)"
         case .garmentType:
             urlString = "/mapi/v1/lists/garmenttypes"
         case .dressStyle:
@@ -216,8 +230,14 @@ enum APIUrlManager: APIUrlManagerProtocol {
         switch self {
         case .login:
             return nil
-        case .outfitCategory:
+        case .currentOutfitCategories:
             fallthrough
+        case .currentOutfits:
+            params["expanded"] = "photos"
+            return params
+        case .currentOutfitDetail:
+            params["expanded"] = "photos"
+            return params
         case .updateMessagesStatus:
             fallthrough
         case .newMessage:
@@ -306,7 +326,11 @@ enum APIUrlManager: APIUrlManagerProtocol {
             fallthrough
         case .messageDetail:
             fallthrough
-        case .outfitCategory:
+        case .currentOutfitCategories:
+            fallthrough
+        case .currentOutfits:
+            fallthrough
+        case .currentOutfitDetail:
             fallthrough
         case .garmentType:
             fallthrough
@@ -338,7 +362,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
             fallthrough
         case .garmentType:
             fallthrough
-        case .outfitCategory:
+        case .currentOutfitCategories, .currentOutfits, .currentOutfitDetail:
             return .get
         case .updateMessagesStatus:
             return .put

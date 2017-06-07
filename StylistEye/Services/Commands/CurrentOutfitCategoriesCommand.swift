@@ -1,5 +1,5 @@
 //
-//  OutfitCategoryCommand.swift
+//  CurrentOutfitCategoriesCommand.swift
 //  StylistEye
 //
 //  Created by Michal Severín on 17.12.16.
@@ -9,9 +9,9 @@
 import Foundation
 
 /**
- Outfit category command.
+ Current Outfit categories command.
  */
-struct OutfitCategoryCommand: NetworkExecutable {
+struct CurrentOutfitCategoriesCommand: NetworkExecutable {
   
     /// Outfit model.
     typealias Data = OutfitCategoryDTO
@@ -20,6 +20,6 @@ struct OutfitCategoryCommand: NetworkExecutable {
     var urlManager: APIUrlManager
     
     init() {
-        urlManager = .outfitCategory
+        urlManager = .currentOutfitCategories
     }
 }
