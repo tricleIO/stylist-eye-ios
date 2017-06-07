@@ -158,8 +158,8 @@ extension QuestionnaireViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let controller = QuestionnaireDetailViewController()
-        controller.questName = garmentTypes[indexPath.row].name
+        let controller = QuestionnaireFeedViewController()
+        controller.categoryId = garmentTypes[indexPath.row].categoryId
         controller.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(controller, animated: true)
     }

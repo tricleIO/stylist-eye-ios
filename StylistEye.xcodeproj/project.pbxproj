@@ -134,6 +134,8 @@
 		A88967091ECB1ABC007580A2 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88967081ECB1ABC007580A2 /* ReviewView.swift */; };
 		A8A30DBE1EE845A20005AA46 /* CurrentOutfitsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DBD1EE845A20005AA46 /* CurrentOutfitsCommand.swift */; };
 		A8A30DC01EE845B20005AA46 /* CurrentOutfitDetailCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DBF1EE845B20005AA46 /* CurrentOutfitDetailCommand.swift */; };
+		A8A30DC21EE84ACD0005AA46 /* QuestionnaireFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DC11EE84ACD0005AA46 /* QuestionnaireFeedViewController.swift */; };
+		A8A30DC41EE84D010005AA46 /* CurrentOutfitDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DC31EE84D010005AA46 /* CurrentOutfitDTO.swift */; };
 		A8C434E61E94E07100FF8832 /* UploadWardrobePhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */; };
 		A8C434E81E94E2A300FF8832 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E71E94E2A300FF8832 /* UIImage.swift */; };
 		A8C714361EC1C51B0073F2C6 /* OutfitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C714351EC1C51B0073F2C6 /* OutfitTableViewCell.swift */; };
@@ -301,6 +303,8 @@
 		A88967081ECB1ABC007580A2 /* ReviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		A8A30DBD1EE845A20005AA46 /* CurrentOutfitsCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOutfitsCommand.swift; sourceTree = "<group>"; };
 		A8A30DBF1EE845B20005AA46 /* CurrentOutfitDetailCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOutfitDetailCommand.swift; sourceTree = "<group>"; };
+		A8A30DC11EE84ACD0005AA46 /* QuestionnaireFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionnaireFeedViewController.swift; sourceTree = "<group>"; };
+		A8A30DC31EE84D010005AA46 /* CurrentOutfitDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOutfitDTO.swift; sourceTree = "<group>"; };
 		A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadWardrobePhotoCommand.swift; sourceTree = "<group>"; };
 		A8C434E71E94E2A300FF8832 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		A8C714351EC1C51B0073F2C6 /* OutfitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitTableViewCell.swift; sourceTree = "<group>"; };
@@ -383,6 +387,7 @@
 				31C8BB311E04808B00D8CBD0 /* StylistListDTO.swift */,
 				310919791DAE850E0083A2C8 /* UserDTO.swift */,
 				A86AAF1C1EBB79FF0070B24D /* WardrobeDTO.swift */,
+				A8A30DC31EE84D010005AA46 /* CurrentOutfitDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -663,6 +668,7 @@
 			isa = PBXGroup;
 			children = (
 				310286A71DAFA569007EE87B /* QuestionnaireViewController.swift */,
+				A8A30DC11EE84ACD0005AA46 /* QuestionnaireFeedViewController.swift */,
 				31400F0C1DB53F2800A088A0 /* QuestionnaireDetailViewController.swift */,
 			);
 			name = Questionnaire;
@@ -1049,6 +1055,7 @@
 				A86CCF561EA649C0006D3245 /* PhotoDetailViewController.swift in Sources */,
 				31C8BB321E04808B00D8CBD0 /* StylistListDTO.swift in Sources */,
 				A820A98C1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift in Sources */,
+				A8A30DC41EE84D010005AA46 /* CurrentOutfitDTO.swift in Sources */,
 				310919901DAE9D830083A2C8 /* AccountSessionManager.swift in Sources */,
 				311D1F1F1DAE4E4500A7F545 /* LoginViewController.swift in Sources */,
 				310919941DAE9FF60083A2C8 /* Typealiases.swift in Sources */,
@@ -1065,6 +1072,7 @@
 				310286AA1DAFA574007EE87B /* WardrobeViewController.swift in Sources */,
 				3197B6611DB28E4C0096EF16 /* MessagesCommand.swift in Sources */,
 				31C8BB391E04848100D8CBD0 /* StylistListTableViewCell.swift in Sources */,
+				A8A30DC21EE84ACD0005AA46 /* QuestionnaireFeedViewController.swift in Sources */,
 				31C8BB371E04822600D8CBD0 /* StylistListViewController.swift in Sources */,
 				31C8BB341E04811C00D8CBD0 /* StylistCommand.swift in Sources */,
 				3197B6591DB236C30096EF16 /* MessagesTableViewCell.swift in Sources */,

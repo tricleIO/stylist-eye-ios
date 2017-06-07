@@ -14,12 +14,12 @@ import Foundation
 struct CurrentOutfitsCommand: NetworkExecutable {
   
   /// Outfit model.
-  typealias Data = OutfitsDTO
+  typealias Data = CurrentOutfitDTO
   
   /// Set RUL manager
   var urlManager: APIUrlManager
   
-  init() {
-    urlManager = .currentOutfits
+  init(category: String) {
+    urlManager = .currentOutfits(category: category)
   }
 }

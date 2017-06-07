@@ -28,7 +28,7 @@ class AbstractViewController: UIViewController {
         addElementsAndApplyConstraints()
 
         /// Load data from API.
-        loadData()
+        //loadData() // MSt: why load on both load and appear?
     }
   
     override func viewWillAppear(_ animated: Bool) {

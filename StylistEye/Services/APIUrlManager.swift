@@ -100,7 +100,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
     /**
      Current Outfits.
      */
-    case currentOutfits
+    case currentOutfits(category: String)
     
     /**
      Current Outfit item detail.
@@ -184,9 +184,9 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .currentOutfitCategories:
             urlString = "/mapi/v1/lists/currentoutfitcat"
         case .currentOutfits:
-            urlString = "/mapi/v1/lists/currentoutfits"
+            urlString = "/mapi/v1/currentoutfits"
         case let .currentOutfitDetail(id):
-            urlString = "/mapi/v1/lists/currentoutfits/\(id)"
+            urlString = "/mapi/v1/currentoutfits/\(id)"
         case .garmentType:
             urlString = "/mapi/v1/lists/garmenttypes"
         case .dressStyle:
@@ -231,9 +231,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .login:
             return nil
         case .currentOutfitCategories:
-            fallthrough
-        case .currentOutfits:
+            return params
+        case let .currentOutfits(category):
             params["expanded"] = "photos"
+            params["currentCategory"] = category
             return params
         case .currentOutfitDetail:
             params["expanded"] = "photos"
