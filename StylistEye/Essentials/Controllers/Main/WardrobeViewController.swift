@@ -45,14 +45,12 @@ class WardrobeViewController: AbstractViewController {
         tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
         
         navigationItem.rightBarButtonItem = rightBarbutton
-
-        // TODO: @MS
-        print(Keychains[.accessTokenKey])
         
         GarmentTypeCommand().executeCommand { data in
             switch data {
             case let .success(object: _, objectsArray: objects, pagination: _, apiResponse: _):
                 if let objects = objects {
+                    // TODO language
                     self.garmentTypes = objects.filter {$0.languageId == .czech}
                 }
             case .failure:

@@ -27,5 +27,6 @@ struct OutfitCategoryDTO: Mappable {
     mutating func mapping(map: Map) {
         languageId <- (map["language"], EnumTransform<Languages>())
         name <- map["name"]
+        icon <- map["icon"]
     }
 }
