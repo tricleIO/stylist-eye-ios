@@ -48,6 +48,7 @@ class LoginViewController: AbstractViewController {
 
         forgotPasswordButton.setTitle(StringContainer[.forgotPassword], for: .normal)
         forgotPasswordButton.tintColor = Palette[custom: .appColor]
+        forgotPasswordButton.titleLabel?.font = SystemFont[.description]
 
         logoImageView.image = #imageLiteral(resourceName: "logo_image")
         logoImageView.contentMode = .scaleAspectFit
@@ -71,6 +72,7 @@ class LoginViewController: AbstractViewController {
         loginButton.setTitle(StringContainer[.login], for: .normal)
         loginButton.tintColor = Palette[custom: .purple]
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        loginButton.titleLabel?.font = SystemFont[.description]
     }
 
     internal override func addElements() {
@@ -104,29 +106,29 @@ class LoginViewController: AbstractViewController {
 
         forgotPasswordButton.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.top.equalTo(loginButton.snp.bottom).offset(10)
+            make.top.equalTo(loginButton.snp.bottom).offset(24)
             make.width.equalTo(view.frame.size.width - 60)
             make.height.equalTo(25)
         }
 
         logoImageView.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.bottom.equalTo(emailTextField.snp.top).offset(-60)
+            make.bottom.equalTo(emailTextField.snp.top).offset(-80)
             make.height.equalTo(120)
         }
 
         passwordTextField.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.top.equalTo(emailTextField.snp.bottom).offset(10)
+            make.top.equalTo(emailTextField.snp.bottom).offset(24)
             make.width.equalTo(view.frame.size.width - 60)
             make.height.equalTo(30)
         }
 
         loginButton.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
-            make.width.equalTo(view.frame.size.width - 60)
-            make.height.equalTo(45)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(24)
+            make.width.equalTo(view.frame.size.width - 60-16)
+            make.height.equalTo(60)
         }
     }
 
