@@ -171,24 +171,26 @@ class WardrobeFeedViewController: AbstractViewController {
             let imageJpeg = image.jpegData()
             let uploadCommand = UploadWardrobePhotoCommand(id: garmentId, photo: imageJpeg)
             
-            KVNProgress.show()
-            uploadCommand.executeCommand {
-                data in
-                
-                switch data {
-                case let .success(_, objectsArray: _, _, apiResponse: apiResponse):
-                    // TODO: @MS
-                    switch apiResponse {
-                    case .ok:
-                        KVNProgress.showSuccess()
-                        self.loadData()
-                    case .fail:
-                        KVNProgress.showError(withStatus: "Upload failed")
-                    }
-                case let .failure(message):
-                    KVNProgress.showError(withStatus: message.message)
-                }
-            }
+            UploadQueueManager.main.push(item: uploadCommand)
+            
+//            KVNProgress.show()
+//            uploadCommand.executeCommand {
+//                data in
+//                
+//                switch data {
+//                case let .success(_, objectsArray: _, _, apiResponse: apiResponse):
+//                    // TODO: @MS
+//                    switch apiResponse {
+//                    case .ok:
+//                        KVNProgress.showSuccess()
+//                        self.loadData()
+//                    case .fail:
+//                        KVNProgress.showError(withStatus: "Upload failed")
+//                    }
+//                case let .failure(message):
+//                    KVNProgress.showError(withStatus: message.message)
+//                }
+//            }
         }
         let navController = UINavigationController(rootViewController: cameraController)
         navController.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))

@@ -286,24 +286,26 @@ class OutfitDetailViewController: AbstractViewController {
             let imageJpeg = image.jpegData()
             let uploadCommand = UploadOutfitPhotoCommand(id: outfitId, photoType: photoType, photo: imageJpeg)
             
-            KVNProgress.show()
-            uploadCommand.executeCommand {
-                data in
-                
-                switch data {
-                case let .success(_, objectsArray: _, _, apiResponse: apiResponse):
-                    // TODO: @MS
-                    switch apiResponse {
-                    case .ok:
-                        KVNProgress.showSuccess()
-                        self.getOutfitDetailInfo(outfitId: outfitId)
-                    case .fail:
-                        KVNProgress.showError(withStatus: "Upload failed")
-                    }
-                case let .failure(message):
-                    KVNProgress.showError(withStatus: message.message)
-                }
-            }
+            UploadQueueManager.main.push(item: uploadCommand)
+            
+//            KVNProgress.show()
+//            uploadCommand.executeCommand {
+//                data in
+//                
+//                switch data {
+//                case let .success(_, objectsArray: _, _, apiResponse: apiResponse):
+//                    // TODO: @MS
+//                    switch apiResponse {
+//                    case .ok:
+//                        KVNProgress.showSuccess()
+//                        self.getOutfitDetailInfo(outfitId: outfitId)
+//                    case .fail:
+//                        KVNProgress.showError(withStatus: "Upload failed")
+//                    }
+//                case let .failure(message):
+//                    KVNProgress.showError(withStatus: message.message)
+//                }
+//            }
         }
         let navController = UINavigationController(rootViewController: cameraController)
         navController.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))

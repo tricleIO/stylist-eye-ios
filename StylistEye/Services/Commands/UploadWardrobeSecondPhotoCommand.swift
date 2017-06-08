@@ -11,7 +11,7 @@ import Foundation
 /**
  Uplad wardrobe command.
  */
-struct UploadWardrobeSecondPhotoCommand: NetworkExecutable {
+struct UploadWardrobeSecondPhotoCommand: NetworkExecutable, UploadQueueItem {
   
   /// Outfit model.
   typealias Data = EmptyDTO
@@ -21,5 +21,17 @@ struct UploadWardrobeSecondPhotoCommand: NetworkExecutable {
   
   init(id: Int, photo: Foundation.Data) {
     urlManager = .uploadWardrobeSecondPhoto(id: id, photo: photo)
+  }
+  
+  func executeQueueItem(handler: @escaping ((Bool) -> Void)) {
+    return self.executeCommand(completion: {
+      data in
+      switch data {
+      case .success:
+        handler(true)
+      case .failure:
+        handler(false)
+      }
+    })
   }
 }

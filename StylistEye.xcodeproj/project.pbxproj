@@ -136,6 +136,7 @@
 		A8A30DC01EE845B20005AA46 /* CurrentOutfitDetailCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DBF1EE845B20005AA46 /* CurrentOutfitDetailCommand.swift */; };
 		A8A30DC21EE84ACD0005AA46 /* QuestionnaireFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DC11EE84ACD0005AA46 /* QuestionnaireFeedViewController.swift */; };
 		A8A30DC41EE84D010005AA46 /* CurrentOutfitDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DC31EE84D010005AA46 /* CurrentOutfitDTO.swift */; };
+		A8A30DC61EE8777F0005AA46 /* UploadQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DC51EE8777E0005AA46 /* UploadQueueManager.swift */; };
 		A8C434E61E94E07100FF8832 /* UploadWardrobePhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */; };
 		A8C434E81E94E2A300FF8832 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E71E94E2A300FF8832 /* UIImage.swift */; };
 		A8C714361EC1C51B0073F2C6 /* OutfitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C714351EC1C51B0073F2C6 /* OutfitTableViewCell.swift */; };
@@ -305,6 +306,7 @@
 		A8A30DBF1EE845B20005AA46 /* CurrentOutfitDetailCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOutfitDetailCommand.swift; sourceTree = "<group>"; };
 		A8A30DC11EE84ACD0005AA46 /* QuestionnaireFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionnaireFeedViewController.swift; sourceTree = "<group>"; };
 		A8A30DC31EE84D010005AA46 /* CurrentOutfitDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOutfitDTO.swift; sourceTree = "<group>"; };
+		A8A30DC51EE8777E0005AA46 /* UploadQueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadQueueManager.swift; sourceTree = "<group>"; };
 		A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadWardrobePhotoCommand.swift; sourceTree = "<group>"; };
 		A8C434E71E94E2A300FF8832 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		A8C714351EC1C51B0073F2C6 /* OutfitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitTableViewCell.swift; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 				311D1F191DAE4C7F00A7F545 /* APIUrlManager.swift */,
 				311D1F1C1DAE4C9500A7F545 /* NetworkExecutable.swift */,
 				3109198F1DAE9D830083A2C8 /* AccountSessionManager.swift */,
+				A8A30DC51EE8777E0005AA46 /* UploadQueueManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1116,6 +1119,7 @@
 				A86CCF581EA693B9006D3245 /* DeleteOutfitPhotoCommand.swift in Sources */,
 				A8DAEF441ED5B8D700C7766A /* DeleteWardrobePhotoCommand.swift in Sources */,
 				A8F746571E8533E200FEDCD9 /* Languages.swift in Sources */,
+				A8A30DC61EE8777F0005AA46 /* UploadQueueManager.swift in Sources */,
 				A8C714381EC1C5390073F2C6 /* WardrobeTableViewCell.swift in Sources */,
 				310286A11DAFA49B007EE87B /* AbstractTabBarViewController.swift in Sources */,
 				31FC670A1DB3AB6C00ECC5A7 /* OutfitDetailTableViewCell.swift in Sources */,

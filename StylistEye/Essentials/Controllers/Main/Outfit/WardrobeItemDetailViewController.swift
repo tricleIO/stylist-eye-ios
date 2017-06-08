@@ -205,47 +205,55 @@ class WardrobeItemDetailViewController: AbstractViewController {
             if photosCount > 0 {
                 let uploadCommand = UploadWardrobeSecondPhotoCommand(id: wardrobeId, photo: imageJpeg)
                 
-                KVNProgress.show()
-                uploadCommand.executeCommand {
-                    data in
-                    
-                    switch data {
-                    case let .success(_, objectsArray: _, _, apiResponse: apiResponse):
-                        // TODO: @MS
-                        switch apiResponse {
-                        case .ok:
-                            KVNProgress.showSuccess()
-                            self.photoIndex = 2
-                            self.navigationController?.popViewController(animated: true)
-                        case .fail:
-                            KVNProgress.showError(withStatus: "Upload failed")
-                        }
-                    case let .failure(message):
-                        KVNProgress.showError(withStatus: message.message)
-                    }
-                }
+                UploadQueueManager.main.push(item: uploadCommand)
+                self.photoIndex = 2
+                self.navigationController?.popViewController(animated: true)
+                
+//                KVNProgress.show()
+//                uploadCommand.executeCommand {
+//                    data in
+//                    
+//                    switch data {
+//                    case let .success(_, objectsArray: _, _, apiResponse: apiResponse):
+//                        // TODO: @MS
+//                        switch apiResponse {
+//                        case .ok:
+//                            KVNProgress.showSuccess()
+//                            self.photoIndex = 2
+//                            self.navigationController?.popViewController(animated: true)
+//                        case .fail:
+//                            KVNProgress.showError(withStatus: "Upload failed")
+//                        }
+//                    case let .failure(message):
+//                        KVNProgress.showError(withStatus: message.message)
+//                    }
+//                }
             } else {
                 let uploadCommand = UploadWardrobePhotoCommand(id: wardrobeId, photo: imageJpeg)
                 
-                KVNProgress.show()
-                uploadCommand.executeCommand {
-                    data in
-                    
-                    switch data {
-                    case let .success(_, objectsArray: _, _, apiResponse: apiResponse):
-                        // TODO: @MS
-                        switch apiResponse {
-                        case .ok:
-                            KVNProgress.showSuccess()
-                            self.photoIndex = 1
-                            self.navigationController?.popViewController(animated: true)
-                        case .fail:
-                            KVNProgress.showError(withStatus: "Upload failed")
-                        }
-                    case let .failure(message):
-                        KVNProgress.showError(withStatus: message.message)
-                    }
-                }
+                UploadQueueManager.main.push(item: uploadCommand)
+                self.photoIndex = 1
+                self.navigationController?.popViewController(animated: true)
+                
+//                KVNProgress.show()
+//                uploadCommand.executeCommand {
+//                    data in
+//                    
+//                    switch data {
+//                    case let .success(_, objectsArray: _, _, apiResponse: apiResponse):
+//                        // TODO: @MS
+//                        switch apiResponse {
+//                        case .ok:
+//                            KVNProgress.showSuccess()
+//                            self.photoIndex = 1
+//                            self.navigationController?.popViewController(animated: true)
+//                        case .fail:
+//                            KVNProgress.showError(withStatus: "Upload failed")
+//                        }
+//                    case let .failure(message):
+//                        KVNProgress.showError(withStatus: message.message)
+//                    }
+//                }
             }
         }
         let navController = UINavigationController(rootViewController: cameraController)
