@@ -141,7 +141,11 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         if videoConnection.isVideoOrientationSupported {
             videoConnection.videoOrientation = .portrait
         }
+        self.captureButton.isEnabled = false
         stillImageOutput.captureStillImageAsynchronously(from: videoConnection) { sampleBuffer, error -> Void in
+            defer {
+                self.captureButton.isEnabled = true
+            }
             if let _ = sampleBuffer {
                 if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer) {
                     if let dataProvider = CGDataProvider(data: imageData as CFData) {

@@ -169,7 +169,7 @@ class WardrobeFeedViewController: AbstractViewController {
             image in
             
             let imageJpeg = image.jpegData()
-            let uploadCommand = UploadWardrobePhotoCommand(id: garmentId, photo: imageJpeg)
+            let uploadCommand = UploadWardrobePhotoCommand(id: garmentId, image: image, imageData: imageJpeg)
             
             UploadQueueManager.main.push(item: uploadCommand)
             

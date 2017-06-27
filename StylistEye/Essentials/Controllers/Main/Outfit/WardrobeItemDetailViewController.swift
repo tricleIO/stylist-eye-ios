@@ -203,7 +203,7 @@ class WardrobeItemDetailViewController: AbstractViewController {
             self.mainImageview.image = image
             
             if photosCount > 0 {
-                let uploadCommand = UploadWardrobeSecondPhotoCommand(id: wardrobeId, photo: imageJpeg)
+                let uploadCommand = UploadWardrobeSecondPhotoCommand(id: wardrobeId, image: image, imageData: imageJpeg)
                 
                 UploadQueueManager.main.push(item: uploadCommand)
                 self.photoIndex = 2
@@ -229,7 +229,7 @@ class WardrobeItemDetailViewController: AbstractViewController {
 //                    }
 //                }
             } else {
-                let uploadCommand = UploadWardrobePhotoCommand(id: wardrobeId, photo: imageJpeg)
+                let uploadCommand = UploadWardrobePhotoCommand(id: wardrobeId, image: image, imageData: imageJpeg)
                 
                 UploadQueueManager.main.push(item: uploadCommand)
                 self.photoIndex = 1

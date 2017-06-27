@@ -27,6 +27,22 @@ protocol NetworkExecutable {
   func executeCommand(page: Int, completion: @escaping Completion)
 }
 
+class AlamofireConfig {
+  
+  static let shared = AlamofireConfig()
+  
+  // we must store the manager somewhere so that is not ARC'ed
+  // use this singleton hack since NetworkExecutable is a protocol...
+  var manager: Alamofire.SessionManager = {
+    let configuration = URLSessionConfiguration.default
+    configuration.timeoutIntervalForResource = Double(UploadQueueManager.timeout)
+    return Alamofire.SessionManager(configuration: configuration)
+  }()
+  
+  
+}
+
+
 // TODO: @MS - reload access token
 extension NetworkExecutable {
   
@@ -64,7 +80,7 @@ extension NetworkExecutable {
       
     case .upload:
       
-      Alamofire.upload(
+      AlamofireConfig.shared.manager.upload(
         multipartFormData: urlManager.multipartData,
         to: url,
         encodingCompletion: { encodingResult in

@@ -97,6 +97,7 @@ class CaptureImageViewController: AbstractViewController {
 
     func uploadButtonTapped() {
         if let image = capturedImage {
+            uploadButton.isEnabled = false
             imagePicked?(image)
             dismiss(animated: true, completion: nil)
         }

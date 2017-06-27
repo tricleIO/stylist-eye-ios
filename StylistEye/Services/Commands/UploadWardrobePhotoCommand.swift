@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Alamofire
+import UIKit
 
 /**
  Uplad wardrobe command.
@@ -14,24 +16,31 @@ import Foundation
 struct UploadWardrobePhotoCommand: NetworkExecutable, UploadQueueItem {
   
   /// Outfit model.
-  typealias Data = EmptyDTO
+  typealias Data = UploadPhotoResponseDTO
   
   /// Set RUL manager
   var urlManager: APIUrlManager
   
-  init(id: Int, photo: Foundation.Data) {
-    urlManager = .uploadWardrobePhoto(id: id, photo: photo)
+  var image: UIImage
+  
+  var imageData: Foundation.Data
+  
+  init(id: Int, image: UIImage, imageData: Foundation.Data) {
+    urlManager = .uploadWardrobePhoto(id: id, photo: imageData)
+    self.image = image
+    self.imageData = imageData
   }
   
-  func executeQueueItem(handler: @escaping ((Bool) -> Void)) {
-    return self.executeCommand(completion: {
+  func executeQueueItem(handler: @escaping ((Bool, UploadPhotoResponseDTO?) -> Void)) {
+    self.executeCommand(completion: {
       data in
       switch data {
-      case .success:
-        handler(true)
+      case let .success(data, objectsArray: _, pagination: _, apiResponse: _):
+        handler(true, data)
       case .failure:
-        handler(false)
+        handler(false, nil)
       }
     })
   }
+  
 }

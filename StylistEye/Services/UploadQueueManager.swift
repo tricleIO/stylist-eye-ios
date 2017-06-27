@@ -7,11 +7,18 @@
 //
 
 import Foundation
+import Alamofire
+import Kingfisher
+import UIKit
 
 // TODO a smarter way to extend NetworkExecutable with constrained generic or something
 protocol UploadQueueItem {
   
-  func executeQueueItem(handler: @escaping ((Bool) -> Void) )
+  func executeQueueItem(handler: @escaping ((Bool, UploadPhotoResponseDTO?) -> Void) )
+  
+  var image: UIImage { get }
+  
+  var imageData: Foundation.Data { get }
   
 }
 
@@ -30,8 +37,8 @@ class UploadQueueManager {
     return queue
   }()
   
-  // this must be larger than Alamofire timeout, which is 60 by default
-  let timeout = 120
+  // this must be larger than Alamofire timeout
+  static let timeout = 2*60
   
   fileprivate init() {
   }
@@ -39,13 +46,20 @@ class UploadQueueManager {
   public func push(item: UploadQueueItem, atTop: Bool = false) {
     
     let operation = BlockOperation {
+      print("Starting upload. In queue: \(self.queue.operationCount)")
       let s = DispatchSemaphore(value: 0)
       item.executeQueueItem() {
-        success in
+        success, photo in
         // do stuff with the response.
         
         if success {
           print("Upload successfull")
+          
+          if let imagePath = photo?.photo?.image {
+            // save photo in cache
+            ImageCache.default.store(item.image, original: item.imageData, forKey: imagePath)
+          }
+          
         } else {
           // reschedule
           print("Upload failed - rescheduling")
@@ -56,7 +70,14 @@ class UploadQueueManager {
       }
       
       // the timeout here is really an extra safety measure – the request itself should time out and end up firing the completion handler.
-      _ = s.wait(timeout: .now() + .seconds(self.timeout))
+      let result = s.wait(timeout: .now() + .seconds(UploadQueueManager.timeout+10))
+      switch result {
+      case .success:
+        print("dispatch success")
+      case .timedOut:
+        print("dispatch timeout")
+        self.push(item: item, atTop: true)
+      }
     }
     
     if atTop {
@@ -73,7 +94,7 @@ class UploadQueueManager {
     }
     
     queue.addOperation(operation)
-    print("Upload enqueued")
+    print("Upload enqueued. In queue: \(self.queue.operationCount)")
   }
   
 }

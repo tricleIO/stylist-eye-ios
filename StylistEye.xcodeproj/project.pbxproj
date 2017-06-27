@@ -137,6 +137,7 @@
 		A8A30DC21EE84ACD0005AA46 /* QuestionnaireFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DC11EE84ACD0005AA46 /* QuestionnaireFeedViewController.swift */; };
 		A8A30DC41EE84D010005AA46 /* CurrentOutfitDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DC31EE84D010005AA46 /* CurrentOutfitDTO.swift */; };
 		A8A30DC61EE8777F0005AA46 /* UploadQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DC51EE8777E0005AA46 /* UploadQueueManager.swift */; };
+		A8AD9E721F02538900F0EC4F /* UploadPhotoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AD9E711F02538900F0EC4F /* UploadPhotoResponseDTO.swift */; };
 		A8C434E61E94E07100FF8832 /* UploadWardrobePhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */; };
 		A8C434E81E94E2A300FF8832 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C434E71E94E2A300FF8832 /* UIImage.swift */; };
 		A8C714361EC1C51B0073F2C6 /* OutfitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C714351EC1C51B0073F2C6 /* OutfitTableViewCell.swift */; };
@@ -275,7 +276,7 @@
 		31E05E261DAF5512007AE913 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		31E30E9C1DAECD5E007F4A5A /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		31F5FB981DAE2BE300418D36 /* StylistEye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StylistEye.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		31F5FB9B1DAE2BE300418D36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		31F5FB9B1DAE2BE300418D36 /* AppDelegate.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; tabWidth = 4; };
 		31F5FBAA1DAE2BE300418D36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31F5FBAF1DAE2BE300418D36 /* StylistEyeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StylistEyeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		31F5FBB31DAE2BE300418D36 /* StylistEyeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylistEyeTests.swift; sourceTree = "<group>"; };
@@ -307,6 +308,7 @@
 		A8A30DC11EE84ACD0005AA46 /* QuestionnaireFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionnaireFeedViewController.swift; sourceTree = "<group>"; };
 		A8A30DC31EE84D010005AA46 /* CurrentOutfitDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOutfitDTO.swift; sourceTree = "<group>"; };
 		A8A30DC51EE8777E0005AA46 /* UploadQueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadQueueManager.swift; sourceTree = "<group>"; };
+		A8AD9E711F02538900F0EC4F /* UploadPhotoResponseDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPhotoResponseDTO.swift; sourceTree = "<group>"; };
 		A8C434E51E94E07100FF8832 /* UploadWardrobePhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadWardrobePhotoCommand.swift; sourceTree = "<group>"; };
 		A8C434E71E94E2A300FF8832 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		A8C714351EC1C51B0073F2C6 /* OutfitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitTableViewCell.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				310919791DAE850E0083A2C8 /* UserDTO.swift */,
 				A86AAF1C1EBB79FF0070B24D /* WardrobeDTO.swift */,
 				A8A30DC31EE84D010005AA46 /* CurrentOutfitDTO.swift */,
+				A8AD9E711F02538900F0EC4F /* UploadPhotoResponseDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1050,6 +1053,7 @@
 				31FE19431DB7DFE30087D095 /* GarmentTypeDTO.swift in Sources */,
 				A86AAF1B1EBB796B0070B24D /* WardrobeItemCommand.swift in Sources */,
 				31FC67081DB38F1D00ECC5A7 /* OutfitDetailCommand.swift in Sources */,
+				A8AD9E721F02538900F0EC4F /* UploadPhotoResponseDTO.swift in Sources */,
 				310919831DAE8FF80083A2C8 /* UIColor+SE.swift in Sources */,
 				31818E4D1DAFEB87004883D2 /* SettingsItem.swift in Sources */,
 				3102869F1DAFA41A007EE87B /* MainTabBarController.swift in Sources */,

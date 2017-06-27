@@ -284,7 +284,7 @@ class OutfitDetailViewController: AbstractViewController {
             image in
             
             let imageJpeg = image.jpegData()
-            let uploadCommand = UploadOutfitPhotoCommand(id: outfitId, photoType: photoType, photo: imageJpeg)
+            let uploadCommand = UploadOutfitPhotoCommand(id: outfitId, photoType: photoType, image: image, imageData: imageJpeg)
             
             UploadQueueManager.main.push(item: uploadCommand)
             
