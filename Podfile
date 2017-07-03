@@ -15,6 +15,9 @@ def shared_pods
 
     pod 'Fabric'
     pod 'Crashlytics'
+    
+    #pod 'ENMBadgedBarButtonItem'
+    pod 'YLBadge'
 end
 
 target 'StylistEye' do

@@ -124,6 +124,8 @@
 		A820A98C1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A820A98B1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift */; };
 		A82F6DA41E964A0F0053B6D1 /* PhotoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F6DA31E964A0F0053B6D1 /* PhotoType.swift */; };
 		A82F6DA61E964A380053B6D1 /* UploadOutfitPhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */; };
+		A84872F81F0A6F6D00BDC0AC /* MessagesCheckCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84872F71F0A6F6D00BDC0AC /* MessagesCheckCommand.swift */; };
+		A84872FA1F0A6FA800BDC0AC /* MessagesCheckDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84872F91F0A6FA800BDC0AC /* MessagesCheckDTO.swift */; };
 		A86AAF191EBB79240070B24D /* WardrobeCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86AAF181EBB79240070B24D /* WardrobeCommand.swift */; };
 		A86AAF1B1EBB796B0070B24D /* WardrobeItemCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86AAF1A1EBB796B0070B24D /* WardrobeItemCommand.swift */; };
 		A86AAF1D1EBB79FF0070B24D /* WardrobeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86AAF1C1EBB79FF0070B24D /* WardrobeDTO.swift */; };
@@ -295,6 +297,8 @@
 		A820A98B1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+isAtBottom.swift"; sourceTree = "<group>"; };
 		A82F6DA31E964A0F0053B6D1 /* PhotoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoType.swift; sourceTree = "<group>"; };
 		A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOutfitPhotoCommand.swift; sourceTree = "<group>"; };
+		A84872F71F0A6F6D00BDC0AC /* MessagesCheckCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCheckCommand.swift; sourceTree = "<group>"; };
+		A84872F91F0A6FA800BDC0AC /* MessagesCheckDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCheckDTO.swift; sourceTree = "<group>"; };
 		A86AAF181EBB79240070B24D /* WardrobeCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeCommand.swift; sourceTree = "<group>"; };
 		A86AAF1A1EBB796B0070B24D /* WardrobeItemCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeItemCommand.swift; sourceTree = "<group>"; };
 		A86AAF1C1EBB79FF0070B24D /* WardrobeDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeDTO.swift; sourceTree = "<group>"; };
@@ -393,6 +397,7 @@
 				A86AAF1C1EBB79FF0070B24D /* WardrobeDTO.swift */,
 				A8A30DC31EE84D010005AA46 /* CurrentOutfitDTO.swift */,
 				A8AD9E711F02538900F0EC4F /* UploadPhotoResponseDTO.swift */,
+				A84872F91F0A6FA800BDC0AC /* MessagesCheckDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -647,6 +652,7 @@
 				A8DAEF451ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift */,
 				A86AAF181EBB79240070B24D /* WardrobeCommand.swift */,
 				A86AAF1A1EBB796B0070B24D /* WardrobeItemCommand.swift */,
+				A84872F71F0A6F6D00BDC0AC /* MessagesCheckCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -1059,8 +1065,10 @@
 				3102869F1DAFA41A007EE87B /* MainTabBarController.swift in Sources */,
 				31818E571DAFF265004883D2 /* UITabeViewCell+SE.swift in Sources */,
 				3161C2BC1E01D2F6007DC0FB /* AddressDTO.swift in Sources */,
+				A84872FA1F0A6FA800BDC0AC /* MessagesCheckDTO.swift in Sources */,
 				A86CCF561EA649C0006D3245 /* PhotoDetailViewController.swift in Sources */,
 				31C8BB321E04808B00D8CBD0 /* StylistListDTO.swift in Sources */,
+				A84872F81F0A6F6D00BDC0AC /* MessagesCheckCommand.swift in Sources */,
 				A820A98C1E9FAF6800ECE3F8 /* UIScrollView+isAtBottom.swift in Sources */,
 				A8A30DC41EE84D010005AA46 /* CurrentOutfitDTO.swift in Sources */,
 				310919901DAE9D830083A2C8 /* AccountSessionManager.swift in Sources */,

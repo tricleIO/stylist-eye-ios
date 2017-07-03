@@ -70,6 +70,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
     case messageDetail(
         orderId: Int?
     )
+    case messagesCheck
     
     /**
      Outfits
@@ -175,6 +176,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
                 break
             }
             urlString = "/mapi/v1/messages/\(id)"
+        case .messagesCheck:
+            urlString = "/mapi/v1/messages/check"
         case .outfits:
             urlString = "/mapi/v1/outfits/"
         case let .outfitDetail(outfitId):
@@ -242,6 +245,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .updateMessagesStatus:
             fallthrough
         case .newMessage:
+            return params
+        case .messagesCheck:
             return params
         case .logout:
             fallthrough
@@ -319,6 +324,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             fallthrough
         case .messages:
             fallthrough
+        case .messagesCheck:
+            fallthrough
         case .outfits:
             fallthrough
         case .stylistList:
@@ -352,6 +359,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .logout:
             fallthrough
         case .messages:
+            fallthrough
+        case .messagesCheck:
             fallthrough
         case .outfits:
             fallthrough

@@ -9,6 +9,7 @@
 import KVNProgress
 import SnapKit
 import UIKit
+import YLBadge
 
 class OutfitViewController: AbstractViewController {
     
@@ -86,7 +87,7 @@ class OutfitViewController: AbstractViewController {
         super.initializeElements()
 
         backgroundImageView.image = #imageLiteral(resourceName: "purpleBg_image")
-
+        
         filterTableView.delegate = self
         filterTableView.dataSource = self
         filterTableView.separatorColor = Palette[custom: .purple]
@@ -195,6 +196,8 @@ class OutfitViewController: AbstractViewController {
         super.loadData()
 
         loadOutfits()
+        
+        loadMessages()
     }
 
     // MARK: - User Action
@@ -267,6 +270,24 @@ class OutfitViewController: AbstractViewController {
                 }
             case let .failure(message: message, apiResponse: _):
                 KVNProgress.showError(withStatus: "Outfit detail: \(message)")
+            }
+        }
+    }
+    
+    fileprivate func loadMessages() {
+        MessagesCheckCommand().executeCommand(page: 0) { data in
+            switch data {
+            case let .success(data, objectsArray: _, pagination: _, apiResponse: _):
+                
+                if let data = data, let unread = data.unread {
+                    if unread > 0 {
+                        self.rightBarbutton.yl_showBadgeText("\(unread)")
+                    } else {
+                        self.rightBarbutton.yl_clearBadge()
+                    }
+                }
+            default:
+                break
             }
         }
     }

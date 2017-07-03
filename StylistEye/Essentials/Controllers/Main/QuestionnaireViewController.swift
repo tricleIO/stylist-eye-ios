@@ -92,6 +92,30 @@ class QuestionnaireViewController: AbstractViewController {
         view.backgroundColor = Palette[basic: .white]
     }
     
+    override func loadData() {
+        super.loadData()
+        
+        loadMessages()
+    }
+    
+    fileprivate func loadMessages() {
+        MessagesCheckCommand().executeCommand(page: 0) { data in
+            switch data {
+            case let .success(data, objectsArray: _, pagination: _, apiResponse: _):
+                
+                if let data = data, let unread = data.unread {
+                    if unread > 0 {
+                        self.rightBarbutton.yl_showBadgeText("\(unread)")
+                    } else {
+                        self.rightBarbutton.yl_clearBadge()
+                    }
+                }
+            default:
+                break
+            }
+        }
+    }
+    
     // MARK: - User Action
     func settingsButtonTapped() {
         openSettingsView()
@@ -113,6 +137,7 @@ class QuestionnaireViewController: AbstractViewController {
         navigationController?.pushViewController(messagesController, animated: true)
         
     }
+    
 }
 
 // MARK: - <UITableViewDataSource>
