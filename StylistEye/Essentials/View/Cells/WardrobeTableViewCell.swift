@@ -152,6 +152,7 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       imageViews.append(imageView)
       imageView.contentMode = .scaleAspectFill
       imageView.clipsToBounds = true
+      imageView.kf.indicatorType = .activity
       imagesScrollContentView.addSubview(imageView)
     }
   }
