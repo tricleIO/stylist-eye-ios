@@ -146,4 +146,17 @@ extension MessageDetailViewController {
             }
         }
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
+        if let message = messages[safe: indexPath.item] {
+            if message.senderId == senderId {
+                cell.textView.textColor = UIColor.white
+            }
+            else {
+                cell.textView.textColor = Palette[custom: .purple]
+            }
+        }
+        return cell
+    }
 }
