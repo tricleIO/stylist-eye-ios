@@ -127,6 +127,13 @@ class WardrobeItemDetailViewController: AbstractViewController {
     }
     
     func configureToolbar() {
+        
+        if wardrobeItem?.isPlaceholder ?? false {
+            cameraImageView.isEnabled = false
+            trashImageView.isEnabled = false
+            return
+        }
+        
         let photosCount = wardrobeItem?.photos?.count ?? 0
         switch photosCount {
         case 0:

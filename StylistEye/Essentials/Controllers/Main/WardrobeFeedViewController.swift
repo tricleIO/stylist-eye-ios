@@ -171,6 +171,9 @@ class WardrobeFeedViewController: AbstractViewController {
             let imageJpeg = image.jpegData()
             let uploadCommand = UploadWardrobePhotoCommand(id: garmentId, image: image, imageData: imageJpeg)
             
+            let fakeItem = WardrobeDTO(image: image)
+            self.items = [fakeItem] + (self.items ?? [])
+            
             UploadQueueManager.main.push(item: uploadCommand)
             
 //            KVNProgress.show()
@@ -207,8 +210,15 @@ extension WardrobeFeedViewController: UITableViewDataSource {
         if let item = items?[safe: indexPath.row] {
         
             cell.backgroundColor = Palette[basic: .clear]
-            if let photos = item.photos?.flatMap({$0.image}) {
-                cell.images = photos
+            
+            if item.isPlaceholder {
+                if let placeholder = item.placeholderImage {
+                    cell.placeholderImages = [placeholder]
+                }
+            } else {
+                if let photos = item.photos?.flatMap({$0.image}) {
+                    cell.images = photos
+                }
             }
             cell.reviews = item.reviews
             cell.selectionStyle = .none
@@ -250,12 +260,19 @@ extension WardrobeFeedViewController: UITableViewDelegate {
         let productVC = WardrobeItemDetailViewController()
         productVC.wardrobeItem = item
         productVC.title = item.garmetType?.name
-        if let image = item.photos?[safe: cell.currentImagePage()]?.image?.urlValue {
-            productVC.mainImageview.kf.setImage(with: image, placeholder: #imageLiteral(resourceName: "placeholder"))
-            productVC.photoIndex = cell.currentImagePage()
+        
+        if item.isPlaceholder {
+            productVC.mainImageview.image = item.placeholderImage
+            productVC.photoIndex = 0
         } else {
-            productVC.mainImageview.image = #imageLiteral(resourceName: "placeholder")
-            productVC.photoIndex = -1
+        
+            if let image = item.photos?[safe: cell.currentImagePage()]?.image?.urlValue {
+                productVC.mainImageview.kf.setImage(with: image, placeholder: #imageLiteral(resourceName: "placeholder"))
+                productVC.photoIndex = cell.currentImagePage()
+            } else {
+                productVC.mainImageview.image = #imageLiteral(resourceName: "placeholder")
+                productVC.photoIndex = -1
+            }
         }
         productVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(productVC, animated: true)

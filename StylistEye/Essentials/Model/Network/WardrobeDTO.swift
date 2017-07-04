@@ -17,6 +17,12 @@ struct WardrobeDTO: Mappable {
   var isFavourite: Bool?
   var reviews: [ReviewDTO]?
   
+  // used for "fake" items
+  var placeholderImage: UIImage?
+  var isPlaceholder: Bool {
+    return wardrobeId < 0
+  }
+  
   init?(map: Map) {
     var id: Int?
     id <- map["id"]
@@ -24,6 +30,11 @@ struct WardrobeDTO: Mappable {
       return nil
     }
     wardrobeId = oID
+  }
+  
+  init(image: UIImage) {
+    wardrobeId = -1
+    placeholderImage = image
   }
   
   mutating func mapping(map: Map) {

@@ -32,6 +32,22 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       imagesScrollView.contentSize = CGSize(width: width*CGFloat(imagesCount), height: height)
     }
   }
+  var placeholderImages = [UIImage]() {
+    didSet {
+      let imagesCount = min(maxImages, images.count)
+      imagesPageControl.numberOfPages = imagesCount
+      
+      for i in 0..<imagesCount {
+        imageViews[i].image = placeholderImages[i]
+      }
+      
+      let width = imagesScrollContainer.frame.width
+      let height = imagesScrollContainer.frame.height
+      
+      imagesScrollView.contentSize = CGSize(width: width*CGFloat(imagesCount), height: height)
+    }
+  }
+  
   fileprivate var imageViews = [UIImageView]()
   
   var reviews: [ReviewDTO]? {
