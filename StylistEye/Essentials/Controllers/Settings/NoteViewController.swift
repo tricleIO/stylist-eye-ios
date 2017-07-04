@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 class NoteViewController: AbstractViewController {
 
@@ -15,6 +16,7 @@ class NoteViewController: AbstractViewController {
     fileprivate lazy var backButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "backArrow_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backButtonTapped))
 
     fileprivate let coverImageView = ImageView()
+    fileprivate let webView = WKWebView()
 
     // MARK: - <Initializable>
     internal override func addElements() {
@@ -23,6 +25,7 @@ class NoteViewController: AbstractViewController {
         view.addSubviews(views:
             [
                 coverImageView,
+                webView,
             ]
         )
     }
@@ -33,12 +36,15 @@ class NoteViewController: AbstractViewController {
         coverImageView.image = #imageLiteral(resourceName: "purpleBg_image")
 
         navigationItem.leftBarButtonItem = backButton
+        
+        let request = URLRequest(url: URL(string: "http://stylist.azurewebsites.net/terms/client")!)
+        webView.load(request)
     }
 
     internal override func setupView() {
         super.setupView()
 
-        title = StringContainer[.languages]
+        title = StringContainer[.note]
     }
 
     internal override func setupConstraints() {
@@ -46,6 +52,13 @@ class NoteViewController: AbstractViewController {
 
         coverImageView.snp.makeConstraints { make in
             make.edges.equalTo(view)
+        }
+        
+        webView.snp.makeConstraints { make in
+            make.top.equalTo(topLayoutGuide.snp.bottom)
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
     }
 
