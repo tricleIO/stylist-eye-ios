@@ -10,7 +10,7 @@ import ObjectMapper
 
 struct OutfitCategoryDTO: Mappable {
     
-    var categoryId: String?
+    var categoryId: Int?
     var languageId: Languages = .unknown
     var name: String?
     var icon: String?
@@ -21,7 +21,7 @@ struct OutfitCategoryDTO: Mappable {
         guard let gID = id else {
             return nil
         }
-        categoryId = String(gID)
+        categoryId = gID
     }
     
     mutating func mapping(map: Map) {

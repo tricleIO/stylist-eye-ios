@@ -13,7 +13,7 @@ struct UpdateMessageStatusCommand: NetworkExecutable {
     typealias Data = EmptyDTO
     var urlManager: APIUrlManager
     
-    init(msgId: Int) {
-        urlManager = .updateMessagesStatus(msgId: msgId)
+    init(threadId: Int, msgId: Int) {
+        urlManager = .updateMessagesStatus(threadId: threadId, msgId: msgId)
     }
 }

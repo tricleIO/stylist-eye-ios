@@ -126,6 +126,8 @@
 		A82F6DA61E964A380053B6D1 /* UploadOutfitPhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */; };
 		A84872F81F0A6F6D00BDC0AC /* MessagesCheckCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84872F71F0A6F6D00BDC0AC /* MessagesCheckCommand.swift */; };
 		A84872FA1F0A6FA800BDC0AC /* MessagesCheckDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84872F91F0A6FA800BDC0AC /* MessagesCheckDTO.swift */; };
+		A84873041F0CDFA300BDC0AC /* UploadCurrentOutfitPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84873031F0CDFA300BDC0AC /* UploadCurrentOutfitPhoto.swift */; };
+		A84873061F0CDFEA00BDC0AC /* DeleteCurrentOutfitPhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84873051F0CDFEA00BDC0AC /* DeleteCurrentOutfitPhotoCommand.swift */; };
 		A86AAF191EBB79240070B24D /* WardrobeCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86AAF181EBB79240070B24D /* WardrobeCommand.swift */; };
 		A86AAF1B1EBB796B0070B24D /* WardrobeItemCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86AAF1A1EBB796B0070B24D /* WardrobeItemCommand.swift */; };
 		A86AAF1D1EBB79FF0070B24D /* WardrobeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86AAF1C1EBB79FF0070B24D /* WardrobeDTO.swift */; };
@@ -253,7 +255,7 @@
 		31818E721DB00BAC004883D2 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		318901DF1DBBBA020027566A /* CurrentLanguageChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLanguageChecker.swift; sourceTree = "<group>"; };
 		31897D941DAF6B8D00BFFED0 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		318FD7721E472A16008EEA23 /* UpdateMessageStatusCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateMessageStatusCommand.swift; sourceTree = "<group>"; };
+		318FD7721E472A16008EEA23 /* UpdateMessageStatusCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UpdateMessageStatusCommand.swift; sourceTree = "<group>"; tabWidth = 4; };
 		3197B6581DB236C30096EF16 /* MessagesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTableViewCell.swift; sourceTree = "<group>"; };
 		3197B65A1DB23B7E0096EF16 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		3197B65C1DB288250096EF16 /* WardrobeFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = WardrobeFeedViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -299,6 +301,8 @@
 		A82F6DA51E964A380053B6D1 /* UploadOutfitPhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOutfitPhotoCommand.swift; sourceTree = "<group>"; };
 		A84872F71F0A6F6D00BDC0AC /* MessagesCheckCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCheckCommand.swift; sourceTree = "<group>"; };
 		A84872F91F0A6FA800BDC0AC /* MessagesCheckDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCheckDTO.swift; sourceTree = "<group>"; };
+		A84873031F0CDFA300BDC0AC /* UploadCurrentOutfitPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadCurrentOutfitPhoto.swift; sourceTree = "<group>"; };
+		A84873051F0CDFEA00BDC0AC /* DeleteCurrentOutfitPhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteCurrentOutfitPhotoCommand.swift; sourceTree = "<group>"; };
 		A86AAF181EBB79240070B24D /* WardrobeCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeCommand.swift; sourceTree = "<group>"; };
 		A86AAF1A1EBB796B0070B24D /* WardrobeItemCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeItemCommand.swift; sourceTree = "<group>"; };
 		A86AAF1C1EBB79FF0070B24D /* WardrobeDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeDTO.swift; sourceTree = "<group>"; };
@@ -377,11 +381,13 @@
 				3161C2BB1E01D2F6007DC0FB /* AddressDTO.swift */,
 				314280DA1DF7ED21003C454A /* AuthorDTO.swift */,
 				3161C2BD1E01D474007DC0FB /* ComponentsDTO.swift */,
+				A8A30DC31EE84D010005AA46 /* CurrentOutfitDTO.swift */,
 				A8F746581E85340500FEDCD9 /* DressStyleDTO.swift */,
 				310919741DAE823E0083A2C8 /* EmptyDTO.swift */,
 				31FE19421DB7DFE30087D095 /* GarmentTypeDTO.swift */,
 				A8F746561E8533E200FEDCD9 /* Languages.swift */,
 				3197B65E1DB28DA20096EF16 /* MessagesDTO.swift */,
+				A84872F91F0A6FA800BDC0AC /* MessagesCheckDTO.swift */,
 				310919991DAEA92A0083A2C8 /* NetworkResponse.swift */,
 				3109197D1DAE87570083A2C8 /* ObjectResponse.swift */,
 				3175F4E11E05614C001C89C6 /* OutfitCategoryDTO.swift */,
@@ -393,11 +399,9 @@
 				A86AAF1E1EBB7ABE0070B24D /* ReviewDTO.swift */,
 				3161C2B91E01D2BF007DC0FB /* StylistDTO.swift */,
 				31C8BB311E04808B00D8CBD0 /* StylistListDTO.swift */,
+				A8AD9E711F02538900F0EC4F /* UploadPhotoResponseDTO.swift */,
 				310919791DAE850E0083A2C8 /* UserDTO.swift */,
 				A86AAF1C1EBB79FF0070B24D /* WardrobeDTO.swift */,
-				A8A30DC31EE84D010005AA46 /* CurrentOutfitDTO.swift */,
-				A8AD9E711F02538900F0EC4F /* UploadPhotoResponseDTO.swift */,
-				A84872F91F0A6FA800BDC0AC /* MessagesCheckDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -633,6 +637,7 @@
 		311D1F1B1DAE4C8100A7F545 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
+				A8A30DBC1EE8457F0005AA46 /* CurrentOutfit */,
 				A86CCF571EA693B9006D3245 /* DeleteOutfitPhotoCommand.swift */,
 				A8DAEF431ED5B8D700C7766A /* DeleteWardrobePhotoCommand.swift */,
 				A8F7465A1E8534CF00FEDCD9 /* DressStyleCommand.swift */,
@@ -641,7 +646,7 @@
 				31818E591DB00295004883D2 /* LogoutCommand.swift */,
 				31A2526F1E06C7980090EFD8 /* MessageDetailCommand.swift */,
 				3197B6601DB28E4C0096EF16 /* MessagesCommand.swift */,
-				A8A30DBC1EE8457F0005AA46 /* CurrentOutfit */,
+				A84872F71F0A6F6D00BDC0AC /* MessagesCheckCommand.swift */,
 				31FC67071DB38F1D00ECC5A7 /* OutfitDetailCommand.swift */,
 				317F6CF71DB2C6D600DE0679 /* OutfitsCommand.swift */,
 				312F04A71E47722700252D22 /* SendMessageCommand.swift */,
@@ -652,7 +657,6 @@
 				A8DAEF451ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift */,
 				A86AAF181EBB79240070B24D /* WardrobeCommand.swift */,
 				A86AAF1A1EBB796B0070B24D /* WardrobeItemCommand.swift */,
-				A84872F71F0A6F6D00BDC0AC /* MessagesCheckCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -832,6 +836,8 @@
 				3175F4E31E05621D001C89C6 /* CurrentOutfitCategoriesCommand.swift */,
 				A8A30DBD1EE845A20005AA46 /* CurrentOutfitsCommand.swift */,
 				A8A30DBF1EE845B20005AA46 /* CurrentOutfitDetailCommand.swift */,
+				A84873031F0CDFA300BDC0AC /* UploadCurrentOutfitPhoto.swift */,
+				A84873051F0CDFEA00BDC0AC /* DeleteCurrentOutfitPhotoCommand.swift */,
 			);
 			name = CurrentOutfit;
 			sourceTree = "<group>";
@@ -1113,6 +1119,7 @@
 				A820A98A1E9FA6E400ECE3F8 /* PaginationDTO.swift in Sources */,
 				31CD44E81DB14CD8007A5E1C /* View.swift in Sources */,
 				31818E551DAFF10E004883D2 /* Reusable.swift in Sources */,
+				A84873061F0CDFEA00BDC0AC /* DeleteCurrentOutfitPhotoCommand.swift in Sources */,
 				318FD7731E472A16008EEA23 /* UpdateMessageStatusCommand.swift in Sources */,
 				3197B65D1DB288250096EF16 /* WardrobeFeedViewController.swift in Sources */,
 				31818E531DAFF0D5004883D2 /* UITableView+SE.swift in Sources */,
@@ -1146,6 +1153,7 @@
 				A8DAEF461ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift in Sources */,
 				3109198A1DAE99280083A2C8 /* AccessToken.swift in Sources */,
 				317F6CF81DB2C6D600DE0679 /* OutfitsCommand.swift in Sources */,
+				A84873041F0CDFA300BDC0AC /* UploadCurrentOutfitPhoto.swift in Sources */,
 				31818E511DAFF003004883D2 /* TableView.swift in Sources */,
 				3163A7D41DBA32DC00D009BB /* Optional.swift in Sources */,
 				A8F7465B1E8534CF00FEDCD9 /* DressStyleCommand.swift in Sources */,

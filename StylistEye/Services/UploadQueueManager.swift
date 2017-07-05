@@ -11,10 +11,16 @@ import Alamofire
 import Kingfisher
 import UIKit
 
+protocol UploadPhotoResponse {
+  
+  var photo: PhotosDTO? { get set }
+  
+}
+
 // TODO a smarter way to extend NetworkExecutable with constrained generic or something
 protocol UploadQueueItem {
   
-  func executeQueueItem(handler: @escaping ((Bool, UploadPhotoResponseDTO?) -> Void) )
+  func executeQueueItem(handler: @escaping ((Bool, UploadPhotoResponse?) -> Void) )
   
   var image: UIImage { get }
   

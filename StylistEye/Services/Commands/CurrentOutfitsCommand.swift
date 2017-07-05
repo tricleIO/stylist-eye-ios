@@ -19,7 +19,7 @@ struct CurrentOutfitsCommand: NetworkExecutable {
   /// Set RUL manager
   var urlManager: APIUrlManager
   
-  init(category: String) {
+  init(category: Int) {
     urlManager = .currentOutfits(category: category)
   }
 }

@@ -14,7 +14,7 @@ class QuestionnaireFeedViewController: AbstractViewController {
   
   // MARK: - Properties
   // MARK: > public
-  var categoryId: String? {
+  var categoryId: Int? {
     didSet {
       
     }
@@ -162,37 +162,23 @@ class QuestionnaireFeedViewController: AbstractViewController {
   
   // MARK: - Actions
   fileprivate func openCamera() {
-//    guard let categoryId = categoryId else { return }
-//    
-//    let cameraController = CameraViewController()
-//    cameraController.imagePicked = {
-//      image in
-//      
-//      let imageJpeg = image.jpegData()
-//      let uploadCommand = UploadWardrobePhotoCommand(id: garmentId, photo: imageJpeg)
-//      
-//      KVNProgress.show()
-//      uploadCommand.executeCommand {
-//        data in
-//        
-//        switch data {
-//        case let .success(_, objectsArray: _, _, apiResponse: apiResponse):
-//          // TODO: @MS
-//          switch apiResponse {
-//          case .ok:
-//            KVNProgress.showSuccess()
-//            self.loadData()
-//          case .fail:
-//            KVNProgress.showError(withStatus: "Upload failed")
-//          }
-//        case let .failure(message):
-//          KVNProgress.showError(withStatus: message.message)
-//        }
-//      }
-//    }
-//    let navController = UINavigationController(rootViewController: cameraController)
-//    navController.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))
-//    present(navController, animated: true, completion: nil)
+    guard let categoryId = categoryId else { return }
+    
+    let cameraController = CameraViewController()
+    cameraController.imagePicked = {
+      image in
+      
+      let imageJpeg = image.jpegData()
+      let uploadCommand = UploadCurrentOutfitPhotoCommand(id: categoryId, image: image, imageData: imageJpeg)
+      
+      let fakeItem = CurrentOutfitDTO(image: image)
+      self.items = [fakeItem] + (self.items ?? [])
+      
+      UploadQueueManager.main.push(item: uploadCommand)
+    }
+    let navController = UINavigationController(rootViewController: cameraController)
+    navController.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))
+    present(navController, animated: true, completion: nil)
   }
 }
 
@@ -205,8 +191,13 @@ extension QuestionnaireFeedViewController: UITableViewDataSource {
     if let item = items?[safe: indexPath.row] {
       
       cell.backgroundColor = Palette[basic: .clear]
-      if let photos = item.photo?.image {
-        cell.images = [photos]
+      
+      if item.isPlaceholder, let image = item.image {
+        cell.placeholderImages = [image]
+      } else {
+        if let photos = item.photo?.image {
+          cell.images = [photos]
+        }
       }
       cell.reviews = []
       cell.selectionStyle = .none

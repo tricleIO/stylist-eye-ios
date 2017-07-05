@@ -31,7 +31,7 @@ struct UploadWardrobePhotoCommand: NetworkExecutable, UploadQueueItem {
     self.imageData = imageData
   }
   
-  func executeQueueItem(handler: @escaping ((Bool, UploadPhotoResponseDTO?) -> Void)) {
+  func executeQueueItem(handler: @escaping ((Bool, UploadPhotoResponse?) -> Void)) {
     self.executeCommand(completion: {
       data in
       switch data {

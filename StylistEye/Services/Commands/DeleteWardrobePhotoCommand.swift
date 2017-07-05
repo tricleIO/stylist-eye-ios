@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- Uplad wardrobe command.
+ Delete wardrobe photo command.
  */
 struct DeleteWardrobePhotoCommand: NetworkExecutable {
   

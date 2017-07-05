@@ -1,22 +1,22 @@
 //
-//  UploadOutfitPhotoCommand.swift
+//  UploadCurrentOutfitPhoto.swift
 //  StylistEye
 //
-//  Created by Martin Stachon on 06.04.17.
+//  Created by Martin Stachon on 05.07.17.
 //  Copyright © 2017 Michal Severín. All rights reserved.
 //
 
 import Foundation
-import UIKit
 import Alamofire
+import UIKit
 
 /**
  Uplad wardrobe command.
  */
-struct UploadOutfitPhotoCommand: NetworkExecutable, UploadQueueItem {
+struct UploadCurrentOutfitPhotoCommand: NetworkExecutable, UploadQueueItem {
   
   /// Outfit model.
-  typealias Data = UploadPhotoResponseDTO
+  typealias Data = UploadCurrentOutfitPhotoResponseDTO
   
   /// Set RUL manager
   var urlManager: APIUrlManager
@@ -25,8 +25,8 @@ struct UploadOutfitPhotoCommand: NetworkExecutable, UploadQueueItem {
   
   var imageData: Foundation.Data
   
-  init(id: Int, photoType: PhotoType, image: UIImage, imageData: Foundation.Data) {
-    urlManager = .uploadOutfitPhoto(id: id, photoType: photoType.rawValue, photo: imageData)
+  init(id: Int, image: UIImage, imageData: Foundation.Data) {
+    urlManager = .uploadCurrentOutfitPhoto(id: id, photo: imageData)
     self.image = image
     self.imageData = imageData
   }
@@ -42,5 +42,5 @@ struct UploadOutfitPhotoCommand: NetworkExecutable, UploadQueueItem {
       }
     })
   }
-
+  
 }

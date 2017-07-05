@@ -164,9 +164,12 @@ extension MessagesViewController: UITableViewDataSource {
 extension MessagesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let msgDetail = MessageDetailViewController()
-        if let msgId = messagesDTO[safe: indexPath.row]?.lastMessage?.identifier, let isSelectedMessageRead = messagesDTO[safe: indexPath.row]?.lastMessage?.read, !isSelectedMessageRead {
+        if let threadId = messagesDTO[safe: indexPath.row]?.order?.identifier,
+            let msgId = messagesDTO[safe: indexPath.row]?.lastMessage?.identifier,
+            let isSelectedMessageRead = messagesDTO[safe: indexPath.row]?.lastMessage?.read, !isSelectedMessageRead {
+            
             self.messagesDTO[indexPath.row].lastMessage?.read = true
-            UpdateMessageStatusCommand(msgId: msgId).executeCommand(completion: { response in
+            UpdateMessageStatusCommand(threadId: threadId, msgId: msgId).executeCommand(completion: { response in
                 switch response {
                 case let .success(object: _, objectsArray: _, pagination: _, apiResponse: apiResponse):
                     switch apiResponse {

@@ -7,12 +7,15 @@
 //
 
 import ObjectMapper
+import UIKit
 
 struct CurrentOutfitDTO: Mappable {
   
   var outfitId: Int?
   var category: GarmentTypeDTO?
   var photo: PhotosDTO?
+  fileprivate(set) var isPlaceholder = false
+  fileprivate(set) var image: UIImage?
   
   init?(map: Map) {
     var id: Int?
@@ -21,6 +24,13 @@ struct CurrentOutfitDTO: Mappable {
       return nil
     }
     outfitId = oId
+  }
+  
+  // constructor for local fake items
+  
+  init(image: UIImage) {
+    self.isPlaceholder = true
+    self.image = image
   }
   
   mutating func mapping(map: Map) {

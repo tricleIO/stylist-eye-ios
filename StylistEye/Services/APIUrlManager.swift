@@ -60,6 +60,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
      */
     case messages
     case updateMessagesStatus(
+        threadId: Int,
         msgId: Int
     )
     case newMessage(
@@ -101,7 +102,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
     /**
      Current Outfits.
      */
-    case currentOutfits(category: String)
+    case currentOutfits(category: Int)
     
     /**
      Current Outfit item detail.
@@ -134,9 +135,19 @@ enum APIUrlManager: APIUrlManagerProtocol {
     case uploadOutfitPhoto(id: Int, photoType: Int, photo: Data)
     
     /**
+     Upload current outfit photo
+     */
+    case uploadCurrentOutfitPhoto(id: Int, photo: Data)
+    
+    /**
      Delete outfit photo
      */
     case deleteOutfitPhoto(id: Int)
+    
+    /**
+     Delete current outfit photo
+     */
+    case deleteCurrentOutfitPhoto(id: Int)
     
     /**
      Wardrobe
@@ -166,9 +177,9 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .logout:
             urlString = "/mapi/v1/user/logout"
         case .messages:
-            fallthrough
-        case .updateMessagesStatus:
             urlString = "/mapi/v1/messages/"
+        case let .updateMessagesStatus(threadId, _):
+            urlString = "/mapi/v1/messages/\(threadId)"
         case let .newMessage(_, _, orderId):
             urlString = "/mapi/v1/messages/\(orderId)"
         case let .messageDetail(id):
@@ -200,6 +211,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
             urlString = "/mapi/v1/photos/outfit/\(id)"
         case let .uploadWardrobeSecondPhoto(id, _):
             urlString = "/mapi/v1/photos/wardrobe/photo2/\(id)"
+        case let .uploadCurrentOutfitPhoto(id, _):
+            urlString = "/mapi/v1/currentoutfits/\(id)"
+        case let .deleteCurrentOutfitPhoto(id):
+            urlString = "/mapi/v1/photos/currentoutfit/\(id)"
         case .wardrobe:
             urlString = "/mapi/v1/wardrobe"
         case let .wardrobeItem(id):
@@ -278,7 +293,12 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return params
         case .dressStyle:
             return params
-        case .uploadWardrobePhoto, .uploadWardrobeSecondPhoto, .uploadOutfitPhoto, .deleteOutfitPhoto:
+        case .uploadWardrobePhoto,
+             .uploadWardrobeSecondPhoto,
+             .uploadOutfitPhoto,
+             .uploadCurrentOutfitPhoto,
+             .deleteOutfitPhoto,
+             .deleteCurrentOutfitPhoto:
             return params
         case let .deleteWardrobePhoto(_, type):
             params["type"] = type
@@ -305,6 +325,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
                 "password": "\(password)",
             ]
         case let .updateMessagesStatus(
+            _,
             msgId
             ):
             return [
@@ -344,7 +365,13 @@ enum APIUrlManager: APIUrlManagerProtocol {
             fallthrough
         case .dressStyle:
             return [:]
-        case .uploadWardrobePhoto, .uploadWardrobeSecondPhoto, .uploadOutfitPhoto, .deleteOutfitPhoto, .deleteWardrobePhoto:
+        case .uploadWardrobePhoto,
+             .uploadWardrobeSecondPhoto,
+             .uploadOutfitPhoto,
+             .uploadCurrentOutfitPhoto,
+             .deleteOutfitPhoto,
+             .deleteWardrobePhoto,
+             .deleteCurrentOutfitPhoto:
             return [:]
         case .wardrobe, .wardrobeItem:
             return [:]
@@ -380,9 +407,15 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return .post
         case .dressStyle:
             return .get
-        case .uploadWardrobePhoto, .uploadWardrobeSecondPhoto, .uploadOutfitPhoto:
+        case .uploadWardrobePhoto,
+             .uploadWardrobeSecondPhoto,
+             .uploadOutfitPhoto,
+             .uploadCurrentOutfitPhoto:
             return .post
-        case .deleteOutfitPhoto, .deleteWardrobePhoto:
+        case .deleteOutfitPhoto,
+             .deleteWardrobePhoto,
+             .deleteOutfitPhoto,
+             .deleteCurrentOutfitPhoto:
             return .delete
         case .wardrobe:
             return .get
@@ -393,7 +426,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
     
     var request: RequestType {
         switch self {
-        case .uploadWardrobePhoto, .uploadWardrobeSecondPhoto, .uploadOutfitPhoto:
+        case .uploadWardrobePhoto,
+             .uploadWardrobeSecondPhoto,
+             .uploadOutfitPhoto,
+             .uploadCurrentOutfitPhoto:
             return .upload
         default:
             return .request
@@ -402,7 +438,9 @@ enum APIUrlManager: APIUrlManagerProtocol {
     
     var multipartData: ((MultipartFormData) -> Void) {
         switch self {
-        case let .uploadWardrobePhoto(_, photo), let .uploadWardrobeSecondPhoto(_, photo):
+        case let .uploadWardrobePhoto(_, photo),
+             let .uploadWardrobeSecondPhoto(_, photo),
+             let .uploadCurrentOutfitPhoto(_, photo):
             return { multipartFormData in
                 multipartFormData.append(photo, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
             }
