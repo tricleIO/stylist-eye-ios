@@ -25,7 +25,18 @@ struct UploadWardrobePhotoCommand: NetworkExecutable, UploadQueueItem {
   
   var imageData: Foundation.Data
   
+  var type: UploadPhotoCategory {
+    return .wardrobe
+  }
+  
+  var uploadCategoryId: Int {
+    return id
+  }
+  
+  var id: Int
+  
   init(id: Int, image: UIImage, imageData: Foundation.Data) {
+    self.id = id
     urlManager = .uploadWardrobePhoto(id: id, photo: imageData)
     self.image = image
     self.imageData = imageData

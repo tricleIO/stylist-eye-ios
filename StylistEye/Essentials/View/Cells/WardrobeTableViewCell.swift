@@ -34,7 +34,7 @@ class WardrobeTableViewCell: AbstractTableViewCell {
   }
   var placeholderImages = [UIImage]() {
     didSet {
-      let imagesCount = min(maxImages, images.count)
+      let imagesCount = min(maxImages, placeholderImages.count)
       imagesPageControl.numberOfPages = imagesCount
       
       for i in 0..<imagesCount {

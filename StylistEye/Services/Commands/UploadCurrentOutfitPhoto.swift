@@ -25,10 +25,21 @@ struct UploadCurrentOutfitPhotoCommand: NetworkExecutable, UploadQueueItem {
   
   var imageData: Foundation.Data
   
+  var type: UploadPhotoCategory {
+    return .currentOutfits
+  }
+  
+  var id: Int
+  
+  var uploadCategoryId: Int {
+    return id
+  }
+  
   init(id: Int, image: UIImage, imageData: Foundation.Data) {
     urlManager = .uploadCurrentOutfitPhoto(id: id, photo: imageData)
     self.image = image
     self.imageData = imageData
+    self.id = id
   }
   
   func executeQueueItem(handler: @escaping ((Bool, UploadPhotoResponse?) -> Void)) {

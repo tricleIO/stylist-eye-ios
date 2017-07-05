@@ -39,10 +39,19 @@ class QuestionnaireFeedViewController: AbstractViewController {
   fileprivate var pagination: PaginationDTO?
   fileprivate var isRefreshing = false
   
-  fileprivate var items: [CurrentOutfitDTO]? {
+  fileprivate var itemsReal: [CurrentOutfitDTO]? {
     didSet {
       tableView.reloadData()
     }
+  }
+  // items with placeholders for uploaded items
+  fileprivate var items: [CurrentOutfitDTO]? {
+    guard let categoryId = categoryId else {
+      return itemsReal
+    }
+    return UploadQueueManager.main.placeholders(type: .currentOutfits, category: categoryId).map {
+      CurrentOutfitDTO(image: $0.image)
+      } + (itemsReal ?? [])
   }
   
   // MARK: - <Initializable>
@@ -138,9 +147,9 @@ class QuestionnaireFeedViewController: AbstractViewController {
           self.pagination = pagination
           KVNProgress.dismiss()
           if page == 1 {
-            self.items = data
-          } else if let items = self.items, let outfitsData = data {
-            self.items = items + outfitsData
+            self.itemsReal = data
+          } else if let items = self.itemsReal, let outfitsData = data {
+            self.itemsReal = items + outfitsData
           }
         case .fail:
           KVNProgress.showError(withStatus: "Fail code wardrobe VC")
@@ -170,9 +179,6 @@ class QuestionnaireFeedViewController: AbstractViewController {
       
       let imageJpeg = image.jpegData()
       let uploadCommand = UploadCurrentOutfitPhotoCommand(id: categoryId, image: image, imageData: imageJpeg)
-      
-      let fakeItem = CurrentOutfitDTO(image: image)
-      self.items = [fakeItem] + (self.items ?? [])
       
       UploadQueueManager.main.push(item: uploadCommand)
     }

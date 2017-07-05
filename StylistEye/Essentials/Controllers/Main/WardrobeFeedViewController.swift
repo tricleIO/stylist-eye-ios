@@ -39,10 +39,20 @@ class WardrobeFeedViewController: AbstractViewController {
     fileprivate var pagination: PaginationDTO?
     fileprivate var isRefreshing = false
     
-    fileprivate var items: [WardrobeDTO]? {
+    fileprivate var itemsReal: [WardrobeDTO]? {
         didSet {
             tableView.reloadData()
         }
+    }
+    // items with placeholders for uploaded items
+    fileprivate var items: [WardrobeDTO]? {
+        guard let garmentId = garmentId else {
+            return itemsReal
+        }
+        
+        return UploadQueueManager.main.placeholders(type: .wardrobe, category: garmentId).map {
+            WardrobeDTO(image: $0.image)
+        } + (itemsReal ?? [])
     }
     
     // MARK: - <Initializable>
@@ -138,9 +148,9 @@ class WardrobeFeedViewController: AbstractViewController {
                     self.pagination = pagination
                     KVNProgress.dismiss()
                     if page == 1 {
-                        self.items = data
-                    } else if let items = self.items, let outfitsData = data {
-                        self.items = items + outfitsData
+                        self.itemsReal = data
+                    } else if let items = self.itemsReal, let outfitsData = data {
+                        self.itemsReal = items + outfitsData
                     }
                 case .fail:
                     KVNProgress.showError(withStatus: "Fail code wardrobe VC")
@@ -170,9 +180,6 @@ class WardrobeFeedViewController: AbstractViewController {
             
             let imageJpeg = image.jpegData()
             let uploadCommand = UploadWardrobePhotoCommand(id: garmentId, image: image, imageData: imageJpeg)
-            
-            let fakeItem = WardrobeDTO(image: image)
-            self.items = [fakeItem] + (self.items ?? [])
             
             UploadQueueManager.main.push(item: uploadCommand)
             

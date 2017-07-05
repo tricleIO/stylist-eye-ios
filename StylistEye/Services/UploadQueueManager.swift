@@ -17,6 +17,12 @@ protocol UploadPhotoResponse {
   
 }
 
+enum UploadPhotoCategory {
+  case outfits
+  case wardrobe
+  case currentOutfits
+}
+
 // TODO a smarter way to extend NetworkExecutable with constrained generic or something
 protocol UploadQueueItem {
   
@@ -26,6 +32,9 @@ protocol UploadQueueItem {
   
   var imageData: Foundation.Data { get }
   
+  var type: UploadPhotoCategory { get }
+  
+  var uploadCategoryId: Int { get }
 }
 
 class UploadQueueManager {
@@ -43,13 +52,24 @@ class UploadQueueManager {
     return queue
   }()
   
+  fileprivate var placeholdersCache = [UploadPhotoCategory: [Int: [UploadQueueItem]]]()
+  
   // this must be larger than Alamofire timeout
   static let timeout = 2*60
   
   fileprivate init() {
+    placeholdersCache[.outfits] = [:]
+    placeholdersCache[.wardrobe] = [:]
+    placeholdersCache[.currentOutfits] = [:]
   }
   
-  public func push(item: UploadQueueItem, atTop: Bool = false) {
+  public func placeholders(type: UploadPhotoCategory, category: Int) -> [UploadQueueItem] {
+    return placeholdersCache[type]![category] ?? []
+  }
+  
+  public func push( item: UploadQueueItem, atTop: Bool = false) {
+    
+    placeholdersCache[item.type]![item.uploadCategoryId] = placeholdersCache[item.type]![item.uploadCategoryId] ?? [] + [item]
     
     let operation = BlockOperation {
       print("Starting upload. In queue: \(self.queue.operationCount)")
@@ -60,6 +80,8 @@ class UploadQueueManager {
         
         if success {
           print("Upload successfull")
+          
+          self.placeholdersCache[item.type]![item.uploadCategoryId] = self.placeholdersCache[item.type]![item.uploadCategoryId]?.filter { $0.image != item.image } ?? []
           
           if let imagePath = photo?.photo?.image {
             // save photo in cache
