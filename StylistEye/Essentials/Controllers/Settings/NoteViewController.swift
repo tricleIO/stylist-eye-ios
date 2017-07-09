@@ -37,7 +37,7 @@ class NoteViewController: AbstractViewController {
 
         navigationItem.leftBarButtonItem = backButton
         
-        let request = URLRequest(url: URL(string: "http://stylist.azurewebsites.net/terms/client")!)
+        let request = URLRequest(url: URL(string: "https://stylisteyecms.azurewebsites.net/mterms")!)
         webView.load(request)
     }
 

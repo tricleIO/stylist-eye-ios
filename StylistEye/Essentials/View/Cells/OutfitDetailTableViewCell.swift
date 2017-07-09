@@ -29,6 +29,15 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
             }
         }
     }
+    
+    var mainImagePlaceholder: UIImage? {
+        get {
+            return nil
+        }
+        set {
+            mainImageView.image = newValue
+        }
+    }
 
     var labelText: String? {
         get {

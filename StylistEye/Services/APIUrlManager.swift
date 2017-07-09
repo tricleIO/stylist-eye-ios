@@ -21,7 +21,8 @@ protocol APIUrlManagerProtocol {
 
 enum RequestType {
     case request
-    case upload
+    case uploadMultipart
+    case uploadRaw
 }
 
 /**
@@ -428,9 +429,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
         switch self {
         case .uploadWardrobePhoto,
              .uploadWardrobeSecondPhoto,
-             .uploadOutfitPhoto,
-             .uploadCurrentOutfitPhoto:
-            return .upload
+             .uploadOutfitPhoto:
+            return .uploadMultipart
+        case .uploadCurrentOutfitPhoto:
+            return .uploadRaw
         default:
             return .request
         }
@@ -439,8 +441,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
     var multipartData: ((MultipartFormData) -> Void) {
         switch self {
         case let .uploadWardrobePhoto(_, photo),
-             let .uploadWardrobeSecondPhoto(_, photo),
-             let .uploadCurrentOutfitPhoto(_, photo):
+             let .uploadWardrobeSecondPhoto(_, photo):
             return { multipartFormData in
                 multipartFormData.append(photo, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
             }
@@ -453,6 +454,15 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return {
                 multipartFormData in
             }
+        }
+    }
+    
+    var data: Data {
+        switch self {
+        case let .uploadCurrentOutfitPhoto(_, photo):
+            return photo
+        default:
+            return Data()
         }
     }
     

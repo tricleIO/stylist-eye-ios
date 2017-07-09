@@ -367,6 +367,18 @@ extension OutfitDetailViewController: UITableViewDataSource {
             if let photo = outfitTableData?.photos[safe: row] {
                 cell.mainImageString = photo.image
             } else {
+                // do we have upload in progress?
+                
+                guard let outfitId = outfitId else {
+                    return cell
+                }
+                
+                let placeholders = UploadQueueManager.main.placeholders(type: .outfits, category: outfitId)
+                
+                if placeholders.count > 0 {
+                    cell.mainImagePlaceholder = placeholders[0].image
+                }
+                
                 // otherwise, use collection of compoments
                 cell.showPlaceholder()
             }

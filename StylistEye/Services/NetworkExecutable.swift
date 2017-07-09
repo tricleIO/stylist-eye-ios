@@ -78,7 +78,7 @@ extension NetworkExecutable {
         
       }
       
-    case .upload:
+    case .uploadMultipart:
       
       AlamofireConfig.shared.manager.upload(
         multipartFormData: urlManager.multipartData,
@@ -108,6 +108,29 @@ extension NetworkExecutable {
           }
       }
       )
+      
+    case .uploadRaw:
+      
+      let headers = ["Content-Type": "image/jpeg"]
+      
+      AlamofireConfig.shared.manager.upload(urlManager.data, to: url, headers: headers)
+        .responseObject { (response: DataResponse<ObjectResponse<Data>>) in
+        switch response.result {
+        case let .success(value):
+          if let errorMessage = value.errorMessage?.message, errorMessage == "Wrong token. " {
+            self.loginWithExpireToken()
+          }
+          else {
+            print(value.result)
+            print(value)
+            print(response.response?.statusCode)
+            completion(.success(object: value.objects, objectsArray: value.objectsArray, pagination: value.pagination, apiResponse: ApiResponse(code: value.result ?? 0)))
+          }
+        case .failure:
+          completion(.failure(message: response.result.value?.errorMessage?.message ?? String.empty, apiResponse: ApiResponse(code: response.result.value?.result ?? 0)))
+        }
+        
+      }
       
     }
   }
