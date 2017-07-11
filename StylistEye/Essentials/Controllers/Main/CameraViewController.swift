@@ -21,8 +21,9 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
     // MARK: < private
     fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cross_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(closeButtonTapped))
     fileprivate lazy var rightBarbutton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "torch_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(torchButtonTapped))
+    fileprivate lazy var rotateCameraButton = UIButton(type: .custom)
 
-    fileprivate let captureSession = AVCaptureSession()
+    fileprivate var captureSession = AVCaptureSession()
     fileprivate let qrCodeFrameView = UIView()
     fileprivate let videoPreviewLayer = AVCaptureVideoPreviewLayer()
     fileprivate let stillImageOutput = AVCaptureStillImageOutput()
@@ -31,7 +32,9 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
     fileprivate let actionBox = View()
 
     fileprivate let captureButton = Button(type: .system)
-
+    
+    fileprivate var cameraDirection = AVCaptureDevicePosition.back
+    
     // MARK: - Life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,6 +48,7 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         view.addSubview(videoView)
         view.addSubview(actionBox)
         actionBox.addSubview(captureButton)
+        actionBox.addSubview(rotateCameraButton)
     }
 
     internal override func initializeElements() {
@@ -56,6 +60,9 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
 
         captureButton.addTarget(self, action: #selector(captureButtonTapped), for: .touchUpInside)
         captureButton.setImage(#imageLiteral(resourceName: "eclipse_icon").withRenderingMode(.alwaysOriginal), for: .normal)
+        
+        rotateCameraButton.addTarget(self, action: #selector(rotateButtonTapped), for: .touchUpInside)
+        rotateCameraButton.setImage(#imageLiteral(resourceName: "cameraRotate_icon").withRenderingMode(.alwaysOriginal), for: .normal)
 
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarbutton
@@ -65,7 +72,7 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         backgroundImage.backgroundColor = UIColor.black
         videoView.backgroundColor = UIColor.black
         
-        setQRCamera()
+        setCamera()
     }
     
     override func setupBackgroundImage() {
@@ -94,6 +101,13 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
             make.width.equalTo(45)
             make.height.equalTo(45)
         }
+        
+        rotateCameraButton.snp.makeConstraints { make in
+            make.leading.equalTo(40)
+            make.centerY.equalTo(actionBox)
+            make.width.equalTo(45)
+            make.height.equalTo(45)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -113,6 +127,10 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
 
     func torchButtonTapped() {
         fireUpFlash()
+    }
+    
+    func rotateButtonTapped() {
+        switchCamera()
     }
 
     // MARK: - Actions
@@ -163,12 +181,36 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         }
     }
 
-    fileprivate func setQRCamera() {
-        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-
+    fileprivate func setCamera() {
+//        let captureDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: self.cameraDirection)
+        
+        var captureDevice: AVCaptureDevice? = nil
+        
+        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
+        for device in devices ?? [] {
+            if let device = device as? AVCaptureDevice {
+                if device.position == cameraDirection {
+                    captureDevice = device
+                    break
+                }
+            }
+        }
+        
+        if captureDevice == nil {
+            captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        }
+        
         do {
             captureSession.sessionPreset = AVCaptureSessionPresetPhoto
+            
+            for input in captureSession.inputs {
+                if let input = input as? AVCaptureInput {
+                    captureSession.removeInput(input)
+                }
+            }
+            
             let input = try AVCaptureDeviceInput(device: captureDevice) as AVCaptureDeviceInput
+            
             captureSession.addInput(input as AVCaptureInput)
             if captureSession.canAddOutput(stillImageOutput) {
                 captureSession.addOutput(stillImageOutput)
@@ -182,5 +224,14 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         videoPreviewLayer.frame = videoView.layer.bounds
         videoView.layer.addSublayer(videoPreviewLayer)
+    }
+    
+    fileprivate func switchCamera() {
+        if (cameraDirection == .front) {
+            cameraDirection = .back
+        } else {
+            cameraDirection = .front
+        }
+        setCamera()
     }
 }
