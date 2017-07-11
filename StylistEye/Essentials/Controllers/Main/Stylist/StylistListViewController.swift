@@ -85,13 +85,14 @@ extension StylistListViewController: UITableViewDataSource {
         cell.backgroundColor = Palette[basic: .clear]
         cell.separatorInset = UIEdgeInsets.zero
         cell.selectionStyle = .none
+        cell.accessoryType = .disclosureIndicator
         
         if let data = stylistListData?[safe: indexPath.row] {
             if let name = data.givenName, let familyName = data.familyName {
                 cell.stylistName = name + String.space + familyName
             }
             cell.stylistPhoto = data.photo?.image
-            cell.descriptionText = data.address?.street
+            cell.descriptionText = data.address?.country
         }
         
         return cell

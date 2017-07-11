@@ -114,7 +114,7 @@ class LoginViewController: AbstractViewController {
         logoImageView.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.bottom.equalTo(emailTextField.snp.top).offset(-80)
-            make.height.equalTo(120)
+            make.height.equalTo(100)
         }
 
         passwordTextField.snp.makeConstraints { make in

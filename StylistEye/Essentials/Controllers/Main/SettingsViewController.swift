@@ -21,7 +21,6 @@ class SettingsViewController: AbstractViewController {
         CellItem(image: #imageLiteral(resourceName: "language_image"), name: StringContainer[.language], controller: LanguagesViewController()),
         CellItem(image: #imageLiteral(resourceName: "privacy_image"), name: StringContainer[.privacy], controller: PrivacyViewController()),
         CellItem(image: #imageLiteral(resourceName: "note_image"), name: StringContainer[.note], controller: NoteViewController()),
-        CellItem(image: #imageLiteral(resourceName: "about_image"), name: StringContainer[.about], controller: AboutViewController()),
         CellItem(image: #imageLiteral(resourceName: "logout_image"), name: StringContainer[.logout], controller: nil),
     ]
 

@@ -53,11 +53,11 @@ class StylistListTableViewCell: AbstractTableViewCell {
         super.initializeElements()
         
         stylistPhotoView.layer.cornerRadius = 20
-        stylistPhotoView.contentMode = .scaleAspectFit
+        stylistPhotoView.contentMode = .scaleAspectFill
         stylistPhotoView.clipsToBounds = true
         
         stylistNameLabel.textColor = Palette[custom: .title]
-        stylistNameLabel.font = SystemFont[.title]
+        stylistNameLabel.font = SystemFont[.description]
         
         descriptionLabel.textColor = Palette[custom: .purple]
         descriptionLabel.font = SystemFont[.litleDescription]

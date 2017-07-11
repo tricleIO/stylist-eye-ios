@@ -95,6 +95,7 @@ extension OutfitCategoryViewController: UITableViewDataSource {
         cell.tintColor = Palette[custom: .purple]
         cell.separatorInset = UIEdgeInsets.zero
         cell.selectionStyle = .gray
+        cell.accessoryType = .disclosureIndicator
         
         if let category = categories?[safe: indexPath.row] {
 //            cell.leftCellImage = settingItem?.image

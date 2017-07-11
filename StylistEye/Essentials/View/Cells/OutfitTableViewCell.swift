@@ -126,7 +126,7 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         addPhotoLabel.textColor = Palette[custom: .title]
         addPhotoLabel.textAlignment = .center
         
-        stylistProfileImageView.contentMode = .scaleAspectFit
+        stylistProfileImageView.contentMode = .scaleAspectFill
         stylistProfileImageView.clipsToBounds = true
         stylistProfileImageView.layer.cornerRadius = 20
         stylistProfileImageView.image = #imageLiteral(resourceName: "placeholder")

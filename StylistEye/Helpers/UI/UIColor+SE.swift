@@ -64,11 +64,11 @@ extension UIColor {
     subscript(custom custom: CustomPaletteColors) -> UIColor {
         switch custom {
         case .appColor:
-            return #colorLiteral(red: 0.5803921569, green: 0.4666666667, blue: 0.4274509804, alpha: 1)
+            return #colorLiteral(red: 0.712184608, green: 0.593695581, blue: 0.5477623343, alpha: 1)
         case .purple:
             return #colorLiteral(red: 0.2549019608, green: 0.1333333333, blue: 0.2274509804, alpha: 1)
         case .title:
-            return #colorLiteral(red: 0.7882352941, green: 0.7411764706, blue: 0.5294117647, alpha: 1)
+            return #colorLiteral(red: 0.9141632318, green: 0.8006886244, blue: 0.5803021789, alpha: 1)
         }
     }
 

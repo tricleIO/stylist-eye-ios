@@ -317,15 +317,28 @@ class OutfitDetailViewController: AbstractViewController {
         case 0:
             let filler1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
             let filler2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-            let button = UIBarButtonItem(image: #imageLiteral(resourceName: "camera_icon"), style: .plain, target: self, action: #selector(addFirstPhotoTapped))
-            button.tintColor = Palette[custom: .title]
+            let image = UIImageView(image: #imageLiteral(resourceName: "camera_icon"))
+            image.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            image.contentMode = .scaleAspectFit
+            image.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(addFirstPhotoTapped))
+            image.addGestureRecognizer(tap)
+            let button = UIBarButtonItem(customView: image)
             toolbar.items = [filler1, button, filler2]
             toolbar.isHidden = false
         case 1,2:
             let filler1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
             let filler2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-            let button = UIBarButtonItem(image: #imageLiteral(resourceName: "cmeraPlus_icon"), style: .plain, target: self, action: #selector(addMorePhotosTapped))
-            button.tintColor = Palette[custom: .title]
+            let image = UIImageView(image: #imageLiteral(resourceName: "cmeraPlus_icon"))
+            image.contentMode = .scaleAspectFit
+            image.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(addMorePhotosTapped))
+            image.addGestureRecognizer(tap)
+            image.snp.makeConstraints { make in
+                make.width.equalTo(30)
+                make.height.equalTo(30)
+            }
+            let button = UIBarButtonItem(customView: image)
             toolbar.items = [filler1, button, filler2]
             toolbar.isHidden = false
         default:
