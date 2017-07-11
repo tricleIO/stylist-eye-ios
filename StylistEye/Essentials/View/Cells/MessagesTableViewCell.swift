@@ -83,7 +83,7 @@ class MessagesTableViewCell: AbstractTableViewCell {
 
         timeLabel.textAlignment = .right
         timeLabel.adjustsFontSizeToFitWidth = true
-
+        timeLabel.textColor = Palette[basic: .gray]
     }
 
     internal override func addElements() {
@@ -137,8 +137,8 @@ class MessagesTableViewCell: AbstractTableViewCell {
 
         disclosureImageView.snp.makeConstraints { make in
             make.trailing.equalTo(contentView).inset(10)
-            make.width.equalTo(20)
-            make.height.equalTo(20)
+            make.width.equalTo(14)
+            make.height.equalTo(14)
             make.top.equalTo(contentView).inset(10)
         }
 

@@ -36,7 +36,7 @@ class OutfitDetailViewController: AbstractViewController {
             if let image = outfitTableData?.stylist?.photo?.image, let imageUrl = URL(string: image) {
                 stylistProfileImageView.kf.setImage(with: imageUrl)
             }
-            ratingView.rating = outfitTableData?.stylist?.rating ?? 0
+            //ratingView.rating = outfitTableData?.stylist?.rating ?? 0
             outfitDescriptionLabel.text = outfitTableData?.comment
             dressStyleLabel.text = outfitTableData?.dressStyle?.name
             tableView.reloadData()
@@ -47,7 +47,7 @@ class OutfitDetailViewController: AbstractViewController {
 
     fileprivate let stylistProfileImageView = ImageView()
 
-    fileprivate let ratingView = RatingView()
+//    fileprivate let ratingView = RatingView()
     
     fileprivate let stylistNameLabel = Label()
     fileprivate let stylistDescriptionLabel = Label()
@@ -123,7 +123,7 @@ class OutfitDetailViewController: AbstractViewController {
                 stylistDescriptionLabel,
                 outfitDescriptionLabel,
                 dressStyleLabel,
-                ratingView,
+//                ratingView,
             ]
         )
     }
@@ -175,17 +175,17 @@ class OutfitDetailViewController: AbstractViewController {
             make.top.equalTo(stylistNameLabel.snp.bottom).offset(5)
         }
         
-        ratingView.snp.makeConstraints { make in
-            make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
-            make.trailing.equalTo(stylistInfoBox).inset(5)
-            make.height.equalTo(20)
-            make.top.equalTo(stylistDescriptionLabel.snp.bottom).offset(5)
-        }
+//        ratingView.snp.makeConstraints { make in
+//            make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
+//            make.trailing.equalTo(stylistInfoBox).inset(5)
+//            make.height.equalTo(20)
+//            make.top.equalTo(stylistDescriptionLabel.snp.bottom).offset(5)
+//        }
 
         outfitDescriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
-            make.top.equalTo(ratingView.snp.bottom).offset(5)
+            make.top.equalTo(stylistDescriptionLabel.snp.bottom).offset(5)
         }
         
         dressStyleLabel.snp.makeConstraints { make in

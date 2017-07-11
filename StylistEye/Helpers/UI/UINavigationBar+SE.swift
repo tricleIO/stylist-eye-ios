@@ -70,6 +70,7 @@ extension UINavigationBar {
             sbBackgroundColor(color: color)
             barTintColor = color
             barStyle = .black
+            tintColor = Palette[custom: .appColor]
         case let .invisible(color):
             sbBackgroundColor(color: color)
             makeInvisibleBar()
