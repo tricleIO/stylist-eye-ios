@@ -19,18 +19,14 @@
 "SE-Main-Logout" = "Logout";
 "SE-Main-Menu" = "Menu";
 
-"SE-Main-Pants" = "Kalhoty";
-"SE-Main-Dress" = "Šaty";
-"SE-Main-Jacket" = "Kabáty / bundy";
-"SE-Main-Shoe" = "Boty";
-"SE-Main-Shirt" = "Trička";
-
-"SE-Main-Cap" = "Volný čas";
-"SE-Main-Work" = "Zaměstnání";
-"SE-Main-Bussiness" = "Společenské";
-"SE-Main-Earings" = "Doplňky";
-
 "SE-Main-Outfit-overview" = "Celkový outfit";
 
 "SE-Main-Take-photo" = "Vyfotit";
 "SE-Main-No-photo-yet" = "Zatím bez fotky";
+
+"SE-Main-Stylists" = "Stylists";
+"SE-Main-Outfits-category" = "Outfits category";
+
+"SE-Main-Error-occured" = "An error has occured";
+
+"SE-Main-Show" = "Zobrazit";

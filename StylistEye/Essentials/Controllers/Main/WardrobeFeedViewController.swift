@@ -153,10 +153,10 @@ class WardrobeFeedViewController: AbstractViewController {
                         self.itemsReal = items + outfitsData
                     }
                 case .fail:
-                    KVNProgress.showError(withStatus: "Fail code wardrobe VC")
+                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
                 }
             case let .failure(message: message, apiResponse: _):
-                KVNProgress.showError(withStatus: "Wardrobe detail: \(message)")
+                KVNProgress.showError(withStatus: StringContainer[.errorOccured])
             }
         }
     }

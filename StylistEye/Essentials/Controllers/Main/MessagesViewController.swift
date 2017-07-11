@@ -116,7 +116,7 @@ class MessagesViewController: AbstractViewController {
                         }
                     }
                 case .fail:
-                    KVNProgress.showError(withStatus: "Fail code msgs")
+                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
                 }
             case .failure:
                 KVNProgress.showError()

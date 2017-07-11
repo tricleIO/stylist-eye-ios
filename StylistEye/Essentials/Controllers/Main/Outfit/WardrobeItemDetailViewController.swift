@@ -181,10 +181,10 @@ class WardrobeItemDetailViewController: AbstractViewController {
                     KVNProgress.showSuccess()
                     self.navigationController?.popViewController(animated: true)
                 case .fail:
-                    KVNProgress.showError(withStatus: "Delete failed")
+                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
                 }
             case let .failure(message):
-                KVNProgress.showError(withStatus: message.message)
+                KVNProgress.showError(withStatus: StringContainer[.errorOccured])
             }
         }
     }

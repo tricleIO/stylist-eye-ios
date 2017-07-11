@@ -67,7 +67,7 @@ class OutfitCategoryViewController: AbstractViewController {
             switch data {
             case let .success(data):
                 // TODO: select language
-                self.categories = data.objectsArray?.filter {$0.languageId == Languages.czech}
+                self.categories = data.objectsArray?.filter {$0.languageId == Languages.current}
             case .failure:
                 break
             }

@@ -62,7 +62,7 @@ class OutfitViewController: AbstractViewController {
             guard let selectedFilterTitle = selectedFilterTitle else {
                 lightPanel.layer.borderWidth = 0
                 lightPanel.backgroundColor = Palette[basic: .white].withAlphaComponent(0)
-                showFilterButton.setTitle("Zobrazit", for: .normal)
+                showFilterButton.setTitle(StringContainer[.show], for: .normal)
                 showFilterButton.tintColor = Palette[custom: .title]
                 showFilterButton.removeTarget(self, action: #selector(resetFilterButtonTapped), for: .touchUpInside)
                 showFilterButton.addTarget(self, action: #selector(showFilterButtonTapped), for: .touchUpInside)
@@ -111,7 +111,7 @@ class OutfitViewController: AbstractViewController {
         lightPanel.layer.borderWidth = 0
         
         // TODO: @MS
-        showFilterButton.setTitle("Zobrazit", for: .normal)
+        showFilterButton.setTitle(StringContainer[.show], for: .normal)
         showFilterButton.tintColor = Palette[custom: .title]
         showFilterButton.addTarget(self, action: #selector(showFilterButtonTapped), for: .touchUpInside)
         
@@ -266,10 +266,10 @@ class OutfitViewController: AbstractViewController {
                         self.outfits = outfits + outfitsData
                     }
                 case .fail:
-                    KVNProgress.showError(withStatus: "Fail code outfit VC")
+                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
                 }
             case let .failure(message: message, apiResponse: _):
-                KVNProgress.showError(withStatus: "Outfit detail: \(message)")
+                KVNProgress.showError(withStatus: StringContainer[.errorOccured])
             }
         }
     }

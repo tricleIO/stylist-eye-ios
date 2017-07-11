@@ -232,7 +232,7 @@ class OutfitDetailViewController: AbstractViewController {
                     self.outfitTableData = data
                     self.configureToolbar()
                 case .fail:
-                    KVNProgress.showError(withStatus: "Fail code - outfit detail")
+                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
                 }
             case let .failure(message):
                 KVNProgress.showError(withStatus: message.message)

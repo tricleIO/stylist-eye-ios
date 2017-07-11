@@ -186,7 +186,7 @@ class LoginViewController: AbstractViewController {
                             }
                         }
                     case .fail:
-                        KVNProgress.showError(withStatus: "Fail code login")
+                        KVNProgress.showError(withStatus: StringContainer[.errorOccured])
                     }
                 case .failure:
                     KVNProgress.showError()

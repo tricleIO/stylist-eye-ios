@@ -28,9 +28,9 @@ enum FilterMenu: FilterProtocol {
     var cellName: String {
         switch self {
         case .stylists:
-            return "Stylists"
+          return StringContainer[.stylists]
         case .outfitsCategory:
-            return "Outfits category"
+          return StringContainer[.outfitsCategory]
         }
     }
     

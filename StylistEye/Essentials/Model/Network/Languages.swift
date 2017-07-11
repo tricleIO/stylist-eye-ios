@@ -24,4 +24,6 @@ enum Languages: Int, LanguageProtocol {
   init(language: Int) {
     self = Languages(rawValue: language) ?? .english
   }
+  
+  static var current: Languages = .english
 }

@@ -105,7 +105,7 @@ class PhotoDetailViewController: AbstractViewController {
                     self.delegate?.photoDeleted()
                     self.dismiss(animated: true, completion: nil)
                 case .fail:
-                    KVNProgress.showError(withStatus: "Fail code - delete photo")
+                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
                 }
             case let .failure(message):
                 KVNProgress.showError(withStatus: message.message)
