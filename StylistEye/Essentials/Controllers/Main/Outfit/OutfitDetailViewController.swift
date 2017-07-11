@@ -36,7 +36,7 @@ class OutfitDetailViewController: AbstractViewController {
             if let image = outfitTableData?.stylist?.photo?.image, let imageUrl = URL(string: image) {
                 stylistProfileImageView.kf.setImage(with: imageUrl)
             }
-            ratingView.rating = 3
+            ratingView.rating = outfitTableData?.stylist?.rating ?? 0
             outfitDescriptionLabel.text = outfitTableData?.comment
             dressStyleLabel.text = outfitTableData?.dressStyle?.name
             tableView.reloadData()

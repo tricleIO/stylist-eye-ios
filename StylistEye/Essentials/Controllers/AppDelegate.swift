@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         kvnConfig?.backgroundType = .solid
         kvnConfig?.backgroundFillColor = UIColor.clear
         kvnConfig?.circleStrokeForegroundColor = Palette[custom: .title]
+        kvnConfig?.statusColor = Palette[custom: .title]
         
         KVNProgress.setConfiguration(kvnConfig)
       

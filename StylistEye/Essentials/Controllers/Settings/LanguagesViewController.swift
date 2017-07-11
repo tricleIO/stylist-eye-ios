@@ -110,6 +110,9 @@ extension LanguagesViewController: UITableViewDataSource {
             cell.imageView?.image = settingItem.image
             cell.textLabel?.text = settingItem.name
         }
+      
+        // TODO when more langs are supported
+        cell.accessoryType = .checkmark
 
         return cell
     }
