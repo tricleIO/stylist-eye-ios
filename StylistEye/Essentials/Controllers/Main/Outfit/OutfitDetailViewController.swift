@@ -50,7 +50,7 @@ class OutfitDetailViewController: AbstractViewController {
     fileprivate let ratingView = RatingView()
     
     fileprivate let stylistNameLabel = Label()
-    //fileprivate let stylistDescriptionLabel = Label()
+    fileprivate let stylistDescriptionLabel = Label()
     fileprivate let dressStyleLabel = Label()
     fileprivate let outfitDescriptionLabel = Label()
     
@@ -96,7 +96,7 @@ class OutfitDetailViewController: AbstractViewController {
 
         mainImageview.image = #imageLiteral(resourceName: "background_image")
 
-        stylistInfoBox.backgroundColor = Palette[basic: .white].withAlphaComponent(0.2)
+        stylistInfoBox.backgroundColor = Palette[basic: .white].withAlphaComponent(0.1)
         stylistInfoBox.layer.borderColor = Palette[custom: .appColor].cgColor
         stylistInfoBox.layer.borderWidth = 1
         
@@ -120,7 +120,7 @@ class OutfitDetailViewController: AbstractViewController {
             [
                 stylistProfileImageView,
                 stylistNameLabel,
-                //stylistDescriptionLabel,
+                stylistDescriptionLabel,
                 outfitDescriptionLabel,
                 dressStyleLabel,
                 ratingView,
@@ -157,8 +157,8 @@ class OutfitDetailViewController: AbstractViewController {
         stylistProfileImageView.snp.makeConstraints { make in
             make.leading.equalTo(stylistInfoBox).inset(5)
             make.top.equalTo(stylistInfoBox).inset(5)
-            make.height.equalTo(40)
-            make.width.equalTo(40)
+            make.height.equalTo(50)
+            make.width.equalTo(50)
         }
 
         stylistNameLabel.snp.makeConstraints { make in
@@ -168,20 +168,18 @@ class OutfitDetailViewController: AbstractViewController {
             make.height.equalTo(20)
         }
 
-        /*
         stylistDescriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
             make.height.equalTo(20)
             make.top.equalTo(stylistNameLabel.snp.bottom).offset(5)
         }
-        */
         
         ratingView.snp.makeConstraints { make in
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
             make.height.equalTo(20)
-            make.top.equalTo(stylistNameLabel.snp.bottom).offset(5)
+            make.top.equalTo(stylistDescriptionLabel.snp.bottom).offset(5)
         }
 
         outfitDescriptionLabel.snp.makeConstraints { make in
@@ -243,28 +241,23 @@ class OutfitDetailViewController: AbstractViewController {
     fileprivate func stylistDefinition() {
 
         stylistProfileImageView.image = #imageLiteral(resourceName: "placeholder")
-        stylistProfileImageView.layer.cornerRadius = 20
+        stylistProfileImageView.layer.cornerRadius = 25
         stylistProfileImageView.contentMode = .scaleToFill
         stylistProfileImageView.clipsToBounds = true
         
         
         if let stylist = outfitTableData?.stylist {
             if let stylistName = stylist.givenName, let familyName = stylist.familyName {
-                if let place = stylist.address?.country {
-                    stylistNameLabel.text = "\(stylistName) \(familyName), \(place)"
-                } else {
-                    stylistNameLabel.text = "\(stylistName) \(familyName)"
-                }
-                
+                stylistNameLabel.text = "\(stylistName) \(familyName)"
             }
-            //stylistDescriptionLabel.text = "stylist description"
+            stylistDescriptionLabel.text = stylist.address?.country ?? ""
         }
 
-        stylistNameLabel.font = SystemFont[.title]
+        stylistNameLabel.font = SystemFont[.description]
         stylistNameLabel.textColor = Palette[custom: .appColor]
 
-        //stylistDescriptionLabel.font = SystemFont[.description]
-        //stylistDescriptionLabel.textColor = Palette[custom: .appColor]
+        stylistDescriptionLabel.font = SystemFont[.litleDescription]
+        stylistDescriptionLabel.textColor = Palette[custom: .appColor]
 
         dressStyleLabel.text = outfitTableData?.dressStyle?.name
         dressStyleLabel.textColor = Palette[custom: .appColor]
@@ -330,14 +323,11 @@ class OutfitDetailViewController: AbstractViewController {
             let filler1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
             let filler2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
             let image = UIImageView(image: #imageLiteral(resourceName: "cmeraPlus_icon"))
+            image.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
             image.contentMode = .scaleAspectFit
             image.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(addMorePhotosTapped))
             image.addGestureRecognizer(tap)
-            image.snp.makeConstraints { make in
-                make.width.equalTo(30)
-                make.height.equalTo(30)
-            }
             let button = UIBarButtonItem(customView: image)
             toolbar.items = [filler1, button, filler2]
             toolbar.isHidden = false
