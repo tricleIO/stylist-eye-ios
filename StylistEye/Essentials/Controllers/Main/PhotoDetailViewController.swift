@@ -43,6 +43,7 @@ class PhotoDetailViewController: AbstractViewController {
         navigationItem.leftBarButtonItem = cancelButton
         
         toolbar.barTintColor = Palette[custom: .purple]
+        toolbar.isTranslucent = false
     }
     
     override func addElements() {

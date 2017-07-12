@@ -85,13 +85,14 @@ class MainTabBarController: AbstractTabBarController {
         super.setupView()
 
         tabBar.barTintColor = Palette[custom: .purple]
-        tabBar.tintColor = Palette[custom: .appColor]
+        tabBar.tintColor = Palette[custom: .title]
+        tabBar.isTranslucent = false
         tabBarItem.setTitleTextAttributes([
             NSFontAttributeName: SystemFont[.description]
             ]
             , for: .normal)
         tabBarItem.setTitleTextAttributes([
-            NSFontAttributeName: SystemFont[.description]
+            NSFontAttributeName: SystemFont[.title]
             ]
             , for: .selected)
     }

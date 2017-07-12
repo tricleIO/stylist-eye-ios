@@ -101,6 +101,7 @@ class OutfitDetailViewController: AbstractViewController {
         stylistInfoBox.layer.borderWidth = 1
         
         toolbar.barTintColor = Palette[custom: .purple]
+        toolbar.isTranslucent = false
     }
 
     internal override func addElements() {
@@ -164,7 +165,7 @@ class OutfitDetailViewController: AbstractViewController {
         stylistNameLabel.snp.makeConstraints { make in
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
-            make.top.equalTo(stylistInfoBox).inset(5)
+            make.top.equalTo(stylistInfoBox).inset(10)
             make.height.equalTo(20)
         }
 
@@ -172,7 +173,7 @@ class OutfitDetailViewController: AbstractViewController {
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
             make.height.equalTo(20)
-            make.top.equalTo(stylistNameLabel.snp.bottom).offset(5)
+            make.top.equalTo(stylistNameLabel.snp.bottom).offset(0)
         }
         
 //        ratingView.snp.makeConstraints { make in
@@ -181,19 +182,19 @@ class OutfitDetailViewController: AbstractViewController {
 //            make.height.equalTo(20)
 //            make.top.equalTo(stylistDescriptionLabel.snp.bottom).offset(5)
 //        }
-
-        outfitDescriptionLabel.snp.makeConstraints { make in
-            make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
-            make.trailing.equalTo(stylistInfoBox).inset(5)
-            make.top.equalTo(stylistDescriptionLabel.snp.bottom).offset(5)
-        }
         
         dressStyleLabel.snp.makeConstraints { make in
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
             make.height.equalTo(20)
-            make.top.equalTo(outfitDescriptionLabel.snp.bottom).offset(5)
-            make.bottom.equalTo(stylistInfoBox).inset(5)
+            make.top.equalTo(stylistDescriptionLabel.snp.bottom).offset(5)
+        }
+        
+        outfitDescriptionLabel.snp.makeConstraints { make in
+            make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
+            make.trailing.equalTo(stylistInfoBox).inset(5)
+            make.top.equalTo(dressStyleLabel.snp.bottom).offset(5)
+            make.bottom.greaterThanOrEqualTo(stylistInfoBox).inset(5)
         }
 
         toolbar.snp.makeConstraints { make in
@@ -254,13 +255,13 @@ class OutfitDetailViewController: AbstractViewController {
         }
 
         stylistNameLabel.font = SystemFont[.description]
-        stylistNameLabel.textColor = Palette[custom: .appColor]
+        stylistNameLabel.textColor = Palette[custom: .title]
 
         stylistDescriptionLabel.font = SystemFont[.litleDescription]
         stylistDescriptionLabel.textColor = Palette[custom: .appColor]
 
         dressStyleLabel.text = outfitTableData?.dressStyle?.name
-        dressStyleLabel.textColor = Palette[custom: .appColor]
+        dressStyleLabel.textColor = Palette[custom: .title]
 
         outfitDescriptionLabel.text = outfitTableData?.comment
         outfitDescriptionLabel.textColor = Palette[custom: .appColor]

@@ -66,9 +66,11 @@ extension UIColor {
         case .appColor:
             return #colorLiteral(red: 0.712184608, green: 0.593695581, blue: 0.5477623343, alpha: 1)
         case .purple:
-            return #colorLiteral(red: 0.2549019608, green: 0.1333333333, blue: 0.2274509804, alpha: 1)
+            return #colorLiteral(red: 0.2348051667, green: 0.1022515669, blue: 0.2371747196, alpha: 1)
         case .title:
             return #colorLiteral(red: 0.9141632318, green: 0.8006886244, blue: 0.5803021789, alpha: 1)
+//        case .titleLight:
+//            return #colorLiteral(red: 0.9141632318, green: 0.8006886244, blue: 0.5803021789, alpha: 1)
         }
     }
 

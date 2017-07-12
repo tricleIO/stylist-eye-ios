@@ -186,17 +186,27 @@ extension MessagesViewController: UITableViewDelegate {
         print(messagesDTO[safe: indexPath.row]?.lastMessage?.systemOriginate)
         msgDetail.isSystem = messagesDTO[safe: indexPath.row]?.lastMessage?.systemOriginate
         msgDetail.orderId = messagesDTO[safe: indexPath.row]?.order?.identifier
-        if let mesg = messagesDTO[safe: indexPath.row], let author = mesg.lastMessage?.author {
-            let firstname = author.givenName ?? ""
-            let familyname = author.familyName ?? ""
-            let authorName = firstname + String.space + familyname
-            msgDetail.senderId = String(author.identifier)
-            msgDetail.senderDisplayName = authorName
+        
+        if let userId = AccountSessionManager.manager.accountSession?.userInfo?.identifier {
+            msgDetail.senderId = String(userId)
+        } else {
+            msgDetail.senderId = "99"
         }
-        else {
-            msgDetail.senderId = "99" // TODO: ???
-            msgDetail.senderDisplayName = String.empty
-        }
+        msgDetail.senderDisplayName = "\(AccountSessionManager.manager.accountSession?.userInfo?.firstname) \(AccountSessionManager.manager.accountSession?.userInfo?.surname)"
+        
+        
+        
+//        if let mesg = messagesDTO[safe: indexPath.row], let author = mesg.lastMessage?.author {
+//            let firstname = author.givenName ?? ""
+//            let familyname = author.familyName ?? ""
+//            let authorName = firstname + String.space + familyname
+//            msgDetail.senderId = String(author.identifier)
+//            msgDetail.senderDisplayName = authorName
+//        }
+//        else {
+//            msgDetail.senderId = "99" // TODO: ???
+//            msgDetail.senderDisplayName = String.empty
+//        }
         navigationController?.pushViewController(msgDetail, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

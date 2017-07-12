@@ -56,7 +56,7 @@ class MessagesTableViewCell: AbstractTableViewCell {
     fileprivate let stapleImageView = ImageView()
     fileprivate let notificationImageView = ImageView()
     
-    fileprivate let userImageView = ImageView(image: #imageLiteral(resourceName: "placeholder"))
+//    fileprivate let userImageView = ImageView(image: #imageLiteral(resourceName: "placeholder"))
 
     // MARK: - <Initializable>
     internal override func initializeElements() {
@@ -68,9 +68,9 @@ class MessagesTableViewCell: AbstractTableViewCell {
         notificationImageView.contentMode = .scaleAspectFit
         notificationImageView.image = #imageLiteral(resourceName: "unreadMark_image")
         
-        userImageView.layer.cornerRadius = 20
-        userImageView.contentMode = .scaleAspectFit
-        userImageView.clipsToBounds = true
+//        userImageView.layer.cornerRadius = 20
+//        userImageView.contentMode = .scaleAspectFit
+//        userImageView.clipsToBounds = true
 
 //        stapleImageView.image = #imageLiteral(resourceName: "msg_attachment_image")
 //        stapleImageView.contentMode = .scaleAspectFit
@@ -97,7 +97,7 @@ class MessagesTableViewCell: AbstractTableViewCell {
                 descriptionLabel,
                 nameLabel,
                 notificationImageView,
-                userImageView,
+//                userImageView,
             ]
         )
     }
@@ -108,14 +108,14 @@ class MessagesTableViewCell: AbstractTableViewCell {
         
 
         notificationImageView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(50)
+            make.leading.equalTo(contentView).inset(15)
             make.top.equalTo(contentView).inset(9)
             make.width.equalTo(10)
             make.height.equalTo(10)
         }
 
         stapleImageView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(50)
+            make.leading.equalTo(contentView).inset(15)
             make.top.equalTo(notificationImageView.snp.bottom).offset(8)
             make.width.equalTo(10)
             make.height.equalTo(10)
@@ -148,11 +148,11 @@ class MessagesTableViewCell: AbstractTableViewCell {
             make.top.equalTo(contentView).inset(5)
         }
         
-        userImageView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(15)
-            make.top.equalTo(contentView).inset(25)
-            make.width.equalTo(40)
-            make.height.equalTo(40)
-        }
+//        userImageView.snp.makeConstraints { make in
+//            make.leading.equalTo(contentView).inset(15)
+//            make.top.equalTo(contentView).inset(25)
+//            make.width.equalTo(40)
+//            make.height.equalTo(40)
+//        }
     }
 }

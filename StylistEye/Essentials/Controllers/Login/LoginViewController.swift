@@ -128,7 +128,7 @@ class LoginViewController: AbstractViewController {
             make.centerX.equalTo(view)
             make.top.equalTo(passwordTextField.snp.bottom).offset(24)
             make.width.equalTo(view.frame.size.width - 60-16)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
         }
     }
 

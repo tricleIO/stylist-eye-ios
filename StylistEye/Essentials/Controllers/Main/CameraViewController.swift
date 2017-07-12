@@ -203,6 +203,7 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         do {
             captureSession.sessionPreset = AVCaptureSessionPresetPhoto
             
+            // remove previous inputs
             for input in captureSession.inputs {
                 if let input = input as? AVCaptureInput {
                     captureSession.removeInput(input)
