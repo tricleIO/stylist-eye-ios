@@ -25,6 +25,7 @@ class StylistListViewController: AbstractViewController {
     fileprivate let tableView = TableView(style: .grouped)
     
     // MARK: - Initialize
+  
     internal override func initializeElements() {
         super.initializeElements()
         

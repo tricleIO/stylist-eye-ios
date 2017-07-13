@@ -43,7 +43,7 @@ class OutfitDetailViewController: AbstractViewController {
         }
     }
 
-    fileprivate let stylistInfoBox = View(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 180))
+    fileprivate let stylistInfoBox = View()
 
     fileprivate let stylistProfileImageView = ImageView()
 
@@ -97,8 +97,9 @@ class OutfitDetailViewController: AbstractViewController {
         mainImageview.image = #imageLiteral(resourceName: "background_image")
 
         stylistInfoBox.backgroundColor = Palette[basic: .white].withAlphaComponent(0.1)
-        stylistInfoBox.layer.borderColor = Palette[custom: .appColor].cgColor
-        stylistInfoBox.layer.borderWidth = 1
+        //stylistInfoBox.layer.borderColor = Palette[custom: .appColor].cgColor
+        //stylistInfoBox.layer.borderWidth = 1
+        stylistInfoBox.addViewBackedBorder(side: .bottom, thickness: 0.5, color: Palette[custom: .appColor])
         
         toolbar.barTintColor = Palette[custom: .purple]
         toolbar.isTranslucent = false
@@ -132,6 +133,14 @@ class OutfitDetailViewController: AbstractViewController {
     internal override func setupConstraints() {
         super.setupConstraints()
 
+    //frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 180)
+        stylistInfoBox.snp.makeConstraints { make in
+            make.leading.equalTo(view)
+            make.top.equalToSuperview()
+            make.trailing.equalTo(view)
+            make.height.equalTo(180)
+        }
+        
         mainImageview.snp.makeConstraints { make in
             make.edges.equalTo(view)
         }
@@ -194,7 +203,7 @@ class OutfitDetailViewController: AbstractViewController {
             make.leading.equalTo(stylistProfileImageView.snp.trailing).offset(5)
             make.trailing.equalTo(stylistInfoBox).inset(5)
             make.top.equalTo(dressStyleLabel.snp.bottom).offset(5)
-            make.bottom.greaterThanOrEqualTo(stylistInfoBox).inset(5)
+            make.bottom.equalTo(stylistInfoBox).offset(5)
         }
 
         toolbar.snp.makeConstraints { make in

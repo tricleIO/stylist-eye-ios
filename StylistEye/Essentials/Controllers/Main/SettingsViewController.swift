@@ -27,6 +27,13 @@ class SettingsViewController: AbstractViewController {
     fileprivate var tableView = TableView(style: .grouped)
 
     // MARK: - <Initializable>
+    
+    override func viewDidLoad() {
+      super.viewDidLoad()
+      
+      automaticallyAdjustsScrollViewInsets = false
+    }
+    
     internal override func addElements() {
         super.addElements()
 
@@ -67,7 +74,7 @@ class SettingsViewController: AbstractViewController {
         }
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(view).inset(46)
+            make.top.equalTo(topLayoutGuide.snp.bottom)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
             make.bottom.equalTo(view)

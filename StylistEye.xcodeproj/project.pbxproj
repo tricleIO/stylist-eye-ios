@@ -134,6 +134,7 @@
 		A86AAF1F1EBB7ABE0070B24D /* ReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86AAF1E1EBB7ABE0070B24D /* ReviewDTO.swift */; };
 		A86CCF561EA649C0006D3245 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86CCF551EA649C0006D3245 /* PhotoDetailViewController.swift */; };
 		A86CCF581EA693B9006D3245 /* DeleteOutfitPhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86CCF571EA693B9006D3245 /* DeleteOutfitPhotoCommand.swift */; };
+		A8755AE21F1770FE00944617 /* UIView+borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8755AE11F1770FE00944617 /* UIView+borders.swift */; };
 		A88967071ECB0415007580A2 /* ImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88967061ECB0415007580A2 /* ImageSlider.swift */; };
 		A88967091ECB1ABC007580A2 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88967081ECB1ABC007580A2 /* ReviewView.swift */; };
 		A8A30DBE1EE845A20005AA46 /* CurrentOutfitsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A30DBD1EE845A20005AA46 /* CurrentOutfitsCommand.swift */; };
@@ -233,7 +234,7 @@
 		317F6CF51DB2C61100DE0679 /* OutfitsDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitsDTO.swift; sourceTree = "<group>"; };
 		317F6CF71DB2C6D600DE0679 /* OutfitsCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitsCommand.swift; sourceTree = "<group>"; };
 		31818E4C1DAFEB87004883D2 /* SettingsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
-		31818E4E1DAFEBF7004883D2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		31818E4E1DAFEBF7004883D2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		31818E501DAFF003004883D2 /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		31818E521DAFF0D5004883D2 /* UITableView+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+SE.swift"; sourceTree = "<group>"; };
 		31818E541DAFF10E004883D2 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
@@ -267,7 +268,7 @@
 		31B9F35F1DB17C740049F08E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		31C8BB311E04808B00D8CBD0 /* StylistListDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListDTO.swift; sourceTree = "<group>"; };
 		31C8BB331E04811C00D8CBD0 /* StylistCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistCommand.swift; sourceTree = "<group>"; };
-		31C8BB361E04822600D8CBD0 /* StylistListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListViewController.swift; sourceTree = "<group>"; };
+		31C8BB361E04822600D8CBD0 /* StylistListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = StylistListViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		31C8BB381E04848100D8CBD0 /* StylistListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistListTableViewCell.swift; sourceTree = "<group>"; };
 		31CD44E71DB14CD8007A5E1C /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		31CD44E91DB161BF007A5E1C /* WardrobeItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = WardrobeItemDetailViewController.swift; path = Outfit/WardrobeItemDetailViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -275,7 +276,7 @@
 		31CD44ED1DB17338007A5E1C /* ProductInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductInfo.swift; sourceTree = "<group>"; };
 		31E05E1D1DAEEADC007AE913 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		31E05E201DAF50BB007AE913 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
-		31E05E221DAF5227007AE913 /* UINavigationBar+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+SE.swift"; sourceTree = "<group>"; };
+		31E05E221DAF5227007AE913 /* UINavigationBar+SE.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+SE.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		31E05E241DAF53CB007AE913 /* StylistEye.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StylistEye.entitlements; sourceTree = "<group>"; };
 		31E05E261DAF5512007AE913 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		31E30E9C1DAECD5E007F4A5A /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -309,6 +310,7 @@
 		A86AAF1E1EBB7ABE0070B24D /* ReviewDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewDTO.swift; sourceTree = "<group>"; };
 		A86CCF551EA649C0006D3245 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		A86CCF571EA693B9006D3245 /* DeleteOutfitPhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteOutfitPhotoCommand.swift; sourceTree = "<group>"; };
+		A8755AE11F1770FE00944617 /* UIView+borders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+borders.swift"; sourceTree = "<group>"; };
 		A88967061ECB0415007580A2 /* ImageSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlider.swift; sourceTree = "<group>"; };
 		A88967081ECB1ABC007580A2 /* ReviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		A8A30DBD1EE845A20005AA46 /* CurrentOutfitsCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOutfitsCommand.swift; sourceTree = "<group>"; };
@@ -618,6 +620,7 @@
 				310286A21DAFA4C7007EE87B /* UIViewController+SE.swift */,
 				31818E521DAFF0D5004883D2 /* UITableView+SE.swift */,
 				31818E561DAFF265004883D2 /* UITabeViewCell+SE.swift */,
+				A8755AE11F1770FE00944617 /* UIView+borders.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1100,6 +1103,7 @@
 				A8A30DBE1EE845A20005AA46 /* CurrentOutfitsCommand.swift in Sources */,
 				310286A31DAFA4C7007EE87B /* UIViewController+SE.swift in Sources */,
 				3109197A1DAE850E0083A2C8 /* UserDTO.swift in Sources */,
+				A8755AE21F1770FE00944617 /* UIView+borders.swift in Sources */,
 				316F69331E24160100EC0972 /* GarmentTypeCommand.swift in Sources */,
 				A8C714361EC1C51B0073F2C6 /* OutfitTableViewCell.swift in Sources */,
 				31CD44EE1DB17338007A5E1C /* ProductInfo.swift in Sources */,

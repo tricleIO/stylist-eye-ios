@@ -128,7 +128,7 @@ class QuestionnaireViewController: AbstractViewController {
     // MARK: - Actions
     fileprivate func openSettingsView() {
         let navigationController = UINavigationController(rootViewController: SettingsViewController())
-        navigationController.navigationBar.applyStyle(style: .invisible(withStatusBarColor: Palette[basic: .clear]))
+        navigationController.navigationBar.applyStyle(style: .invisibleWithoutShadow(withStatusBarColor: Palette[basic: .clear]))
         present(navigationController, animated: true, completion: nil)
     }
     
@@ -185,6 +185,7 @@ extension QuestionnaireViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let controller = QuestionnaireFeedViewController()
         controller.categoryId = garmentTypes[indexPath.row].categoryId
+        controller.categoryName = garmentTypes[indexPath.row].name
         controller.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(controller, animated: true)
     }
