@@ -152,7 +152,7 @@ class OutfitViewController: AbstractViewController {
         
         showFilterButton.snp.makeConstraints { make in
             make.trailing.equalTo(lightPanel).inset(10)
-            make.width.equalTo(60)
+            //make.width.equalTo(60)
             make.height.equalTo(30)
             make.top.equalTo(lightPanel).inset(10)
         }
