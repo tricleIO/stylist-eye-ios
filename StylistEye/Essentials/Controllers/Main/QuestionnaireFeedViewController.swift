@@ -178,7 +178,7 @@ class QuestionnaireFeedViewController: AbstractViewController {
       image in
       
       let imageJpeg = image.jpegData()
-      let uploadCommand = UploadCurrentOutfitPhotoCommand(id: categoryId, image: image, imageData: imageJpeg)
+      let uploadCommand = UploadCurrentOutfitPhotoCommand2(id: categoryId, image: image, imageData: imageJpeg)
       
       UploadQueueManager.main.push(item: uploadCommand)
     }

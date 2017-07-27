@@ -141,6 +141,11 @@ enum APIUrlManager: APIUrlManagerProtocol {
     case uploadCurrentOutfitPhoto(id: Int, photo: Data)
     
     /**
+     Upload current outfit photo
+     */
+    case uploadCurrentOutfitPhoto2(id: Int, photo: Data)
+    
+    /**
      Delete outfit photo
      */
     case deleteOutfitPhoto(id: Int)
@@ -213,7 +218,9 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case let .uploadWardrobeSecondPhoto(id, _):
             urlString = "/mapi/v1/photos/wardrobe/photo2/\(id)"
         case let .uploadCurrentOutfitPhoto(id, _):
-            urlString = "/mapi/v1/currentoutfits/\(id)"
+            urlString = "/mapi/v1/photos/currentoutfit/\(id)"
+        case let .uploadCurrentOutfitPhoto2(id, _):
+            urlString = "/mapi/v1/photos/currentoutfit/\(id)"
         case let .deleteCurrentOutfitPhoto(id):
             urlString = "/mapi/v1/photos/currentoutfit/\(id)"
         case .wardrobe:
@@ -298,6 +305,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
              .uploadWardrobeSecondPhoto,
              .uploadOutfitPhoto,
              .uploadCurrentOutfitPhoto,
+             .uploadCurrentOutfitPhoto2,
              .deleteOutfitPhoto,
              .deleteCurrentOutfitPhoto:
             return params
@@ -370,6 +378,7 @@ enum APIUrlManager: APIUrlManagerProtocol {
              .uploadWardrobeSecondPhoto,
              .uploadOutfitPhoto,
              .uploadCurrentOutfitPhoto,
+             .uploadCurrentOutfitPhoto2,
              .deleteOutfitPhoto,
              .deleteWardrobePhoto,
              .deleteCurrentOutfitPhoto:
@@ -411,7 +420,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .uploadWardrobePhoto,
              .uploadWardrobeSecondPhoto,
              .uploadOutfitPhoto,
-             .uploadCurrentOutfitPhoto:
+             .uploadCurrentOutfitPhoto,
+             .uploadCurrentOutfitPhoto2:
             return .post
         case .deleteOutfitPhoto,
              .deleteWardrobePhoto,
@@ -429,7 +439,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         switch self {
         case .uploadWardrobePhoto,
              .uploadWardrobeSecondPhoto,
-             .uploadOutfitPhoto:
+             .uploadOutfitPhoto,
+             .uploadCurrentOutfitPhoto2:
             return .uploadMultipart
         case .uploadCurrentOutfitPhoto:
             return .uploadRaw
@@ -441,7 +452,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
     var multipartData: ((MultipartFormData) -> Void) {
         switch self {
         case let .uploadWardrobePhoto(_, photo),
-             let .uploadWardrobeSecondPhoto(_, photo):
+             let .uploadWardrobeSecondPhoto(_, photo),
+             let .uploadCurrentOutfitPhoto2(_, photo):
             return { multipartFormData in
                 multipartFormData.append(photo, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
             }
