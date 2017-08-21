@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import KVNProgress
 
 class PrivacyViewController: AbstractViewController {
 
@@ -37,8 +38,20 @@ class PrivacyViewController: AbstractViewController {
         coverImageView.image = #imageLiteral(resourceName: "purpleBg_image")
         navigationItem.leftBarButtonItem = backButton
         
-        let request = URLRequest(url: URL(string: "https://stylisteyecms.azurewebsites.net/mprivacy")!)
+        let request = URLRequest(url: URL(string: "https://stylisteye.com/mprivacy")!)
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         webView.load(request)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "estimatedProgress" {
+            let progress = CGFloat(webView.estimatedProgress)
+            if progress < 1.0 {
+                KVNProgress.show(progress)
+            } else {
+                KVNProgress.dismiss()
+            }
+        }
     }
 
     internal override func setupView() {

@@ -322,6 +322,9 @@ extension OutfitViewController: UITableViewDataSource {
             if let outfitImage = outfit.photos?.first?.image {
                 // image provided by user
                 cell.mainImageString = outfitImage
+            } else if let placeholder = UploadQueueManager.main.placeholders(type: .outfits, category: outfit.outfitId).first {
+                // upload in progress
+                cell.mainImagePlaceholder = placeholder.image
             } else {
                 // use collection mosaic
                 // cell.mosaicImages = outfit.components?.flatMap({$0.photo?.image})

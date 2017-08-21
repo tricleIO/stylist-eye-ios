@@ -25,6 +25,15 @@ class OutfitTableViewCell: AbstractTableViewCell, UICollectionViewDataSource, UI
         }
     }
     
+    var mainImagePlaceholder: UIImage? {
+        get {
+            return nil
+        }
+        set {
+            mainImageView.image = newValue
+        }
+    }
+  
     var stylistImageString: String? {
         get {
             return String.empty

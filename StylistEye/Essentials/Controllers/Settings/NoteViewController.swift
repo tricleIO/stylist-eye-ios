@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import KVNProgress
 
 class NoteViewController: AbstractViewController {
 
@@ -37,8 +38,20 @@ class NoteViewController: AbstractViewController {
 
         navigationItem.leftBarButtonItem = backButton
         
-        let request = URLRequest(url: URL(string: "https://stylisteyecms.azurewebsites.net/mterms")!)
+        let request = URLRequest(url: URL(string: "https://stylisteye.com/mterms")!)
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         webView.load(request)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "estimatedProgress" {
+            let progress = CGFloat(webView.estimatedProgress)
+            if progress < 1.0 {
+                KVNProgress.show(progress)
+            } else {
+                KVNProgress.dismiss()
+            }
+        }
     }
 
     internal override func setupView() {

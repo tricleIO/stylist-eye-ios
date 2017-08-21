@@ -291,6 +291,8 @@ class OutfitDetailViewController: AbstractViewController {
             
             UploadQueueManager.main.push(item: uploadCommand)
             
+            self.tableView.reloadData()
+            
 //            KVNProgress.show()
 //            uploadCommand.executeCommand {
 //                data in
@@ -389,11 +391,12 @@ extension OutfitDetailViewController: UITableViewDataSource {
                 let placeholders = UploadQueueManager.main.placeholders(type: .outfits, category: outfitId)
                 
                 if placeholders.count > 0 {
-                    cell.mainImagePlaceholder = placeholders[0].image
-                }
+                    cell.mainImagePlaceholder = placeholders[row].image
+                } else {
                 
-                // otherwise, use collection of compoments
-                cell.showPlaceholder()
+                    // otherwise, use collection of compoments
+                    cell.showPlaceholder()
+                }
             }
             
             return cell

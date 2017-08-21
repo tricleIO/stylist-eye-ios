@@ -181,6 +181,8 @@ class QuestionnaireFeedViewController: AbstractViewController {
       let uploadCommand = UploadCurrentOutfitPhotoCommand2(id: categoryId, image: image, imageData: imageJpeg)
       
       UploadQueueManager.main.push(item: uploadCommand)
+      
+      self.tableView.reloadData()
     }
     let navController = UINavigationController(rootViewController: cameraController)
     navController.navigationBar.applyStyle(style: .solid(withStatusBarColor: Palette[custom: .purple]))

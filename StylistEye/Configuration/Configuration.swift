@@ -15,7 +15,7 @@ import Foundation
 struct APIConfiguration {
 
     /// Basic API url.
-    static let BaseUrl = "http://stylist.azurewebsites.net"
+    static let BaseUrl = "http://stylisteye.com" // http://stylist.azurewebsites.net
 }
 
 /**
