@@ -15,7 +15,7 @@ struct CurrentOutfitDTO: Mappable {
   var category: GarmentTypeDTO?
   var photo: PhotosDTO?
   fileprivate(set) var isPlaceholder = false
-  fileprivate(set) var image: UIImage?
+  fileprivate(set) var placeholderImage: UIImage?
   
   init?(map: Map) {
     var id: Int?
@@ -30,7 +30,7 @@ struct CurrentOutfitDTO: Mappable {
   
   init(image: UIImage) {
     self.isPlaceholder = true
-    self.image = image
+    self.placeholderImage = image
   }
   
   mutating func mapping(map: Map) {

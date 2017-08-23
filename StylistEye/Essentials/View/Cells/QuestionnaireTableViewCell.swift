@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class QuestionnaireTableViewCell: AbstractTableViewCell {
 
@@ -18,6 +19,17 @@ class QuestionnaireTableViewCell: AbstractTableViewCell {
         }
         set {
             mainImageView.image = newValue
+        }
+    }
+  
+    var mainImageString: String? {
+        get {
+            return String.empty
+        }
+        set {
+            if let url = newValue?.urlValue {
+                mainImageView.kf.setImage(with: ImageResource(downloadURL: url))
+            }
         }
     }
 
@@ -63,7 +75,7 @@ class QuestionnaireTableViewCell: AbstractTableViewCell {
         coverView.addSubviews(views:
             [
                 mainImageView,
-                descriptionLabel,
+                //descriptionLabel,
             ]
         )
     }
@@ -79,17 +91,18 @@ class QuestionnaireTableViewCell: AbstractTableViewCell {
         }
 
         // TODO: @MS - insets
-        descriptionLabel.snp.makeConstraints { make in
-            make.leading.equalTo(coverView).inset(10)
-            make.trailing.equalTo(coverView).inset(10)
-            make.top.equalTo(mainImageView.snp.bottom).offset(10)
-        }
+//        descriptionLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(coverView).inset(10)
+//            make.trailing.equalTo(coverView).inset(10)
+//            make.top.equalTo(mainImageView.snp.bottom).offset(10)
+//        }
 
         mainImageView.snp.makeConstraints { make in
             make.leading.equalTo(coverView).inset(10)
             make.trailing.equalTo(coverView).inset(10)
             make.top.equalTo(coverView).inset(10)
-            make.height.equalTo(220)
+            make.bottom.equalTo(coverView).inset(10)
+            make.height.equalTo(mainImageView.snp.width).multipliedBy(4.0/3.0)
         }
     }
 }

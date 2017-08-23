@@ -67,7 +67,7 @@ class QuestionnaireFeedViewController: AbstractViewController {
     
     actionView.backgroundColor = Palette[custom: .purple]
     
-    tableView.register(WardrobeTableViewCell.self)
+    tableView.register(QuestionnaireTableViewCell.self)
     tableView.dataSource = self
     tableView.delegate = self
     tableView.backgroundColor = Palette[basic: .clear]
@@ -194,20 +194,19 @@ class QuestionnaireFeedViewController: AbstractViewController {
 extension QuestionnaireFeedViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell: WardrobeTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+    let cell: QuestionnaireTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
     
     if let item = items?[safe: indexPath.row] {
       
       cell.backgroundColor = Palette[basic: .clear]
       
-      if item.isPlaceholder, let image = item.image {
-        cell.placeholderImages = [image]
+      if item.isPlaceholder, let image = item.placeholderImage {
+        cell.mainImage = image
       } else {
-        if let photos = item.photo?.image {
-          cell.images = [photos]
+        if let photo = item.photo?.image {
+          cell.mainImageString = photo
         }
       }
-      cell.reviews = []
       cell.selectionStyle = .none
     }
     
@@ -237,25 +236,26 @@ extension QuestionnaireFeedViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-   
-//TODO
-//    let cell = tableView.cellForRow(at: indexPath) as! WardrobeTableViewCell
-//    
-//    guard let item = items?[safe: indexPath.row] else {
-//      return
-//    }
-//    
-//    let productVC = WardrobeItemDetailViewController()
-//    productVC.wardrobeItem = item
-//    productVC.title = item.garmetType?.name
-//    if let image = item.photos?[safe: cell.currentImagePage()]?.image?.urlValue {
-//      productVC.mainImageview.kf.setImage(with: image, placeholder: #imageLiteral(resourceName: "placeholder"))
-//      productVC.photoIndex = cell.currentImagePage()
-//    } else {
-//      productVC.mainImageview.image = #imageLiteral(resourceName: "placeholder")
-//      productVC.photoIndex = -1
-//    }
-//    productVC.hidesBottomBarWhenPushed = true
-//    navigationController?.pushViewController(productVC, animated: true)
+    
+    guard let item = items?[safe: indexPath.row] else {
+      return
+    }
+    
+    let productVC = QuestionnaireDetailViewController()
+    productVC.item = item
+    productVC.title = ""
+    
+    if item.isPlaceholder {
+      productVC.mainImageview.image = item.placeholderImage
+    } else {
+      
+      if let image = item.photo?.image?.urlValue {
+        productVC.mainImageview.kf.setImage(with: image, placeholder: #imageLiteral(resourceName: "placeholder"))
+      } else {
+        productVC.mainImageview.image = #imageLiteral(resourceName: "placeholder")
+      }
+    }
+    productVC.hidesBottomBarWhenPushed = true
+    navigationController?.pushViewController(productVC, animated: true)
   }
 }
