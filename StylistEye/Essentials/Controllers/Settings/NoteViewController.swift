@@ -38,7 +38,7 @@ class NoteViewController: AbstractViewController {
 
         navigationItem.leftBarButtonItem = backButton
         
-        let request = URLRequest(url: URL(string: "https://stylisteye.com/mterms")!)
+        let request = URLRequest(url: URL(string: "http://stylisteye.com/mterms")!)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         webView.load(request)
     }

@@ -38,7 +38,7 @@ class PrivacyViewController: AbstractViewController {
         coverImageView.image = #imageLiteral(resourceName: "purpleBg_image")
         navigationItem.leftBarButtonItem = backButton
         
-        let request = URLRequest(url: URL(string: "https://stylisteye.com/mprivacy")!)
+        let request = URLRequest(url: URL(string: "http://stylisteye.com/mprivacy")!)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         webView.load(request)
     }

@@ -36,13 +36,11 @@ class WardrobeItemDetailViewController: AbstractViewController {
 
         cameraImageView.setImage(#imageLiteral(resourceName: "cmeraPlus_icon"), for: .normal)
         cameraImageView.contentMode = .scaleAspectFit
-        cameraImageView.isUserInteractionEnabled = true
-        cameraImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cameraImageViewTapped)))
+        cameraImageView.addTarget(self, action: #selector(cameraImageViewTapped), for: .touchUpInside)
 
         trashImageView.setImage(#imageLiteral(resourceName: "trash_icon"), for: .normal)
         trashImageView.contentMode = .scaleAspectFit
-        trashImageView.isUserInteractionEnabled = true
-        trashImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(deleteTapped)))
+        trashImageView.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
 
         navigationItem.leftBarButtonItem = backButton
 
@@ -103,15 +101,15 @@ class WardrobeItemDetailViewController: AbstractViewController {
         cameraImageView.snp.makeConstraints { make in
             make.centerX.equalTo(footerView).inset(-50)
             make.centerY.equalTo(footerView)
-            make.height.equalTo(30)
-            make.width.equalTo(30)
+            make.height.equalTo(50)
+            make.width.equalTo(50)
         }
 
         trashImageView.snp.makeConstraints { make in
             make.centerX.equalTo(footerView).inset(50)
             make.centerY.equalTo(footerView)
-            make.height.equalTo(30)
-            make.width.equalTo(30)
+            make.height.equalTo(50)
+            make.width.equalTo(50)
         }
     }
 

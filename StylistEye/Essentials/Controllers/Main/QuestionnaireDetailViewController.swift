@@ -35,8 +35,7 @@ class QuestionnaireDetailViewController: AbstractViewController {
         
         trashImageView.setImage(#imageLiteral(resourceName: "trash_icon"), for: .normal)
         trashImageView.contentMode = .scaleAspectFit
-        trashImageView.isUserInteractionEnabled = true
-        trashImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(deleteTapped)))
+        trashImageView.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
         
         navigationItem.leftBarButtonItem = backButton
         
@@ -96,8 +95,8 @@ class QuestionnaireDetailViewController: AbstractViewController {
         trashImageView.snp.makeConstraints { make in
             make.centerX.equalTo(footerView)
             make.centerY.equalTo(footerView)
-            make.height.equalTo(30)
-            make.width.equalTo(30)
+            make.height.equalTo(50)
+            make.width.equalTo(50)
         }
     }
     

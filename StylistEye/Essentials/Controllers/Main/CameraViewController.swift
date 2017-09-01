@@ -20,7 +20,7 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
   
     // MARK: < private
     fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cross_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(closeButtonTapped))
-    fileprivate lazy var rightBarbutton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "torch_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(torchButtonTapped))
+    fileprivate lazy var rightBarbutton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "torch_off"), style: .plain, target: self, action: #selector(torchButtonTapped))
     fileprivate lazy var rotateCameraButton = UIButton(type: .custom)
 
     fileprivate var captureSession = AVCaptureSession()
@@ -66,7 +66,6 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
 
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarbutton
-
         
         backgroundImage.image = nil
         backgroundImage.backgroundColor = UIColor.black
@@ -139,11 +138,13 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
             if (device.hasFlash) {
                 do {
                     try device.lockForConfiguration()
-                    if device.flashMode == .on {
+                    if device.flashMode == .on || device.flashMode == .auto {
                         device.flashMode = .off
+                        rightBarbutton.image = #imageLiteral(resourceName: "torch_off")
                     }
                     else {
                         device.flashMode = .on
+                        rightBarbutton.image = #imageLiteral(resourceName: "torch_icon")
                     }
                     device.unlockForConfiguration()
                 }
