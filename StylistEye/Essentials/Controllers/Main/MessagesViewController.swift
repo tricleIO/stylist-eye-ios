@@ -136,7 +136,7 @@ extension MessagesViewController: UITableViewDataSource {
         if let message = messagesDTO[safe: indexPath.row] {
             cell.messageText = message.lastMessage?.content
             cell.time = message.lastMessage?.timestamp
-            let lastMessageIsMine = message.counterparty?.identifier == AccountSessionManager.manager.accountSession?.userInfo?.identifier
+            let lastMessageIsMine = message.lastMessage?.author?.identifier == AccountSessionManager.manager.accountSession?.userInfo?.identifier
             cell.isRead = (message.lastMessage?.read ?? false) || lastMessageIsMine
             if let firstname = message.counterparty?.givenName, let secondname = message.counterparty?.familyName {
                 cell.senderName = firstname + String.space + secondname
