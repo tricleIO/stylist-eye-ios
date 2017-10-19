@@ -289,7 +289,13 @@ class OutfitDetailViewController: AbstractViewController {
             let imageJpeg = image.jpegData()
             let uploadCommand = UploadOutfitPhotoCommand(id: outfitId, photoType: photoType, image: image, imageData: imageJpeg)
             
-            UploadQueueManager.main.push(item: uploadCommand)
+            UploadQueueManager.main.push(item: uploadCommand) {
+                [weak self]
+                in
+                DispatchQueue.main.async {
+                    self?.loadData()
+                }
+            }
             
             self.tableView.reloadData()
             

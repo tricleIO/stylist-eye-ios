@@ -128,6 +128,7 @@
 		A84872FA1F0A6FA800BDC0AC /* MessagesCheckDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84872F91F0A6FA800BDC0AC /* MessagesCheckDTO.swift */; };
 		A84873041F0CDFA300BDC0AC /* UploadCurrentOutfitPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84873031F0CDFA300BDC0AC /* UploadCurrentOutfitPhoto.swift */; };
 		A84873061F0CDFEA00BDC0AC /* DeleteCurrentOutfitPhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84873051F0CDFEA00BDC0AC /* DeleteCurrentOutfitPhotoCommand.swift */; };
+		A869CF7F1F67C75A008593A2 /* UpdateMessageThreadStatusCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A869CF7E1F67C75A008593A2 /* UpdateMessageThreadStatusCommand.swift */; };
 		A86AAF191EBB79240070B24D /* WardrobeCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86AAF181EBB79240070B24D /* WardrobeCommand.swift */; };
 		A86AAF1B1EBB796B0070B24D /* WardrobeItemCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86AAF1A1EBB796B0070B24D /* WardrobeItemCommand.swift */; };
 		A86AAF1D1EBB79FF0070B24D /* WardrobeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86AAF1C1EBB79FF0070B24D /* WardrobeDTO.swift */; };
@@ -304,6 +305,7 @@
 		A84872F91F0A6FA800BDC0AC /* MessagesCheckDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCheckDTO.swift; sourceTree = "<group>"; };
 		A84873031F0CDFA300BDC0AC /* UploadCurrentOutfitPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadCurrentOutfitPhoto.swift; sourceTree = "<group>"; };
 		A84873051F0CDFEA00BDC0AC /* DeleteCurrentOutfitPhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteCurrentOutfitPhotoCommand.swift; sourceTree = "<group>"; };
+		A869CF7E1F67C75A008593A2 /* UpdateMessageThreadStatusCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateMessageThreadStatusCommand.swift; sourceTree = "<group>"; };
 		A86AAF181EBB79240070B24D /* WardrobeCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeCommand.swift; sourceTree = "<group>"; };
 		A86AAF1A1EBB796B0070B24D /* WardrobeItemCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeItemCommand.swift; sourceTree = "<group>"; };
 		A86AAF1C1EBB79FF0070B24D /* WardrobeDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeDTO.swift; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 				A8DAEF451ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift */,
 				A86AAF181EBB79240070B24D /* WardrobeCommand.swift */,
 				A86AAF1A1EBB796B0070B24D /* WardrobeItemCommand.swift */,
+				A869CF7E1F67C75A008593A2 /* UpdateMessageThreadStatusCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -1156,6 +1159,7 @@
 				31E30E9D1DAECD5E007F4A5A /* Button.swift in Sources */,
 				A8DAEF461ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift in Sources */,
 				3109198A1DAE99280083A2C8 /* AccessToken.swift in Sources */,
+				A869CF7F1F67C75A008593A2 /* UpdateMessageThreadStatusCommand.swift in Sources */,
 				317F6CF81DB2C6D600DE0679 /* OutfitsCommand.swift in Sources */,
 				A84873041F0CDFA300BDC0AC /* UploadCurrentOutfitPhoto.swift in Sources */,
 				31818E511DAFF003004883D2 /* TableView.swift in Sources */,

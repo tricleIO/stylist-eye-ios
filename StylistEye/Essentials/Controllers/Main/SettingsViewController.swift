@@ -25,6 +25,8 @@ class SettingsViewController: AbstractViewController {
     ]
 
     fileprivate var tableView = TableView(style: .grouped)
+    
+    fileprivate var versionLabel = UILabel()
 
     // MARK: - <Initializable>
     
@@ -41,6 +43,7 @@ class SettingsViewController: AbstractViewController {
             [
                 coverImageView,
                 tableView,
+                versionLabel,
             ]
         )
     }
@@ -58,6 +61,13 @@ class SettingsViewController: AbstractViewController {
         tableView.separatorColor =  Palette[custom: .appColor]
 
         navigationItem.leftBarButtonItem = crossButton
+        
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        
+        versionLabel.text = "\(version ?? "") \(build ?? "")"
+        versionLabel.textColor = Palette[custom: .appColor]
+        versionLabel.font = UIFont.systemFont(ofSize: 12.0)
     }
 
     internal override func setupView() {
@@ -77,7 +87,12 @@ class SettingsViewController: AbstractViewController {
             make.top.equalTo(topLayoutGuide.snp.bottom)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.bottom.equalTo(view)
+            make.bottom.equalTo(versionLabel)
+        }
+        
+        versionLabel.snp.makeConstraints { make in
+            make.leadingMargin.equalTo(view)
+            make.bottom.equalTo(view).inset(8)
         }
     }
 

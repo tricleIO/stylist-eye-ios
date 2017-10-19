@@ -67,7 +67,7 @@ class UploadQueueManager {
     return placeholdersCache[type]![category] ?? []
   }
   
-  public func push( item: UploadQueueItem, atTop: Bool = false) {
+  public func push( item: UploadQueueItem, atTop: Bool = false, completion: ((Void) -> Void)? = nil) {
     
     placeholdersCache[item.type]![item.uploadCategoryId] = placeholdersCache[item.type]![item.uploadCategoryId] ?? [] + [item]
     
@@ -80,6 +80,8 @@ class UploadQueueManager {
         
         if success {
           print("Upload successfull")
+          
+          completion?()
           
           self.placeholdersCache[item.type]![item.uploadCategoryId] = self.placeholdersCache[item.type]![item.uploadCategoryId]?.filter { $0.image != item.image } ?? []
           

@@ -64,6 +64,9 @@ enum APIUrlManager: APIUrlManagerProtocol {
         threadId: Int,
         msgId: Int
     )
+    case updateMessageThreadStatus(
+        threadId: Int
+    )
     case newMessage(
         thread: Int,
         content: String,
@@ -186,6 +189,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             urlString = "/mapi/v1/messages/"
         case let .updateMessagesStatus(threadId, _):
             urlString = "/mapi/v1/messages/\(threadId)"
+        case let .updateMessageThreadStatus(threadId):
+            urlString = "/mapi/v1/messages/\(threadId)"
         case let .newMessage(_, _, orderId):
             urlString = "/mapi/v1/messages/\(orderId)"
         case let .messageDetail(id):
@@ -267,6 +272,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
             return params
         case .updateMessagesStatus:
             fallthrough
+        case .updateMessageThreadStatus:
+            fallthrough
         case .newMessage:
             return params
         case .messagesCheck:
@@ -341,6 +348,10 @@ enum APIUrlManager: APIUrlManagerProtocol {
                 "message": "\(msgId)",
                 "read": "true",
             ]
+        case let .updateMessageThreadStatus:
+            return [
+                "read": "true",
+            ]
         case let .newMessage(
             thread,
             content,
@@ -412,6 +423,8 @@ enum APIUrlManager: APIUrlManagerProtocol {
         case .currentOutfitCategories, .currentOutfits, .currentOutfitDetail:
             return .get
         case .updateMessagesStatus:
+            return .put
+        case .updateMessageThreadStatus:
             return .put
         case .newMessage:
             return .post

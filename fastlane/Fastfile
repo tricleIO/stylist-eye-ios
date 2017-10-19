@@ -33,6 +33,10 @@ platform :ios do
     # )
   end
 
+  lane :appstore do
+    gym(scheme: "StylistEye")
+  end
+
   # private_lane :fabric do |options|
   #   scheme = options[:scheme]
   #   ENV["RELEASE_TYPE"] = options[:type]

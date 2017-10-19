@@ -136,8 +136,9 @@ extension MessagesViewController: UITableViewDataSource {
         if let message = messagesDTO[safe: indexPath.row] {
             cell.messageText = message.lastMessage?.content
             cell.time = message.lastMessage?.timestamp
-            cell.isRead = message.lastMessage?.read
-            if let firstname = message.lastMessage?.author?.givenName, let secondname = message.lastMessage?.author?.familyName {
+            let lastMessageIsMine = message.counterparty?.identifier == AccountSessionManager.manager.accountSession?.userInfo?.identifier
+            cell.isRead = (message.lastMessage?.read ?? false) || lastMessageIsMine
+            if let firstname = message.counterparty?.givenName, let secondname = message.counterparty?.familyName {
                 cell.senderName = firstname + String.space + secondname
             }
             cell.isSystemMessage = message.lastMessage?.systemOriginate
@@ -165,11 +166,10 @@ extension MessagesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let msgDetail = MessageDetailViewController()
         if let threadId = messagesDTO[safe: indexPath.row]?.order?.identifier,
-            let msgId = messagesDTO[safe: indexPath.row]?.lastMessage?.identifier,
             let isSelectedMessageRead = messagesDTO[safe: indexPath.row]?.lastMessage?.read, !isSelectedMessageRead {
             
             self.messagesDTO[indexPath.row].lastMessage?.read = true
-            UpdateMessageStatusCommand(threadId: threadId, msgId: msgId).executeCommand(completion: { response in
+            UpdateMessageThreadStatusCommand(threadId: threadId).executeCommand(completion: { response in
                 switch response {
                 case let .success(object: _, objectsArray: _, pagination: _, apiResponse: apiResponse):
                     switch apiResponse {

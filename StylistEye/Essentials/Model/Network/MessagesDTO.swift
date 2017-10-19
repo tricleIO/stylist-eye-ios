@@ -13,6 +13,7 @@ struct MessagesListDTO: Mappable {
     var messagesCount: Int?
     var lastMessage: LastMessagesDTO?
     var order: OrderDTO?
+    var counterparty: AuthorDTO?
     
     init?(map: Map) {
     }
@@ -21,6 +22,7 @@ struct MessagesListDTO: Mappable {
         messagesCount <- map["messageCount"]
         lastMessage <- map["lastMessage"]
         order <- map["order"]
+        counterparty <- map["counterparty"]
     }
 }
 

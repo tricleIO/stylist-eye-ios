@@ -181,7 +181,13 @@ class WardrobeFeedViewController: AbstractViewController {
             let imageJpeg = image.jpegData()
             let uploadCommand = UploadWardrobePhotoCommand(id: garmentId, image: image, imageData: imageJpeg)
             
-            UploadQueueManager.main.push(item: uploadCommand)
+            UploadQueueManager.main.push(item: uploadCommand) {
+                [weak self]
+                in
+                DispatchQueue.main.async {
+                    self?.loadData()
+                }
+            }
             
 //            KVNProgress.show()
 //            uploadCommand.executeCommand {
