@@ -6,7 +6,6 @@
 //  Copyright © 2016 Michal Severín. All rights reserved.
 //
 
-import KVNProgress
 import SnapKit
 import UIKit
 
@@ -127,7 +126,7 @@ class QuestionnaireDetailViewController: AbstractViewController {
         }
         let deleteCommand = DeleteCurrentOutfitPhotoCommand(id: photoId)
         
-        KVNProgress.show()
+        ProgressHUD.show()
         deleteCommand.executeCommand {
             data in
             
@@ -136,13 +135,13 @@ class QuestionnaireDetailViewController: AbstractViewController {
                 // TODO: @MS
                 switch apiResponse {
                 case .ok:
-                    KVNProgress.showSuccess()
+                    ProgressHUD.showSuccess()
                     self.navigationController?.popViewController(animated: true)
                 case .fail:
-                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                    ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
                 }
             case let .failure(message):
-                KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
             }
         }
     }

@@ -6,7 +6,6 @@
 //  Copyright © 2016 Michal Severín. All rights reserved.
 //
 
-import KVNProgress
 import SnapKit
 import UIKit
 import YLBadge
@@ -249,7 +248,7 @@ class OutfitViewController: AbstractViewController {
     }
 
     fileprivate func loadOutfits(page: Int = 1) {
-        KVNProgress.show()
+        ProgressHUD.show()
         isRefreshing = true
         OutfitsCommand(stylistId: stylistId, dressstyle: styleId).executeCommand(page: page) { data in
             self.isRefreshing = false
@@ -259,17 +258,17 @@ class OutfitViewController: AbstractViewController {
                 switch apiResponse {
                 case .ok:
                     self.pagination = pagination
-                    KVNProgress.dismiss()
+                    ProgressHUD.dismiss()
                     if page == 1 {
                         self.outfits = data
                     } else if let outfits = self.outfits, let outfitsData = data {
                         self.outfits = outfits + outfitsData
                     }
                 case .fail:
-                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                    ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
                 }
             case let .failure(message: message, apiResponse: _):
-                KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
             }
         }
     }

@@ -12,7 +12,6 @@ import Fabric
 import Crashlytics
 import Alamofire
 import YLBadge
-import KVNProgress
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,15 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         YLBadge.appearance().maxDigit = 3
         YLBadge.appearance().alignment = .topRight
         
-        let kvnConfig = KVNProgressConfiguration.default()
-        kvnConfig?.backgroundType = .solid
-        kvnConfig?.backgroundFillColor = UIColor.clear
-        kvnConfig?.circleStrokeForegroundColor = Palette[custom: .title]
-        kvnConfig?.statusColor = Palette[custom: .title]
-        kvnConfig?.errorColor = Palette[custom: .title]
-        kvnConfig?.successColor = Palette[custom: .title]
-        
-        KVNProgress.setConfiguration(kvnConfig)
+        ProgressHUD.configure()
       
         initializeRootViewController()
 

@@ -6,7 +6,6 @@
 //  Copyright © 2016 Michal Severín. All rights reserved.
 //
 
-import KVNProgress
 import SnapKit
 import UIKit
 
@@ -136,7 +135,7 @@ class WardrobeFeedViewController: AbstractViewController {
         guard let garmentId = garmentId else {
             return
         }
-        KVNProgress.show()
+        ProgressHUD.show()
         isRefreshing = true
         WardrobeCommand(garmetType: garmentId).executeCommand(page: page) { data in
             self.isRefreshing = false
@@ -146,17 +145,17 @@ class WardrobeFeedViewController: AbstractViewController {
                 switch apiResponse {
                 case .ok:
                     self.pagination = pagination
-                    KVNProgress.dismiss()
+                    ProgressHUD.dismiss()
                     if page == 1 {
                         self.itemsReal = data
                     } else if let items = self.itemsReal, let outfitsData = data {
                         self.itemsReal = items + outfitsData
                     }
                 case .fail:
-                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                    ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
                 }
             case let .failure(message: message, apiResponse: _):
-                KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
             }
         }
     }
@@ -189,7 +188,7 @@ class WardrobeFeedViewController: AbstractViewController {
                 }
             }
             
-//            KVNProgress.show()
+//            ProgressHUD()
 //            uploadCommand.executeCommand {
 //                data in
 //                
@@ -204,7 +203,7 @@ class WardrobeFeedViewController: AbstractViewController {
 //                        KVNProgress.showError(withStatus: "Upload failed")
 //                    }
 //                case let .failure(message):
-//                    KVNProgress.showError(withStatus: message.message)
+//                    ProgressHUD.showError(withStatus: message.message)
 //                }
 //            }
         }

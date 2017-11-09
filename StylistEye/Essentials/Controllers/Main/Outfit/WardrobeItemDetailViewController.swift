@@ -8,7 +8,6 @@
 
 import SnapKit
 import UIKit
-import KVNProgress
 
 class WardrobeItemDetailViewController: AbstractViewController {
 
@@ -167,7 +166,7 @@ class WardrobeItemDetailViewController: AbstractViewController {
         }
         let deleteCommand = DeleteWardrobePhotoCommand(id: photoId, type: photoType)
         
-        KVNProgress.show()
+        ProgressHUD.show()
         deleteCommand.executeCommand {
             data in
             
@@ -176,13 +175,13 @@ class WardrobeItemDetailViewController: AbstractViewController {
                 // TODO: @MS
                 switch apiResponse {
                 case .ok:
-                    KVNProgress.showSuccess()
+                    ProgressHUD.showSuccess()
                     self.navigationController?.popViewController(animated: true)
                 case .fail:
-                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                    ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
                 }
             case let .failure(message):
-                KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
             }
         }
     }

@@ -6,7 +6,6 @@
 //  Copyright © 2016 Michal Severín. All rights reserved.
 //
 
-import KVNProgress
 import UIKit
 
 class SettingsViewController: AbstractViewController {
@@ -153,24 +152,24 @@ extension SettingsViewController: UITableViewDelegate {
             navigationController?.pushViewController(controller, animated: true)
         }
         else {
-            KVNProgress.show()
+            ProgressHUD.show()
             LogoutCommand().executeCommand { data in
                 switch data {
                 case let .success(_, _, _, apiResponse: apiResponse):
                     // TODO: @MS
                     switch apiResponse {
                     case .ok:
-                        KVNProgress.showSuccess {
+                        ProgressHUD.showSuccess {
                             AccountSessionManager.manager.closeSession()
                             if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
                                 window.rootViewController = LoginViewController()
                             }
                         }
                     case .fail:
-                        KVNProgress.showError()
+                        ProgressHUD.showError()
                     }
                 case let .failure(message):
-                    KVNProgress.showError(withStatus: message.message)
+                    ProgressHUD.showError(withStatus: message.message)
                 }
             }
         }

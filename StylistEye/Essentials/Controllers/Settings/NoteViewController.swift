@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-import KVNProgress
 
 class NoteViewController: AbstractViewController {
 
@@ -47,9 +46,9 @@ class NoteViewController: AbstractViewController {
         if keyPath == "estimatedProgress" {
             let progress = CGFloat(webView.estimatedProgress)
             if progress < 1.0 {
-                KVNProgress.show(progress)
+                ProgressHUD.show(progress)
             } else {
-                KVNProgress.dismiss()
+                ProgressHUD.dismiss()
             }
         }
     }

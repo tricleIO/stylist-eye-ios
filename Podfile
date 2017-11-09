@@ -9,7 +9,8 @@ def shared_pods
     pod 'Alamofire'
     pod 'JSQMessagesViewController'
     pod 'Kingfisher'
-    pod 'KVNProgress'
+    # pod 'KVNProgress'
+    pod 'SVProgressHUD'
     pod 'ObjectMapper'
     pod 'SnapKit'
 

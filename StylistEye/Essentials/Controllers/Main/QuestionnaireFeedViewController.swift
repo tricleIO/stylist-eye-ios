@@ -6,7 +6,6 @@
 //  Copyright © 2017 Michal Severín. All rights reserved.
 //
 
-import KVNProgress
 import SnapKit
 import UIKit
 
@@ -135,7 +134,7 @@ class QuestionnaireFeedViewController: AbstractViewController {
     guard let categoryId = categoryId else {
       return
     }
-    KVNProgress.show()
+    ProgressHUD.show()
     isRefreshing = true
     CurrentOutfitsCommand(category: categoryId).executeCommand(page: page) { data in
       self.isRefreshing = false
@@ -145,17 +144,17 @@ class QuestionnaireFeedViewController: AbstractViewController {
         switch apiResponse {
         case .ok:
           self.pagination = pagination
-          KVNProgress.dismiss()
+          ProgressHUD.dismiss()
           if page == 1 {
             self.itemsReal = data
           } else if let items = self.itemsReal, let outfitsData = data {
             self.itemsReal = items + outfitsData
           }
         case .fail:
-          KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+          ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
         }
       case let .failure(message: message, apiResponse: _):
-        KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+        ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
       }
     }
   }

@@ -8,7 +8,6 @@
 
 import SnapKit
 import UIKit
-import KVNProgress
 
 class LoginViewController: AbstractViewController {
 
@@ -170,14 +169,14 @@ class LoginViewController: AbstractViewController {
     // MARK: - Action methods
     private func login() {
         if let email = emailTextField.text, let password = passwordTextField.text {
-            KVNProgress.show()
+            ProgressHUD.show()
             LoginCommand(email: email, password: password).executeCommand { data in
                 switch data {
                 case let .success(object: data, _, _, apiResponse: apiResponse):
                 // TODO: @MS
                     switch apiResponse {
                     case .ok:
-                        KVNProgress.showSuccess {
+                        ProgressHUD.showSuccess {
                             Keychains[.userEmail] = email
                             Keychains[.userPassword] = password
                             AccountSessionManager.manager.accountSession = AccountSession(response: data)
@@ -186,10 +185,10 @@ class LoginViewController: AbstractViewController {
                             }
                         }
                     case .fail:
-                        KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                        ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
                     }
                 case .failure:
-                    KVNProgress.showError()
+                    ProgressHUD.showError()
                 }
             }
         }

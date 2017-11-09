@@ -6,7 +6,6 @@
 //  Copyright © 2016 Michal Severín. All rights reserved.
 //
 
-import KVNProgress
 import UIKit
 
 class MessagesViewController: AbstractViewController {
@@ -97,7 +96,7 @@ class MessagesViewController: AbstractViewController {
     }
 
     fileprivate func loadMessages(page: Int = 1) {
-        KVNProgress.show()
+        ProgressHUD.show()
         isRefreshing = true
         MessagesCommand().executeCommand(page: page) { data in
             self.isRefreshing = false
@@ -106,7 +105,7 @@ class MessagesViewController: AbstractViewController {
                 // TODO: @MS
                 switch apiResponse {
                 case .ok:
-                    KVNProgress.dismiss()
+                    ProgressHUD.dismiss()
                     if let messages = data {
                         self.pagination = pagination
                         if pagination?.page == 1 {
@@ -116,10 +115,10 @@ class MessagesViewController: AbstractViewController {
                         }
                     }
                 case .fail:
-                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                    ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
                 }
             case .failure:
-                KVNProgress.showError()
+                ProgressHUD.showError()
             }
         }
     }

@@ -6,7 +6,6 @@
 //  Copyright © 2016 Michal Severín. All rights reserved.
 //
 
-import KVNProgress
 import SnapKit
 import UIKit
 
@@ -229,21 +228,21 @@ class OutfitDetailViewController: AbstractViewController {
         guard let outfitId = outfitId else {
             return
         }
-        KVNProgress.show()
+        ProgressHUD.show()
         OutfitDetailCommand(outfitId: outfitId).executeCommand { data in
             switch data {
             case let .success(data, objectsArray: _, pagination: _, apiResponse: apiResponse):
                 // TODO: @MS
                 switch apiResponse {
                 case .ok:
-                    KVNProgress.dismiss()
+                    ProgressHUD.dismiss()
                     self.outfitTableData = data
                     self.configureToolbar()
                 case .fail:
-                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                    ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
                 }
             case let .failure(message):
-                KVNProgress.showError(withStatus: message.message)
+                ProgressHUD.showError(withStatus: message.message)
             }
         }
     }

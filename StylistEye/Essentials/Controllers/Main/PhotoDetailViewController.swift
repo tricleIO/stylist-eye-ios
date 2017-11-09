@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import SnapKit
 import Kingfisher
-import KVNProgress
 
 protocol PhotoDetailDelegate: class {
     
@@ -94,7 +93,7 @@ class PhotoDetailViewController: AbstractViewController {
         guard let id = imageId else {
             return
         }
-        KVNProgress.show()
+        ProgressHUD.show()
         let cmd = DeleteOutfitPhotoCommand(id: id).executeCommand() {
             data in
             switch data {
@@ -102,14 +101,14 @@ class PhotoDetailViewController: AbstractViewController {
                 // TODO: @MS
                 switch apiResponse {
                 case .ok:
-                    KVNProgress.dismiss()
+                    ProgressHUD.dismiss()
                     self.delegate?.photoDeleted()
                     self.dismiss(animated: true, completion: nil)
                 case .fail:
-                    KVNProgress.showError(withStatus: StringContainer[.errorOccured])
+                    ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
                 }
             case let .failure(message):
-                KVNProgress.showError(withStatus: message.message)
+                ProgressHUD.showError(withStatus: message.message)
             }
         }
     }

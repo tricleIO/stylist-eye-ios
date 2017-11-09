@@ -64,7 +64,16 @@ extension NetworkExecutable {
         switch response.result {
         case let .success(value):
           if let errorMessage = value.errorMessage?.message, errorMessage == "Wrong token. " {
-            self.loginWithExpireToken()
+            self.loginWithExpireToken() {
+              response in
+              switch response {
+              case .success:
+                // retry the request
+                self.executeCommand(page: page, completion: completion)
+              case .failure(let message, let apiResponse):
+                completion(.failure(message: message, apiResponse: apiResponse))
+              }
+            }
           }
           else {
             print(value.result)
@@ -90,7 +99,16 @@ extension NetworkExecutable {
               switch response.result {
               case let .success(value):
                 if let errorMessage = value.errorMessage?.message, errorMessage == "Wrong token. " {
-                  self.loginWithExpireToken()
+                  self.loginWithExpireToken() {
+                    response in
+                    switch response {
+                    case .success:
+                      // retry the request
+                      self.executeCommand(page: page, completion: completion)
+                    case .failure(let message, let apiResponse):
+                      completion(.failure(message: message, apiResponse: apiResponse))
+                    }
+                  }
                 }
                 else {
                   print(value.result)
@@ -118,7 +136,16 @@ extension NetworkExecutable {
         switch response.result {
         case let .success(value):
           if let errorMessage = value.errorMessage?.message, errorMessage == "Wrong token. " {
-            self.loginWithExpireToken()
+            self.loginWithExpireToken() {
+              response in
+              switch response {
+              case .success:
+                // retry the request
+                self.executeCommand(page: page, completion: completion)
+              case let .failure(message, apiResponse):
+                completion(.failure(message: message, apiResponse: apiResponse))
+              }
+            }
           }
           else {
             print(value.result)
@@ -135,7 +162,7 @@ extension NetworkExecutable {
     }
   }
   
-  fileprivate func loginWithExpireToken() {
+  fileprivate func loginWithExpireToken(completion: @escaping Completion) {
     if let email = Keychains[.userEmail], let password = Keychains[.userPassword] {
       LoginCommand(email: email, password: password).executeCommand { data in
         switch data {
@@ -147,13 +174,16 @@ extension NetworkExecutable {
             Keychains[.userEmail] = email
             Keychains[.userPassword] = password
             AccountSessionManager.manager.accountSession = AccountSession(response: data)
-            if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
-              window.rootViewController = MainTabBarController()
-            }
+            //if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
+            //  window.rootViewController = MainTabBarController()
+            //}
+            completion(.success(object: nil, objectsArray: nil, pagination: nil, apiResponse: apiResponse))
           case .fail:
+            completion(.failure(message: "", apiResponse: apiResponse))
             break
           }
         case .failure:
+          completion(.failure(message: "", apiResponse: ApiResponse(code: 0)))
           break
         }
       }
