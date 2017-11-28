@@ -11,7 +11,7 @@ import CoreData
 import Fabric
 import Crashlytics
 import Alamofire
-import YLBadge
+//import YLBadge
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Fabric.with([Crashlytics.self])
         
-        YLBadge.appearance().textColor = Palette[custom: .purple]
-        YLBadge.appearance().maxDigit = 3
-        YLBadge.appearance().alignment = .topRight
+//        YLBadge.appearance().textColor = Palette[custom: .purple]
+//        YLBadge.appearance().maxDigit = 3
+//        YLBadge.appearance().alignment = .topRight
         
         ProgressHUD.configure()
       

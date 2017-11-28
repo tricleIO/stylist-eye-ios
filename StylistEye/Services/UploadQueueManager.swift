@@ -69,7 +69,7 @@ class UploadQueueManager {
   
   public func push( item: UploadQueueItem, atTop: Bool = false, completion: ((Void) -> Void)? = nil) {
     
-    placeholdersCache[item.type]![item.uploadCategoryId] = placeholdersCache[item.type]![item.uploadCategoryId] ?? [] + [item]
+    placeholdersCache[item.type]![item.uploadCategoryId] = (placeholdersCache[item.type]![item.uploadCategoryId] ?? []) + [item]
     
     let operation = BlockOperation {
       print("Starting upload. In queue: \(self.queue.operationCount)")
@@ -82,6 +82,8 @@ class UploadQueueManager {
           print("Upload successfull")
           
           completion?()
+          
+          NotificationCenter.default.post(name: .uploadFinished, object: nil)
           
           self.placeholdersCache[item.type]![item.uploadCategoryId] = self.placeholdersCache[item.type]![item.uploadCategoryId]?.filter { $0.image != item.image } ?? []
           

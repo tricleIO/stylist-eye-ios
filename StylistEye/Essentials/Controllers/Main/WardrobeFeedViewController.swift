@@ -74,6 +74,12 @@ class WardrobeFeedViewController: AbstractViewController {
         tableView.separatorColor =  Palette[basic: .clear]
         
         navigationItem.leftBarButtonItem = backButton
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onUploadFinished), name: .uploadFinished, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     internal override func addElements() {
@@ -271,7 +277,7 @@ extension WardrobeFeedViewController: UITableViewDelegate {
         
         let productVC = WardrobeItemDetailViewController()
         productVC.wardrobeItem = item
-        productVC.title = item.garmetType?.name
+        productVC.title = categoryName //item.garmetType?.name
         
         if item.isPlaceholder {
             productVC.mainImageview.image = item.placeholderImage
@@ -288,5 +294,9 @@ extension WardrobeFeedViewController: UITableViewDelegate {
         }
         productVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(productVC, animated: true)
+    }
+    
+    func onUploadFinished() {
+        self.loadData()
     }
 }

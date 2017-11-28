@@ -11,9 +11,9 @@ PODS:
   - JSQSystemSoundPlayer (2.0.1)
   - Kingfisher (3.6.2)
   - ObjectMapper (2.2.1)
+  - PPBadgeViewSwift (2.0.0)
   - SnapKit (3.2.0)
   - SVProgressHUD (2.2.2)
-  - YLBadge (1.0.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -23,9 +23,9 @@ DEPENDENCIES:
   - JSQMessagesViewController
   - Kingfisher
   - ObjectMapper
+  - PPBadgeViewSwift
   - SnapKit
   - SVProgressHUD
-  - YLBadge
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
@@ -36,10 +36,10 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Kingfisher: 2c94e72c6830622c71d06adf4ea024c37d316830
   ObjectMapper: 41e43e1a89f8060ef5ea5d04ba852e269a621d68
+  PPBadgeViewSwift: dc520c183e11d87fbe19bdb223e8b47d158f3c6b
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
-  YLBadge: 17d0b12176bf5b85f185d6d3d13dc8c5d7ad301a
 
-PODFILE CHECKSUM: 44e16b2d5514051e6863bc3f2870543027172976
+PODFILE CHECKSUM: e1f1e930bbed83fe25adbbc9b56f27765093a91b
 
 COCOAPODS: 1.3.1

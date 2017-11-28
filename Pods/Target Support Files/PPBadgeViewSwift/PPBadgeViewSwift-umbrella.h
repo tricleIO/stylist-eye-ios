@@ -10,10 +10,7 @@
 #endif
 #endif
 
-#import "UIBarItem+YLBadge.h"
-#import "UIView+YLBadge.h"
-#import "YLBadge.h"
 
-FOUNDATION_EXPORT double YLBadgeVersionNumber;
-FOUNDATION_EXPORT const unsigned char YLBadgeVersionString[];
+FOUNDATION_EXPORT double PPBadgeViewSwiftVersionNumber;
+FOUNDATION_EXPORT const unsigned char PPBadgeViewSwiftVersionString[];
 

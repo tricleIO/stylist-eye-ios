@@ -61,7 +61,10 @@ class MessageDetailViewController: JSQMessagesViewController {
         
         if let isSystem = isSystem, inputToolbar != nil {
             inputToolbar.contentView.leftBarButtonItem = nil
-            inputToolbar.isHidden = isSystem
+            /*
+            2. Message: tady byla asi chyba v logice návrhu. Pokud po zprávě od stylisty přijde klientovi systémová zpráva, nejde již vytvořit zprávu od klienta pro stylistu (nezobrazuje se řádek New Mesage) a komunikace je tak pro klienta zablokována. Nejlepší řešení takové situace by bylo, aby již od první systémové zprávy v rámci celého vlákna se vždy zobrazoval řádek pro odeslání zprávy a všechny klientem vytvořené zprávy byly adresovány stylistovi. Tzn. neřešit logiku neodpovídání na systémové zprávy, ale umožnit vždy vytvořit zprávu a adresovat ji vždy stylistovi.  Jinak každá příchozí systémová zpráva zablokuje komunikaci...
+            */
+            //inputToolbar.isHidden = isSystem
             
             if isSystem {
             }

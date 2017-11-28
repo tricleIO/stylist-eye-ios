@@ -104,10 +104,19 @@ class QuestionnaireViewController: AbstractViewController {
             case let .success(data, objectsArray: _, pagination: _, apiResponse: _):
                 
                 if let data = data, let unread = data.unread {
+                    self.rightBarbutton.pp.setBadgeLabel(attributes: { badgeLabel in
+                        badgeLabel.textColor = Palette[custom: .purple]
+                    })
                     if unread > 0 {
-                        self.rightBarbutton.yl_showBadgeText("\(unread)")
+                        //self.rightBarbutton.yl_showBadgeText("\(unread)")
+                        if unread > 99 {
+                            self.rightBarbutton.pp.addBadge(text: "99+")
+                        } else {
+                            self.rightBarbutton.pp.addBadge(number: unread)
+                        }
                     } else {
-                        self.rightBarbutton.yl_clearBadge()
+                        //self.rightBarbutton.yl_clearBadge()
+                        self.rightBarbutton.pp.hiddenBadge()
                     }
                 }
             default:

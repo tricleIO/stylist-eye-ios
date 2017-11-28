@@ -40,10 +40,11 @@ class MessagesTableViewCell: AbstractTableViewCell {
     
     var isSystemMessage: Bool? {
         didSet {
-            guard let isSystemMsg = isSystemMessage else {
-                return
-            }
-            nameLabel.text = isSystemMsg ? "StylistEye" : senderName
+//            guard let isSystemMsg = isSystemMessage else {
+//                return
+//            }
+//            nameLabel.text = isSystemMsg ? "StylistEye" : senderName
+          nameLabel.text = senderName
         }
     }
 

@@ -8,7 +8,7 @@
 
 import SnapKit
 import UIKit
-import YLBadge
+//import YLBadge
 
 class OutfitViewController: AbstractViewController {
     
@@ -69,7 +69,7 @@ class OutfitViewController: AbstractViewController {
             }
             lightPanel.layer.borderWidth = 1
             lightPanel.backgroundColor = Palette[basic: .white].withAlphaComponent(0.1)
-            showFilterButton.setTitle("X", for: .normal)
+            showFilterButton.setTitle("   X   ", for: .normal)
             showFilterButton.tintColor = Palette[custom: .title]
             showFilterButton.removeTarget(self, action: #selector(showFilterButtonTapped), for: .touchUpInside)
             showFilterButton.addTarget(self, action: #selector(resetFilterButtonTapped), for: .touchUpInside)
@@ -152,8 +152,8 @@ class OutfitViewController: AbstractViewController {
         showFilterButton.snp.makeConstraints { make in
             make.trailing.equalTo(lightPanel).inset(10)
             //make.width.equalTo(60)
-            make.height.equalTo(30)
-            make.top.equalTo(lightPanel).inset(10)
+            make.height.equalTo(60)
+            make.centerY.equalTo(lightPanel.snp.centerY)
         }
         
         backgroundImageView.snp.makeConstraints { make in
@@ -279,10 +279,19 @@ class OutfitViewController: AbstractViewController {
             case let .success(data, objectsArray: _, pagination: _, apiResponse: _):
                 
                 if let data = data, let unread = data.unread {
+                    self.rightBarbutton.pp.setBadgeLabel(attributes: { badgeLabel in
+                        badgeLabel.textColor = Palette[custom: .purple]
+                    })
                     if unread > 0 {
-                        self.rightBarbutton.yl_showBadgeText("\(unread)")
+                        //self.rightBarbutton.yl_showBadgeText("\(unread)")
+                        if unread > 99 {
+                            self.rightBarbutton.pp.addBadge(text: "99+")
+                        } else {
+                            self.rightBarbutton.pp.addBadge(number: unread)
+                        }
                     } else {
-                        self.rightBarbutton.yl_clearBadge()
+                        //self.rightBarbutton.yl_clearBadge()
+                        self.rightBarbutton.pp.hiddenBadge()
                     }
                 }
             default:

@@ -1,6 +1,0 @@
-framework module YLBadge {
-  umbrella header "YLBadge-umbrella.h"
-
-  export *
-  module * { export * }
-}

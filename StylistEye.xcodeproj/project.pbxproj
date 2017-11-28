@@ -152,6 +152,7 @@
 		A8CA378B1FB1CEC9002C3F37 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA378A1FB1CEC9002C3F37 /* ProgressHUD.swift */; };
 		A8DAEF441ED5B8D700C7766A /* DeleteWardrobePhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DAEF431ED5B8D700C7766A /* DeleteWardrobePhotoCommand.swift */; };
 		A8DAEF461ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DAEF451ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift */; };
+		A8EA3FD61FC303B5001E3F9C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EA3FD51FC303B5001E3F9C /* Notifications.swift */; };
 		A8F746571E8533E200FEDCD9 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F746561E8533E200FEDCD9 /* Languages.swift */; };
 		A8F746591E85340500FEDCD9 /* DressStyleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F746581E85340500FEDCD9 /* DressStyleDTO.swift */; };
 		A8F7465B1E8534CF00FEDCD9 /* DressStyleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F7465A1E8534CF00FEDCD9 /* DressStyleCommand.swift */; };
@@ -330,6 +331,7 @@
 		A8CA378A1FB1CEC9002C3F37 /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		A8DAEF431ED5B8D700C7766A /* DeleteWardrobePhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteWardrobePhotoCommand.swift; sourceTree = "<group>"; };
 		A8DAEF451ED5B9FF00C7766A /* UploadWardrobeSecondPhotoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadWardrobeSecondPhotoCommand.swift; sourceTree = "<group>"; };
+		A8EA3FD51FC303B5001E3F9C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		A8F746561E8533E200FEDCD9 /* Languages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
 		A8F746581E85340500FEDCD9 /* DressStyleDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressStyleDTO.swift; sourceTree = "<group>"; };
 		A8F7465A1E8534CF00FEDCD9 /* DressStyleCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressStyleCommand.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				3109198D1DAE9BB80083A2C8 /* UserInfo.swift */,
 				31818E4C1DAFEB87004883D2 /* SettingsItem.swift */,
 				31CD44ED1DB17338007A5E1C /* ProductInfo.swift */,
+				A8EA3FD51FC303B5001E3F9C /* Notifications.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -1035,9 +1038,9 @@
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/PPBadgeViewSwift/PPBadgeViewSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/YLBadge/YLBadge.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1047,9 +1050,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PPBadgeViewSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YLBadge.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1116,6 +1119,7 @@
 				31A252701E06C7980090EFD8 /* MessageDetailCommand.swift in Sources */,
 				312F04A81E47722700252D22 /* SendMessageCommand.swift in Sources */,
 				3175F4E21E05614C001C89C6 /* OutfitCategoryDTO.swift in Sources */,
+				A8EA3FD61FC303B5001E3F9C /* Notifications.swift in Sources */,
 				31FC670E1DB3BEF700ECC5A7 /* ScrollView.swift in Sources */,
 				31F5FB9C1DAE2BE300418D36 /* AppDelegate.swift in Sources */,
 				31582A241DBCB86E009D7139 /* FilterBox.swift in Sources */,

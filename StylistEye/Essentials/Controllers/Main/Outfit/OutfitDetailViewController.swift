@@ -28,7 +28,7 @@ class OutfitDetailViewController: AbstractViewController {
     fileprivate lazy var backButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "backArrow_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backButtonTapped))
 
     fileprivate var tableView = TableView(style: .grouped)
-
+    
     fileprivate var outfitTableData: OutfitDetailDTO? {
         didSet {
             stylistDefinition()
@@ -41,6 +41,8 @@ class OutfitDetailViewController: AbstractViewController {
             tableView.reloadData()
         }
     }
+    
+    fileprivate var uploadedPhotos = [UIImage?]()
 
     fileprivate let stylistInfoBox = View()
 
@@ -217,7 +219,7 @@ class OutfitDetailViewController: AbstractViewController {
 
         view.backgroundColor = Palette[basic: .white]
     }
-
+    
     // MARK: - User Action
     func backButtonTapped() {
         let _ = navigationController?.popViewController(animated: true)
@@ -292,7 +294,7 @@ class OutfitDetailViewController: AbstractViewController {
                 [weak self]
                 in
                 DispatchQueue.main.async {
-                    self?.loadData()
+                    self?.getOutfitDetailInfo(outfitId: outfitId)
                 }
             }
             
@@ -360,6 +362,7 @@ class OutfitDetailViewController: AbstractViewController {
     func addMorePhotosTapped() {
         openCamera(photoType: .OtherOutfitPhoto)
     }
+    
 }
 
 // MARK: - <UITableViewDataSource>

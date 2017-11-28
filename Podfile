@@ -18,7 +18,9 @@ def shared_pods
     pod 'Crashlytics'
     
     #pod 'ENMBadgedBarButtonItem'
-    pod 'YLBadge'
+    #pod 'YLBadge'
+    pod 'PPBadgeViewSwift'
+    #pod 'BadgeSwift', '5.0.1'
 end
 
 target 'StylistEye' do
