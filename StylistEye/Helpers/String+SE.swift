@@ -19,6 +19,10 @@ extension String {
     static var empty: String {
         return ""
     }
+    
+    static var space: String {
+        return " "
+    }
 }
 
 extension String {
@@ -87,16 +91,14 @@ extension String {
         case about
         case logout
         case menu
-        case pants
-        case dress
-        case jacket
-        case shoe
-        case shirt
-        case cap
-        case work
-        case bussiness
-        case earings
         case messages
+        case outfitOverview
+        case takePhoto
+        case noPhotoYet
+        case stylists
+        case outfitsCategory
+        case errorOccured
+        case show
 
         var localizedString: String {
             var stringToReturn: String = String.empty
@@ -121,26 +123,22 @@ extension String {
                 stringToReturn = "logout"
             case .menu:
                 stringToReturn = "menu"
-            case .pants:
-                stringToReturn = "pants"
-            case .dress:
-                stringToReturn = "dress"
-            case .jacket:
-                stringToReturn = "jacket"
-            case .shoe:
-                stringToReturn = "shoe"
-            case .shirt:
-                stringToReturn = "shirt"
-            case .cap:
-                stringToReturn = "cap"
-            case .work:
-                stringToReturn = "work"
-            case .bussiness:
-                stringToReturn = "bussiness"
-            case .earings:
-                stringToReturn = "earings"
             case .messages:
                 stringToReturn = "messages"
+            case .outfitOverview:
+                stringToReturn = "outfit-overview"
+            case .takePhoto:
+                stringToReturn = "take-photo"
+            case .noPhotoYet:
+                stringToReturn = "no-photo-yet"
+            case .stylists:
+                stringToReturn = "stylists"
+            case .outfitsCategory:
+                stringToReturn = "outfits-category"
+            case .errorOccured:
+                stringToReturn = "error-occured"
+            case .show:
+                stringToReturn = "show"
             }
             return stringToReturn
         }
@@ -196,7 +194,4 @@ extension String {
         return first + other
     }
 
-    var controllerFromString: UIViewController {
-        return UIViewController()
-    }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 struct MessagesCommand: NetworkExecutable {
 
-    typealias Data = MessagesDTO
+    typealias Data = MessagesListDTO
     var urlManager: APIUrlManager
 
     init() {

@@ -6,7 +6,6 @@
 //  Copyright © 2016 Michal Severín. All rights reserved.
 //
 
-import KVNProgress
 import UIKit
 
 class SettingsViewController: AbstractViewController {
@@ -21,13 +20,21 @@ class SettingsViewController: AbstractViewController {
         CellItem(image: #imageLiteral(resourceName: "language_image"), name: StringContainer[.language], controller: LanguagesViewController()),
         CellItem(image: #imageLiteral(resourceName: "privacy_image"), name: StringContainer[.privacy], controller: PrivacyViewController()),
         CellItem(image: #imageLiteral(resourceName: "note_image"), name: StringContainer[.note], controller: NoteViewController()),
-        CellItem(image: #imageLiteral(resourceName: "about_image"), name: StringContainer[.about], controller: AboutViewController()),
         CellItem(image: #imageLiteral(resourceName: "logout_image"), name: StringContainer[.logout], controller: nil),
     ]
 
     fileprivate var tableView = TableView(style: .grouped)
+    
+    fileprivate var versionLabel = UILabel()
 
     // MARK: - <Initializable>
+    
+    override func viewDidLoad() {
+      super.viewDidLoad()
+      
+      automaticallyAdjustsScrollViewInsets = false
+    }
+    
     internal override func addElements() {
         super.addElements()
 
@@ -35,6 +42,7 @@ class SettingsViewController: AbstractViewController {
             [
                 coverImageView,
                 tableView,
+                versionLabel,
             ]
         )
     }
@@ -52,6 +60,13 @@ class SettingsViewController: AbstractViewController {
         tableView.separatorColor =  Palette[custom: .appColor]
 
         navigationItem.leftBarButtonItem = crossButton
+        
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        
+        versionLabel.text = "\(version ?? "") \(build ?? "")"
+        versionLabel.textColor = Palette[custom: .appColor]
+        versionLabel.font = UIFont.systemFont(ofSize: 12.0)
     }
 
     internal override func setupView() {
@@ -68,10 +83,15 @@ class SettingsViewController: AbstractViewController {
         }
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(view).inset(46)
+            make.top.equalTo(topLayoutGuide.snp.bottom)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.bottom.equalTo(view)
+            make.bottom.equalTo(versionLabel)
+        }
+        
+        versionLabel.snp.makeConstraints { make in
+            make.leadingMargin.equalTo(view)
+            make.bottom.equalTo(view).inset(8)
         }
     }
 
@@ -132,24 +152,24 @@ extension SettingsViewController: UITableViewDelegate {
             navigationController?.pushViewController(controller, animated: true)
         }
         else {
-            KVNProgress.show()
+            ProgressHUD.show()
             LogoutCommand().executeCommand { data in
                 switch data {
-                case let .success(_, _, apiResponse: apiResponse):
+                case let .success(_, _, _, apiResponse: apiResponse):
                     // TODO: @MS
                     switch apiResponse {
                     case .ok:
-                        KVNProgress.showSuccess {
+                        ProgressHUD.showSuccess {
                             AccountSessionManager.manager.closeSession()
                             if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
                                 window.rootViewController = LoginViewController()
                             }
                         }
                     case .fail:
-                        KVNProgress.showError()
+                        ProgressHUD.showError()
                     }
-                case .failure:
-                    KVNProgress.showError()
+                case let .failure(message):
+                    ProgressHUD.showError(withStatus: message.message)
                 }
             }
         }

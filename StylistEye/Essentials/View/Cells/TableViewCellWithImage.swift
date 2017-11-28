@@ -39,7 +39,9 @@ class TableViewCellWithImage: AbstractTableViewCell {
     // MARK: - <Initialize>
     override func initializeElements() {
         super.initializeElements()
-
+        
+        customTextLabel.textColor = Palette[custom: .purple]
+        
         leftImageView.contentMode = .scaleAspectFit
     }
 
@@ -59,15 +61,24 @@ class TableViewCellWithImage: AbstractTableViewCell {
 
         customTextLabel.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
-            make.leading.equalTo(leftImageView.snp.trailing).offset(5)
+            make.leading.equalTo(leftImageView.snp.trailing).offset(10)
             make.trailing.equalTo(contentView).inset(15)
         }
 
         leftImageView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView)
+            make.leading.equalTo(contentView).inset(8)
             make.centerY.equalTo(contentView)
-            make.width.equalTo(70)
-            make.height.equalTo(35)
+            make.width.equalTo(30)
+            make.height.equalTo(30)
         }
+    }
+  
+    func leftImageSetFrom(url: URL?) {
+        leftImageView.kf.setImage(with: url)
+    }
+    
+    override func prepareForReuse() {
+        leftImageView.kf.cancelDownloadTask()
+        leftImageView.image = nil
     }
 }

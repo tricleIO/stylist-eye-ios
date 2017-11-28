@@ -29,6 +29,8 @@ public enum KeychainKeys: String, KeychainKeysProtocol {
 
     /// Access token key.
     case accessTokenKey = "StylistEyeAkcesToken009"
+    /// ClientId
+    case clientId = "ClientIdAaxAEffaeFASSA00"
     /// User email.
     case userEmail = "StylistUZerEmal066"
     /// User password.

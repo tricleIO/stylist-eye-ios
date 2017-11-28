@@ -45,6 +45,11 @@ protocol InitializableProtocol {
      Load data from API
      */
     func loadData()
+    
+    /**
+     Setup defualt background image.
+     */
+    func setupBackgroundImage()
 }
 
 extension InitializableProtocol {
@@ -53,13 +58,12 @@ extension InitializableProtocol {
      Initializable function contains all ordered initialzable methods from protocol.
      */
     func addElementsAndApplyConstraints() {
-        defer {
-            customInit()
-            setupConstraints()
-        }
         initializeElements()
         addElements()
+        setupBackgroundImage()
         setupView()
+        customInit()
+        setupConstraints()
     }
 
     func initialize() {

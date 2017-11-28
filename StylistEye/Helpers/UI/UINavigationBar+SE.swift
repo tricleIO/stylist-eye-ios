@@ -20,6 +20,7 @@ enum NavigationBarStyle {
     case white
     case solid(withStatusBarColor: UIColor)
     case invisible(withStatusBarColor: UIColor)
+    case invisibleWithoutShadow(withStatusBarColor: UIColor)
 }
 
 extension UINavigationBar {
@@ -70,10 +71,28 @@ extension UINavigationBar {
             sbBackgroundColor(color: color)
             barTintColor = color
             barStyle = .black
+            tintColor = Palette[custom: .appColor]
+            setBottomBorderColor(color: Palette[custom: .appColor], height: 0.5)
         case let .invisible(color):
             sbBackgroundColor(color: color)
             makeInvisibleBar()
             barStyle = .blackOpaque
+        case let .invisibleWithoutShadow(color):
+            sbBackgroundColor(color: color)
+            makeInvisibleBar()
+            barStyle = .blackOpaque
+            shadowImage = UIImage()
         }
+    }
+    
+}
+
+extension UINavigationBar {
+    
+    func setBottomBorderColor(color: UIColor, height: CGFloat) {
+        let bottomBorderRect = CGRect(x: 0, y: frame.height, width: frame.width, height: height)
+        let bottomBorderView = UIView(frame: bottomBorderRect)
+        bottomBorderView.backgroundColor = color
+        addSubview(bottomBorderView)
     }
 }

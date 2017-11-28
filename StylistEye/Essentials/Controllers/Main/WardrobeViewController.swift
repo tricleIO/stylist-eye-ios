@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PPBadgeViewSwift
 
 class WardrobeViewController: AbstractViewController {
 
@@ -14,34 +15,49 @@ class WardrobeViewController: AbstractViewController {
     // MARK: > public
 
     // MARK: > private
-    internal static let cellItem: [CellItem] = [
-        CellItem(image: #imageLiteral(resourceName: "pants_image"), name: StringContainer[.pants], controller: WardrobeFeedViewController()),
-        CellItem(image: #imageLiteral(resourceName: "dress_image"), name: StringContainer[.dress], controller: WardrobeFeedViewController()),
-        CellItem(image: #imageLiteral(resourceName: "jacket_image"), name: StringContainer[.jacket], controller: WardrobeFeedViewController()),
-        CellItem(image: #imageLiteral(resourceName: "shoe_image"), name: StringContainer[.shoe], controller: WardrobeFeedViewController()),
-        CellItem(image: #imageLiteral(resourceName: "shirt_image"), name: StringContainer[.shirt], controller: WardrobeFeedViewController()),
-    ]
+    
+    fileprivate var garmentTypes: [GarmentTypeDTO] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     fileprivate var tableView = TableView(style: .grouped)
+    fileprivate lazy var rightBarbutton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "message_icon"), style: .plain, target: self, action: #selector(messagesButtonTapped))
 
+    fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburger_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
+    fileprivate let messagesController = MessagesViewController()
     fileprivate let backgroundImageView = ImageView()
+    fileprivate var pagination: PaginationDTO?
 
     // MARK: - <Initializable>
     internal override func initializeElements() {
         super.initializeElements()
 
         backgroundImageView.image = #imageLiteral(resourceName: "whiteBg_image")
-
+        
+        navigationItem.leftBarButtonItem = leftBarButton
+        
         tableView.register(TableViewCellWithImage.self)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = Palette[basic: .clear]
-        tableView.isScrollEnabled = false
         tableView.separatorColor =  Palette[custom: .purple]
         tableView.contentInset = UIEdgeInsets(top: -36, left: 0, bottom: 0, right: 0)
-
-        // TODO: @MS
-        print(Keychains[.accessTokenKey])
+        
+        navigationItem.rightBarButtonItem = rightBarbutton
+        
+        GarmentTypeCommand().executeCommand { data in
+            switch data {
+            case let .success(object: _, objectsArray: objects, pagination: _, apiResponse: _):
+                if let objects = objects {
+                    // TODO language
+                    self.garmentTypes = objects.filter {$0.languageId == Languages.current}
+                }
+            case .failure:
+                break
+            }
+        }
     }
 
     internal override func addElements() {
@@ -69,14 +85,72 @@ class WardrobeViewController: AbstractViewController {
             make.bottom.equalTo(view)
         }
     }
-
-    override func customInit() {}
-
+    
+    override func customInit() {
+        
+    }
+ 
     internal override func setupView() {
         super.setupView()
 
         title = StringContainer[.wardrobe]
         view.backgroundColor = Palette[basic: .white]
+    }
+    
+    
+    override func loadData() {
+        super.loadData()
+        
+        loadMessages()
+    }
+    
+    fileprivate func loadMessages() {
+        MessagesCheckCommand().executeCommand(page: 0) { data in
+            switch data {
+            case let .success(data, objectsArray: _, pagination: _, apiResponse: _):
+                
+                if let data = data, let unread = data.unread {
+                    self.rightBarbutton.pp.setBadgeLabel(attributes: { badgeLabel in
+                        badgeLabel.textColor = Palette[custom: .purple]
+                    })
+                    if unread > 0 {
+                        //self.rightBarbutton.yl_showBadgeText("\(unread)")
+                        if unread > 99 {
+                            self.rightBarbutton.pp.addBadge(text: "99+")
+                        } else {
+                            self.rightBarbutton.pp.addBadge(number: unread)
+                        }
+                    } else {
+                        //self.rightBarbutton.yl_clearBadge()
+                        self.rightBarbutton.pp.hiddenBadge()
+                    }
+                }
+            default:
+                break
+            }
+        }
+    }
+    
+    // MARK: - User Action
+    func settingsButtonTapped() {
+        openSettingsView()
+    }
+    
+    func messagesButtonTapped() {
+        openMessagesView()
+    }
+    
+    // MARK: - Actions
+    fileprivate func openSettingsView() {
+        let navigationController = UINavigationController(rootViewController: SettingsViewController())
+        navigationController.navigationBar.applyStyle(style: .invisibleWithoutShadow(withStatusBarColor: Palette[basic: .clear]))
+        present(navigationController, animated: true, completion: nil)
+    }
+    
+    fileprivate func openMessagesView() {
+        messagesController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(messagesController, animated: true)
+        
     }
 }
 
@@ -84,8 +158,7 @@ class WardrobeViewController: AbstractViewController {
 extension WardrobeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TableViewCellWithImage = tableView.dequeueReusableCell()
-        let settingItem = WardrobeViewController.cellItem[safe: indexPath.row]
+        let cell: TableViewCellWithImage = tableView.dequeueReusableCell(forIndexPath: indexPath)
 
         cell.backgroundColor = Palette[basic: .clear]
         cell.textLabel?.textColor = Palette[custom: .purple]
@@ -95,16 +168,18 @@ extension WardrobeViewController: UITableViewDataSource {
         cell.separatorInset = UIEdgeInsets.zero
         cell.selectionStyle = .gray
 
-        if indexPath.row < WardrobeViewController.cellItem.count {
-            cell.leftCellImage = settingItem?.image
-            cell.labelText = settingItem?.name
+        if let garmentType = garmentTypes[safe: indexPath.row] {
+            cell.labelText = garmentType.name
+            if let iconUrl = garmentType.icon {
+                cell.leftImageSetFrom(url: URL(string: iconUrl))
+            }
         }
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return WardrobeViewController.cellItem.count
+        return garmentTypes.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -113,7 +188,7 @@ extension WardrobeViewController: UITableViewDataSource {
 
     @objc(tableView:heightForRowAtIndexPath:)
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(GUIConfiguration.CellHeight)
+        return GUIConfiguration.CellHeight
     }
 }
 
@@ -122,9 +197,12 @@ extension WardrobeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let controller = WardrobeViewController.cellItem[indexPath.row].controller {
-            controller.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(controller, animated: true)
+        if let garmentType = garmentTypes[safe: indexPath.row] {
+            let vc = WardrobeFeedViewController()
+            vc.categoryName = garmentType.name
+            vc.garmentId = garmentType.typeId
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

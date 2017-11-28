@@ -11,7 +11,8 @@ struct OutfitsCommand: NetworkExecutable {
     typealias Data = OutfitsDTO
     var urlManager: APIUrlManager
 
-    init() {
-        urlManager = .outfits
+    init(stylistId: String? = nil, dressstyle: String? = nil) {
+        urlManager = .outfits(stylistId: stylistId, dressstyle: dressstyle)
+        
     }
 }

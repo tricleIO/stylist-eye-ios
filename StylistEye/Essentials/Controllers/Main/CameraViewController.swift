@@ -9,23 +9,32 @@
 import SnapKit
 import UIKit
 import AVFoundation
+    
+typealias CameraPickerHandler = ( (UIImage) -> Void )
 
 class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     // MARK: - Properties
+  
+    var imagePicked: CameraPickerHandler?
+  
     // MARK: < private
     fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cross_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(closeButtonTapped))
-    fileprivate lazy var rightBarbutton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "torch_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(torchButtonTapped))
+    fileprivate lazy var rightBarbutton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "torch_off"), style: .plain, target: self, action: #selector(torchButtonTapped))
+    fileprivate lazy var rotateCameraButton = UIButton(type: .custom)
 
-    fileprivate let captureSession = AVCaptureSession()
+    fileprivate var captureSession = AVCaptureSession()
     fileprivate let qrCodeFrameView = UIView()
     fileprivate let videoPreviewLayer = AVCaptureVideoPreviewLayer()
     fileprivate let stillImageOutput = AVCaptureStillImageOutput()
 
+    fileprivate let videoView = UIView()
     fileprivate let actionBox = View()
 
     fileprivate let captureButton = Button(type: .system)
-
+    
+    fileprivate var cameraDirection = AVCaptureDevicePosition.back
+    
     // MARK: - Life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,8 +45,10 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
     override func addElements() {
         super.addElements()
 
+        view.addSubview(videoView)
         view.addSubview(actionBox)
         actionBox.addSubview(captureButton)
+        actionBox.addSubview(rotateCameraButton)
     }
 
     internal override func initializeElements() {
@@ -49,31 +60,61 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
 
         captureButton.addTarget(self, action: #selector(captureButtonTapped), for: .touchUpInside)
         captureButton.setImage(#imageLiteral(resourceName: "eclipse_icon").withRenderingMode(.alwaysOriginal), for: .normal)
+        
+        rotateCameraButton.addTarget(self, action: #selector(rotateButtonTapped), for: .touchUpInside)
+        rotateCameraButton.setImage(#imageLiteral(resourceName: "cameraRotate_icon").withRenderingMode(.alwaysOriginal), for: .normal)
 
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarbutton
-
-        setQRCamera()
+        
+        backgroundImage.image = nil
+        backgroundImage.backgroundColor = UIColor.black
+        videoView.backgroundColor = UIColor.black
+        
+        setCamera()
+    }
+    
+    override func setupBackgroundImage() {
     }
 
     override func setupConstraints() {
         super.setupConstraints()
 
-        videoPreviewLayer.frame = view.bounds
-
+        videoView.snp.makeConstraints { make in
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.top.equalTo(view.snp.top)
+            make.height.equalTo(view.snp.width).multipliedBy(4.0/3.0)
+        }
+        
         actionBox.snp.makeConstraints { make in
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.height.equalTo(50)
+            make.top.equalTo(videoView.snp.bottom)
             make.bottom.equalTo(view)
         }
 
         captureButton.snp.makeConstraints { make in
             make.centerX.equalTo(actionBox)
             make.centerY.equalTo(actionBox)
+            make.width.equalTo(45)
+            make.height.equalTo(45)
+        }
+        
+        rotateCameraButton.snp.makeConstraints { make in
+            make.leading.equalTo(40)
+            make.centerY.equalTo(actionBox)
+            make.width.equalTo(45)
+            make.height.equalTo(45)
         }
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        videoPreviewLayer.frame = videoView.bounds
+    }
+    
     // MARK: - User action
     func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
@@ -84,20 +125,26 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
     }
 
     func torchButtonTapped() {
-        fireUpTorch()
+        fireUpFlash()
+    }
+    
+    func rotateButtonTapped() {
+        switchCamera()
     }
 
     // MARK: - Actions
-    fileprivate func fireUpTorch() {
+    fileprivate func fireUpFlash() {
         if let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo) {
-            if (device.hasTorch) {
+            if (device.hasFlash) {
                 do {
                     try device.lockForConfiguration()
-                    if device.torchMode == AVCaptureTorchMode.on {
-                        device.torchMode = AVCaptureTorchMode.off
+                    if device.flashMode == .on || device.flashMode == .auto {
+                        device.flashMode = .off
+                        rightBarbutton.image = #imageLiteral(resourceName: "torch_off")
                     }
                     else {
-                        try device.setTorchModeOnWithLevel(1.0)
+                        device.flashMode = .on
+                        rightBarbutton.image = #imageLiteral(resourceName: "torch_icon")
                     }
                     device.unlockForConfiguration()
                 }
@@ -107,17 +154,27 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
     }
 
     fileprivate func captureImage() {
-        if let videoConnection = stillImageOutput.connection(withMediaType: AVMediaTypeVideo) {
-            stillImageOutput.captureStillImageAsynchronously(from: videoConnection) { sampleBuffer, error -> Void in
-                if let _ = sampleBuffer {
-                    if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer) {
-                        if let dataProvider = CGDataProvider(data: imageData as CFData) {
-                            if let cgImageRef = CGImage(jpegDataProviderSource: dataProvider, decode: nil, shouldInterpolate: true, intent: .defaultIntent) {
-                                let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: .right)
-                                let imageVC = CaptureImageViewController()
-                                imageVC.capturedImage = image
-                                self.navigationController?.pushViewController(imageVC, animated: true)
-                            }
+        guard let videoConnection = stillImageOutput.connection(withMediaType: AVMediaTypeVideo) else {
+            return
+        }
+        if videoConnection.isVideoOrientationSupported {
+            videoConnection.videoOrientation = .portrait
+        }
+        self.captureButton.isEnabled = false
+        stillImageOutput.captureStillImageAsynchronously(from: videoConnection) { sampleBuffer, error -> Void in
+            defer {
+                self.captureButton.isEnabled = true
+            }
+            if let _ = sampleBuffer {
+                if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer) {
+                    if let dataProvider = CGDataProvider(data: imageData as CFData) {
+                        if let cgImageRef = CGImage(jpegDataProviderSource: dataProvider, decode: nil, shouldInterpolate: true, intent: .defaultIntent) {
+                            // need to rotate the image using fixedOrientation(), because the server ignores EXIF rotation
+                            let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: .right).fixedOrientation()
+                            let imageVC = CaptureImageViewController()
+                            imageVC.capturedImage = image
+                            imageVC.imagePicked = self.imagePicked
+                            self.navigationController?.pushViewController(imageVC, animated: true)
                         }
                     }
                 }
@@ -125,11 +182,37 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         }
     }
 
-    fileprivate func setQRCamera() {
-        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-
+    fileprivate func setCamera() {
+//        let captureDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: self.cameraDirection)
+        
+        var captureDevice: AVCaptureDevice? = nil
+        
+        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
+        for device in devices ?? [] {
+            if let device = device as? AVCaptureDevice {
+                if device.position == cameraDirection {
+                    captureDevice = device
+                    break
+                }
+            }
+        }
+        
+        if captureDevice == nil {
+            captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        }
+        
         do {
+            captureSession.sessionPreset = AVCaptureSessionPresetPhoto
+            
+            // remove previous inputs
+            for input in captureSession.inputs {
+                if let input = input as? AVCaptureInput {
+                    captureSession.removeInput(input)
+                }
+            }
+            
             let input = try AVCaptureDeviceInput(device: captureDevice) as AVCaptureDeviceInput
+            
             captureSession.addInput(input as AVCaptureInput)
             if captureSession.canAddOutput(stillImageOutput) {
                 captureSession.addOutput(stillImageOutput)
@@ -138,10 +221,19 @@ class CameraViewController: AbstractViewController, AVCaptureMetadataOutputObjec
         catch {
             // TODO: @MS
         }
-
+      
         videoPreviewLayer.session = captureSession
         videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-        videoPreviewLayer.frame = view.layer.bounds
-        view.layer.addSublayer(videoPreviewLayer)
+        videoPreviewLayer.frame = videoView.layer.bounds
+        videoView.layer.addSublayer(videoPreviewLayer)
+    }
+    
+    fileprivate func switchCamera() {
+        if (cameraDirection == .front) {
+            cameraDirection = .back
+        } else {
+            cameraDirection = .front
+        }
+        setCamera()
     }
 }

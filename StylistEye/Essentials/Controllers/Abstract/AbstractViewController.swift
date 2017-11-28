@@ -17,6 +17,9 @@ class AbstractViewController: UIViewController {
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
     }
+    
+    // MARK: - Properties
+    let backgroundImage = ImageView(image: #imageLiteral(resourceName: "whiteBg_image"))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +28,12 @@ class AbstractViewController: UIViewController {
         addElementsAndApplyConstraints()
 
         /// Load data from API.
+        //loadData() // MSt: why load on both load and appear?
+    }
+  
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         loadData()
     }
 
@@ -36,8 +45,23 @@ class AbstractViewController: UIViewController {
         ]
     }
 
+    internal override func addElements() {
+        view.addSubview(backgroundImage)
+    }
+
+    internal override func setupBackgroundImage() {
+        backgroundImage.snp.makeConstraints { make in
+            make.edges.equalTo(view)
+        }
+    }
+    
     internal override func customInit() {
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss)))
+        // NOTE from Martin: without cancelsTouchesInView, this gesture recognizer causes strange
+        // behaviours of UITableViewDelegate - didSelectRowAt not called etc.
+        // NOTE even with cancelsTouchesInView it causes problems with camera
+        //let tap = UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss))
+        //tap.cancelsTouchesInView = false
+        //view.addGestureRecognizer(tap)
     }
 
     // MARK: - Action

@@ -38,7 +38,7 @@ class AboutViewController: AbstractViewController {
     internal override func setupView() {
         super.setupView()
 
-        title = StringContainer[.languages]
+        title = StringContainer[.about]
     }
 
     internal override func setupConstraints() {

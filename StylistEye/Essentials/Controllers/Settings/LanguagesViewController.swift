@@ -18,10 +18,10 @@ class LanguagesViewController: AbstractViewController {
 
     internal static let cellItem: [CellItem] = [
         CellItem(image: nil, name: StringContainer[.english], controller: nil),
-        CellItem(image: nil, name: StringContainer[.fransais], controller: nil),
-        CellItem(image: nil, name: StringContainer[.deutch], controller: nil),
-        CellItem(image: nil, name: StringContainer[.cestina], controller: nil),
-        CellItem(image: nil, name: StringContainer[.italy], controller: nil),
+//        CellItem(image: nil, name: StringContainer[.fransais], controller: nil),
+//        CellItem(image: nil, name: StringContainer[.deutch], controller: nil),
+//        CellItem(image: nil, name: StringContainer[.cestina], controller: nil),
+//        CellItem(image: nil, name: StringContainer[.italy], controller: nil),
     ]
 
     internal var selected: [Bool] = [
@@ -110,6 +110,9 @@ extension LanguagesViewController: UITableViewDataSource {
             cell.imageView?.image = settingItem.image
             cell.textLabel?.text = settingItem.name
         }
+      
+        // TODO when more langs are supported
+        cell.accessoryType = .checkmark
 
         return cell
     }

@@ -10,11 +10,13 @@ import Foundation
 
 struct UserInfo {
 
+    var identifier: Int?
     var email: String?
     var firstname: String?
     var surname: String?
 
     init(userInfo: UserDTO?) {
+        identifier = userInfo?.clientId
         email = userInfo?.email
         firstname = userInfo?.firstname
         surname = userInfo?.surname
@@ -29,6 +31,7 @@ extension UserInfo: StaticSerializable {
 
     // MARK: Constructor
     init?(dictionary: [String: Any]?) {
+        identifier = dictionary?["identifier"] as? Int
         email = dictionary?["email"] as? String
         firstname = dictionary?["firstname"] as? String
         surname = dictionary?["surname"] as? String
@@ -37,6 +40,7 @@ extension UserInfo: StaticSerializable {
     // MARK: Public methods
     func encode() -> [String: Any] {
         var dictionary: [String: Any] = [:]
+        dictionary["identifier"] = identifier
         dictionary["email"] = email
         dictionary["firstname"] = firstname
         dictionary["surname"] = surname

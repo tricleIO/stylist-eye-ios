@@ -17,6 +17,8 @@ class CaptureImageViewController: AbstractViewController {
             imageView.image = capturedImage
         }
     }
+  
+    var imagePicked: CameraPickerHandler?
 
     // MARK: < private
     fileprivate lazy var leftBarButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "backArrow_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backButtonTapped))
@@ -39,6 +41,11 @@ class CaptureImageViewController: AbstractViewController {
 
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarbutton
+        
+        imageView.contentMode = .scaleAspectFit
+        
+        backgroundImage.image = nil
+        backgroundImage.backgroundColor = UIColor.black
     }
 
     internal override func addElements() {
@@ -50,6 +57,8 @@ class CaptureImageViewController: AbstractViewController {
                 actionBox,
             ]
         )
+        
+        actionBox.addSubview(uploadButton)
     }
 
     internal override func setupConstraints() {
@@ -59,14 +68,21 @@ class CaptureImageViewController: AbstractViewController {
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
             make.top.equalTo(view)
-            make.bottom.equalTo(actionBox.snp.top)
+            make.height.equalTo(view.snp.width).multipliedBy(4.0/3.0)
         }
 
         actionBox.snp.makeConstraints { make in
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.height.equalTo(50)
+            make.top.equalTo(imageView.snp.bottom)
             make.bottom.equalTo(view)
+        }
+        
+        uploadButton.snp.makeConstraints { make in
+            make.centerX.equalTo(actionBox)
+            make.centerY.equalTo(actionBox)
+            make.width.equalTo(45)
+            make.height.equalTo(45)
         }
     }
 
@@ -80,11 +96,10 @@ class CaptureImageViewController: AbstractViewController {
     }
 
     func uploadButtonTapped() {
-        uploadImageToServer()
-    }
-
-    // MARK: - Actions
-    fileprivate func uploadImageToServer() {
-        // TODO: @MS
+        if let image = capturedImage {
+            uploadButton.isEnabled = false
+            imagePicked?(image)
+            dismiss(animated: true, completion: nil)
+        }
     }
 }

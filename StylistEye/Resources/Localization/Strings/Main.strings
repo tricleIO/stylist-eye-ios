@@ -6,26 +6,27 @@
   Copyright © 2016 Michal Severín. All rights reserved.
 */
 
-"SE-Main-Questionnaire" = "Dotazník";
-"SE-Main-Outfit" = "Outfity";
-"SE-Main-Wardrobe" = "Šatník";
-"SE-Main-Messages" = "Zprávy";
+"SE-Main-Questionnaire" = "Questionnaire";
+"SE-Main-Outfit" = "Outfits";
+"SE-Main-Wardrobe" = "Wardrobe";
+"SE-Main-Messages" = "Messages";
 
-"SE-Main-Language" = "Jazyk";
-"SE-Main-Languages" = "Jazyky";
-"SE-Main-Privacy" = "Privacy & Safety";
-"SE-Main-Note" = "Obchodní podmínky";
+"SE-Main-Language" = "Language";
+"SE-Main-Languages" = "Language";
+"SE-Main-Privacy" = "Privacy";
+"SE-Main-Note" = "Terms of Use";
 "SE-Main-About" = "O nás";
 "SE-Main-Logout" = "Logout";
 "SE-Main-Menu" = "Menu";
 
-"SE-Main-Pants" = "Kalhoty";
-"SE-Main-Dress" = "Šaty";
-"SE-Main-Jacket" = "Kabáty / bundy";
-"SE-Main-Shoe" = "Boty";
-"SE-Main-Shirt" = "Trička";
+"SE-Main-Outfit-overview" = "Outfit";
 
-"SE-Main-Cap" = "Volný čas";
-"SE-Main-Work" = "Zaměstnání";
-"SE-Main-Bussiness" = "Společenské";
-"SE-Main-Earings" = "Doplňky";
+"SE-Main-Take-photo" = "Take a Photo";
+"SE-Main-No-photo-yet" = "No photo yet";
+
+"SE-Main-Stylists" = "Stylist";
+"SE-Main-Outfits-category" = "Outfits Category";
+
+"SE-Main-Error-occured" = "An error has occured";
+
+"SE-Main-Show" = "Selection";

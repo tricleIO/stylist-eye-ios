@@ -13,8 +13,8 @@ import Foundation
  */
 struct LoginCommand: NetworkExecutable {
 
-    /// User profile DTO
-    typealias Data = UserDTO
+    /// Login DTO
+    typealias Data = LoginDTO
 
     /// Url manager.
     var urlManager: APIUrlManager

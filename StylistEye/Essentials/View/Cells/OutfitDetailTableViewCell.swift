@@ -9,6 +9,12 @@
 import Kingfisher
 import UIKit
 
+protocol OutfitDetailCellDelegateProtocol: class {
+    
+    func zoomTapped(cell: OutfitDetailTableViewCell)
+    
+}
+
 class OutfitDetailTableViewCell: AbstractTableViewCell {
 
     // MARK: - Properties
@@ -23,6 +29,15 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
             }
         }
     }
+    
+    var mainImagePlaceholder: UIImage? {
+        get {
+            return nil
+        }
+        set {
+            mainImageView.image = newValue
+        }
+    }
 
     var labelText: String? {
         get {
@@ -35,43 +50,80 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
 
     // MARK: > private
     fileprivate let mainImageView = ImageView()
+    
+    fileprivate var addPhotoOverlay = View()
+    fileprivate var addPhotoButton = UIButton()
+    fileprivate var addPhotoLabel = UILabel()
+    
+    fileprivate let zoomImageView = ImageView(image: #imageLiteral(resourceName: "zoom"))
+    
     fileprivate let coverView = View()
 
     fileprivate let customTextLabel = Label()
+    
+    weak var delegate: OutfitDetailCellDelegateProtocol?
 
     // MARK: - <Initialize>
     override func initializeElements() {
         super.initializeElements()
 
+        addPhotoOverlay.isHidden = true
+        
+        addPhotoOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        addPhotoButton.setImage(#imageLiteral(resourceName: "cmeraPlus_icon").withRenderingMode(.alwaysTemplate), for: .normal)
+        addPhotoButton.tintColor = Palette[custom: .title]
+        addPhotoButton.isUserInteractionEnabled = false
+        
+        addPhotoLabel.text = StringContainer[.noPhotoYet]
+        addPhotoLabel.textColor = Palette[custom: .title]
+        addPhotoLabel.textAlignment = .center
+        
         coverView.backgroundColor = Palette[basic: .white]
 
         customTextLabel.textColor = Palette[custom: .appColor]
         customTextLabel.font = SystemFont[.title]
 
-        mainImageView.contentMode = .scaleAspectFit
+        mainImageView.contentMode = .scaleAspectFill
+        mainImageView.clipsToBounds = true
+        mainImageView.kf.indicatorType = .activity
+        
+        zoomImageView.contentMode = .scaleAspectFit
+        zoomImageView.isUserInteractionEnabled = true
+        let zoomTap = UITapGestureRecognizer(target: self, action: #selector(zoomTapped))
+        zoomImageView.addGestureRecognizer(zoomTap)
     }
 
     override func addElements() {
         super.addElements()
 
-        contentView.addSubviews(views:
+        contentView.addSubview(coverView)
+        coverView.addSubviews(views:
             [
-                coverView,
                 customTextLabel,
+                mainImageView,
+                zoomImageView,
             ]
         )
-
-        coverView.addSubview(mainImageView)
+        
+        mainImageView.addSubview(addPhotoOverlay)
+        addPhotoOverlay.addSubview(addPhotoButton)
+        addPhotoOverlay.addSubview(addPhotoLabel)
     }
 
     override func setupConstraints() {
         super.setupConstraints()
 
+        zoomImageView.snp.makeConstraints { make in
+            make.trailing.equalTo(coverView).inset(10)
+            make.top.equalTo(coverView).inset(10)
+            make.width.equalTo(30)
+            make.height.equalTo(30)
+        }
+        
         coverView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(5)
-            make.trailing.equalTo(contentView).inset(5)
+            make.leading.equalTo(contentView).inset(10)
+            make.trailing.equalTo(contentView).inset(10)
             make.top.equalTo(customTextLabel.snp.bottom).offset(15)
-            make.height.equalTo(200)
             make.bottom.equalTo(contentView).inset(5)
         }
 
@@ -83,10 +135,43 @@ class OutfitDetailTableViewCell: AbstractTableViewCell {
         }
 
         mainImageView.snp.makeConstraints { make in
-            make.leading.equalTo(coverView).inset(5)
-            make.top.equalTo(coverView).inset(5)
-            make.bottom.equalTo(coverView).inset(5)
-            make.trailing.equalTo(coverView).inset(5)
+            make.leading.equalTo(coverView).inset(10)
+            make.top.equalTo(coverView).inset(10)
+            make.bottom.equalTo(coverView).inset(10)
+            make.trailing.equalTo(coverView).inset(10)
+            make.height.equalTo(mainImageView.snp.width).multipliedBy(4.0/3.0)
         }
+        
+        addPhotoButton.snp.makeConstraints { make in
+            make.center.equalTo(mainImageView)
+        }
+        
+        addPhotoLabel.snp.makeConstraints { make in
+            make.topMargin.equalTo(addPhotoButton.snp.bottomMargin).offset(20)
+            make.centerX.equalTo(addPhotoButton)
+        }
+        
     }
+    
+    func showPlaceholder() {
+        addPhotoOverlay.isHidden = false
+        mainImageView.image = #imageLiteral(resourceName: "background_image")
+    }
+  
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        mainImageView.kf.cancelDownloadTask()
+        mainImageView.image = nil
+        addPhotoOverlay.isHidden = true
+    }
+    
+    func zoomTapped() {
+        delegate?.zoomTapped(cell: self)
+    }
+    
+    func zoomButton(shown: Bool) {
+        zoomImageView.isHidden = !shown
+    }
+    
 }

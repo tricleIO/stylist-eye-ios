@@ -29,6 +29,7 @@ struct AccessToken {
                 Keychains[.accessTokenKey] = nil
                 Keychains[.userEmail] = nil
                 Keychains[.userPassword] = nil
+                Keychains[.clientId] = nil
             }
         }
     }

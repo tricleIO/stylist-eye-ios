@@ -6,119 +6,154 @@
 //  Copyright © 2016 Michal Severín. All rights reserved.
 //
 
-import KVNProgress
 import SnapKit
 import UIKit
 
 class QuestionnaireDetailViewController: AbstractViewController {
-
+    
     // MARK: - Properties
+    // MARK: < public
+    var mainImageview = ImageView() // ImageViewWithGradient
+    
+    var item: CurrentOutfitDTO?
+    
+    // MARK: < private
+    fileprivate let productDescriptionLabel = Label()
+    
+    fileprivate let footerView = View()
+    
+    fileprivate let cameraImageView = Button()
+    fileprivate let trashImageView = Button()
+    
     // MARK: < private
     fileprivate lazy var backButton: UIBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "backArrow_icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backButtonTapped))
-
-    fileprivate var tableView = TableView(style: .grouped)
-
-    fileprivate let photoBox = View()
-
-    fileprivate let mainImageview = ImageView()
-
+    
     // MARK: - <Initializable>
     internal override func initializeElements() {
         super.initializeElements()
-
-        tableView.register(QuestionnaireTableViewCell.self)
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorColor = Palette[basic: .clear]
-        tableView.backgroundColor = Palette[basic: .clear]
-
+        
+        trashImageView.setImage(#imageLiteral(resourceName: "trash_icon"), for: .normal)
+        trashImageView.contentMode = .scaleAspectFit
+        trashImageView.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
+        
         navigationItem.leftBarButtonItem = backButton
-
-        mainImageview.image = #imageLiteral(resourceName: "background_image")
-
-        photoBox.backgroundColor = Palette[basic: .white].withAlphaComponent(0.2)
-        photoBox.layer.borderColor = Palette[custom: .appColor].cgColor
-        photoBox.layer.borderWidth = 1
+        
+        productDescriptionLabel.textColor = Palette[basic: .white]
+        productDescriptionLabel.font = SystemFont[.litleDescription]
+        productDescriptionLabel.numberOfLines = 0
+        
+        backgroundImage.image = nil
+        backgroundImage.backgroundColor = UIColor.black
+        //mainImageview.image = #imageLiteral(resourceName: "placeholder")
+        mainImageview.contentMode = .scaleAspectFit
+        
+        footerView.backgroundColor = Palette[custom: .purple]
     }
-
+    
     internal override func addElements() {
         super.addElements()
-
+        
         view.addSubviews(views:
             [
                 mainImageview,
-                tableView,
-                photoBox,
-            ]
+                productDescriptionLabel,
+                footerView,
+                ]
+        )
+        
+        footerView.addSubviews(views:
+            [
+                trashImageView,
+                ]
         )
     }
-
+    
     internal override func setupConstraints() {
         super.setupConstraints()
-
+        
         mainImageview.snp.makeConstraints { make in
-            make.edges.equalTo(view)
-        }
-
-        photoBox.snp.makeConstraints { make in
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
             make.top.equalTo(view)
-            make.height.equalTo(85)
+            make.height.equalTo(view.snp.width).multipliedBy(4.0/3.0)
         }
-
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(photoBox.snp.bottom)
+        
+        productDescriptionLabel.snp.makeConstraints { make in
+            make.leading.equalTo(view).inset(10)
+            make.trailing.equalTo(view).inset(10)
+            make.bottom.equalTo(view).inset(60)
+        }
+        
+        footerView.snp.makeConstraints { make in
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
+            make.top.equalTo(mainImageview.snp.bottom)
             make.bottom.equalTo(view)
         }
+        
+        trashImageView.snp.makeConstraints { make in
+            make.centerX.equalTo(footerView)
+            make.centerY.equalTo(footerView)
+            make.height.equalTo(50)
+            make.width.equalTo(50)
+        }
     }
-
+    
     internal override func setupView() {
         super.setupView()
-
+        
         view.backgroundColor = Palette[basic: .white]
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureToolbar()
+    }
+    
+    func configureToolbar() {
+        
+        if item?.isPlaceholder ?? false {
+            trashImageView.isEnabled = false
+            return
+        }
+    }
+    
     // MARK: - User Action
+    
+    func deleteTapped() {
+        guard let photoId = item?.photo?.id else {
+            return
+        }
+        let deleteCommand = DeleteCurrentOutfitPhotoCommand(id: photoId)
+        
+        ProgressHUD.show()
+        deleteCommand.executeCommand {
+            data in
+            
+            switch data {
+            case let .success(_, objectsArray: _, _, apiResponse: apiResponse):
+                // TODO: @MS
+                switch apiResponse {
+                case .ok:
+                    ProgressHUD.showSuccess()
+                    self.navigationController?.popViewController(animated: true)
+                case .fail:
+                    ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
+                }
+            case let .failure(message):
+                ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
+            }
+        }
+    }
+    
     func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-}
-
-
-// MARK: - <UITableViewDataSource>
-extension QuestionnaireDetailViewController: UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: QuestionnaireTableViewCell = tableView.dequeueReusableCell()
-
-        cell.backgroundColor = Palette[basic: .clear]
-        cell.mainImage = #imageLiteral(resourceName: "placeholder")
-        cell.descriptionText = "Aasdf sdf alskdnf lasdnf lasnflnaslfn lasnfl asdlf aslfn asldknf lksadnfksdanf lsda."
-
-        return cell
+    
+    // MARK: - Actions
+    fileprivate func reloadProductInformation(productInfo: ProductInfo) {
+        productDescriptionLabel.text = productInfo.infoText
     }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    @objc(tableView:heightForRowAtIndexPath:)
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(GUIConfiguration.OutfitCellHeight)
-    }
-}
-
-// MARK: - <UITableViewDelegate>
-extension QuestionnaireDetailViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-    }
+    
+    
 }

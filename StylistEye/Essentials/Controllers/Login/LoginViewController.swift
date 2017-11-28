@@ -8,7 +8,6 @@
 
 import SnapKit
 import UIKit
-import KVNProgress
 
 class LoginViewController: AbstractViewController {
 
@@ -36,6 +35,10 @@ class LoginViewController: AbstractViewController {
         )
         emailTextField.textColor = Palette[custom: .appColor]
         emailTextField.tintColor = Palette[custom: .appColor]
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.spellCheckingType = .no
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
         let emailImageView = ImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 12))
         emailImageView.image = #imageLiteral(resourceName: "human_image")
         emailImageView.contentMode = .scaleAspectFit
@@ -44,6 +47,7 @@ class LoginViewController: AbstractViewController {
 
         forgotPasswordButton.setTitle(StringContainer[.forgotPassword], for: .normal)
         forgotPasswordButton.tintColor = Palette[custom: .appColor]
+        forgotPasswordButton.titleLabel?.font = SystemFont[.description]
 
         logoImageView.image = #imageLiteral(resourceName: "logo_image")
         logoImageView.contentMode = .scaleAspectFit
@@ -67,6 +71,7 @@ class LoginViewController: AbstractViewController {
         loginButton.setTitle(StringContainer[.login], for: .normal)
         loginButton.tintColor = Palette[custom: .purple]
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        loginButton.titleLabel?.font = SystemFont[.description]
     }
 
     internal override func addElements() {
@@ -100,29 +105,29 @@ class LoginViewController: AbstractViewController {
 
         forgotPasswordButton.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.top.equalTo(loginButton.snp.bottom).offset(10)
+            make.top.equalTo(loginButton.snp.bottom).offset(24)
             make.width.equalTo(view.frame.size.width - 60)
             make.height.equalTo(25)
         }
 
         logoImageView.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.bottom.equalTo(emailTextField.snp.top).offset(-60)
-            make.height.equalTo(120)
+            make.bottom.equalTo(emailTextField.snp.top).offset(-80)
+            make.height.equalTo(100)
         }
 
         passwordTextField.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.top.equalTo(emailTextField.snp.bottom).offset(10)
+            make.top.equalTo(emailTextField.snp.bottom).offset(24)
             make.width.equalTo(view.frame.size.width - 60)
             make.height.equalTo(30)
         }
 
         loginButton.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
-            make.width.equalTo(view.frame.size.width - 60)
-            make.height.equalTo(45)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(24)
+            make.width.equalTo(view.frame.size.width - 60-16)
+            make.height.equalTo(50)
         }
     }
 
@@ -164,14 +169,14 @@ class LoginViewController: AbstractViewController {
     // MARK: - Action methods
     private func login() {
         if let email = emailTextField.text, let password = passwordTextField.text {
-            KVNProgress.show()
+            ProgressHUD.show()
             LoginCommand(email: email, password: password).executeCommand { data in
                 switch data {
-                case let .success(object: data, _, apiResponse: apiResponse):
+                case let .success(object: data, _, _, apiResponse: apiResponse):
                 // TODO: @MS
                     switch apiResponse {
                     case .ok:
-                        KVNProgress.showSuccess {
+                        ProgressHUD.showSuccess {
                             Keychains[.userEmail] = email
                             Keychains[.userPassword] = password
                             AccountSessionManager.manager.accountSession = AccountSession(response: data)
@@ -180,10 +185,10 @@ class LoginViewController: AbstractViewController {
                             }
                         }
                     case .fail:
-                        KVNProgress.showError()
+                        ProgressHUD.showError(withStatus: StringContainer[.errorOccured])
                     }
                 case .failure:
-                    KVNProgress.showError()
+                    ProgressHUD.showError()
                 }
             }
         }
