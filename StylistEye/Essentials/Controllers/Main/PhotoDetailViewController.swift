@@ -60,15 +60,23 @@ class PhotoDetailViewController: AbstractViewController {
         imageView.snp.makeConstraints { make in
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.top.equalTo(view)
+            make.top.greaterThanOrEqualTo(view)
+            make.centerY.equalTo(view).priority(750)
             make.height.equalTo(view.snp.width).multipliedBy(4.0/3.0)
         }
         
-        toolbar.snp.makeConstraints { make in
-            make.bottom.equalTo(view)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.top.equalTo(imageView.snp.bottom)
+        if #available(iOS 11.0, *) {
+            toolbar.snp.makeConstraints { make in
+                make.leading.equalTo(view)
+                make.trailing.equalTo(view)
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            }
+        } else {
+            toolbar.snp.makeConstraints { make in
+                make.leading.equalTo(view)
+                make.trailing.equalTo(view)
+                make.bottom.equalTo(view)
+            }
         }
     }
     

@@ -33,7 +33,7 @@ class WardrobeFeedViewController: AbstractViewController {
     fileprivate let backgroundImageView = ImageView()
     fileprivate let cameraImageView = ImageView()
     
-    fileprivate let actionView = View()
+    fileprivate var toolbar = UIToolbar()
     
     fileprivate var pagination: PaginationDTO?
     fileprivate var isRefreshing = false
@@ -65,7 +65,21 @@ class WardrobeFeedViewController: AbstractViewController {
         cameraImageView.isUserInteractionEnabled = true
         cameraImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cameraImageViewTapped)))
         
-        actionView.backgroundColor = Palette[custom: .purple]
+        toolbar.barTintColor = Palette[custom: .purple]
+        toolbar.isTranslucent = false
+        
+        let filler1 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let filler2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        cameraImageView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        if #available(iOS 11.0, *) {
+            cameraImageView.snp.makeConstraints { make in
+                make.width.equalTo(30)
+                make.height.equalTo(30)
+            }
+        }
+        let button = UIBarButtonItem(customView: cameraImageView)
+        toolbar.items = [filler1, button, filler2]
+        toolbar.isHidden = false
         
         tableView.register(WardrobeTableViewCell.self)
         tableView.dataSource = self
@@ -89,11 +103,10 @@ class WardrobeFeedViewController: AbstractViewController {
             [
                 backgroundImageView,
                 tableView,
-                actionView,
+                toolbar,
                 ]
         )
         
-        actionView.addSubview(cameraImageView)
     }
     
     internal override func setupConstraints() {
@@ -107,19 +120,20 @@ class WardrobeFeedViewController: AbstractViewController {
             make.edges.equalTo(view)
         }
         
-        actionView.snp.makeConstraints { make in
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.height.equalTo(40)
-            make.bottom.equalTo(view)
+        if #available(iOS 11.0, *) {
+            toolbar.snp.makeConstraints { make in
+                make.leading.equalTo(view)
+                make.trailing.equalTo(view)
+                 make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            }
+        } else {
+            toolbar.snp.makeConstraints { make in
+                make.leading.equalTo(view)
+                make.trailing.equalTo(view)
+                make.bottom.equalTo(view)
+            }
         }
         
-        cameraImageView.snp.makeConstraints { make in
-            make.centerX.equalTo(actionView)
-            make.centerY.equalTo(actionView)
-            make.height.equalTo(30)
-            make.width.equalTo(30)
-        }
     }
     
     internal override func setupView() {

@@ -207,10 +207,18 @@ class OutfitDetailViewController: AbstractViewController {
             make.bottom.equalTo(stylistInfoBox).offset(5)
         }
 
-        toolbar.snp.makeConstraints { make in
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.bottom.equalTo(view)
+        if #available(iOS 11.0, *) {
+            toolbar.snp.makeConstraints { make in
+                make.leading.equalTo(view)
+                make.trailing.equalTo(view)
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            }
+        } else {
+            toolbar.snp.makeConstraints { make in
+                make.leading.equalTo(view)
+                make.trailing.equalTo(view)
+                make.bottom.equalTo(view)
+            }
         }
     }
 
@@ -331,6 +339,12 @@ class OutfitDetailViewController: AbstractViewController {
             let filler2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
             let image = UIImageView(image: #imageLiteral(resourceName: "camera_icon"))
             image.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            if #available(iOS 11.0, *) {
+                image.snp.makeConstraints { make in
+                    make.width.equalTo(30)
+                    make.height.equalTo(30)
+                }
+            }
             image.contentMode = .scaleAspectFit
             image.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(addFirstPhotoTapped))
@@ -343,6 +357,12 @@ class OutfitDetailViewController: AbstractViewController {
             let filler2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
             let image = UIImageView(image: #imageLiteral(resourceName: "cmeraPlus_icon"))
             image.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            if #available(iOS 11.0, *) {
+                image.snp.makeConstraints { make in
+                    make.width.equalTo(30)
+                    make.height.equalTo(30)
+                }
+            }
             image.contentMode = .scaleAspectFit
             image.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(addMorePhotosTapped))

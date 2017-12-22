@@ -43,9 +43,10 @@ class QuestionnaireDetailViewController: AbstractViewController {
         productDescriptionLabel.numberOfLines = 0
         
         backgroundImage.image = nil
-        backgroundImage.backgroundColor = UIColor.black
+        backgroundImage.backgroundColor = Palette[custom: .purple]
         //mainImageview.image = #imageLiteral(resourceName: "placeholder")
         mainImageview.contentMode = .scaleAspectFit
+        mainImageview.backgroundColor = .black
         
         footerView.backgroundColor = Palette[custom: .purple]
     }
@@ -74,7 +75,8 @@ class QuestionnaireDetailViewController: AbstractViewController {
         mainImageview.snp.makeConstraints { make in
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.top.equalTo(view)
+            make.top.greaterThanOrEqualTo(view)
+            make.centerY.equalTo(view).priority(750)
             make.height.equalTo(view.snp.width).multipliedBy(4.0/3.0)
         }
         
