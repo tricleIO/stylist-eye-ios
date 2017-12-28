@@ -17,43 +17,40 @@ class WardrobeTableViewCell: AbstractTableViewCell {
   
   // MARK: - Properties
   // MARK: > public
+  fileprivate var imagesCount: Int {
+    return min(maxImages, images.count)
+  }
   var images = [String]() {
     didSet {
-      let imagesCount = min(maxImages, images.count)
       imagesPageControl.numberOfPages = imagesCount
       
       for i in 0..<imagesCount {
         imageViews[i].kf.setImage(with: images[i].urlValue, placeholder: #imageLiteral(resourceName: "placeholder"))
       }
       
-      let width = imagesScrollContainer.frame.width
-      let height = imagesScrollContainer.frame.height
-      
-      imagesScrollView.contentSize = CGSize(width: width*CGFloat(imagesCount), height: height)
+      setupImageViewsConstraints()
     }
   }
   var placeholderImages = [UIImage]() {
     didSet {
-      let imagesCount = min(maxImages, placeholderImages.count)
       imagesPageControl.numberOfPages = imagesCount
       
       for i in 0..<imagesCount {
         imageViews[i].image = placeholderImages[i]
       }
       
-      let width = imagesScrollContainer.frame.width
-      let height = imagesScrollContainer.frame.height
-      
-      imagesScrollView.contentSize = CGSize(width: width*CGFloat(imagesCount), height: height)
+      setupImageViewsConstraints()
     }
   }
   
   fileprivate var imageViews = [UIImageView]()
   
+  fileprivate var reviewsCount: Int {
+    return min(reviews?.count ?? 0, maxReviews)
+  }
   var reviews: [ReviewDTO]? {
     didSet {
       if let reviews = reviews, reviews.count > 0 {
-        let reviewsCount = min(reviews.count, maxReviews)
         reviewsPageControl.numberOfPages = reviewsCount
         
         for i in 0..<reviewsCount {
@@ -70,6 +67,7 @@ class WardrobeTableViewCell: AbstractTableViewCell {
         reviewsPageControl.numberOfPages = 0
         reviewScrollContainer.isHidden = true
       }
+      setupReviewsConstraints()
     }
   }
   fileprivate var reviewViews = [ReviewView]()
@@ -100,6 +98,8 @@ class WardrobeTableViewCell: AbstractTableViewCell {
   internal override func initializeElements() {
     super.initializeElements()
     
+    self.selectionStyle = .none
+    
     coverView.backgroundColor = Palette[basic: .white]
     
     /*
@@ -118,8 +118,11 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     imagesScrollView.bounces = false
     // trick to enable tap to select, yet allowing scroll
     // source: https://stackoverflow.com/questions/6636844/uiscrollview-inside-uitableviewcell-touch-detect
+    // 12-2017 this is probably no longer needed now?
     imagesScrollView.isUserInteractionEnabled = false
     imagesScrollContainer.addGestureRecognizer(imagesScrollView.panGestureRecognizer)
+    let imagesTapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTap))
+    imagesScrollContainer.addGestureRecognizer(imagesTapGesture)
     
     imagesPageControl.numberOfPages = 0
     imagesPageControl.pageIndicatorTintColor = Palette[custom: .appColor]
@@ -176,7 +179,7 @@ class WardrobeTableViewCell: AbstractTableViewCell {
   func setupImageViewsConstraints() {
     for i in 0..<imageViews.count {
       let imageView = imageViews[i]
-      imageView.snp.makeConstraints { make in
+      imageView.snp.remakeConstraints { make in
         if i == 0 {
           make.leading.equalToSuperview()
         } else {
@@ -188,14 +191,15 @@ class WardrobeTableViewCell: AbstractTableViewCell {
         make.bottom.equalToSuperview()
       }
     }
-    imagesScrollContentView.snp.makeConstraints { make in
+    imagesScrollContentView.snp.remakeConstraints { make in
       make.leading.equalToSuperview()
       make.trailing.equalToSuperview()
       make.top.equalToSuperview()
-//      self.imagesContentWidthConstraint = make.width.equalTo(imagesScrollContainer).multipliedBy(imageViews.count).constraint
+      make.width.equalTo(imagesScrollContainer).multipliedBy(imagesCount)
       make.bottom.equalToSuperview()
       make.height.equalToSuperview()
     }
+    
   }
   
   func createReviews(number: Int) {
@@ -227,7 +231,7 @@ class WardrobeTableViewCell: AbstractTableViewCell {
       make.leading.equalToSuperview()
       make.trailing.equalToSuperview()
       make.top.equalToSuperview()
-//      self.reviewsContentWidthConstraint = make.width.equalTo(reviewScrollContainer).multipliedBy(reviewViews.count).constraint
+      make.width.equalTo(reviewScrollContainer).multipliedBy(reviewsCount)
       make.bottom.equalToSuperview()
       make.height.equalToSuperview()
     }
@@ -357,9 +361,16 @@ class WardrobeTableViewCell: AbstractTableViewCell {
     
     reviewsPageControl.currentPage = 0
     imagesPageControl.currentPage = 0
+    
+    zoomButtonCallback = nil
+    
   }
   
   // MARK: - User Action
+  func imageTap() {
+    zoomButtonCallback?()
+  }
+  
   func zoomButtonTapped() {
     zoomButtonCallback?()
   }

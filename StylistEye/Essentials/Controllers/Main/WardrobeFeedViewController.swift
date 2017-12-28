@@ -83,9 +83,9 @@ class WardrobeFeedViewController: AbstractViewController {
         
         tableView.register(WardrobeTableViewCell.self)
         tableView.dataSource = self
-        tableView.delegate = self
         tableView.backgroundColor = Palette[basic: .clear]
         tableView.separatorColor =  Palette[basic: .clear]
+        tableView.allowsSelection = false
         
         navigationItem.leftBarButtonItem = backButton
         
@@ -124,7 +124,7 @@ class WardrobeFeedViewController: AbstractViewController {
             toolbar.snp.makeConstraints { make in
                 make.leading.equalTo(view)
                 make.trailing.equalTo(view)
-                 make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             }
         } else {
             toolbar.snp.makeConstraints { make in
@@ -254,6 +254,29 @@ extension WardrobeFeedViewController: UITableViewDataSource {
             }
             cell.reviews = item.reviews
             cell.selectionStyle = .none
+            
+            cell.zoomButtonCallback = { [weak self] in
+                guard let `self` = self else { return}
+                let productVC = WardrobeItemDetailViewController()
+                productVC.wardrobeItem = item
+                productVC.title = self.categoryName //item.garmetType?.name
+                
+                if item.isPlaceholder {
+                    productVC.mainImageview.image = item.placeholderImage
+                    productVC.photoIndex = 0
+                } else {
+                    
+                    if let image = item.photos?[safe: cell.currentImagePage()]?.image?.urlValue {
+                        productVC.mainImageview.kf.setImage(with: image, placeholder: #imageLiteral(resourceName: "placeholder"))
+                        productVC.photoIndex = cell.currentImagePage()
+                    } else {
+                        productVC.mainImageview.image = #imageLiteral(resourceName: "placeholder")
+                        productVC.photoIndex = -1
+                    }
+                }
+                productVC.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(productVC, animated: true)
+            }
         }
         
         return cell
@@ -277,38 +300,7 @@ extension WardrobeFeedViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - <UITableViewDelegate>
-extension WardrobeFeedViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let cell = tableView.cellForRow(at: indexPath) as! WardrobeTableViewCell
-        
-        guard let item = items?[safe: indexPath.row] else {
-            return
-        }
-        
-        let productVC = WardrobeItemDetailViewController()
-        productVC.wardrobeItem = item
-        productVC.title = categoryName //item.garmetType?.name
-        
-        if item.isPlaceholder {
-            productVC.mainImageview.image = item.placeholderImage
-            productVC.photoIndex = 0
-        } else {
-        
-            if let image = item.photos?[safe: cell.currentImagePage()]?.image?.urlValue {
-                productVC.mainImageview.kf.setImage(with: image, placeholder: #imageLiteral(resourceName: "placeholder"))
-                productVC.photoIndex = cell.currentImagePage()
-            } else {
-                productVC.mainImageview.image = #imageLiteral(resourceName: "placeholder")
-                productVC.photoIndex = -1
-            }
-        }
-        productVC.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(productVC, animated: true)
-    }
+extension WardrobeFeedViewController {
     
     func onUploadFinished() {
         self.loadData()
